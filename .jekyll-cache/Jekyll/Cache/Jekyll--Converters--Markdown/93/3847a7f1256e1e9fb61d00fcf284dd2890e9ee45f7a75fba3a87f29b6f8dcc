@@ -1,0 +1,53 @@
+I"±	<h3 id="git">Git</h3>
+
+<p>Initialize a new local repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div></div>
+
+<p>Stage all local changes in <code class="highlighter-rouge">&lt;directory&gt; </code> for the next commit: (Replace <code class="highlighter-rouge">&lt;directory&gt; </code>  with a <code class="highlighter-rouge">&lt;file&gt;</code> to stage the changes of a specific file.  Replace with <code class="highlighter-rouge">-A</code> to stage all changes.)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add &lt;directory&gt;
+</code></pre></div></div>
+
+<p>List which files are staged, unstaged, and untracked:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div></div>
+
+<p>Unstage everything (retain changes):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git reset
+</code></pre></div></div>
+
+<p>Commit previously staged changes with message:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"&lt;message&gt;"</span>
+</code></pre></div></div>
+
+<p>Connect the local repository to the GitHub (remote) repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote add origin &lt;GitHubRepoURL&gt;
+</code></pre></div></div>
+
+<p>Verify the connection:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>Push to GitHub (remote) repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="jekyll">Jekyll</h3>
+
+<p>Make the local Jekyll server work:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll serve <span class="nt">--watch</span>
+</code></pre></div></div>
+
+<hr />
+:ET
