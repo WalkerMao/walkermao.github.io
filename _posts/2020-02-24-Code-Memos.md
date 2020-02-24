@@ -77,10 +77,3 @@ Make the local Jekyll server work:
 ```bash
 $ bundle exec jekyll serve --watch
 ```
-
----
-
-
-
-
-

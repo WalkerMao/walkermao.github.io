@@ -50,12 +50,3 @@ If we assume $\sigma^2_A = \sigma^2_B$, then $$ T = \frac{\bar{X}_{A} - \bar{X}_
 
 
 Reference: [Two-Sample *t*-Test for Equal Means](https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm).
-
-
-
----
-
-
-
-
-
