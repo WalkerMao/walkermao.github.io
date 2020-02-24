@@ -32,6 +32,12 @@ Unstage everything (retain changes):
 $ git reset
 ```
 
+Commit all local changes (include unstaged changes) in tracked files:
+
+```bash
+$ git commit -a -m "<message>"
+```
+
 Commit previously staged changes with message:
 
 ```bash
