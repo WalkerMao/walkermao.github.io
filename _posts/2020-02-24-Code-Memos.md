@@ -14,7 +14,7 @@ Initialize a new local repository:
 $ git init
 ```
 
-Stage all local changes in `<directory> ` for the next commit: (Replace `<directory> `  with a `<file>` to stage the changes of a specific file.  Replace with `-A` to stage all changes.)
+Stage all local changes in `<directory> ` for the next commit: (Replace `<directory> `  with a `<file>` to stage the changes of a specific file.  Replace with `-A` to stage all changes.). The `<directory> ` will be tracked.  
 
 ```bash
 $ git add <directory>
