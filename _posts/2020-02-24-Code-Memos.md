@@ -62,6 +62,12 @@ Push to GitHub (remote) repository:
 $ git push
 ```
 
+Fetches all files from GitHub (remote) repository (remember to backup local repository before execute this command): 
+
+```bash
+$ git pull --all
+```
+
 ---
 
 ### Jekyll
