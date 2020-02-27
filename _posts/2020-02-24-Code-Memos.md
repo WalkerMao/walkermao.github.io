@@ -70,6 +70,17 @@ $ git pull --all
 
 ---
 
+### SQL 
+
+The input of the function `MAX()` must be a group of data.
+
+```mysql
+SELECT id, name FROM table where id = MAX(id); # invalid
+SELECT id, name FROM table where id = (SELECT MAX(id) FROM table); # valid
+```
+
+---
+
 ### Jekyll
 
 Make the local Jekyll server work:
