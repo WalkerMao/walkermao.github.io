@@ -52,7 +52,7 @@ Advantage compared to parametric methods: flexible. By avoiding the assumption o
 
 ### 4.1 Flexibility-Interpretability Trade-Off
 
-The flexible models are usually more accurate and less interpretable. Linear regression is interpretable but not flexible, and neural network is the opposite. 
+The flexible models are usually more accurate and less interpretable. For example, linear regression is interpretable but not flexible, and neural network is the opposite. 
 
 [high Interpretability, low Flexibility] Subset Selection (e.g. LASSO), Least Squares, Generalized Additive Models (GAM) (e.g. Trees), Bagging or Boosting, SVM. [low Interpretability, high Flexibility] 
 
@@ -60,19 +60,24 @@ Note: SVM with non-linear kernels is non-linear methods.
 
 ### 4.2 Bias-Variance Trade-Off
 
-For regression, assume $Y = f+\epsilon,E(\epsilon) = 0$, then we have 
+For regression, assume $Y = f+\epsilon,E(\epsilon) = 0$, and $\epsilon$ is independent with $f$ and $\hat{f}$, then we have 
 
-$$
-E[(Y-\hat{f})^2] = \text{Var}(\hat{f}) + \text{Bias}^2(\hat{f}) + \text{Var}(\epsilon).
-$$
+$$\begin{align*}
+E[(Y-\hat{f})^2] &= E[(f-\hat{f}+\epsilon)^2] \\
+&= E[(f-\hat{f})^2] + E(\epsilon^2) + 2E(f-\hat{f})E(\epsilon) \\ 
+&= E(\hat{f}^2) + f^2 - 2fE(\hat{f}) + \text{Var}(\epsilon) + 0\\ 
+&= \big[ E(\hat{f}^2) - E^2(\hat{f}) \big] + \big[ E^2(\hat{f}) + f^2 - 2fE(\hat{f}) \big] + \text{Var}(\epsilon) \\
+&= \text{Var}(\hat{f}) + [E(\hat{f})-f]^2 + \text{Var}(\epsilon) \\
+&= \text{Var}(\hat{f}) + \text{Bias}^2(\hat{f}) + \text{Var}(\epsilon).
+\end{align*}$$
 
 **More flexible methods leads to higher variance and lower bias.**
 
-Variance $\text{Var}(\hat{f})$ refers to the amount by which $ \hat{f} $ would change if we estimated it using a different training data set. In general, more flexible statistical methods have higher variance.
+Variance $\text{Var}(\hat{f})$ refers to the amount by which $ \hat{f} $ would change if it is by a different training data set. In general, more flexible statistical methods have higher variance.
 
 Bias $\text{Bias}(\hat{f})$ refers to the error that is introduced by approximating a real-life problem. For example, linear regression assumes that there is a linear relationship between $Y$ and $X$. It is unlikely that any real-life problem truly has such a simple linear relationship, and so performing linear regression will undoubtedly result in some bias in the estimate of $f$. Generally, more flexible methods result in less bias.
 
-
+Note: It is possible to have a model that has lower variance and lower bias simultaneously. For example, boosting method can reduce both variance and bias. 
 
 ---
 
