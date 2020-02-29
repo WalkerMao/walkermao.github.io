@@ -78,7 +78,7 @@ Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n
 
 If a model learned too much noise in the training data, it tends to be overfitting, and the training error is much lower than the test error. Overfitting often happens for flexible models. An overfitted model has low bias but high variance. Regularization discourages learning a more complex or flexible model, so as to reduce overfitting. 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Overfitted_Data.png" style="width:50%;height:50%;" alt="Overfitting">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Overfitted_Data.png" style="width:30%;height:30%;" alt="Overfitting">
 
 The blue line in the plot above indicates an overfitted model.
 
