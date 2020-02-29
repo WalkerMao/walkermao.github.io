@@ -58,7 +58,7 @@ Mean squared error (MSE): $$ \frac{1}{n} \| Y - \hat{Y} \| _2^2 = \frac{1}{n} \s
 
 Root MSE: $$ \sqrt{\frac{1}{n} \| Y - \hat{Y} \| _2^2 }= \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2} $$.
 
-MSE is the most commonly used metric. MAE is more robust and less sensitive to outliers or influential points. However, MAE is not differentiable at the point $y_i-\hat{y}_i = 0$, which is big problem. 
+MSE is the most commonly used metric. MAE is more robust and less sensitive to outliers or influential points. However, MAE is not differentiable at the point $y_i-\hat{y}_i = 0$, which is not amenable to numerical optimization. 
 
 ### 4.2 For Classification
 
