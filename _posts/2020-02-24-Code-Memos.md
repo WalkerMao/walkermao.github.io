@@ -81,6 +81,60 @@ SELECT id, name FROM table where id = (SELECT MAX(id) FROM table); # valid
 
 ---
 
+### HTML
+
+HTML is the standard markup language for Web pages.
+
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<title>Page Title</title>
+</head>
+
+<body>
+    
+<h1>My First Heading</h1>
+
+<img src="img_girl.jpg" style="width:50%;height:50%;" alt="Girl with a jacket">
+
+<p style="color:red; font-size:120%; font-family: Arial; text-align:center;">
+The <b>first</b> line.<br>The second line.
+</p>
+
+<a href="https://www.w3schools.com">
+
+<pre>
+	The first line.
+	The second line.
+</pre>
+    
+</body>
+
+</html>
+```
+
+The `<!DOCTYPE>` declaration represents the document type, and helps browsers to display web pages correctly. 
+
+The HTML `<head>` element contains the metadata about the HTML document which is not displayed in web pages. 
+
+Only the content inside the `<body>` section is displayed in a browser. 
+
+---
+
+### CSS
+
+**CSS** stands for **C**ascading **S**tyle **S**heets. CSS describes **how HTML elements are to be displayed on**. CSS **saves a lot of work**. It can control the layout of multiple web pages all at once.
+
+CSS can be added to HTML elements in 3 ways:
+
+- **Inline** - by using the style attribute in HTML elements;
+- **Internal** - by using a `<style>` element in the `<head>` section;
+- **External** - by using an external CSS file. (most common)
+
+---
+
 ### Jekyll
 
 Make the local Jekyll server work:
