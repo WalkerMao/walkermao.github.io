@@ -21,6 +21,8 @@ $$
 \bar{X}_A - \bar{X}_B \xrightarrow{d} N(\mu_A - \mu_B, \frac{\sigma_A^2}{n_A} + \frac{\sigma_B^2}{n_B}).
 $$
 
+If the population variances $$\sigma_A$$ and $$\sigma_B$$ are known, we can simply use $Z$-test. However, we usually do not know them and we use the sample variances $$s_A^2$$ and $$s_B^2$$ to estimate them, then we construct a test statistic $$T$$ which follows the student's $$t$$ distribution with the degrees of freedom $$\upsilon$$.
+
 **Hypothesis:** $H_0: \mu_A=\mu_B \text{  v.s. } H_1: \mu_A \neq \mu_B$.
 
 **Test statistic:** 

@@ -68,7 +68,7 @@ Misclassification error:  $$ \text{Loss}(y_i,\hat{y}_i) = \frac{1}{2} \sum_{k=1}
 
 Cross entropy loss: $$ \text{Loss}(y_i,\hat{p}_i) = \sum_{k=1}^K -y_{ik} \log \hat{p}_{ik} $$.
 
-In the formula above, $y_i$, $\hat{y}_ {i}$ or $\hat{p}_ i$ is a vector with dimension $K \times 1$; $y_{ik}$, $\hat{y}_ {ik}$ or $$\hat{p}_i$$ is the $k$-th element in the vector $y_i$, $$\hat{y}_i$$ or $$\hat{p}_i$$; $y_{ik}=1$ if the $i$-th observation is of class $k$, and $y_{ik}=0$ otherwise; $$\hat{y}_{ik}=1$$ if the $i$-th observation is classified to be the class $k$ by the model, and $$\hat{y}_{ik}=0$$ otherwise; $$\hat{p}_{ik}$$ is the estimated probability of the $i$-th observation is of class $k$. 
+In the formula above, $y_i$, $\hat{y}_ {i}$ or $\hat{p}_ i$ is a vector with dimension $K \times 1$; $y_{ik}$, $\hat{y}_ {ik}$ or $$\hat{p}_{ik}$$ is the $k$-th element in the vector $y_i$, $$\hat{y}_i$$ or $$\hat{p}_i$$; $y_{ik}=1$ if the $i$-th observation is of class $k$, and $y_{ik}=0$ otherwise; $$\hat{y}_{ik}=1$$ if the $i$-th observation is classified to be the class $k$ by the model, and $$\hat{y}_{ik}=0$$ otherwise; $$\hat{p}_{ik}$$ is the estimated probability of the $i$-th observation is of class $k$. 
 
 Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n \big[ -y_i \log \hat{p}_i - (1-y_i) \log(1-\hat{p}_i) \big]$. Cross-entropy is differentiable, and hence more amenable to numerical optimization. 
 
@@ -86,7 +86,9 @@ L1-norm regularization: $\text{Loss} + \lambda \Vert w \Vert_1$.
 
 L2-norm regularization: $\text{Loss} + \lambda \Vert w \Vert _2^2$.
 
-$\lambda$ depends the regularization strength. Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
+The hyperparameter $\lambda$ depends the regularization strength. Note: a hyperparameter is a parameter whose value is set before the learning process begins. By contrast, the values of other parameters are derived via training. 
+
+Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
 
 ![LASSO and Ridge](https://qph.fs.quoracdn.net/main-qimg-2a88e2acc009fa4de3edeb51e683ca02)
 
