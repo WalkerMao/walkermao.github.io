@@ -65,7 +65,7 @@ which is the sample covariance matrix.
 
 ### Orthogonal Transformation
 
-Suppose there is a orthogonal matrix $$\underset{p\times p}{Q}$$, then we transform by $$Q$$ to get $$\underset{n\times p}{Z} = XQ$$. The output of PCA , which is $$\underset{n \times d}{Z_d}$$, is a sub-matrix of $$Z$$.
+Suppose there is a orthogonal matrix $$\underset{p\times p}{Q}$$, then we transform $$X$$ by $$Q$$ to get $$\underset{n\times p}{Z} = XQ$$. Denote $$\underset{n \times d}{Z_d}$$ as the output of PCA, which is a sub-matrix of $$Z$$.
 
 Orthogonal transformation to the centralized data $$X$$ or $$x_i $$: 
 
@@ -73,7 +73,7 @@ $$
 XQ=Z \ \text{ or } \ \ x_iQ=z_i,
 $$
 
-where the transformation matrix $$Q = (q_1,\cdots,q_p)$$ with dimension $$p \times p$$ is a orthogonal matrix  with orthogonal unit column vectors $$q_1,\cdots, q_p$$, and the output $$Z$$ has the same dimension with $$X$$. 
+where the transformation matrix $$Q = (q_1,\cdots,q_p)$$ with dimension $$p \times p$$ is a orthogonal matrix  with orthogonal unit column vectors $$q_1,\cdots, q_p$$, and the output $$Z$$ has the same dimension as $$X$$. 
 
 ### Singular Value Decomposition
 
@@ -175,7 +175,7 @@ $$
 
 Compact SVD of $$X$$ can be decomposed as $$X = \underset{n\times r}{U}\ \underset{r \times r}{\Sigma}\ \underset{r \times p}{V^T} = \sum_{j=1}^r \sigma_j u_j v_j^T$$, where $$u_1,\cdots,u_r$$ and $$v_1,\cdots,v_r$$ are column vectors of $$U$$ and $$V$$.
 
-According Eckart-Young-Mirsky theorem, we can approximate $$X$$ by $$\sum_{j=1}^d \sigma_j u_j v_j^T$$. 
+According to Eckart-Young-Mirsky theorem, we can approximate $$X$$ by $$\sum_{j=1}^d \sigma_j u_j v_j^T$$. 
 
 We have 
 
@@ -192,7 +192,11 @@ $$
 
 ### Tips
 
-* The trace of a matrix equals to the sum of the eigenvalues. $$ \text{tr}(Z_d^T Z_d) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = tr(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. Thus, the proportion of the information retained in the output $$Z_d $$ is  $$\sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2$$.
+* The trace of a matrix equals to the sum of the eigenvalues. $$ \text{tr}(Z_d^T Z_d) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = tr(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. Thus, the proportion of the information retained in the output $$Z_d $$ is 
+
+    $$
+    \text{tr}(\Sigma_d^2) / \text{tr}(\Sigma_d^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2
+    $$.
 
 * The column vectors in $$V$$ are the orthogonal basis vectors, which are principal components and decide the direction of coordinate axis after orthogonal transformation.
 
@@ -202,7 +206,7 @@ $$
 
 ### Reference
 
-Lecture Notes from Professor [Min Xu](https://stat.rutgers.edu/people-pages/faculty/people/130-faculty/378-min-xu).
+Lecture notes from professor [Min Xu](https://stat.rutgers.edu/people-pages/faculty/people/130-faculty/378-min-xu).
 
 张 洋. “[PCA的数学原理.](https://blog.codinglabs.org/articles/pca-tutorial.html.)” *CodingLabs*, 22 June 2013.
 
