@@ -8,7 +8,7 @@ comments: true
 
 ### Goal of PCA
 
-The goal of PCA is to reduce the dimension of the original data without lose too much information. In machine learning, we usually want to reduce the number of features of   the original matrix $$\underset{n \times p}{X}$$, that is, to find a matrix $$\underset{n \times d}{Z_d}$$ that contains enough information of $$X$$ but with $$d<p$$, where $$n$$ is the number of observations, $$p$$ is the number of features and $$d$$ is the number of features after PCA.
+The goal of PCA is to reduce the dimension of the original data without losing too much information. In machine learning, we usually want to reduce the number of features of   the original matrix $$\underset{n \times p}{X}$$, that is, to find a matrix $$\underset{n \times d}{Z_d}$$ that contains enough information of $$X$$ but with $$d<p$$, where $$n$$ is the number of observations, $$p$$ is the number of features and $$d$$ is the number of features after PCA.
 
 ### Centralization
 
