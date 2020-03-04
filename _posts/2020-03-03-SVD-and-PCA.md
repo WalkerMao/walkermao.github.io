@@ -192,11 +192,9 @@ $$
 
 ### Tips
 
-* The trace of a matrix equals to the sum of the eigenvalues. $$X^TX$$ and $$XX^T$$ have the same eigenvalues. $$ \text{tr}(Z_d^T Z_d) =  \text{tr}(Z_d Z_d^T) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = \text{tr}(XX^T) = \text{tr}(ZZ^T) =\text{tr}(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. Thus, the proportion of the information retained in the output $$Z_d $$ is 
+* The trace of a matrix equals to the sum of the eigenvalues. $$X^TX$$ and $$XX^T$$ have the same eigenvalues. $$ \text{tr}(Z_d^T Z_d) =  \text{tr}(Z_d Z_d^T) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = \text{tr}(XX^T) = \text{tr}(ZZ^T) =\text{tr}(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. 
 
-    $$
-    \text{tr}(\Sigma_d^2) / \text{tr}(\Sigma_d^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2
-    $$.
+    Thus, the proportion of the information (variance) retained in the output $$Z_d $$ is $$ \text{tr}(\Sigma_d^2) / \text{tr}(\Sigma_d^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2 $$.
 
 * The column vectors in $$V$$ are the orthogonal basis vectors, which are principal components and decide the direction of coordinate axis after orthogonal transformation.
 
