@@ -77,7 +77,7 @@ where the transformation matrix $$Q = (q_1,\cdots,q_p)$$ with dimension $$p \tim
 
 ### Singular Value Decomposition
 
-As we known, high variance means large amount of information. Similar to $$X$$, The sample covariance matrix of $$Z$$ is $$\frac{1}{n-1} Z^T Z$$. Note that the diagonal entries of $$\frac{X^TX}{n-1}$$ and $$\frac{Z^TZ}{n-1}$$ are the sample variance of each feature of $$X$$ and $$Z$$ respectively. The idea of PCA is to make $$\text{tr}(Z_d)$$ as close as possible to $$\text{tr}(X)$$. The larger $$\text{tr}(Z_d) $$, the higher variance, and the larger information we can have in $$Z_d$$.
+As we known, high variance means large amount of information. Similar to $$X$$, The sample covariance matrix of $$z_i$$ is $$\frac{1}{n-1} Z^T Z$$. Note that the diagonal entries of $$\frac{X^TX}{n-1}$$ and $$\frac{Z^TZ}{n-1}$$ are the sample variance of each feature of $$X$$ and $$Z$$ respectively. The idea of PCA is to make $$\text{tr}(Z_d)$$ as close as possible to $$\text{tr}(X)$$. The larger $$\text{tr}(Z_d) $$, the higher variance, and the larger information we can have in $$Z_d$$.
 
 An intuitive idea is to find a way to transform $$X^TX$$ to a diagonal matrix $$Z^TZ$$, then $$Z_d^T Z_d$$ will be the sub-matrix of $$Z^TZ$$ and contains the most highest $$d$$ diagonal values of  $$Z^TZ$$, In this way, the information contained in $$Z_d$$ will be largest. 
 
@@ -192,7 +192,7 @@ $$
 
 ### Tips
 
-* The trace of a matrix equals to the sum of the eigenvalues. $$ \text{tr}(Z_d^T Z_d) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = tr(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. Thus, the proportion of the information retained in the output $$Z_d $$ is 
+* The trace of a matrix equals to the sum of the eigenvalues. $$X^TX$$ and $$XX^T$$ have the same eigenvalues. $$ \text{tr}(Z_d^T Z_d) =  \text{tr}(Z_d Z_d^T) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = \text{tr}(XX^T) = \text{tr}(ZZ^T) =\text{tr}(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. Thus, the proportion of the information retained in the output $$Z_d $$ is 
 
     $$
     \text{tr}(\Sigma_d^2) / \text{tr}(\Sigma_d^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2
@@ -203,6 +203,14 @@ $$
 * How to decide $$d$$ ? We can plot the information (variance) proportion v.s. the number of components.
 
 <img src="https://miro.medium.com/max/769/1*K8kwhxztpLzMSCI9labMzw.png" style="width:50%;height:50%;" alt="PCA_Visulization.png">
+
+### Summary
+
+$$ \begin{align*} 
+\underset{n \times p}{X} = \underset{n\times p}{U}\ \underset{p \times p}{\Sigma}\ \underset{p \times p}{V^T} & \implies Z^TZ = V^T X^T X V = \Sigma^2 \implies \underset{n \times p}{Z} = XV \implies \underset{n \times d}{Z_d} = \underset{n \times p}{X}\ \underset{p \times d}{V_d}. \text{ (Cov matrix and ortho trans)} \\
+\text{or} &\implies XX^T = U \Sigma^2 U^T \implies
+Z_d Z_d^T = \underset{n \times d}{U_d} \ \underset{d \times d}{\Sigma_d^2} \ \underset{d \times n}{U_d^T} \implies \underset{n \times d}{Z_d} = U_d \Sigma_d. \text{ (SVD low-rank approx)}
+\end{align*} $$
 
 ### Reference
 
