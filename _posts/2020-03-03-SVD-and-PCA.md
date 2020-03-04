@@ -12,11 +12,11 @@ The goal of PCA is to reduce the dimension of the original data without losing t
 
 ### Centralization
 
-At first, we centralize the original data by reducing the column mean to get $$X=(x^{(1)}, \cdots ,x^{(p)})$$. 
+The original data $$X=(x^{(1)}, \cdots ,x^{(p)})$$ is of dimension $$n \times p$$ with column vectors $$x^{(1)}, \cdots ,x^{(p)}$$. Each column vector refers to a feature. At first, we centralize the original data by reducing the column mean: 
 
 Set $$x_i^{(j)} = x_i^{(j)} - \frac{1}{n} \sum_{i=1}^n x_i^{(j)}$$ for all $$i=1,\cdots,n$$ and all $$j=1,\cdots,p$$. 
 
-The centralized data $$X$$ is of dimension $$n \times p$$ with column vectors $$x^{(1)}, \cdots ,x^{(p)}$$. Each column vector refers to a feature. The centralization means $$\sum_{i=1}^n x_i^{(j)} = 0$$ or $$\bar{x}^{(j)}=0$$.
+After centralization,  $$\sum_{i=1}^n x_i^{(j)} = 0$$ or $$\bar{x}^{(j)}=0$$.
 
 ### Covariance Matrix
 
@@ -85,7 +85,7 @@ SVD is a nice method to do this.
 
 Normal SVD: $$X = \underset{n\times n}{U}\ \underset{n\times p}{\Sigma}\ \underset{p\times p}{V^T}$$. 
 
-Compact SVD: $$X = \underset{n\times r}{U}\ \underset{r \times r}{\Sigma}\ \underset{r \times p}{V^T}$$, where $$r$$ is the rank of $$X$$; $$U$$ and $$V$$ are orthogonal matrix; $$\Sigma$$ is a diagonal matrix with singular values $$\sigma_1, \cdots, \sigma_r$$ on the diagonal. We use the compact SVD since it is more computationally effective. 
+Compact SVD: $$X = \underset{n\times r}{U}\ \underset{r \times r}{\Sigma}\ \underset{r \times p}{V^T}$$, where $$r$$ is the rank of $$X$$; $$U$$ and $$V$$ are orthogonal matrices; $$\Sigma$$ is a diagonal matrix with singular values $$\sigma_1, \cdots, \sigma_r$$ on the diagonal. We prefer the compact SVD since it is more computationally effective. 
 
 Suppose $$p=r$$. Since $$U$$ and $$V$$ are both orthogonal, we have $$U^T=U^{-1}, V^T=V^{-1}$$, then the compact SVD of $$X^TX$$ is
 $$
