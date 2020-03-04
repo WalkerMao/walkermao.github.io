@@ -8,7 +8,7 @@ comments: true
 
 ### Goal of PCA
 
-The goal of PCA is to reduce the dimension of the original data without losing too much information. In machine learning, we usually want to reduce the number of features of   the original matrix $$\underset{n \times p}{X}$$, that is, to find a matrix $$\underset{n \times d}{Z_d}$$ that contains enough information of $$X$$ but with $$d<p$$, where $$n$$ is the number of observations, $$p$$ is the number of features and $$d$$ is the number of features after PCA.
+The goal of PCA is to reduce the dimension of the original data without losing too much information. In machine learning, we usually want to reduce the number of features of   the original matrix $$\underset{n \times p}{X}$$, that is, to find a matrix $$\underset{n \times d}{Z_d}$$ that contains enough information of $$X$$ but with $$d<p$$, where $$n$$ is the number of observations, $$p$$ is the number of features and $$d$$ is the number of features after PCA, which is also the number of components.
 
 ### Centralization
 
@@ -194,11 +194,11 @@ $$
 
 * The trace of a matrix equals to the sum of the eigenvalues. $$X^TX$$ and $$XX^T$$ have the same eigenvalues. $$ \text{tr}(Z_d^T Z_d) =  \text{tr}(Z_d Z_d^T) = \sum_{j=1}^{d} \sigma_j^2$$, which equals to the sum of the sample variances of $$z^{(1)}, \cdots, z^{(d)}$$. We also have $$\text{tr}(X^TX) = \text{tr}(Z^TZ) = \text{tr}(XX^T) = \text{tr}(ZZ^T) =\text{tr}(\Sigma^2) = \sum_{j=1}^p \sigma_j^2$$, which also equals to the sum of the sample variances of $$x^{(1)}, \cdots, x^{(p)}$$ or equivalently that of $$z^{(1)}, \cdots, z^{(p)}$$. 
 
-    Thus, the proportion of the information (variance) retained in the output $$Z_d $$ is $$ \text{tr}(\Sigma_d^2) / \text{tr}(\Sigma_d^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2 $$.
+    Thus, the proportion of the information (variance) retained in the output $$Z_d $$ is $$ \text{tr}(\Sigma_d^2) / \text{tr}(\Sigma^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2 $$.
 
 * The column vectors in $$V$$ are the orthogonal basis vectors, which are principal components and decide the direction of coordinate axis after orthogonal transformation.
 
-* How to decide $$d$$ ? We can plot the information (variance) proportion v.s. the number of components.
+* How to decide the number of components $$d$$ ? We can plot the information (variance) proportion v.s. the number of components.
 
 <img src="https://miro.medium.com/max/769/1*K8kwhxztpLzMSCI9labMzw.png" style="width:50%;height:50%;" alt="PCA_Visulization.png">
 
