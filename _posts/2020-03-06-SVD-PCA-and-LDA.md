@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "SVD, PCA and LDA"
-date: 2020-03-03
+date: 2020-03-06
 categories: Stat
 comments: true
 ---
@@ -95,11 +95,14 @@ $$
 We find $$w^{(1)}, \cdots, w^{(p)}$$ sequentially by using the method of Lagrange multipliers. 
 
 At first, we find $$w^{(1)}$$ that maximize the sample variance of the first principal component 
+
 $$
-w^{(1)} = \underset{w^{(1)} \in \R^p}{\text{argmax }} \hat{\text{Var}} (z_i^{(1)}) = \underset{w^{(1)} \in \R^p}{\text{argmax }} {w^{(1)}}^T S^2_x w^{(1)}, \\
+w^{(1)} = \underset{w^{(1)} \in \mathbb{R}^p}{\text{argmax }} \hat{\text{Var}} (z_i^{(1)}) = \underset{w^{(1)} \in \mathbb{R}^p}{\text{argmax }} {w^{(1)}}^T S^2_x w^{(1)}, \\
 \text{ subject to } {w^{(1)}}^T w^{(1)} = 1.
 $$
+
 Using the method of Lagrange multipliers, the Lagrangian function:
+
 $$
 {\mathcal {L}} (w^{(1)}, \lambda_1) = {w^{(1)}}^T S^2_x w^{(1)} + \lambda ({w^{(1)}}^T w^{(1)} - 1).
 $$
@@ -118,17 +121,22 @@ Now we have $$ S^2_x w^{(1)} = \lambda_1 w^{(1)}$$, which means $$\lambda_1 $$ i
 In addition, $$\hat{\text{Var}} (z_i^{(1)}) = {w^{(1)}}^T S^2_x w^{(1)} = \lambda_1$$, so we select the largest eigenvalue of $$S_x^2$$ as $$\lambda_1 $$ since we want to maximize  $$\hat{\text{Var}} (z_i^{(1)})$$. 
 
 Then we find $$w^{(2)}$$ that maximize the sample variance of the second principal component 
+
 $$
-w^{(2)} = \underset{w^{(2)} \in \R^p}{\text{argmax }} \hat{\text{Var}} (z_i^{(2)}) = \underset{w^{(2)} \in \R^p}{\text{argmax }} {w^{(2)}}^T S^2_x w^{(2)}, \\
+w^{(2)} = \underset{w^{(2)} \in \mathbb{R}^p}{\text{argmax }} \hat{\text{Var}} (z_i^{(2)}) = \underset{w^{(2)} \in \mathbb{R}^p}{\text{argmax }} {w^{(2)}}^T S^2_x w^{(2)}, \\
 \text{ subject to } {w^{(2)}}^T w^{(2)} = 1 \text{ and } {w^{(2)}}^T w^{(1)} = 0.
 $$
- Lagrangian function:
+
+Lagrangian function:
+
 $$
 {\mathcal {L}} (w^{(2)}, \lambda_2, \mu_2) = {w^{(2)}}^T S^2_x w^{(2)} + \lambda_2 ({w^{(2)}}^T w^{(2)} - 1) + \mu_2 ({w^{(2)}}^T w^{(1)} - 0).
 $$
+
 Take derivatives of $${\mathcal {L}} (w^{(2)}, \lambda_2, \mu_2)$$ with respect to $$ w^{(2)} $$, $$\lambda_2$$ and $$\mu_2$$, then set to $$0$$. We have $$ S^2_x w^{(2)} = \lambda_2 w^{(2)} $$. $$\lambda_2 $$ is the second eigenvalue of $$S^2_x$$ and $$ w^{(2)} $$ is the corresponding eigenvector. 
 
 Thus,
+
 $$
 S_z^2 = W^T S_x^2 W = 
 \begin{pmatrix}
@@ -138,11 +146,13 @@ S_z^2 = W^T S_x^2 W =
   0 & 0 & \cdots & \lambda_p
  \end{pmatrix},
 $$
+
 where **the columns of $$W$$ are the eigenvectors of $$S_x^2$$ and $$\lambda_1, \cdots \lambda_p$$ are the corresponding eigenvalues.** 
 
 $$\lambda_j$$ **is the sample variance of the $$j$$-th principal component.**
+
 $$
-\lambda_j = \hat{\text{Var}} (z^{(j)}) = \frac{{z^{(j)}}^T z^{(j)}}{n-1} = {w^{(j)}}^T \frac{X^T X}{n-1} w^{(j)} = {w^{(j)}}^T S_x^2 w^{(j)}.
+{\lambda}_j = \hat{\text{Var}} (z^{(j)}) = \frac{ {z^{(j)}}^T z^{(j)}} {n-1} = {w^{(j)}}^T \frac{X^T X}{n-1} w^{(j)} = {w^{(j)}}^T S^2_x w^{(j)}.
 $$
 
 ### Singular Value Decomposition
@@ -162,12 +172,15 @@ An intuitive idea is to find a way to transform $$X^TX$$ to a diagonal matrix $$
 SVD is a nice method to do this.
 
 Suppose $$p=r$$. Since $$U$$ and $$V$$ are both orthogonal, we have $$U^T=U^{-1}, V^T=V^{-1}$$, then the compact SVD of $$X^TX$$ is
+
 $$
 X^TX = V \Sigma^T U^T \cdot U \Sigma V^T = V \Sigma^2 V^T.
 $$
+
 It is also the eigenvalue decomposition of $$X^TX$$. The columns of $$V$$ are the eigenvectors of $$ X^TX $$ and the diagonal entries of $$ \Sigma^2 $$ are the corresponding eigenvalues. 
 
 Now we have a diagonal matrix $$\Sigma^2$$, then we set
+
 $$
 Z^TZ = V^T X^T X V = \Sigma^2 = 
 \begin{pmatrix}
@@ -177,10 +190,13 @@ Z^TZ = V^T X^T X V = \Sigma^2 =
   0 & 0 & \cdots & \sigma_p^2
  \end{pmatrix} .
 $$
+
 Thus, 
+
 $$
 Z = XV.
 $$
+
 The column vectors in $$V$$ are the orthogonal basis vectors, which is the same as $$W$$ and **decide the directions of the principal components**.
 
 To get $$Z_d $$, we select the $$d$$ column vectors in $$V$$ that corresponding to $$d$$ largest eigenvalues $$\sigma_1^2, \cdots, \sigma_d^2$$. 
@@ -188,6 +204,7 @@ To get $$Z_d $$, we select the $$d$$ column vectors in $$V$$ that corresponding 
 ### Example
 
 <img src="https://github.com/WalkerMao/Notes/blob/master/Pictures/PCA_Visulization.png?raw=true" style="width:80%;height:80%;" alt="PCA_Visulization.png">
+
 $$
 X = 
 
@@ -238,6 +255,7 @@ Z = XW =
   4\sqrt{2} & 0
  \end{pmatrix}.
 $$
+
 ### Low-Rank Approximation
 
 Compact SVD of $$X$$ can be decomposed as $$X = \underset{n\times r}{U}\ \underset{r \times r}{\Sigma}\ \underset{r \times p}{V^T} = \sum_{j=1}^r \sigma_j u_j v_j^T$$, where $$u_1,\cdots,u_r$$ and $$v_1,\cdots,v_r$$ are column vectors of $$U$$ and $$V$$.
@@ -245,11 +263,14 @@ Compact SVD of $$X$$ can be decomposed as $$X = \underset{n\times r}{U}\ \unders
 According to Eckart-Young-Mirsky theorem, we can approximate $$X$$ by $$\sum_{j=1}^d \sigma_j u_j v_j^T$$. 
 
 We have 
+
 $$
 XX^T = U \Sigma V^T \cdot V \Sigma^T U^T = U \Sigma^2 U^T, \\
 Z_d Z_d^T = \underset{n \times d}{U_d} \ \underset{d \times d}{\Sigma_d^2} \ \underset{d \times n}{U_d^T}.
 $$
-Therefore, 
+
+Therefore,
+
 $$
 Z_d = U_d \Sigma_d.
 $$
@@ -298,7 +319,8 @@ PCA is unsupervised learning method but LDA is supervised.
 
 The idea of LDA is to find projection (or transformation) that makes the samples belonging to the same class are close together but samples from different classes are far  from each other.
 
-![LDA](https://upload-images.jianshu.io/upload_images/11525720-e5d45695a3c66d7e.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
+![LDA](https://images2018.cnblogs.com/blog/1099525/201804/1099525-20180426100319196-1777070849.png)
+
 
 For simplicity, I take two classes problem for example.
 
@@ -323,9 +345,11 @@ J(w) &= \frac{( w^T \bar{x}_{C_1} - w^T \bar{x}_{C_2} )^2}{\sum_{x \in C_1} (w^T
 Denote the between-class scatter matrix as $$S_b = (\bar{x}_{C_1} - \bar{x}_{C_2})(\bar{x}_{C_1} - \bar{x}_{C_2})^T$$, the within-class scatter matrix as $$S_w = \sum_{k=1}^2 \sum_{x \in C_k} (x - \bar{x}_{C_k}) (x - \bar{x}_{C_k})^T $$. 
 
 For multiclass ($$K$$-class) problem, denote the overall mean of all samples as $$\bar{x}$$, the total class scatter matrix as 
+
 $$
 S_t = \sum_{i=1}^{n} (x_i - \bar{x}) (x_i - \bar{x})^T.
 $$
+
 The within-class scatter matrix as 
 
 $$
@@ -333,27 +357,33 @@ S_w = \sum_{k=1}^K \sum_{x \in C_k} (x - \bar{x}_{C_k}) (x - \bar{x}_{C_k})^T.
 $$
 
 Then we can derive the between-class scatter matrix as 
+
 $$
 S_b = S_t - S_w = \sum_{k=1}^K |C_k| (\bar{x}_{C_k} - \bar{x}) (\bar{x}_{C_k} - \bar{x})^T,
 $$
-where $$|C_k|$$ is the size of the set $$C_k$$ (the number of samples in the class $$k$$).
+
+where $$ \mid C_k \mid $$ is the size of the set $$C_k$$ (the number of samples in the class $$k$$).
 
 We can explain the between-class scatter matrix $$ S_b $$ as the weighted distance between the class mean and the overall mean, and the weight is sample size of each class. Maximizing $$w^T S_b w$$ means maximizing the distances between all class mean and the overall mean.
 
 Then $$J(w)$$ can be rewritten as 
+
 $$
 J(w) = \frac{w^T S_b w}{w^T S_w w},
 $$
+
 which is the generalized Rayleigh quotient of $$S_b$$ and $$S_w$$.
 
 $$
-w = \underset{w \in \R^p}{\text{argmax }} J(w).
+w = \underset{w \in \mathbb{R}^p}{\text{argmax }} J(w).
 $$
 
 Take derivative of $$J(w)$$ with respect to $$w$$ and set to $$0$$, we have
+
 $$
 (w^T S_w w) S_b w - (w^T S_b w) S_w w = 0 \implies S_w^{-1} S_b w = J(w) w.
 $$
+
 Thus, $$J(w)$$ **is the largest eigenvalue of $$S_w^{-1}S_b$$ and $$w$$ is the corresponding eigenvector.** 
 
 The decision rule of binary classification can be simply written as $$\text{sign}( w^Tx + b)$$, where $$b$$ is the intercept that minimize the loss. 
@@ -365,3 +395,5 @@ Lecture notes from professor [Min Xu](https://stat.rutgers.edu/people-pages/facu
 张 洋. “[PCA的数学原理.](https://blog.codinglabs.org/articles/pca-tutorial.html.)” *CodingLabs*, 22 June 2013.
 
 Jonathan Hui, "[Machine Learning - SVD and PCA.]( https://medium.com/@jonathan_hui/machine-learning-singular-value-decomposition-svd-principal-component-analysis-pca-1d45e885e491.)" *Medium*, 6 Mar 2019.
+
+周志华. *机器学习*. 清华大学出版社, 2016.
