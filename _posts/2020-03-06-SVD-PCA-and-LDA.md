@@ -356,6 +356,8 @@ $$
 $$
 Thus, $$J(w)$$ **is the largest eigenvalue of $$S_w^{-1}S_b$$ and $$w$$ is the corresponding eigenvector.** 
 
+The decision rule of binary classification can be simply written as $$\text{sign}( w^Tx + b)$$, where $$b$$ is the intercept that minimize the loss. 
+
 ### Reference
 
 Lecture notes from professor [Min Xu](https://stat.rutgers.edu/people-pages/faculty/people/130-faculty/378-min-xu).
