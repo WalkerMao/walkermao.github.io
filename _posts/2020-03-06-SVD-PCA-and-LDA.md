@@ -2,7 +2,7 @@
 layout: post
 title:  "SVD, PCA and LDA"
 date: 2020-03-06
-categories: Stat
+categories: ML
 comments: true
 ---
 
@@ -319,7 +319,7 @@ PCA is unsupervised learning method but LDA is supervised.
 
 The idea of LDA is to find projection (or transformation) that makes the samples belonging to the same class are close together but samples from different classes are far  from each other.
 
-![LDA](https://images2018.cnblogs.com/blog/1099525/201804/1099525-20180426100319196-1777070849.png)
+![LDA](/pictures/LDA.png)
 
 
 For simplicity, I take two classes problem for example.
@@ -386,7 +386,7 @@ $$
 
 Thus, $$J(w)$$ **is the largest eigenvalue of $$S_w^{-1}S_b$$ and $$w$$ is the corresponding eigenvector.** 
 
-The decision rule of binary classification can be simply written as $$\text{sign}( w^Tx + b)$$, where $$b$$ is the intercept that minimize the loss. 
+The decision rule of binary classification can be simply written as $$\text{sign}( w^Tx + b)$$, where $$b$$ is the intercept that is selected to minimize the loss. 
 
 ### Reference
 
