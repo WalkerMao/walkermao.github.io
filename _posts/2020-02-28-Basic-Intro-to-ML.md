@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Basic Introduction to Statistical Learning"
+title:  "Basic Intro to Statistical Learning"
 date: 2020-02-28
 categories: ML
 comments: true
@@ -70,7 +70,13 @@ Cross entropy loss: $$ \text{Loss}(y_i,\hat{p}_i) = \sum_{k=1}^K -y_{ik} \log \h
 
 In the formula above, $y_i$, $\hat{y}_ {i}$ or $\hat{p}_ i$ is a vector with dimension $K \times 1$; $y_{ik}$, $\hat{y}_ {ik}$ or $$\hat{p}_{ik}$$ is the $k$-th element in the vector $y_i$, $$\hat{y}_i$$ or $$\hat{p}_i$$; $y_{ik}=1$ if the $i$-th observation is of class $k$, and $y_{ik}=0$ otherwise; $$\hat{y}_{ik}=1$$ if the $i$-th observation is classified to be the class $k$ by the model, and $$\hat{y}_{ik}=0$$ otherwise; $$\hat{p}_{ik}$$ is the estimated probability of the $i$-th observation is of class $k$. 
 
-Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n \big[ -y_i \log \hat{p}_i - (1-y_i) \log(1-\hat{p}_i) \big]$. Cross-entropy is differentiable, and hence more amenable to numerical optimization. 
+Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n \big[ -y_i \log \hat{p}_i - (1-y_i) \log(1-\hat{p}_i) \big]$. 
+
+Cross-entropy is differentiable, and hence more amenable to numerical optimization. 
+
+**ROC & AUC**: If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$\hat{y}_i = \text{sign}(\hat{p}_i > \text{threshold})$$. We can change the threshold from $$1$$ to $$0$$ and plot the TPR (true positive rate) v.s. FPR (false positive rate). The plot is known as ROC (receiver operating characteristic) curve. When the threshold is $$1$$, $$\text{TPR} = \text{FPR} = 0$$. When the threshold is $$0$$, $$\text{TPR} = \text{FPR} = 1$$.  The AUC (area under curve) is the area under the ROC curve. The larger of the AUC, the better of the classification model. 
+
+![Confusion matrix](https://miro.medium.com/max/600/0*UdqpQ0-AHVlN-hF4.gif) <img src="https://miro.medium.com/max/865/0*ysufmKF9prSFhgve.png" alt="ROC" style="zoom: 50%;" />
 
 ## 5. Regularization
 
