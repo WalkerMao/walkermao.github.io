@@ -94,7 +94,7 @@ $$
 \text{Misclassification error: } \frac{1}{2} -  \mid \hat{p}_{m1}-\frac{1}{2} \mid. \\\text{Gini index: } 2 \hat{p}_{m1} (1-\hat{p}_{m1}). \\\text{Cross entropy or deviance: } - \hat{p}_{m1} \log(\hat{p}_{m1}) - (1-\hat{p}_{m1}) \log(1-\hat{p}_{m1}).
 $$
 
-<img src="/pictures/Three-measures.png" alt="Three-measures" style="zoom: 80%;" class="center" />
+<img align="middle" src="/pictures/Three-measures.png" alt="Three-measures" style="zoom: 80%;" />
 
 All three are similar, but cross-entropy and the Gini index are differentiable, and hence more amenable to numerical optimization.
 
