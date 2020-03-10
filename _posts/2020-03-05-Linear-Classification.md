@@ -10,7 +10,7 @@ We model **discriminant functions** $$\delta_k(x)$$ for each class $$k$$, and th
 
 If the discriminant functions $$\delta_k(x)$$ are linear in $$x$$, then the decision boundaries are also linear in $$x$$. The models with linear boundaries are linear classification methods. 
 
-The following parts introduce two popular linear classification methods: linear discriminant analysis and logistic regression.
+The following parts introduce two popular linear classification methods: **LDA** (linear discriminant analysis) and **LR** (logistic regression).
 
 ## 1. Linear Discriminant Analysis
 
