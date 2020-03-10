@@ -64,7 +64,7 @@ The tuning parameter $α ≥ 0$ governs the trade-off between tree size and its 
 
 Large values of $α$ result in smaller trees $T_α$, and conversely for smaller values of $$α$$. As the notation suggests, with $α$ = 0 the solution is the full tree $T_0$.
 
-For each α one can show that there is a unique smallest subtree $T_α$ that minimizes $C_α(T)$. For each $\alpha$, to find $T_α$, we use **weakest link pruning**: we successively collapse the internal node that produces the smallest per-node increase in $\sum_mN_mQ_m(T)$, and continue until we produce the single-node (root) tree. This gives a (finite) sequence of subtrees, and one can show this sequence must contain $T_α$.
+For each $$\alpha$$ one can show that there is a unique smallest subtree $T_α$ that minimizes $C_α(T)$. For each $\alpha$, to find $T_α$, we use **weakest link pruning**: we successively collapse the internal node that produces the smallest per-node increase in $\sum_mN_mQ_m(T)$, and continue until we produce the single-node (root) tree. This gives a (finite) sequence of subtrees, and one can show this sequence must contain $T_α$.
 
 To choose $\alpha$, we use **cross-validation**: we choose the value $\hat{\alpha}$ to minimize the cross-validated loss. Our final tree is $T_\hat{\alpha}$.
 
