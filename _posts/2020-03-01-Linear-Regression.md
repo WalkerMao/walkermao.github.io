@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Linear Regression"
-date: 2020-03-08
+date: 2020-03-01
 categories: ML
 comments: true
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linear Classification Methods"
-date: 2020-03-10
+date: 2020-03-05
 categories: ML
 comments: true
 ---
