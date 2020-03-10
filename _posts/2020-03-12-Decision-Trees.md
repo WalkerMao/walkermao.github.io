@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Decision-Trees"
+title:  "Decision Trees"
 date: 2020-03-12
 categories: ML
 comments: true
