@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Decision Trees"
-date: 2020-03-12
+date: 2020-03-11
 categories: ML
 comments: true
 ---
@@ -107,8 +107,37 @@ Cost-complexity pruning: any of the three.
 
 We usually treat the class proportions in the terminal node as the class probability estimates.
 
+## 3. Interpretation
 
-## 3. Some Tips
+Single decision trees can be graphed and are highly interpretable, but the ensemble trees must be interpreted in the different ways as follow. The following methods can be used for both single tree and ensemble trees.
+
+### 3. 1 Relative Importance of Predictor Variables
+
+For a single decision tree $T_m$, the importance of the variable $$X_j$$ (denote as $$\mathcal{I}_j^2(T_m)$$) can be measured by the sum of the improvements in loss after partition regions by variable $X_j$ over all nodes. 
+
+For additive tree expansions, it is simply averaged over the trees $\mathcal{I}_j^2 = \frac{1}{M} \sum_{m=1}^{M} \mathcal{I}_j^2(T_m)$.
+
+### 3.2 Partial Dependence Plots
+
+Let $\mathcal{S} ⊂ \{1,2,...,p\}$. Let $\mathcal{C}$ be the complement set of  $\mathcal{S}$, with $\mathcal{S} ∪ \mathcal{C} = \{1,2,...,p\}$. The goal is to produce a visual description of the effect of $X_S$ on $f$ via a plot of $\hat{f}(X_S)$. A general function $f(X)$ will in principle depend on all of the input variables: $f(X) = f(X_\mathcal{S},X_\mathcal{C})$. 
+
+The average or partial dependence of $f(X)$ on $X_\mathcal{S}$ can be defined as $
+f_\mathcal{S}(X_\mathcal{S}) = E_{X_\mathcal{C}} f (X_\mathcal{S}, X_\mathcal{C})$, and can be estimated by
+$$
+\bar{f}_\mathcal{S}(X_\mathcal{S}) = \frac{1}{N} \sum_{i=1}^{N} f(X_\mathcal{S}, x_\mathcal{iC}),
+$$
+where $\{x_{1\mathcal{C}},...,x_{N\mathcal{C}} \}$ are the values of $X_\mathcal{C}$ occurring in the training data.
+
+Partial dependence functions $f_\mathcal{S}(X_\mathcal{S})$ can be used to interpret the results of **any** "black box" learning method. However, it can be computationally intensive. Fortunately with decision trees, $\bar{f}_\mathcal{S}(X_\mathcal{S})$ can be rapidly computed from the tree itself without reference to the data (ESL Exercise 10.11). 
+
+The partial dependence of $f(X)$ on $X_\mathcal{S}$ is a marginal average of $f$, and can represent the **effect** of $X_\mathcal{S}$ on $f(X)$ after accounting for the (average) effects of the other variables $X_\mathcal{C}$ on $f(X)$. It is not the effect of $X_\mathcal{S}$ on $f(X)$ ignoring the effects of $X_\mathcal{C}$. The latter is given by the conditional expectation $
+\tilde{f}_\mathcal{S}(X_\mathcal{S}) = E(f(X_\mathcal{S}, X_\mathcal{C}) | f(X_\mathcal{S})$. 
+
+<img src="/pictures/Partial-dependence-plot-1.jpg" alt="Partial-dependence-plot-1" style="zoom: 33%;" /><img src="/pictures/Partial-dependence-plot-2.jpg" alt="Partial-dependence-plot-2" style="zoom: 33%;" /><img src="/pictures/Partial-dependence-plot-3.jpg" alt="Partial-dependence-plot-3" style="zoom: 28.5%;" />
+
+The plots above show the partial dependence of house value on average occupancy and house age. There appears to be a strong interaction effect between these two variables.
+
+## 4. Some Tips
 
 A key advantage of the recursive binary tree is its interpretability. 
 
