@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Basic Intro to Statistical Learning"
+title:  "Intro to Statistical Learning"
 date: 2020-02-28
 categories: ML
 comments: true
@@ -131,7 +131,75 @@ Bias $\text{Bias}(\hat{f})$ refers to the error that is introduced by approximat
 
 Note: It is possible to have a model that has lower variance and lower bias simultaneously. For example, boosting method can reduce both variance and bias. 
 
+## 7. Optimization
 
+The objective function
+
+$$
+\text{Obj}(Y, X, \theta) = \frac{1}{n} \sum_{i=1}^n L \big( y_i, f(x_i; \theta) \big) + \Omega \big( f(\cdot;\theta) \big),
+$$
+
+where $\theta$ is a vector of dimension $p_\theta \times 1$ that contains the parameters of predictive model $f(\cdot)$, $L(\cdot)$ is the loss function, and $\Omega(\cdot)$ is the regularization term. 
+
+Our objective is to minimize the objective function with respect to $\theta$: $\theta^* = \underset{\theta}{\text{argmin }} \text{Obj}(Y,X,\theta)$.
+
+### 7.1 Gradient Descent
+
+We perform $\theta^{(t)} = \theta^{(t-1)} + \Delta\theta^{(t)}$ iteratively until the objective function converges. Denote $\Delta \theta = \alpha \mathbf{u}$, where $\alpha$ is a non-negative scalar (length of $\Delta\theta$) and $\mathbf{u}$ is a unit vector (direction of $\Delta\theta$).  
+
+By the Taylor polynomial of degree one, 
+
+$$
+\text{Obj}(\theta + \alpha\mathbf{u}) \approx \text{Obj}(\theta) + \alpha \mathbf{u}^T \text{Obj}'(\theta) = \text{Obj}(\theta) + \alpha \| \text{Obj}'(\theta) \| \text{cos}(\gamma),
+$$
+
+where $\gamma$ is the angle between $\mathbf{u}$ and $\text{Obj}'(\theta)$. 
+
+We want to find the unit vector $\mathbf{u}$ that minimize $\text{Obj}(\theta + \alpha\mathbf{u})$. Obviously, the minimizer $\mathbf{u}$ should have the opposite direction of $\text{Obj}'(\theta)$ that make $\text{cos}(\gamma)=-1$, then we have $\mathbf{u} = \frac{-\text{Obj}'(\theta)}{\| \text{Obj}'(\theta) \|}$.
+
+Thus, we have
+
+$$
+\theta^{(t)} = \theta^{(t-1)} - \frac{\alpha}{\| \text{Obj}'(\theta^{(t-1)}) \|} \text{Obj}'(\theta^{(t-1)}),
+$$
+
+where $$\frac{\alpha}{\| \text{Obj}'(\theta^{(t-1)}) \|}$$ is called the step size or learning rate.
+
+### 7.2 Newton's Method
+
+We use the Taylor polynomial of degree two to decompose the objective function, 
+
+$$
+\text{Obj}(\theta + \Delta\theta) \approx \text{Obj}(\theta) + {\Delta\theta}^T \text{Obj}'(\theta) + \frac{1}{2} {\Delta\theta}^T \text{Obj}''(\theta) \Delta\theta.
+$$
+
+$\text{Obj}''(\theta)$ is the **Hessian** matrix that contains all second order partial derivatives:
+
+$$
+\mathbf{H} = \text{Obj}''(\theta) = 
+\begin{pmatrix}
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1^2} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_{p_{\theta}}} \\
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2^2} & \cdots & 0 \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial  \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial \theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial \theta_{p_{\theta}}}
+ \end{pmatrix}.
+$$
+
+To find the minimum of the objective $\text{Obj}(\theta + \Delta\theta)$, we take its first derivative and equate it with $0$ and solve for $\Delta\theta$,
+
+$$
+\text{Obj}'(\theta) + \text{Obj}''(\theta) \Delta\theta = 0 \implies \Delta\theta = - [\text{Obj}''(\theta)]^{-1} \text{Obj}'(\theta).
+$$
+
+Thus, we have 
+
+$$
+\theta^{(t)} = \theta^{(t-1)} - \eta^{(t)} \cdot [\text{Obj}''(\theta^{(t-1)})]^{-1} \text{Obj}'(\theta^{(t-1)}),
+$$
+
+where $\eta^{(t)}$ is the step size.
+
+Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
 
 ---
 
