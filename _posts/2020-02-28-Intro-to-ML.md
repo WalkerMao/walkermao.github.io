@@ -143,6 +143,8 @@ where $\theta$ is a vector of dimension $p_\theta \times 1$ that contains the pa
 
 Our objective is to minimize the objective function with respect to $\theta$: $\theta^* = \underset{\theta}{\text{argmin }} \text{Obj}(Y,X,\theta)$.
 
+In the following two sections, I interpret the gradient descent and Newton's method as iteratively minimizing the local Taylor approximation to the objective function.
+
 ### 7.1 Gradient Descent
 
 We perform $\theta^{(t)} = \theta^{(t-1)} + \Delta\theta^{(t)}$ iteratively until the objective function converges. Denote $\Delta \theta = \alpha \mathbf{u}$, where $\alpha$ is a non-negative scalar (length of $\Delta\theta$) and $\mathbf{u}$ is a unit vector (direction of $\Delta\theta$).  
@@ -155,15 +157,15 @@ $$
 
 where $\gamma$ is the angle between $\mathbf{u}$ and $\text{Obj}'(\theta)$. 
 
-We want to find the unit vector $\mathbf{u}$ that minimize $\text{Obj}(\theta + \alpha\mathbf{u})$. Obviously, the minimizer $\mathbf{u}$ should have the opposite direction of $\text{Obj}'(\theta)$ that make $\text{cos}(\gamma)=-1$, then we have $\mathbf{u} = \frac{-\text{Obj}'(\theta)}{\| \text{Obj}'(\theta) \|}$.
+We want to find the unit vector $\mathbf{u}$ that minimize $\text{Obj}(\theta + \alpha\mathbf{u})$. Obviously, the minimizer $\mathbf{u}$ should have the opposite direction of $\text{Obj}'(\theta)$ that make $\text{cos}(\gamma)=-1$, then we have $$\mathbf{u} = \frac{-\text{Obj}'(\theta)}{\| \text{Obj}'(\theta) \|}$$.
 
 Thus, we have
 
 $$
-\theta^{(t)} = \theta^{(t-1)} - \frac{\alpha}{\| \text{Obj}'(\theta^{(t-1)}) \|} \text{Obj}'(\theta^{(t-1)}),
+\theta^{(t)} = \theta^{(t-1)} - \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|} \text{Obj}'(\theta^{(t-1)}) = \theta^{(t-1)} - \eta^{(t)}\text{Obj}'(\theta^{(t-1)}),
 $$
 
-where $$\frac{\alpha}{\| \text{Obj}'(\theta^{(t-1)}) \|}$$ is called the step size or learning rate.
+where $$\eta^{(t)} = \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|}$$ is called the step size or learning rate. 
 
 ### 7.2 Newton's Method
 
@@ -197,7 +199,7 @@ $$
 \theta^{(t)} = \theta^{(t-1)} - \eta^{(t)} \cdot [\text{Obj}''(\theta^{(t-1)})]^{-1} \text{Obj}'(\theta^{(t-1)}),
 $$
 
-where $\eta^{(t)}$ is the step size.
+where $\eta^{(t)}$ is the step size or learning rate.
 
 Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
 
