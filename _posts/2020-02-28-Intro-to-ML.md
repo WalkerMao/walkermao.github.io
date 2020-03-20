@@ -98,7 +98,9 @@ Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
 
 ![LASSO and Ridge](https://qph.fs.quoracdn.net/main-qimg-2a88e2acc009fa4de3edeb51e683ca02)
 
-L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more computationally efficient when doing prediction. L2-norm is differentiable so it has an analytical solution and can be calculated efficiently when training model. 
+L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more robust and also more computationally efficient when doing prediction. 
+
+L2-norm encouraging the model to use all of its inputs a little rather than some of its inputs a lot. It is differentiable so it has an analytical solution and can be calculated efficiently when training model. Notice that during gradient descent parameters update, using the L2-norm regularization ultimately means that the parameter is decayed linearly: `W -= lambda * W` towards zero. 
 
 ## 6. Trade-off 
 
