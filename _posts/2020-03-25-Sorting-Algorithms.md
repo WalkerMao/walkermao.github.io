@@ -70,7 +70,7 @@ Both them employ the **divide-and-conquer** paradigm based on recursion. This pa
 
 Divide the array into two sublists recursively and merge them.
 
-<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Merge-Sort-Tutorial.png" alt="Merge sort" style="zoom: 50%;" />
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Merge-Sort-Tutorial.png" alt="Merge sort" style="zoom: 80%;" />
 
 Space complexity: 
 
