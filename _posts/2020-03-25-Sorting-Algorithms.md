@@ -28,6 +28,8 @@ They are both comparison based sorting techniques based on binary search trees a
 
 Tree sort builds a binary search tree (BST) for the elements and then traverses the tree in-order so that the elements come out in sorted order. It is faster for nearly sorted array. 
 
+Pseudo code:
+
 ```pseudocode
 def TreeSort(A): 
 	BST = BuildBST(A)
@@ -38,9 +40,11 @@ def TreeSort(A):
 
 Heap sort first transforms the array into a heap (implemented as an array) in-place (time $O(n)$), then divides the array into a sorted and an unsorted region. We do the following steps iteratively (time $O(n\log_2n)$): 1. swap the first and last element in unsorted region; 2. shrink the unsorted region by merging the last element into the the sorted region. 3. re-heapify the shrunk unsorted region. 
 
+Pseudo code:
+
 ```pseudocode
 def HeapSort(A):
-	BuildHeap(A) # in-place, time is n
+	BuildHeap(A) # in-place
 	for i from len(A)-1 to 1:
 		swap(A[0], A[i])
 		Heapify(A[:i])
