@@ -165,7 +165,16 @@ Best case: In the best case, each time we perform a partition we divide the list
 
 Worst case: If the leftmost (or rightmost) element is chosen as pivot, the worst occurs when the array is **already sorted** in order or reverse order (a special case is that all elements are same). At this situation, every element will be a pivot, thus the time is $$(n-1) + (n-2) + \cdots + 1 = \frac{n(n-1)}{2} = O(n^2)$$, and the recurrence tree will be a right or left skewed tree thus the space is $O(n)$. The problem can be easily solved by choosing a random or middle index for the pivot. However, the worst case can still occurs when all elements are same. 
 
-Quick sort exhibits good cache locality, and this makes quick sort faster than most other $O(n\log_2n)$ comparison based algorithms in practice. The reason for this **cache efficiency** is that it linearly scans the input and linearly partitions the input. This means we can make the most of every cache load we do as we read every number we load into the cache before swapping that cache for another. In particular, the algorithm is cache-oblivious, which gives good cache performance for every cache level, which is another win.
+#### Comparisons between Heap, Merge and Quick sort
+
+Heap sort is the slowest. Heap sort may make more comparisons than optimal. Each siftUp operation makes two comparisons per level, so the comparison bound is approximately $$2n\log_2 n$$. Heap Sort is more memory efficient and also in place. Merge sort is slightly faster than the heap sort for larger sets. 
+
+Quick sort is usually faster than most other $O(n\log_2n)$ comparison based algorithms in practice. The reasons are:
+
+- **Cache efficiency**. Quick sort changes the array in-place, and it linearly scans the input and linearly partitions the input. Thus, it applies the principle of [locality of reference](http://en.wikipedia.org/wiki/Locality_of_reference). Cache benefits from multiple accesses to the same place in the memory, since only the first access needs to be actually taken from the memory, and the rest of the accesses are taken from cache, which is much faster than the access to memory. For heap sort, it needs to swap the elements that are usually not close to each other. If $n$ is large, the cache cannot store the heap array, thus we need to access the memory (RAM) frequently. Merge sort needs much more RAM accesses, since every accessory array you create is accessing the RAM again. Trees are even worse, since it is not in-place and two sequential accesses in a tree are not likely to be close to each other. 
+- **No unnecessary elements swaps**. Swap is time consuming. With quick sort we don't swap what is already ordered. The main competitors of quick sort are merge sort and heap sort. With heap sort, which is also in-place, even if all of your data is already ordered, we are going to swap all elements to order the array. With merge sort, which is not in-place, it's even worse, since you are going to write all elements in another array and write it back in the original one, even if data is already ordered. However, it doesn't mean heap sort is always faster than merge sort. 
+
+[Comparison between merge sort and quick sort](https://www.geeksforgeeks.org/quick-sort-vs-merge-sort/)
 
 #### Quick Sort on Linked List
 
