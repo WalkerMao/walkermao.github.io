@@ -117,7 +117,14 @@ In the formula above, $y_i$ and $\hat{p}_ i$ are the vectors with dimension $K \
 
 ### 2.2 Binary LR
 
-For binary classification, the softmax function is degraded to sigmoid function. Then the binary logistic regression can be written as
+For binary classification, the softmax function is degraded to sigmoid function:
+
+$$\begin{align}
+\hat{p}_{i1} &= \frac{e^{z_{i1}}}{e^{z_{i0}} + e^{z_{i1}}} = \frac{1}{1+e^{z_{i0} - z_{i1}}} = \frac{1}{1 + e^{-(w_1^Tx_i + b_1 - w_0^Tx_i + b_0)}} \\
+&= \frac{1}{1 + e^{-[(w_1-w_0)^T x_i + (b_1-b_0)]}} = \frac{1}{1 + e^{-(w^Tx_i + b)}}.
+\end{align}$$
+
+Then the binary logistic regression can be written as
 
 $$
 \hat{p}_i = \frac{1}{1+e^{-z_i}}, \\z_i = w^Tx_i + b,

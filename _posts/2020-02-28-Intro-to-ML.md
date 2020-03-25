@@ -205,6 +205,10 @@ where $\eta^{(t)}$ is the step size or learning rate.
 
 Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
 
+### 7.3 Proximal Gradient Descent
+
+If the objective function is not differentiable everywhere (e.g. L1 norm), we can use the proximal gradient descent. 
+
 ---
 
 Reference: James, Gareth, et al. "Statistical Learning." *An introduction to statistical learning*. Vol. 112. New York: springer, 2013.

@@ -8,9 +8,9 @@ comments: true
 
 ## Architecture Overview
 
-Regular Neural Nets don't scale well to full images. The full connectivity is wasteful and the huge number of parameters would quickly lead to overfitting. For a image of size $$32\times 32 \times3$$ ($32$ wide, $32$ high, $3$ color channels), so a single fully-connected neuron in a first hidden layer of a regular Neural Network would have $$32\times32\times3=3072$$ weights.
+Regular Neural Networks don't scale well to full images. The full connectivity is wasteful and the huge number of parameters would quickly lead to overfitting. For a image of size $$32\times 32 \times3$$ ($32$ wide, $32$ high, $3$ color channels), so a single fully-connected neuron in a first hidden layer of a regular Neural Network would have $$32\times32\times3=3072$$ weights.
 
-CNNs are very similar to ordinary NNs. However, CNN architectures make the explicit assumption that the inputs are images, which allows us to encode certain properties into the architecture. These then make the forward function more efficient to implement and vastly reduce the amount of parameters in the network. 
+Convolutional Neural Networks (CNNs) are very similar to ordinary Neural Networks. However, CNN architectures make the explicit assumption that the inputs are images, which allows us to encode certain properties into the architecture. These then make the forward function more efficient to implement and vastly reduce the amount of parameters in the network. 
 
 A CNN arranges its neurons in three dimensions (width, height, depth), and the neurons in a layer will only be connected to a small region of the layer before it, instead of all of the neurons in a fully-connected manner. 
 
