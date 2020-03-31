@@ -13,12 +13,35 @@ Here is the cheat sheet for commonly used sorting algorithms:
 | Selection | $n^2$       | $n^2$        | $n^2$      | $1$              | ✓       | ✓         |
 | Bubble    | $n$         | $n^2$        | $n^2$      | $1$              | ✓       | ✓         |
 | Insertion | $n$         | $n^2$        | $n^2$      | $1$              | ✓       | ✓         |
+| Shell     | $n\log_2 n$ | $n\log^2_2n$ | $n^2$      | $1$              | ✗       | ✓         |
 | Tree      | $n\log_2 n$ | $n\log_2 n$  | $n^2$      | $n$              | ✓       | ✗         |
 | Heap      | $n\log_2 n$ | $n\log_2 n$  | $n\log_2n$ | $1$              | ✗       | ✓         |
 | Merge     | $n\log_2 n$ | $n\log_2 n$  | $n\log_2n$ | $n$              | ✓       | ✗         |
 | Quick     | $n\log_2 n$ | $n\log_2 n$  | $n^2$      | $\log_2n$ or $n$ | ✗       | ✓         |
-| Counting  | $n+k$       | $ n+k $      | $n+k$      | $k$              | ✓       | ✗         |
-| Bucket    | $n+k $      | $ n+k $      | $ n^2 $    | $n$              | ✓       | ✗         |
+| Counting  | $n+k$       | $ n+k $      | $n+k$      | $n+k$            | ✓       | ✗         |
+| Radix     | $l(n+c)$    | $l(n+c)$     | $l(n+c)$   | $n+c$            | ✓       | ✗         |
+| Bucket    | $n+b$       | $n+b$        | $n^2$      | $n+b$            | ✓       | ✗         |
+
+## Insertion Sort and Shell Sort
+
+### Insertion Sort
+
+Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.
+
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/insertionsort.png" alt="InsertionSort" style="zoom: 70%;" />
+
+### Shell Sort
+
+The shell sort, sometimes called the "diminishing increment sort", improves on the insertion sort by breaking the original list into a number of smaller sublists, each of which is sorted using an insertion sort. 
+
+The unique way that these sublists are chosen is the key to the shell sort. Instead of breaking the list into sublists of contiguous items, the shell sort creates the sublists by an increment (sometimes called the **gap**). 
+
+<img src="../pictures/shellsort.jpg" alt="shellsort" style="zoom:80%;" />
+
+There are two advantages of Shell Sort over Insertion Sort.
+
+- When the swap occurs in a noncontiguous sublist, the swap moves the item over a greater distance within the overall array. Insertion Sort only moves the item one position at a time. This means that in Shell Sort, the items being swapped are more likely to be closer to its final position then Insertion Sort.
+- Since the items are more likely to be closer to its final position, the array itself become partially sorted. Thus when the segment number equals one, and Shell Sort is performing basically the Insertion Sort, it will be able to work very fast, since Insertion Sort is fast when the array is almost in order.
 
 ## Tree Sort and Heap Sort
 
@@ -165,7 +188,7 @@ Best case: In the best case, each time we perform a partition we divide the list
 
 Worst case: If the leftmost (or rightmost) element is chosen as pivot, the worst occurs when the array is **already sorted** in order or reverse order (a special case is that all elements are same). At this situation, every element will be a pivot, thus the time is $$(n-1) + (n-2) + \cdots + 1 = \frac{n(n-1)}{2} = O(n^2)$$, and the recurrence tree will be a right or left skewed tree thus the space is $O(n)$. The problem can be easily solved by choosing a random or middle index for the pivot. However, the worst case can still occurs when all elements are same. 
 
-#### Comparisons between Heap, Merge and Quick sort
+#### Comparisons between Heap, Merge and Quick Sort
 
 Heap sort is the slowest. Heap sort may make more comparisons than optimal. Each siftUp operation makes two comparisons per level, so the comparison bound is approximately $$2n\log_2 n$$. Heap Sort is more memory efficient and also in place. Merge sort is slightly faster than the heap sort for larger sets. 
 
@@ -220,7 +243,7 @@ class Solution(object):
         return headLeft
 ```
 
-## Counting Sort and Bucket Sort
+## Non-Comparison Sort Algorithm
 
 ### Counting Sort
 
@@ -228,24 +251,40 @@ Counting sort is usually used for sorting integers or characters. It is based on
 
 ![counting_sort](https://www.cs.rit.edu/~vcss233/Labs/lab05/images/count_sort_exp.gif)
 
+Suppose the elements are in range from $1$ to $k$, thus there are $k$ keys.
+
 ```python
-# Suppose A is an integer array
-def countingSort(A: list) -> list:
-    mi, ma = float("inf"), -float("inf")
-    for n in A: 
-        mi, ma = min(mi, n), max(ma, n)
-    counts = [0] * (max(A) - min(A) + 1)
-    for n in A: 
-        counts[n-mi] += 1
-    sortedA = list()
-    for i, c in enumerate(counts):
-        sortedA.extend([mi+i] * c)
-    return sortedA
+# Python code for counting sort.
+def CountingSort(input: list, k: int) -> list:
+    count = k * [0]
+    for x in input:
+        count[key(x)] += 1
+    for j in range(1, k):
+        count[j] += count[j-1]
+    output = len(input) * [None]
+    for x in input[::-1]:
+        count[key(x)] -= 1
+        output[count[key(x)]] = x
+    return output
 ```
 
 Time complexity of initializing the counting array of size $k$ is $O(k)$, and that of counting all elements is $O(n)$. Thus the time complexity of counting sort is $O(n+k)$. Space complexity is $O(k)$ since the size of the counting array is $k$. 
 
+### Radix Sort
+
+Counting sort is a linear time sorting algorithm that sort in $O(n+k)$ time when elements are in range from $1$ to $k$. However, if the elements are in a **big range**, for example, from $1$ to $n^2$, then $k=O(n^2)$, we cannot use counting sort because it will take $O(n^2)$ which is worse than comparison based sorting algorithms. 
+
+In this case, radix sort can sort such an array in linear time. The idea of Radix sort is to do digit by digit sort starting from least significant digit to most significant digit. Radix sort uses counting sort as a subroutine to sort. 
+
+<img src="https://camo.githubusercontent.com/4376d13c2f2b6425681038a614ccdce1cf0c1893/68747470733a2f2f7777772e7265736561726368676174652e6e65742f7075626c69636174696f6e2f3239313038363233312f6669677572652f666967312f41533a36313432313434353234303432343040313532333435313534353536382f53696d706c69737469632d696c6c757374726174696f6e2d6f662d7468652d73746570732d706572666f726d65642d696e2d612d72616469782d736f72742d496e2d746869732d6578616d706c652d7468652e706e67" alt="Radix Sort" style="zoom: 60%;" />
+
+Suppose there are $l$ digits(or characters) in each input integer(or string), and there are $c$ different digits(or characters), for example, $c=10$ for digits and $c=26$ for characters. Note that $c$ is the size of the count array in each counting sort of each pass, also $k=O(c^l)$. 
+
+In radix sort, we perform counting sort for $l$ passes, and each counting sort takes $O(n+c)$ time, thus the time complexity of radix sort is $O(l(n+c))$. The space complexity also comes from counting sort, which requires $O(n+c)$ space. 
+
 ### Bucket Sort
+
+For counting sort, if the range of the elements is very big, then the size of the count array $k$ will be unaffordable large. As discussed before, radix sort can reduce the space. However, if the size of different element values is small, bucket sort is more suitable. For example, if the input array is $1,1,1,1000,1000,1000$, then the count array for counting sort is of size $1000$, and radix sort is also not that good since it does four passes. In bucket sort, we use buckets instead of count array. The number of buckets $b$ is usually much smaller than $k$. 
 
 Bucket sort works as follows:
 
@@ -258,3 +297,10 @@ Bucket sort works as follows:
 
 Bucket sort is mainly useful when input is uniformly distributed over a range. The worst-case scenario occurs when all the elements are placed in a single bucket. The overall performance would then be dominated by the algorithm used to sort each bucket, which is typically $O(n^{2}) $ insertion sort, making bucket sort less optimal than $O(n\log_2n)$ comparison sort algorithms.
 
+Examples:
+
+| Input array                     | Suitable algorithm |
+| ------------------------------- | ------------------ |
+| 1, 1, 1, 2, 2, 3, 3, 3, 4, 5, 5 | Counting sort      |
+| 1, 995, 996, 996, 998, 999      | Radix sort         |
+| 1, 1, 1, 1, 1000, 1000, 1000    | Bucket sort        |
