@@ -36,7 +36,7 @@ The shell sort, sometimes called the "diminishing increment sort", improves on t
 
 The unique way that these sublists are chosen is the key to the shell sort. Instead of breaking the list into sublists of contiguous items, the shell sort creates the sublists by an increment (sometimes called the **gap**). 
 
-<img src="../pictures/shellsort.jpg" alt="shellsort" style="zoom:80%;" />
+<img src="/pictures/shellsort.jpg" alt="shellsort" style="zoom:70%;" />
 
 There are two advantages of Shell Sort over Insertion Sort.
 
