@@ -282,6 +282,21 @@ Suppose there are $l$ digits(or characters) in each input integer(or string), an
 
 In radix sort, we perform counting sort for $l$ passes, and each counting sort takes $O(n+c)$ time, thus the time complexity of radix sort is $O(l(n+c))$. The space complexity also comes from counting sort, which requires $O(n+c)$ space. 
 
+```python
+# use the bucket sort internally.
+def radixSort(self, nums: list) -> int:
+    # Convert nums list to reversed bit array list
+    nums = [bin(num)[2:][::-1] for num in nums] 
+    for i in range(max(map(len, nums))):
+        nums0 = [x for x in nums if i >= len(x) or x[i] == '0']
+        nums1 = [x for x in nums if i < len(x) and x[i] == '1']
+        # it will only have two buckets (0, 1) in radix sort.
+        nums = nums0 + nums1
+    # convert the number back to base 10 integer. 
+    output = [int(num[::-1], 2) for num in nums]
+    return output
+```
+
 ### Bucket Sort
 
 For counting sort, if the range of the elements is very big, then the size of the count array $k$ will be unaffordable large. As discussed before, radix sort can reduce the space. However, if the size of different element values is small, bucket sort is more suitable. For example, if the input array is $1,1,1,1000,1000,1000$, then the count array for counting sort is of size $1000$, and radix sort is also not that good since it does four passes. In bucket sort, we use buckets instead of count array. The number of buckets $b$ is usually much smaller than $k$. 
