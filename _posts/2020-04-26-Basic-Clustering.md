@@ -59,16 +59,18 @@ Suppose there are latent variables $z_i$'s ($z_i$ can be a scalar or vector). Fo
 
 We wish to fit the parameters $\theta$ of a model $p(x;\theta)$ to the observable data $x$. We estimate the parameters $\theta$ by maximizing the log likelihood. 
 
+Note: There are two different approaches to derive the EM algorithm. The following is the approach that was introduced by Andrew Ng in his lecture notes. 
+
 If $z_i$ is a continuous random variable. The log likelihood for the observable data $x_i$'s is
 
 $$ \begin{align*}
-l(\theta) &= \log L(\theta) \\
+\ell(\theta) &= \log L(\theta) \\
 &= \sum_{i=1}^n \log p(x_i;\theta) \\
-&= \sum_{i=1}^n \log \int p(x_i, z_i; \theta) dz_i \\
-&= \sum_{i=1}^n \log \int q_i(z_i) \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i \\
+&= \sum_{i=1}^n \log \sum_{z_i} p(x_i, z_i; \theta)  \\
+&= \sum_{i=1}^n \log \sum_{z_i} q_i(z_i) \frac{p(x_i, z_i; \theta)}{q_i(z_i)}  \\
 &= \sum_{i=1}^n \log E_{z_i \sim q_i} \Big[\frac{p(x_i, z_i; \theta)}{q_i(z_i)} \Big] \\
 & \geq \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] \\
-&= \sum_{i=1}^n \int q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i. \tag{1}
+&= \sum_{i=1}^n \sum_{z_i} q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)}. \tag{1}
 \end{align*} $$
 
 where the "$$z_i \sim q_i$$" subscripts above indicate that the expectations are with respect to $z_i$ drawn from $q_i$. 
@@ -84,7 +86,7 @@ Similarly, if $z_i$ is a discrete random variable, we have $$l(\theta) \geq \sum
 Define
 
 $$
-J(\mathbf{q},\theta) = J(q_1,\cdots,q_n, \theta) := \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] = \sum_{i=1}^n \int q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i.
+J(\mathbf{q},\theta) = J(q_1,\cdots,q_n, \theta) := \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] = \sum_{i=1}^n \sum_{z_i} q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)}.
 $$
 
 Now, for any set of distributions $\mathbf{q}$, the formula (1) gives a lower-bound $$J(\mathbf{q},\theta)$$ on the log likelihood $l(\theta)$. 
@@ -92,20 +94,22 @@ Now, for any set of distributions $\mathbf{q}$, the formula (1) gives a lower-bo
 At $t$-th step, $\mathbf{q}^{(t)}$'s and $$\theta^{(t)}$$ are known. By the equation (1), we have
 
 $$
-l(\theta^{(t+1)}) \geq J(\mathbf{q}^{(t)}, \theta^{(t)}). \tag{3}
+\ell(\theta^{(t+1)}) \geq J(\mathbf{q}^{(t)}, \theta^{(t)}). \tag{3}
 $$
 
 To increase the lower bound of $l(\theta^{(t+1)})$ as much as possible, it seems natural to select $\mathbf{q}^{(t)}$ ($q_i^{(t)}$'s) that makes the lower-bound tight at that value of $\theta^{(t)}$. I.e., we'll make the inequality (3) above hold with equality at our particular value of $\theta^{(t)}$. To do that, we need to make the Jensen’s inequality in equitation (2) to hold with equality, which means $$\frac{p(x_i, z_i; \theta)}{q_i(z_i)}$$ need to be a constant-valued random variable. 
 
-Thus, to get the tight lower bound on $l(\theta)$, we require that $$\frac{p(x_i, z_i; \theta)}{q_i(z_i)} = c$$ for some constant $c$ that does not depend on $z_i$. Since $$1 = \int q_i(z_i) dz_i = \int \frac{1}{c} p(x_i, z_i; \theta) dz_i = \frac{1}{c} \int  p(x_i, z_i; \theta) dz_i$$, we have $$c =  \int  p(x_i, z_i; \theta) dz_i $$. It follows that 
+Thus, to get the tight lower bound on $\ell(\theta)$, we require that $$\frac{p(x_i, z_i; \theta)}{q_i(z_i)} = c$$ for some constant $c$ that does not depend on $z_i$. Since $$1 = \sum_{z_i} q_i(z_i) = \sum_{z_i} \frac{1}{c} p(x_i, z_i; \theta)  = \frac{1}{c} \sum_{z_i}  p(x_i, z_i; \theta) $$, we have $$c =  \sum_{z_i}  p(x_i, z_i; \theta)  $$. It follows that 
 
 $$
-q_i(z_i) = \frac{ p(x_i, z_i; \theta)} {\int  p(x_i, z_i; \theta) dz_i} = \frac{ p(x_i, z_i; \theta)} {p(x_i; \theta)} = p(z_i | x_i; \theta).
+q_i(z_i) = \frac{ p(x_i, z_i; \theta)} {\sum_{z_i}  p(x_i, z_i; \theta) } = \frac{ p(x_i, z_i; \theta)} {p(x_i; \theta)} = p(z_i | x_i; \theta).
 $$
 
 Therefore, we simply set the $q_i$ to be the posterior distribution of the $z_i$ given $x_i$ and the setting of the parameters $\theta$, which is denoted as $\theta^{(t)}$ at $t$-th iteration. 
 
-At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$'s, the equation (3) gives a lower bound on the loglikelihood that we're trying to maximize. We select $$q_i^{(t+1)}(z_i) = p(z_i \mid x_i; \theta^{(t)})$$ to make the lower bound tight, then we have $l(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)})$.This is the E-step. In the M-step of the algorithm, we then maximize the tight lower bound $J(\mathbf{q}^{(t+1)}, \theta^{(t)})$ with respect to the parameters $\theta$ to obtain a new setting of the parameters, which is $\theta^{(t+1)}$. 
+At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$'s, the equation (3) gives a lower bound on the loglikelihood that we're trying to maximize. We select $$q_i^{(t+1)}(z_i) = p(z_i \mid x_i; \theta^{(t)})$$ to make the lower bound tight, then we have $\ell(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)})$.This is the E-step. 
+
+In the M-step of the algorithm, we then maximize the tight lower bound $$J(\mathbf{q}^{(t+1)}, \theta^{(t)}) = \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log \frac{p(x_i, z_i; \theta)}{p(z_i \mid x_i; \theta^{(t)})}$$ with respect to the parameters $\theta$ to obtain a new setting of the parameters, which is $\theta^{(t+1)}$. 
 
 **Algorithm. EM algorithm:**
 
@@ -115,7 +119,7 @@ At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$'s, 
 
 (a) E-step. For each $$i$$, set $$q_i^{(t+1)}(z_i) := p(z_i \mid x_i; \theta^{(t)})$$;
 
-(b) M-step. Update  $$\theta^{(t+1)} := \underset{\theta}{\text{argmax }} J(\mathbf{q}^{(t+1)}, \theta)$$.
+(b) M-step. Update  $$\theta^{(t+1)} := \underset{\theta}{\text{argmax }} J(\mathbf{q}^{(t+1)}, \theta) = \underset{\theta}{\text{argmax }} \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log \frac{p(x_i, z_i; \theta)}{p(z_i \mid x_i; \theta^{(t)})}$$.
 
 **Remark.** The EM algorithm can also be viewed a coordinate ascent on $J(\mathbf{q}, \theta)$, in which the E-step maximizes it with respect to $\mathbf{q}$, and the M-step maximizes it with respect to $\theta$.
 
@@ -123,8 +127,25 @@ Summary:
 
 $$
 \newcommand{\vc}[3]{\overset{#2}{\underset{#3}{#1}}}
-l(\theta^{(t+1)}) \geq J(\mathbf{q}^{(t)}, \theta^{(t)}) \vc{\implies}{\text{E-step}}{\text{Update } \mathbf{q}} l(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)}) \vc{\implies}{\text{M-step}}{\text{Update } \theta} l(\theta^{(t+2)}) \geq J(\mathbf{q}^{(t+1)}, \theta^{(t+1)}) \vc{\implies}{\text{E-step}}{\text{Update } \mathbf{q}} \cdots
+\ell(\theta^{(t+1)}) \geq J(\mathbf{q}^{(t)}, \theta^{(t)}) \vc{\implies}{\text{E-step}}{\text{Update } \mathbf{q}} \ell(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)}) \vc{\implies}{\text{M-step}}{\text{Update } \theta} \ell(\theta^{(t+2)}) \geq J(\mathbf{q}^{(t+1)}, \theta^{(t+1)}) \vc{\implies}{\text{E-step}}{\text{Update } \mathbf{q}} \cdots
 $$
+
+Denote $$Q(\theta;\theta^{(t)}) := \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta)$$. Note that $$\underset{\theta}{\text{argmax }} \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log \frac{p(x_i, z_i; \theta)}{p(z_i \mid x_i; \theta^{(t)})} = \underset{\theta}{\text{argmax }} Q(\theta;\theta^{(t)})$$. 
+
+To derive the other form of the algorithm, note that 
+
+$$\begin{align*}
+Q(\theta;\theta^{(t)}) &= \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) \\
+&= \sum_{i=1}^n E_{z_i \mid x_i;\theta^{(t)}} \Big[\log p(x_i,z_i;\theta) \mid x_i \Big] \\
+&= E_{z \mid x;\theta^{(t)}} \Big[ \sum_{i=1}^{n} \log p(x_i,z_i;\theta) \mid x_i  \Big] \\
+&= E_{z \mid x;\theta^{(t)}} \Big[ \ell(x,z ; \theta)  \mid x_i  \Big].
+\end{align*}$$
+
+**Remark.** The algorithm can also be written as
+
+(a) E-step. Set $$Q(\theta;\theta^{(t)}) := \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) = E_{z \mid x;\theta^{(t)}} \Big[ \ell(x,z ; \theta)  \mid x_i  \Big]$$.
+
+(b) M-step. Update  $$\theta^{(t+1)} := \underset{\theta}{\text{argmax }} Q(\theta;\theta^{(t)})$$. 
 
 ## Gaussian Mixture Model
 
