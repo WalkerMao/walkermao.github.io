@@ -8,7 +8,7 @@ comments: true
 
 ## K-Means
 
-The aim of clustering is to divide observations into several non-overlap clusters, such that observations in the same cluster are similar to each other, while observations in different clusters are dissimilar to each other. The clustering problem is an unsupervised learning problem. We are given the training data set $$X = (x_1^T, x_2^T, \cdots, x_n^T)^T \in \mathbb{R}^{n \times p}$$, where each observation $x_i \in \mathbb{R}^{p}$ as usual, and we want to group the data into a few cohesive "clusters".  
+The aim of clustering is to divide observations into several non-overlap clusters, such that observations in the same cluster are similar to each other, while observations in different clusters are dissimilar to each other. The clustering problem is an unsupervised learning problem. We are given the training data set $$X = (x_1, x_2, \cdots, x_n)^T \in \mathbb{R}^{n \times p}$$, where each observation $x_i \in \mathbb{R}^{p}$ as usual, and we want to group the data into a few cohesive "clusters".  
 
 The K-means clustering algorithm is an iterative algorithm. In each step, we assign each data point (observation) to the closest cluster (centroid), then recompute the centroids for the clusters by taking the average of the all data points that belong to each cluster.
 
@@ -55,7 +55,7 @@ Here, $f$ is a convex function shown by the solid line. Also, $X$ is a random va
 
 The expectation-maximization (EM) algorithm is a very general iterative algorithm for parameter estimation (model fitting) by maximum likelihood, when some of data (random variables) involved are not observed, i.e. missing or incomplete. These unobservable variables are usually called as latent variables.
 
-Suppose there are latent variables $z_i$'s ($z_i$ can be a scalar or vector). For each $i$, let $q_i(\cdot)$ be the probability distribution function of the random variable $z_i$. 
+Suppose there are latent variables $z_i$'s ($z_i$ can be a scalar or vector). For each $i$, let $q_i(\cdot)$ be the probability distribution function of the random variable $z_i$. Denote $$X:= (x_1, \cdots, x_n)^T, Z := (z_1, \cdots, z_n)^T$$, where $X$ is observable data and $Z$ is unobservable (hidden, missing) data. 
 
 We wish to fit the parameters $\theta$ of a model $p(x;\theta)$ to the observable data $x$. We estimate the parameters $\theta$ by maximizing the log likelihood. 
 
@@ -64,7 +64,7 @@ Note: There are two different approaches to derive the EM algorithm. The followi
 If $z_i$ is a continuous random variable. The log likelihood for the observable data $x_i$'s is
 
 $$ \begin{align*}
-\ell(\theta) &= \log L(\theta) \\
+\ell(X; \theta) &= \log L(X; \theta) \\
 &= \sum_{i=1}^n \log p(x_i;\theta) \\
 &= \sum_{i=1}^n \log \sum_{z_i} p(x_i, z_i; \theta)  \\
 &= \sum_{i=1}^n \log \sum_{z_i} q_i(z_i) \frac{p(x_i, z_i; \theta)}{q_i(z_i)}  \\
@@ -137,13 +137,13 @@ To derive the other form of the algorithm, note that
 $$\begin{align*}
 Q(\theta;\theta^{(t)}) &= \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) \\
 &= \sum_{i=1}^n E_{z_i \mid x_i;\theta^{(t)}} \Big[\log p(x_i,z_i;\theta) \mid x_i \Big] \\
-&= E_{z \mid x;\theta^{(t)}} \Big[ \sum_{i=1}^{n} \log p(x_i,z_i;\theta) \mid x_i  \Big] \\
-&= E_{z \mid x;\theta^{(t)}} \Big[ \ell(x,z ; \theta)  \mid x_i  \Big].
+&= E_{Z \mid X;\theta^{(t)}} \Big[ \sum_{i=1}^{n} \log p(x_i,z_i;\theta) \mid X  \Big] \\
+&= E_{Z \mid X; \theta^{(t)}} \Big[ \ell(X, Z ; \theta)  \mid X \Big].
 \end{align*}$$
 
 **Remark.** The algorithm can also be written as
 
-(a) E-step. Set $$Q(\theta;\theta^{(t)}) := \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) = E_{z \mid x;\theta^{(t)}} \Big[ \ell(x,z ; \theta)  \mid x_i  \Big]$$.
+(a) E-step. Set $$Q(\theta;\theta^{(t)}) := \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) = E_{Z \mid X;\theta^{(t)}} \Big[ \ell(X,Z ; \theta)  \mid X  \Big]$$.
 
 (b) M-step. Update  $$\theta^{(t+1)} := \underset{\theta}{\text{argmax }} Q(\theta;\theta^{(t)})$$. 
 
@@ -156,7 +156,7 @@ These assumptions can be written as $$x_i \mid z_{ik}=1 \sim N(\mu_k, \Sigma_k)$
 We want to estimate the parameters $$\mathbf{\pi}$$, $$\mathbf{\mu}$$ and $$\mathbf{\Sigma}$$ (i.e. $$\pi_1,\cdots,\pi_K,\mu_1,\cdots,\mu_K,\Sigma_1,\cdots,\Sigma_K$$). To estimate them, we first written down the loglikelihood of the observable data $x_i$'s:
 
 $$ \begin{align*}
-l(\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) &= \log L(\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) \\
+\ell(\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) &= \log L(\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) \\
 &= \sum_{i=1}^n \log p(x_i;\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) \\
 &= \sum_{i=1}^n \log \sum_{z_i} p(x_i, z_i; \theta).
 \end{align*} $$
