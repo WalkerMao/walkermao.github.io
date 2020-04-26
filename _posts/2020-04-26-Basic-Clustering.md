@@ -22,7 +22,7 @@ The K-Means algorithm works as follows:
 
 (b) For each $$k = 1, \cdots, K$$, recompute the the centroid for the cluster $$k$$ as $$\mu_k := \frac{\sum_{i=1}^{n} \mathbf{1}\{ c_i = k\} \cdot x_i }{\sum_{i=1}^{n} \mathbf{1}\{ c_i = k\}}$$.
 
-<img src="https://stanford.edu/~cpiech/cs221/img/kmeansViz.png" alt="kmeansViz" style="zoom:80%;" />
+<div style="text-align: center"> <img src="/pictures/kmeansViz.png" alt="kmeansViz" style="zoom:80%;" />  </div>
 
 K-Means algorithm is susceptible to local optima, so we usually reinitialize $$\mu_1, \cdots, \mu_K$$ at several different initial parameters.
 
@@ -45,7 +45,7 @@ Note that $f$ is (strictly) concave when $-f$ is (strictly) convex, thus we have
 
 The figure below is an interpretation of the theorem.
 
-<img src="https://cnx.org/resources/8c2093ae93ab41402b3805eac106a7d75a167b55/jensen.png" alt="representation of Jensen’s Inequality" style="zoom: 70%;" />
+<div style="text-align: center"> <img src="/pictures/Jensen-inequality.png" alt="representation of Jensen's Inequality" style="zoom: 80%;" />  </div>
 
 Here, $f$ is a convex function shown by the solid line. Also, $X$ is a random variable that has a $0.5$ chance of taking the value $a$, and a $0.5$ chance of taking the value $b$ (indicated on the $x$-axis). Thus, the value $E(X)$ is given by the midpoint between $a$ and $b$.  The value $E[f(X)]$ is now the midpoint on the $y$-axis between $f(a)$ and $f(b)$. We see that because $f$ is convex, it must be the case that $E[f(X)] ≥ f(EX)$.
 
@@ -103,7 +103,7 @@ $$
 
 Therefore, we simply set the $q_i$ to be the posterior distribution of the $z_i$ given $x_i$ and the setting of the parameters $\theta$, which is denoted as $\theta^{(t)}$ at $t$-th iteration. 
 
-At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$'s, the equation (3) gives a lower bound on the loglikelihood that we're trying to maximize. We select $$q_i^{(t+1)}(z_i) = p(z_i|x_i; \theta^{(t)})$$ to make the lower bound tight, then we have $l(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)})$.This is the E-step. In the M-step of the algorithm, we then maximize the tight lower bound $J(\mathbf{q}^{(t+1)}, \theta^{(t)})$ with respect to the parameters $\theta$ to obtain a new setting of the parameters, which is $\theta^{(t+1)}$. 
+At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$'s, the equation (3) gives a lower bound on the loglikelihood that we're trying to maximize. We select $$q_i^{(t+1)}(z_i) = p(z_i \mid x_i; \theta^{(t)})$$ to make the lower bound tight, then we have $l(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)})$.This is the E-step. In the M-step of the algorithm, we then maximize the tight lower bound $J(\mathbf{q}^{(t+1)}, \theta^{(t)})$ with respect to the parameters $\theta$ to obtain a new setting of the parameters, which is $\theta^{(t+1)}$. 
 
 **Algorithm. EM algorithm:**
 
@@ -111,7 +111,7 @@ At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$'s, 
 
 [2] Repeat these two steps until convergence:
 
-(a) E-step. For each $i$, set $$q_i^{(t+1)}(z_i) := p(z_i | x_i; \theta^{(t)})$$;
+(a) E-step. For each $$i$$, set $$q_i^{(t+1)}(z_i) := p(z_i \mid x_i; \theta^{(t)})$$;
 
 (b) M-step. Update  $$\theta^{(t+1)} := \underset{\theta}{\text{argmax }} J(\mathbf{q}^{(t+1)}, \theta)$$.
 
@@ -128,7 +128,7 @@ $$
 
 The mixture models can be used for clustering problems. We assume observations in the same cluster follow the same distribution, while observations in different clusters follow different distributions. For gaussian mixture model, we assume the observations follow the gaussian distributions. 
 
-These assumptions can be written as $$x_i|z_{ik}=1 \sim N(\mu_k, \Sigma_k)$$ for every $i$, where $$z_{ik} = 1$$ if $$x_i$$ is from $k$-th cluster and $$z_{ik} = 0$$ otherwise. Here, $z_i\text{'s} \overset{\text{i.i.d.}}{\sim} \text{Multinoulli}(\pi)$, where $$\mathbf{\pi} = (\pi_1, \cdots, \pi_K)^T \in \mathbb{R}^K$$ and $$\sum_{k=1}^K \pi_k = 1$$. Note that $z_i$'s are latent random variables, which are hidden and unobservable. 
+These assumptions can be written as $$x_i \mid z_{ik}=1 \sim N(\mu_k, \Sigma_k)$$ for every $$i$$, where $$z_{ik} = 1$$ if $$x_i$$ is from $k$-th cluster and $$z_{ik} = 0$$ otherwise. Here, $$z_i\text{'s} \overset{\text{i.i.d.}}{\sim} \text{Multinoulli}(\pi)$$, where $$\mathbf{\pi} = (\pi_1, \cdots, \pi_K)^T \in \mathbb{R}^K$$ and $$\sum_{k=1}^K \pi_k = 1$$. Note that $z_i$'s are latent random variables, which are hidden and unobservable. 
 
 We want to estimate the parameters $$\mathbf{\pi}$$, $$\mathbf{\mu}$$ and $$\mathbf{\Sigma}$$ (i.e. $$\pi_1,\cdots,\pi_K,\mu_1,\cdots,\mu_K,\Sigma_1,\cdots,\Sigma_K$$). To estimate them, we first written down the loglikelihood of the observable data $x_i$'s:
 
@@ -164,7 +164,7 @@ contrast, a "**hard**" guess is one that represents a single best guess (such as
 
 Similar to K-means, it is also susceptible to local optima, so reinitializing at several different initial parameters may be a good idea.
 
-<img src="https://i.stack.imgur.com/Z5mcu.png" alt="EM example" style="zoom: 60%;" />
+<div style="text-align: center"> <img src="/pictures/GMM-example.png" alt="GMM-example" style="zoom: 70%;" /> </div>
 
 ---
 
