@@ -64,11 +64,11 @@ If $z_i$ is a continuous random variable. The log likelihood for the observable 
 $$ \begin{align*}
 l(\theta) &= \log L(\theta) \\
 &= \sum_{i=1}^n \log p(x_i;\theta) \\
-&= \sum_{i=1}^n \log \int_{z_i} p(x_i, z_i; \theta) dz_i \\
-&= \sum_{i=1}^n \log \int_{z_i} q_i(z_i) \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i \\
+&= \sum_{i=1}^n \log \int p(x_i, z_i; \theta) dz_i \\
+&= \sum_{i=1}^n \log \int q_i(z_i) \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i \\
 &= \sum_{i=1}^n \log E_{z_i \sim q_i} \Big[\frac{p(x_i, z_i; \theta)}{q_i(z_i)} \Big] \\
 & \geq \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] \\
-&= \sum_{i=1}^n \int_{z_i} q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i. \tag{1}
+&= \sum_{i=1}^n \int q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i. \tag{1}
 \end{align*} $$
 
 where the "$$z_i \sim q_i$$" subscripts above indicate that the expectations are with respect to $z_i$ drawn from $q_i$. 
@@ -84,7 +84,7 @@ Similarly, if $z_i$ is a discrete random variable, we have $$l(\theta) \geq \sum
 Define
 
 $$
-J(\mathbf{q},\theta) = J(q_1,\cdots,q_n, \theta) := \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] = \sum_{i=1}^n \int_{z_i} q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i.
+J(\mathbf{q},\theta) = J(q_1,\cdots,q_n, \theta) := \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] = \sum_{i=1}^n \int q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} dz_i.
 $$
 
 Now, for any set of distributions $\mathbf{q}$, the formula (1) gives a lower-bound $$J(\mathbf{q},\theta)$$ on the log likelihood $l(\theta)$. 
@@ -97,10 +97,10 @@ $$
 
 To increase the lower bound of $l(\theta^{(t+1)})$ as much as possible, it seems natural to select $\mathbf{q}^{(t)}$ ($q_i^{(t)}$'s) that makes the lower-bound tight at that value of $\theta^{(t)}$. I.e., we'll make the inequality (3) above hold with equality at our particular value of $\theta^{(t)}$. To do that, we need to make the Jensen’s inequality in equitation (2) to hold with equality, which means $$\frac{p(x_i, z_i; \theta)}{q_i(z_i)}$$ need to be a constant-valued random variable. 
 
-Thus, to get the tight lower bound on $l(\theta)$, we require that $$\frac{p(x_i, z_i; \theta)}{q_i(z_i)} = c$$ for some constant $c$ that does not depend on $z_i$. Since $$1 = \int_{z_i} q_i(z_i) dz_i = \int_{z_i} \frac{1}{c} p(x_i, z_i; \theta) dz_i = \frac{1}{c} \int_{z_i}  p(x_i, z_i; \theta) dz_i$$, we have $$c =  \int_{z_i}  p(x_i, z_i; \theta) dz_i $$. It follows that 
+Thus, to get the tight lower bound on $l(\theta)$, we require that $$\frac{p(x_i, z_i; \theta)}{q_i(z_i)} = c$$ for some constant $c$ that does not depend on $z_i$. Since $$1 = \int q_i(z_i) dz_i = \int \frac{1}{c} p(x_i, z_i; \theta) dz_i = \frac{1}{c} \int  p(x_i, z_i; \theta) dz_i$$, we have $$c =  \int  p(x_i, z_i; \theta) dz_i $$. It follows that 
 
 $$
-q_i(z_i) = \frac{ p(x_i, z_i; \theta)} {\int_{z_i}  p(x_i, z_i; \theta) dz_i} = \frac{ p(x_i, z_i; \theta)} {p(x_i; \theta)} = p(z_i | x_i; \theta).
+q_i(z_i) = \frac{ p(x_i, z_i; \theta)} {\int  p(x_i, z_i; \theta) dz_i} = \frac{ p(x_i, z_i; \theta)} {p(x_i; \theta)} = p(z_i | x_i; \theta).
 $$
 
 Therefore, we simply set the $q_i$ to be the posterior distribution of the $z_i$ given $x_i$ and the setting of the parameters $\theta$, which is denoted as $\theta^{(t)}$ at $t$-th iteration. 
