@@ -10,9 +10,9 @@ comments: true
 
 The aim of clustering is to divide observations into several non-overlap clusters, such that observations in the same cluster are similar to each other, while observations in different clusters are dissimilar to each other. The clustering problem is an unsupervised learning problem. We are given the training data set $$X = (x_1^T, x_2^T, \cdots, x_n^T)^T \in \mathbb{R}^{n \times p}$$, where each observation $x_i \in \mathbb{R}^{p}$ as usual, and we want to group the data into a few cohesive "clusters".  
 
-The K-Means clustering algorithm is an iterative algorithm. In each step, we assign each data point (observation) to the closest cluster (centroid), then recompute the centroids for the clusters by taking the average of the all data points that belong to each cluster.
+The K-means clustering algorithm is an iterative algorithm. In each step, we assign each data point (observation) to the closest cluster (centroid), then recompute the centroids for the clusters by taking the average of the all data points that belong to each cluster.
 
-The K-Means algorithm works as follows: 
+**Algorithm. K-Means:** 
 
 [1] Initialize cluster centroids $$\mu_1, \cdots, \mu_K \in \mathbb{R}^p$$ randomly.
 
@@ -22,16 +22,18 @@ The K-Means algorithm works as follows:
 
 (b) For each $$k = 1, \cdots, K$$, recompute the the centroid for the cluster $$k$$ as $$\mu_k := \frac{\sum_{i=1}^{n} \mathbf{1}\{ c_i = k\} \cdot x_i }{\sum_{i=1}^{n} \mathbf{1}\{ c_i = k\}}$$.
 
-<div style="text-align: center"> <img src="/pictures/kmeansViz.png" alt="kmeansViz" style="zoom:80%;" />  </div>
+Here is a visualization of K-means algorithm: 
 
-K-Means algorithm is susceptible to local optima, so we usually reinitialize $$\mu_1, \cdots, \mu_K$$ at several different initial parameters.
+<div style="text-align: center"> <img src="/pictures/kmeansViz.png" alt="K-means visualization" style="zoom:100%;" />  </div>
+
+K-means algorithm is susceptible to local optima, so we usually reinitialize $$\mu_1, \cdots, \mu_K$$ at several different initial parameters.
 
 ## EM Algorithm
 
 ### Jensen’s Inequality
 
 Let $f$ be a function whose domain is the set of real numbers (i.e. $$f(x) \in \mathbb{R}$$). Recall that
-$f$ is a **convex** function if $f''(x) ≥ 0$ for all $x ∈ \mathbb{R}$. In the case of $f$ taking vector-valued inputs, this is generalized to the condition that its hessian $H$ is positive semi-definite ($$H ≥ 0$$). We say $f$ is strictly convex if  $f''(x) > 0$ or $H > 0$ for all $x$.  
+$f$ is a **convex** function if $$f''(x) ≥ 0$$ for all $x ∈ \mathbb{R}$. In the case of $f$ taking vector-valued inputs, this is generalized to the condition that its hessian $H$ is positive semi-definite ($$H ≥ 0$$). We say $f$ is strictly convex if $$f''(x) > 0$$ or $H > 0$ for all $x$.  
 
 Let $X$ be a random variable, and let $f$ be a convex function, then **Jensen's inequality** can then be stated as: 
 
@@ -45,7 +47,7 @@ Note that $f$ is (strictly) concave when $-f$ is (strictly) convex, thus we have
 
 The figure below is an interpretation of the theorem.
 
-<div style="text-align: center"> <img src="/pictures/Jensen-inequality.png" alt="representation of Jensen's Inequality" style="zoom: 80%;" />  </div>
+<div style="text-align: center"> <img src="/pictures/Jensen-inequality.png" alt="Representation of Jensen's Inequality" style="zoom: 80%;" />  </div>
 
 Here, $f$ is a convex function shown by the solid line. Also, $X$ is a random variable that has a $0.5$ chance of taking the value $a$, and a $0.5$ chance of taking the value $b$ (indicated on the $x$-axis). Thus, the value $E(X)$ is given by the midpoint between $a$ and $b$.  The value $E[f(X)]$ is now the midpoint on the $y$-axis between $f(a)$ and $f(b)$. We see that because $f$ is convex, it must be the case that $E[f(X)] ≥ f(EX)$.
 
@@ -164,7 +166,7 @@ contrast, a "**hard**" guess is one that represents a single best guess (such as
 
 Similar to K-means, it is also susceptible to local optima, so reinitializing at several different initial parameters may be a good idea.
 
-<div style="text-align: center"> <img src="/pictures/GMM-example.png" alt="GMM-example" style="zoom: 70%;" /> </div>
+<div style="text-align: center"> <img src="/pictures/GMM-example.png" alt="GMM example" style="zoom: 70%;" /> </div>
 
 ---
 
