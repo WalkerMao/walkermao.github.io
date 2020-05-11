@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "K-Means, EM and GMM"
+title:  "Basic Clustering: K-Means, EM and GMM"
 date: 2020-04-26
 categories: ML
 comments: true
@@ -197,7 +197,7 @@ Similar to K-means, it is also susceptible to local optima, so reinitializing at
 
 **References**: 
 
-Andrew Ng. "CS229 Lecture notes: 7a, 7b, 8.", http://cs229.stanford.edu/notes/.
+Andrew Ng. "CS229 Lecture notes: 7a, 7b, 8.", http://cs229.stanford.edu/notes.
 
-Victor Lavrenko. "Expectation Maximization: how it works", https://www.youtube.com/watch?v=iQoXFmbXRJA.
+Victor Lavrenko. "Expectation Maximization: how it works", https://youtu.be/iQoXFmbXRJA.
 
