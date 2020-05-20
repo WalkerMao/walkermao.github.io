@@ -24,15 +24,9 @@ Monte Carlo methods generally follow the following steps:
 
 1. Determine the statistical properties of possible inputs;
 
-    <img src="/pictures/MC_Int_1.png" alt="MC_Int_1" style="zoom:20%;" />
-
 2. Generate many ($$N$$) inputs randomly from the distribution which follows the above properties;
 
-    <img src="/pictures/MC_Int_2.png" alt="MC_Int_2" style="zoom:20%;" />
-
 3. Perform a deterministic calculation with these sets;
-
-    <img src="/pictures/MC_Int_3.png" alt="MC_Int_3" style="zoom:20%;" />
 
 4. Analyze statistically the results.
 
@@ -49,8 +43,17 @@ Monte Carlo integration is the most common application of Monte Carlo methods. W
 Suppose we want to compute definite integral of function $f(x)$ from $a$ to $b$, and $c$ is a upper bound of $$f(x)$$ in the interval $$x \in (a,b)$$.
 
 1. The possible inputs are uniformly distributed in the upper bound volume;
+
+   <img src="/pictures/MC_Int_1.png" alt="MC_Int_1" style="zoom:15%;" />
+
 2. Generate $N$ uniform random samples in upper bound volume;
+
+   <img src="/pictures/MC_Int_2.png" alt="MC_Int_2" style="zoom:15%;" />
+
 3. Count the $K$ samples that fall below the $f(x)$ curve;
+
+   <img src="/pictures/MC_Int_3.png" alt="MC_Int_3" style="zoom:15%;" />
+
 4. The estimate of the integral is $$\frac{K}{N} \times \text{Area of upper bound volume} = \frac{K}{N} (b-a)(c-0)$$.
 
 ### Expectation Estimation
@@ -60,7 +63,7 @@ Suppose we have a random variable $x$ and we want to calculate $$E[g(x)] = \int 
 1. The possible inputs follow the distribution $$f(x)$$;
 2. Generate $N$ random samples $$\{x_i\}_{i=1}^N$$ from the distribution $$f(x)$$;
 3. Calculate the mean of $$\{g(x_i)\}_{i=1}^N$$ (i.e. $$\frac{1}{N} \sum_{i=1}^N g(x_i)$$);
-4. By the law of large number, $$\frac{1}{N} \sum_{i=1}^N g(x_i) \to E[g(x_i)]$$ as $$N \to \infin$$.
+4. By the law of large number, $$\frac{1}{N} \sum_{i=1}^N g(x_i) \to E[g(x_i)]$$ as $$N \to \infty$$.
 
 ## Sampling Methods
 
@@ -86,7 +89,7 @@ $$
 
 [2] Return samples $$\{x_i\}_{i=1}^N$$. END.
 
-Note that the segment $$(a_{j-1}, a_j]$$ becomes a point as $$N \to \infin$$, and then the (b) step becomes:
+Note that the segment $$(a_{j-1}, a_j]$$ becomes a point as $$N \to \infty$$, and then the (b) step becomes:
 
 (b) Generate a new sample $x_i$ such that $$F(x_i) = u$$. 
 
