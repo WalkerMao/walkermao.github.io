@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Parameters Estimation: MLE, MAP and Bayesian"
-date: 2020-04-26
+date: 2020-05-11
 categories: Stat
 comments: true
 ---
