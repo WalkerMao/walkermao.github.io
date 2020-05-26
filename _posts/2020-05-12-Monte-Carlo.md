@@ -97,7 +97,7 @@ Note that the segment $$(a_{j-1}, a_j]$$ becomes a point as $$N \to \infty$$, an
 
 Note that the step (b) in CDF inversion sampling is sometimes difficult. We can use rejection sampling if the PDF (probability density function) is known. 
 
-The idea of rejection sampling is: we do not sample from our target distribution directly (since doing this is hard), instead we sample from a working distribution which is easy to sample from, and then we make some "correction" on the observations sampled from working distribution to get the observations sampled from target distribution. 
+The idea of rejection sampling is: we do not sample from our target distribution directly (since doing this is hard), instead we sample from a working (or proposal) distribution which is easy to sample from, and then we make some "correction" on the observations sampled from working distribution to get the observations sampled from target distribution. 
 
 If $g(t) > f(t)$, it means that, when we sample from $g(x)$, we have less observations around $t$ than what we should observe if we sample from $f(x)$. Similarly, if $g(t) < f(t)$, we have more. The idea of rejecting is that, we should have a high chance to reject a observation $$x_i$$ if $$g(x_i) > f(x_i)$$, and low chance if $$g(x_i) < f(x_i)$$. 
 

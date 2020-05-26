@@ -6,7 +6,7 @@ categories: Stat
 comments: true
 ---
 
-In this section, let us introduce and compare three methods (MLE, MAP and Bayesian) for **parameters estimation**.
+In this post, let's introduce and compare three methods (MLE, MAP and Bayesian) for **parameters estimation**.
 
 Given the observed data $$X = \{ x_i \}_{i=1}^n$$, we want to estimate the probabilistic model's parameter $$\theta$$. Denote $$f(*)$$ as the probability density function of $$*$$ if $$*$$ is a continuous random variable, or the probability mass function if $$*$$ is a discrete random variable. 
 
