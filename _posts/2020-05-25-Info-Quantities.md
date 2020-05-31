@@ -203,13 +203,15 @@ $$\begin{align}
 I(X,Y) &= H(X) - H(X\mid Y) \\ &= H(Y) - H(Y \mid X) \\ &= H(X) + H(Y) - H(X,Y) \\ &= H(X,Y) - H(X\mid Y) - H(Y \mid X).
 \end{align}$$
 
-<img src="/pictures/Mutual_Info_1.gif" alt="Mutual_Info_1" style="zoom:90%;"/>
+<div style="text-align: center"> <img src="/pictures/Mutual_Info_1.gif" alt="Mutual_Info_1" style="zoom:90%;"/> </div>
 
-<img src="/pictures/Mutual_Info_2.png" alt="Mutual_Info_2" style="zoom:50%;"/>
+<div style="text-align: center"> <img src="/pictures/Mutual_Info_2.png" alt="Mutual_Info_2" style="zoom:40%;"/> </div>
 
 ---
 
 **References:**
+
+All references are from Wikipedia.
 
 Wikipedia contributors. (2020, May 27). Entropy (information theory). In *Wikipedia, The Free Encyclopedia*. Retrieved 05:04, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Entropy_(information_theory)&oldid=959218981
 
