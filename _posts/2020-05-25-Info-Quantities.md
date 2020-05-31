@@ -171,9 +171,9 @@ Here is the intuition. In the case when we use the distribution $Q$ to describe 
 
 ### Cross Entropy Loss
 
-In classification problems we want to estimate the probability of different outcomes. Suppose we have $n$ outcomes $$\{y_i\}_{i=1}^n$$. Denote the frequency (empirical probability) of outcome $i$ is $$p_i=\frac{1}{n}\sum_{l=1}^n\mathbf{1}(y_l=y_i)$$, and the estimated probability of outcome $i$ as $\hat{p}_i$. 
+In classification problems we want to estimate the probability of different outcomes. Suppose we have $n$ outcomes $$\{y_i\}_{i=1}^n$$. Denote the frequency (empirical probability) of outcome $i$ as $$p_i=\frac{1}{n}\sum_{l=1}^n\mathbf{1}(y_l=y_i)$$, and the estimated probability of outcome $i$ as $\hat{p}_i$. 
 
-Now we use MLE to estimate $\{\hat{p}_i\}_{i=1}^n$. Likelihood function is $$\prod_{i=1}^n \hat{p}_i^{np_i}$$, so the log-likelihood, divided by $n$ is $$\frac{1}{n}\log\prod_{i=1}^n \hat{p}_i^{np_i} = \sum_{i=1}^n p_i\log\hat{p}_i = -H(P \parallel \hat{P})$$. 
+Now we use MLE to estimate $$\{\hat{p}_i\}_{i=1}^n$$. Likelihood function is $$\prod_{i=1}^n \hat{p}_i^{np_i}$$, so the log-likelihood, divided by $n$ is $$\frac{1}{n}\log\prod_{i=1}^n \hat{p}_i^{np_i} = \sum_{i=1}^n p_i\log\hat{p}_i = -H(P \parallel \hat{P})$$. 
 
 Thus, maximizing the likelihood is equivalent to minimizing the cross entropy.
 
