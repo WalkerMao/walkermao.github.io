@@ -101,7 +101,7 @@ Logistic regression (LR) is used for classification problem and it can predict t
 We use the softmax function to generate the probability. The logistic regression for $K$-class classification can be written as
 
 $$
-\hat{p}_{ik} = \frac{e^{z_{ik}}}{\sum_{k=1}^K e^{z_{ik}}}, \\
+\hat{p}_{ik} = \frac{e^{z_{ik}}}{\sum_{l=1}^K e^{z_{il}}}, \\
 z_{ik} = w_k^T x_{i} + b_k,
 $$
 
@@ -140,7 +140,7 @@ $$
 
 where $y_i$ and $\hat{p}_i$ are both scalar, and $y_i$ can only be $0$ or $1$. 
 
-#### 2.3 Gradient Descent for LR
+### 2.3 Optimization by Gradient Descent
 
 For simplicity, let's look at the gradient descent for binary logistic regression.
 
@@ -178,16 +178,49 @@ $$
 
 where $t$ is the index of iteration, and $\alpha$ is the learning rate (step size).
 
-​	
+### 2.4 Optimization by Maximum Likelihood
 
-**Comparisons** between LDA and LR:
+Expect for gradient descent, we can also optimize logistic regression by maximum likelihood.
+
+In training data set, the observation $i$ is of class $$y_i$$, and $$\hat{p}_{iy_i}$$ is the estimated probability of the $i$-th observation is of class $y_i$. 
+
+For the observation $i$, 
+
+$$
+\hat{p}_{iy_i} = \frac{e^{z_{iy_i}}}{\sum_{l=1}^{K} e^{z_{il}}}, \\
+z_{iy_i} = w_{y_i}^T x_{i} + b_{y_i}.
+$$
+
+Now we treat $$\hat{p}_{iy_i}$$ as a function of $$w_{y_i}\in\mathbb{R}^p$$and $$b_{y_i}\in\mathbb{R}$$. The likelihood and log-likelihood on training data set 
+
+$$
+\mathcal{L}(w_{y_i}, b_{y_i}) = \prod_{i=1}^n \hat{p}_{iy_i}, \\
+\log \mathcal{L}(w_{y_i}, b_{y_i}) = \sum_{i=1}^n \log \hat{p}_{iy_i}.
+$$
+
+Denote the $j$-th element of $$w_{y_i}$$ as $$w_{y_i}^{(j)}$$. Take derivative of log-likelihood with respect to $$w_{y_i}^{(j)}$$ and set to $0$, we have
+
+$$
+\frac{\partial \log\mathcal{L}(w_{y_i}, b_{y_i})}{\partial w^{(j)}_{k}} = 0
+\implies \sum_{i=1}^{n} \hat{p}_{ik} x_i^{(j)} = \sum_{i=1}^n \mathbf{1}(y_i=k)x_i^{(j)} \text{ for any } k, j.
+$$
+
+That means, for any $$k,j$$, the sum of any feature $j$ of training data $x_i$'s in a particular class $k$ is equal to the sum of probability mass the model places in that feature summed across all data. 
+
+Take derivative to each weight $$w_k^{(j)}\ (j=1,\cdots,p;k=1,\cdots,K)$$, then we have $$p \times K$$ different equations. Similarly, take derivative to each bias $$b_k\ (k=1,\cdots,K)$$, then we have $$K$$ equations. 
+
+We can apply one of Newton’s Method, Fisher Scoring or Iteratively re-Weighted Least Squares to find weights and biases that satisfy all of our equations.
+
+### 2.5 Comparisons between LDA and LR
 
 The LR model is more robust and more general, in that it makes less assumptions. LDA is not robust to gross outliers, because observations far from the decision boundary (which are down-weighted by logistic regression) play a role in estimating the common covariance matrix. LDA assumes the distribution of the data. By relying on the additional model assumptions, we have more information about the parameters, and hence can estimate them more efficiently (lower variance). Otherwise, it will pay a price for focusing on the (noisier) data.
 
-​	
+---
 
 **References**:
 
-Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. *The elements of statistical learning*. Vol. 1. No. 10. New York: Springer series in statistics, 2001.
+Friedman, J., Hastie, T., & Tibshirani, R. (2001). *The elements of statistical learning* (Vol. 1, No. 10). New York: Springer series in statistics.
 
-周志华. *机器学习*. 清华大学出版社, 2016. 
+周志华. (2016). *机器学习*. 清华大学出版社. 
+
+Mount, John. (2011, Sep 23). *The equivalence of logistic regression and maximum entropy models*. Retrieved June 7, 2020, from https://pdfs.semanticscholar.org/19cc/c9e2937b3260ac2c93020174c09c2891672e.pdf

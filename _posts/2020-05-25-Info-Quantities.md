@@ -23,7 +23,7 @@ $$
 I(x) := -\log P(x).
 $$
 
-The entropy quantifies how "informative" or "surprising" the entire random variable is, averaged on all its possible outcomes. Given a random variable $X$ with possible outcomes $x$'s, and the image $\mathcal{X}$ is the set of these outcomes, the entropy $H(X)$ of $X$ is defined as follows:
+The entropy quantifies how "informative" or "surprising" the entire random variable is, averaged on all its possible outcomes. Given a random variable $X$ with possible outcomes $x$'s, and the sample space $\mathcal{X}$ is the set of these outcomes, the entropy $H(X)$ of $X$ is defined as follows:
 
 $$
 H(X) := E[I(X)] = E[-\log_b P(X)] = - \sum_{x \in \mathcal{X}} P(x) \log_b P(x).
@@ -35,7 +35,7 @@ For example, tossing a fair die contains more information than tossing a fair co
 
 ### Properties
 
-**Non-negative**: The entropy is always non-negative. i.e. $$H(X)\geq0$$ for any random variable $X$. 
+**Non-negativity:** The entropy is always non-negative. i.e. $$H(X)\geq0$$ for any random variable $X$. 
 
 **Decrease through any function**:
 
@@ -53,21 +53,21 @@ The **joint entropy** is a measure of uncertainty associated with a set of rando
 
 ### Definition
 
-For two random variables $X_1,X_2$, with images $$\mathcal{X}_1,\mathcal{X}_2$$ and outcomes $$x_1 \in \mathcal{X}_1, x_2 \in \mathcal{X}_2$$, then the joint entropy is defined as
+For two random variables $X_1,X_2$, with sample spaces $$\mathcal{X}_1,\mathcal{X}_2$$ and outcomes $$x_1 \in \mathcal{X}_1, x_2 \in \mathcal{X}_2$$, then the joint entropy is defined as
 
 $$
-H(X_1,X_2) := E_{X_1,X_2}[-\log P(X_1,X_2)] = - \sum_{x_1\in\mathcal{X}_1,\\x_2\in\mathcal{X}_2} P(x_{1},x_{2}) \log P(x_{1},x_{2}).
+H(X_1,X_2) := E_{(X_1,X_2)}[-\log P(X_1,X_2)] = - \sum_{x_1\in\mathcal{X}_1,\\x_2\in\mathcal{X}_2} P(x_{1},x_{2}) \log P(x_{1},x_{2}).
 $$
 
 In general, for a set of random variables $X_1,X_2,\cdots,X_n$, the joint entropy is
 
 $$
-H(X_1,\cdots,X_n) := E_{X_1,\cdots,X_n}[-\log P(X_1,\cdots,X_n)] = - \sum_{x_1,\cdots,x_n} P(x_{1},\cdots,x_{2}) \log P(x_{1},\cdots,x_{n}).
+H(X_1,\cdots,X_n) := E_{(X_1,\cdots,X_n)}[-\log P(X_1,\cdots,X_n)] = - \sum_{x_1,\cdots,x_n} P(x_{1},\cdots,x_{2}) \log P(x_{1},\cdots,x_{n}).
 $$
 
 ### Properties
 
-**Symmetric:** Joint entropy is symmetric, which means $$H(X_1,X_2)=H(X_2,X_1)$$.
+**Symmetry:** Joint entropy is symmetric, which means $$H(X_1,X_2)=H(X_2,X_1)$$.
 
 **Greater than individual and less than sum:**
 
@@ -83,7 +83,7 @@ The **conditional entropy** quantifies the amount of information needed to descr
 
 ### Definition
 
-Given random variables $X_1$ with image $\mathcal{X}_1$ and $X_2$ with images $\mathcal{X}_2$. The conditional entropy of $X_2$ given (or conditional on) $X_1$ is defined as
+Given random variables $X_1$ with sample space $\mathcal{X}_1$ and $X_2$ with sample space $\mathcal{X}_2$. The conditional entropy of $X_2$ given (or conditional on) $X_1$ is defined as
 
 $$\begin{align}
 H(X_2 \mid X_1) &:= \sum_{x_1\in\mathcal{X}_1} P(x_1) H(X_2 \mid X_1=x_1) \\
@@ -123,7 +123,7 @@ In other words, if we use the distribution $Q$ to approximate an unknown distrib
 
 ### Definition
 
-For a random variable $X$ with outcomes $x$'s and image $\mathcal{X}$, and probability distributions $P$ and $Q$ defined on the same probability space $\mathcal{X}$, the the Kullback-Leibler divergence from $Q$ to $P$ is defined to be 
+For a random variable $X$ with outcomes $x$'s and sample space $\mathcal{X}$, and probability distributions $P$ and $Q$ defined on the same probability space $\mathcal{X}$, the the Kullback-Leibler divergence from $Q$ to $P$ is defined to be 
 
 $$
 D_{\text{KL}}(P \parallel Q) := E_P\bigg[\log \frac{P(X)}{Q(X)} \bigg] = \sum_{x\in\mathcal{X}} P(x) \log \frac{P(x)}{Q(x)}.
@@ -133,11 +133,17 @@ In the context of machine learning, $$D_{\text{KL}}(P \parallel Q)$$ is often ca
 
 ### Properties
 
-**Non-negative:**
+**Non-negativity:**
 
 The KL-divergence is non-negative, which means $$D_{\text{KL}}(P \parallel Q) \geq 0$$ for any $P$ and $Q$. Here is the proof: By Jensen's inequality, $$-D_{\text{KL}}(P \parallel Q) = \sum_x P(x)\log \frac{Q(x)}{P(x)} \leq \log \sum_x P(x)\frac{Q(x)}{P(x)} =\log 1 = 0.$$
 
-**Asymmetric:** 
+This non-negativity gives us **Gibbs' inequality**: 
+
+$$
+H(P) = -\sum_{x\in\mathcal{X}} P(x) \log P(x) \leq H(P \parallel Q) = -\sum_{x\in\mathcal{X}} P(x) \log Q(x).
+$$
+
+**Asymmetry:** 
 
 KL divergence is a asymmetric metric. That is, $$D_{\text{KL}}(P \parallel Q) \neq D_{\text{KL}}(Q \parallel P)$$. However, Kullback and Leibler themselves actually defined the divergence as $$D_{\text{KL}}(P \parallel Q) + D_{\text{KL}}(Q \parallel P)$$, which is symmetric and nonnegative. This quantity has sometimes been used for feature selection in classification problems, where $P$ and $Q$ are the conditional probability density (or mass) functions of a feature under two different classes. 
 
@@ -147,7 +153,7 @@ The **cross entropy** can measures the difference between two probability distri
 
 ### Definition
 
-Given a random variable $X$ with outcomes $x$'s and image $$\mathcal{X}$$, and probability distributions $P$ and $Q$ defined on the same probability space $\mathcal{X}$, the cross entropy of $Q$ relative to $P$ is defined as 
+Given a random variable $X$ with outcomes $x$'s and sample space $$\mathcal{X}$$, and probability distributions $P$ and $Q$ defined on the same probability space $\mathcal{X}$, the cross entropy of $Q$ relative to $P$ is defined as 
 
 $$
 H(P \parallel Q) := -E_P[\log Q(X)] = -\sum_{x\in\mathcal{X}} P(x) \log Q(x).
@@ -157,7 +163,7 @@ $$
 
 ### Properties
 
-**Asymmetric:** Similar to Kullback-Leibler divergence, cross entropy is also asymmetric, which means $$H(P \parallel Q) \neq H(Q \parallel P)$$. 
+**Asymmetry:** Similar to Kullback-Leibler divergence, cross entropy is also asymmetric, which means $$H(P \parallel Q) \neq H(Q \parallel P)$$. 
 
 ### Relation to KL Divergence
 
@@ -167,7 +173,7 @@ $$
 H(P \parallel Q) = H(P) + D_{\text{KL}}(P \parallel Q).
 $$
 
-Here is the intuition. In the case when we use the distribution $Q$ to describe the unknown distribution $P$, the KL divergence $$D_{\text{KL}}(P \parallel Q) $$ quantifies the amount of extra information needed to describe the target distribution $P$ when we use $Q$ to describe it, compared to the information needed when we use $P$ to describe $P$ (it is just the entropy of $P$), and the cross entropy is the total information needed to describe $P$ by using $Q$.
+Here is the intuition. In the case when we use the distribution $Q$ to describe the unknown distribution $P$, the KL divergence $$D_{\text{KL}}(P \parallel Q) $$ quantifies the amount of extra information needed to describe the target distribution $P$ when we use $Q$ to describe it, compared to the information needed when we use $P$ to describe $P$ (it is just the entropy of $P$), and the cross entropy is the total information needed to describe $P$ by using $Q$. 
 
 ### Cross Entropy Loss
 
@@ -185,7 +191,7 @@ Not limited to real-valued random variables and linear dependence like the corre
 
 ### Definition
 
-Given random variables $X,Y$ with image $\mathcal{X},\mathcal{Y}$ and possible outcomes $x\in\mathcal{X},y\in\mathcal{Y}$, the mutual information is defined as
+Given random variables $X,Y$ with sample spaces $\mathcal{X},\mathcal{Y}$ and possible outcomes $x\in\mathcal{X},y\in\mathcal{Y}$, the mutual information is defined as
 
 $$\begin{align}
 I(X,Y) &:= D_{\text{KL}}(P_{(X,Y)} \parallel P_XP_Y) \\ &= E_P\bigg[\log \frac{P_{(X,Y)}(X,Y)}{P_X(X)P_Y(Y)} \bigg] \\ &= \sum_{y \in \mathcal Y} \sum_{x \in \mathcal X} { P_{(X,Y)}(x,y) \log{ \frac{P_{(X,Y)}(x,y)}{P_X(x)\,P_Y(y)} }}.
@@ -193,9 +199,9 @@ I(X,Y) &:= D_{\text{KL}}(P_{(X,Y)} \parallel P_XP_Y) \\ &= E_P\bigg[\log \frac{P
 
 ### Properties
 
-**Non-negative:** $$I(X,Y)\geq 0$$ for any random variables $$X$$ and $$Y$$, and $$I(X,Y)=0$$ and only if $X$ and $Y$ are independent.
+**Non-negativity:** $$I(X,Y)\geq 0$$ for any random variables $$X$$ and $$Y$$, and $$I(X,Y)=0$$ and only if $X$ and $Y$ are independent.
 
-**Symmetric:** $$I(X,Y) = I(Y,X)$$ for any random variables $$X$$ and $$Y$$. 
+**Symmetry:** $$I(X,Y) = I(Y,X)$$ for any random variables $$X$$ and $$Y$$. 
 
 ### Relation to Conditional and Joint Entropy
 
@@ -211,17 +217,18 @@ I(X,Y) &= H(X) - H(X\mid Y) \\ &= H(Y) - H(Y \mid X) \\ &= H(X) + H(Y) - H(X,Y) 
 
 **References:**
 
-All references are from Wikipedia.
+Wikipedia contributors. (2020, May 27). Entropy (information theory). In *Wikipedia, The Free Encyclopedia*. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Entropy_(information_theory)&oldid=959218981.
 
-Wikipedia contributors. (2020, May 27). Entropy (information theory). In *Wikipedia, The Free Encyclopedia*. Retrieved 05:04, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Entropy_(information_theory)&oldid=959218981
+Wikipedia contributors. (2019, November 1). Joint entropy. In *Wikipedia, The Free Encyclopedia*. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Joint_entropy&oldid=924098872.
 
-Wikipedia contributors. (2019, November 1). Joint entropy. In *Wikipedia, The Free Encyclopedia*. Retrieved 05:05, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Joint_entropy&oldid=924098872
+Wikipedia contributors. (2020, May 24). Conditional entropy. In *Wikipedia, The Free Encyclopedia*. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Conditional_entropy&oldid=958606256.
 
-Wikipedia contributors. (2020, May 24). Conditional entropy. In *Wikipedia, The Free Encyclopedia*. Retrieved 05:03, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Conditional_entropy&oldid=958606256
+Wikipedia contributors. (2020, May 27). Kullback–Leibler divergence. In Wikipedia, The Free Encyclopedia. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Kullback%E2%80%93Leibler_divergence&oldid=959167128.
 
-Wikipedia contributors. (2020, May 27). Kullback–Leibler divergence. In Wikipedia, The Free Encyclopedia. Retrieved 05:06, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Kullback%E2%80%93Leibler_divergence&oldid=959167128
+Brownlee, J. (2019, December 19). A Gentle Introduction to Cross-Entropy for Machine Learning. Retrieved May 31, 2020, from https://machinelearningmastery.com/cross-entropy-for-machine-learning/.
 
-Wikipedia contributors. (2020, May 27). Cross entropy. In Wikipedia, The Free Encyclopedia. Retrieved 05:07, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Cross_entropy&oldid=959139954
+Wikipedia contributors. (2020, May 27). Cross entropy. In Wikipedia, The Free Encyclopedia. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Cross_entropy&oldid=959139954.
 
-Wikipedia contributors. (2020, May 12). Mutual information. In *Wikipedia, The Free Encyclopedia*. Retrieved 05:05, May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Mutual_information&oldid=956303301
+Wikipedia contributors. (2020, May 12). Mutual information. In *Wikipedia, The Free Encyclopedia*. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Mutual_information&oldid=956303301.
 
+Yao Xie. (2010, Dec 9). Entropy and mutual information. Retrieved May 31, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture2.pdf. 
