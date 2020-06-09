@@ -9,7 +9,7 @@ comments: true
 
 ## Upper Bound of Entropy
 
-Given a finite sample space, **uniform distribution has maximum entropy among all distributions**.
+For a finite sample space, **uniform distribution has maximum entropy among all distributions**.
 
 Given a random variable $X$ with sample space $$\mathcal{X}$$ and outcomes $$x \in \mathcal{X}$$. Suppose $X$ follows the distribution $$P_X$$. Denote $$\mid\mathcal{X}\mid$$ as the number of elements in the set $$\mathcal{X}$$, 
 
@@ -126,17 +126,84 @@ $$
 
 ## Maximum Entropy Classifier
 
-The maximum entropy classifier is equivalent to logistic regression. 
+**The maximum entropy classifier is equivalent to logistic regression.** Let's derive logistic regression by maximum entropy to show why they are equivalent.
+
+For $$K$$-class classification problem, denote $k$ as the index of class, vector $$x_i$$ with dimension $$ p \times 1 $$ as the $i$-th observation of the input variables, $$x_i^{(j)}$$ as the $i$-th observation of the $$j$$-th input variable ($j$-th element in vector $$x_i$$), scalar $$y_i$$ as the $i$-th observation of the output variable, and $$\hat{p}_{ik}$$ as the estimated probability of the $i$-th observation is of class $k$. 
+
+Remember that if we optimize logistic regression by maximum likelihood, we can derive the following conclusion: 
+$$
+\sum_{i=1}^{n} \hat{p}_{ik} x_i^{(j)} = \sum_{i=1}^n \mathbf{1}(y_i=k)x_i^{(j)} \text{ for any } k, j.
+$$
+We call this equation the "balance equation", which indicates, for any $$k,j$$, the sum of any feature $j$ of training data $x_i$'s in a particular class $k$ is equal to the sum of probability mass the model places in that feature summed across all data. 
+
+In the equivalent maximum entropy derivation of logistic regression we don't have to cleverly guess the sigmoid form. Instead we assume we want the "balance equation" to be true and then we can solve for the form for $$\hat{p}_{ik}$$. 
+
+The entropy of the estimated probabilities $$\hat{p}_{ik}$$'s is $$-\sum_{k=1}^K \sum_{i=1}^n \hat{p}_{ik} \log\hat{p}_{ik}$$.
+
+The formulation of maximizing entropy is 
+
+$$
+\hat{p}_{ik}\text{'s} = \underset{\hat{p}_{ik}\text{'s}}{\text{argmax }} -\sum_{k=1}^K \sum_{i=1}^n \hat{p}_{ik} \log\hat{p}_{ik}, \\
+\begin{align}
+\text{subject to } \\
+& \hat{p}_{ik} \geq 0 \text{ for any }i,k, \\ 
+& \sum_{k=1}^{K}\hat{p}_{ik}=1, \\ 
+& \sum_{i=1}^{n} \hat{p}_{ik} x_i^{(j)} = \sum_{i=1}^n \mathbf{1}(y_i=k)x_i^{(j)} \text{ for any } k, j.
+\end{align}
+$$
+
+The constraint $$\hat{p}_{ik} \geq 0$$ are hard to work with because it is an inequality instead of an equality, so we leave it out for now and hope that what we find can be shown to satisfy it. 
+
+We still apply the method of Lagrange multipliers to solve this maximization problem. The Lagrangian function is 
+
+$$
+\begin{align}
+\mathcal{L} \big( \hat{p}_{ik}\text{'s}, \lambda_k^{(j)}\text{'s}, \mu_i\text{'s} \big) 
+=  &- \sum_{k=1}^K \sum_{i=1}^n \hat{p}_{ik} \log\hat{p}_{ik} + \sum_{i=1}^{n}\mu_i\left( \sum_{k=1}^{K}\hat{p}_{ik} - 1 \right) \\
+&+ \sum_{j=1}^p\sum_{k=1}^{K} \lambda_k^{(j)} \left( \sum_{i=1}^{n} \hat{p}_{ik} x_i^{(j)} - \sum_{i=1}^n \mathbf{1}(y_i=k)x_i^{(j)} \right).
+\end{align}
+$$
+
+Take derivative of the Lagrangian function with respect to $$\hat{p}_{ik}$$ for all $$i,k$$ and set to $$0$$, we have
+
+$$
+\begin{align}
+& \frac{\partial \mathcal{L}}{\partial \hat{p}_{ik}} = \sum_{j=1}^p \lambda_k^{(j)} x_i^{(j)} + \mu_i - \log\hat{p}_{ik} - 1 = 0 \\ 
+&\implies \hat{p}_{ik} = \exp\left(\sum_{j=1}^p \lambda_k^{(j)} x_i^{(j)} + \mu_i - 1\right)
+\end{align}
+$$
+
+Denote $$\lambda_k := \left(\lambda_k^{(1)}, \lambda_k^{(2)}, \cdots, \lambda_k^{(p)}\right)^T$$, then 
+
+$$
+\hat{p}_{ik} = \exp\left(\lambda_k^T x_i + \mu_i - 1\right).
+$$
+
+We can see that this form satisfy the constraint $$\hat{p}_{ik} \geq 0$$.
+
+Now we need to solve for $$\lambda_k$$ and $$\mu_i$$ by the constraints. 
+
+$$
+\sum_{k=1}^{K}\hat{p}_{ik} = \sum_{k=1}^{K}\exp\left(\lambda_k^T x_i + \mu_i - 1\right) = 1 \implies e^{\mu_i} = 1 / \sum_{k=1}^{K} e^{\lambda_k^T x_i - 1}.
+$$
+
+We then plug it back and simplify to get
+
+$$
+\hat{p}_{ik} = \frac{e^{\lambda_k^T x_i}}{\sum_{k=1}^{K} e^{\lambda_k^T x_i}}.
+$$
+
+This is exact the softmax function (or multi-category version of the sigmoid function), and thus we showed that the maximum entropy classifier is equivalent to logistic regression.
 
 ---
 
 **References:**
 
-Xie, Yao. (2010, Dec 9). Chain rules and inequalities. Retrieved June 4, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture2.pdf. 
+Xie, Yao. (2010, Dec 9). *Chain rules and inequalities*. Retrieved June 4, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture2.pdf. 
 
-Xie, Yao. (2010, Dec 9). Maximum entropy. Retrieved June 6, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture11.pdf. 
+Xie, Yao. (2010, Dec 9). *Maximum entropy*. Retrieved June 6, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture11.pdf. 
 
-Paul Penfield, Jr. (2004, Apr 2). Principle of Maximum Entropy. Retrieved June 7, 2020, from http://www-mtl.mit.edu/Courses/6.050/notes/chapter9.pdf.
+Paul Penfield, Jr. (2004, Apr 2). *Principle of Maximum Entropy*. Retrieved June 7, 2020, from http://www-mtl.mit.edu/Courses/6.050/notes/chapter9.pdf.
 
 Mount, John. (2011, Sep 23). *The equivalence of logistic regression and maximum entropy models*. Retrieved June 7, 2020, from https://pdfs.semanticscholar.org/19cc/c9e2937b3260ac2c93020174c09c2891672e.pdf.
 
