@@ -37,7 +37,7 @@ For example, tossing a fair die contains more information than tossing a fair co
 
 **Non-negativity:** The entropy is always non-negative. i.e. $$H(X)\geq0$$ for any random variable $X$. 
 
-**Decrease through any function**:
+**Decrease through any function"**
 
 The entropy of a random variable can only decrease when the latter is passed through a function. Mathematically, that is, for a random variable $X$ and a arbitrary function $f(\cdot)$, we have
 
@@ -46,6 +46,31 @@ H(f(X)) \leq H(X).
 $$
 
 Proof (requires the properties of joint entropy and conditional entropy): $$H(f(X) \mid X)=0$$ since $f(X)$ is completely determined by $X$. The joint entropy $$H(X,f(X)) = H(X \mid f(X)) + H(f(X)) = H(f(X) \mid X) + H(X)$$, thus $$H(f(X)) \leq H(X)$$. 
+
+**Lower bound on average code length:**
+
+Suppose we want to code all the outcomes of a random variable, the entropy of the random variable is the lower bound on average code length. That's why we say the entropy of a random variable is the amount of information needed to fully describe it. The codes with lowest average code length can be produced by **Huffman coding algorithm**. 
+
+### Example
+
+Suppose you are operating a fast food restaurant, which offers eight different meals. Different meals are ordered with different probabilities, as shown below: 
+
+| Items  | Ordered Probabilities | Items  | Ordered Probabilities |
+| ------ | --------------------- | ------ | --------------------- |
+| Meal 1 | $$1/2$$               | Meal 5 | $$1/64$$              |
+| Meal 2 | $$1/4$$               | Meal 6 | $$1/64$$              |
+| Meal 3 | $$1/8$$               | Meal 7 | $$1/64$$              |
+| Meal 4 | $$1/16$$              | Meal 8 | $$1/64$$              |
+
+You need to send a message to tell the kitchen what meals the customers ordered. One simple way to encode these meals is just to use the binary representation of the meal's number as the code: $$000, 001, 010, 011,100,101,110,111$$. Each meal is coded with $3$ bits, on average we would be sending $3$ bits per order. 
+
+However, we can do better. The entropy (measured in bits) of the distribution of the meals gives us a lower bound on the number of the average bits needed to encode these meals and is
+$$
+-\frac{1}{2}\log_2\frac{1}{2} - \frac{1}{4}\log_2\frac{1}{4} - \frac{1}{8}\log_2\frac{1}{8} - \frac{1}{16}\log\frac{1}{16} - 4 \times \frac{1}{64}\log\frac{1}{64} = 2 \text{ bits}.
+$$
+A code that averages $2$ bits per order can be built with short encodings for more probable meals, and longer encodings for less probable meals. For example, by using Huffman coding, meals $$1\sim8$$ can be coded as $$0,10,110,1110,111100, 111101, 111110, 11111$$. 
+
+Nevertheless, if all meals are ordered with same probability $$1/8$$, the entropy is $$3$$ bits, and the Huffman coding gives us the same codes as the binary representation of the meal's number: $$000, 001, 010, 011,100,101,110,111$$. 
 
 ## Joint Entropy
 
@@ -218,6 +243,8 @@ I(X,Y) &= H(X) - H(X\mid Y) \\ &= H(Y) - H(Y \mid X) \\ &= H(X) + H(Y) - H(X,Y) 
 **References:**
 
 Wikipedia contributors. (2020, May 27). Entropy (information theory). In *Wikipedia, The Free Encyclopedia*. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Entropy_(information_theory)&oldid=959218981.
+
+Cover, T. M., & Thomas, J. A. (2012). *Elements of information theory*. John Wiley & Sons.
 
 Wikipedia contributors. (2019, November 1). Joint entropy. In *Wikipedia, The Free Encyclopedia*. Retrieved May 31, 2020, from https://en.wikipedia.org/w/index.php?title=Joint_entropy&oldid=924098872.
 
