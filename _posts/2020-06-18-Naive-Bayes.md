@@ -45,7 +45,7 @@ By considering features in log space, naive Bayes classifier computes the predic
 
 How can we learn the probabilities $$P(c)$$ and $$P(w \mid c)$$?
 
-Let $N_c$ be the number of documents in our training data with class $c$, $N_{doc}$ be the total number of documents, and the vocabulary $\mathcal{V}$ be the union of all types of words in all classes. Then
+Let $N_c$ be the number of documents in our training data with class $c$, $N_{doc}$ be the total number of documents, the vocabulary $\mathcal{V}$ be the union of all different words in all classes, and $$\mid\mathcal{\mathcal{V}}\mid$$ be the size of set $$\mathcal{\mathcal{V}}$$ (that is, the number of different words). Then
 
 $$
 \hat{P}(c) = \frac{N_c}{N_{doc}}, \\
