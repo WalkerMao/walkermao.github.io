@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Basic Convolutional Neural Networks"
+title:  "Basic Convolutional Neural Networks (CNNs)"
 date: 2020-03-22
 categories: DL
 comments: true
