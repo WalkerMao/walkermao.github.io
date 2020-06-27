@@ -45,9 +45,9 @@ A recurrent neural network (RNN) is any network that contains a cycle within its
 
 We first consider a class of recurrent networks referred to as **Elman Networks** or **simple RNNs**. 
 
-In a simple RNN, the hidden layer from the previous time step provides a form of memory, or past context, that encodes earlier processing and informs the decisions to be made at later points in time.
+In a simple RNN, the hidden layer from the previous time-step provides a form of memory, or past context, that encodes earlier processing and informs the decisions to be made at later points in time.
 
-Compared to non-recurrent architectures, we need another set of weights that connect the hidden layer from the previous time step to the current hidden layer. These weights determine how the network should make use of memory (or past context) in calculating the output for the current input. As with the other weights in the network, these weights are trained via backpropagation.
+Compared to non-recurrent architectures, we need another set of weights that connect the hidden layer from the previous time-step to the current hidden layer. These weights determine how the network should make use of memory (or past context) in calculating the output for the current input. As with the other weights in the network, these weights are trained via backpropagation.
 
 The following figures illustrate the structure of a simple RNN with one hidden layer. 
 
@@ -57,7 +57,7 @@ The following figures illustrate the structure of a simple RNN with one hidden l
 
 #### Forward Inference in Simple RNNs
 
-**Forward inference** in a RNN maps a sequence of inputs to a sequence of outputs. To compute an output $y_t$ for an input $x_t$, we need the activation value for the hidden layer $h_t$. To calculate this, we multiply the input $x_t$ with the weight matrix $W$, and the hidden layer from the previous time step $h_{t-1}$ with the weight matrix $U$. We add these values together and pass them through a suitable activation function, $g(\cdot)$, to arrive at the activation value for the current hidden layer, $h_t$:
+**Forward inference** in a RNN maps a sequence of inputs to a sequence of outputs. To compute an output $y_t$ for an input $x_t$, we need the activation value for the hidden layer $h_t$. To calculate this, we multiply the input $x_t$ with the weight matrix $W$, and the hidden layer from the previous time-step $h_{t-1}$ with the weight matrix $U$. We add these values together and pass them through a suitable activation function, $g(\cdot)$, to arrive at the activation value for the current hidden layer, $h_t$:
 $$
 h_t = g(Uh_{t-1} + Wx_t).
 $$
@@ -81,13 +81,54 @@ function FORWARD_RNN(x, network) returns output sequence y:
     h0 = 0 
     for t = 1 to LENGTH(x) do:
         ht = g(U * ht + W * xt) 
-        yi = f(V * hi) 
+        yt = f(V * ht) 
     return y
 ```
 
 #### Training Simple RNNs
 
 As with other neural networks, we use a training set, a loss function, and backpropagation to obtain the gradients needed to adjust the weights in RNNs. We now have $3$ sets of weights to update: $W$, the weights from the input layer to the hidden layer, $U$, the weights from the previous hidden layer to the current hidden layer, and finally $V$, the weights from the hidden layer to the output layer. 
+
+Given an input sequence $x=(x_1,x_3,\cdots,x_N)$, the total loss (error) $L$ of an RNN is the sum of the loss at each time-step: $$L = \sum_{t=1}^N L_t = \sum_{t=1}^N \text{Loss}(\hat{y}_t, y_t)$$. 
+
+Then the gradient of $W$ is
+$$
+\frac{\partial L}{\partial W} = \frac{\partial \sum_{t=1}^N L_t}{\partial W} = \sum_{t=1}^N \frac{\partial L_t}{\partial W}.
+$$
+
+The error for each time-step is computed through applying the chain rule differentiation:
+
+$$
+\frac{\partial L_t}{\partial W} = \sum_{s=1}^t \frac{\partial L_t}{\partial y_t} \frac{\partial y_t}{\partial h_t} \frac{\partial h_t}{\partial h_s} \frac{\partial h_s}{\partial W}.
+$$
+
+Also by the chain rule, each $$\frac{\partial h_t}{\partial h_s}$$ is computed as
+
+$$
+\frac{\partial h_t}{\partial h_s} = \frac{\partial h_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial h_{t-2}} \cdots \frac{\partial h_{s+1}}{\partial h_s} = \prod_{r={s+1}}^{t} \frac{\partial h_r}{\partial h_{r-1}}.
+$$
+
+Put these equations together and we have
+
+$$
+\frac{\partial L}{\partial W} = \sum_{t=1}^N \sum_{s=1}^t \frac{\partial L_t}{\partial y_t} \frac{\partial y_t}{\partial h_t} \left( \prod_{r={s+1}}^{t} \frac{\partial h_r}{\partial h_{r-1}} \right) \frac{\partial h_s}{\partial W}.
+$$
+
+The product form of these derivatives may lead to **gradient explosion** or **gradient vanishing** problem. Due to vanishing gradients, we don't know whether there is no dependency between different time steps in the data, or we just cannot capture the true dependency due to this issue. 
+
+To solve the problem of exploding gradients, Thomas Mikolov first introduced a simple heuristic solution that clips gradients to a small number whenever they reach a certain threshold, as shown below:
+
+$$
+\begin{equation}
+\text{gradient} = 
+\begin{cases} 
+\frac{\partial L}{\partial W} & \text{ if } \| \frac{\partial L}{\partial W} \| \leq \text{threshold}, \\
+\text{threshold} \cdot \frac{\frac{\partial L}{\partial W}}{\| \frac{\partial L}{\partial W} \|} & \text{ otherwise.}
+\end{cases}
+\end{equation}
+$$
+
+To solve the problem of vanishing gradients, we introduce two techniques. The first technique is that instead of initializing $U$ randomly, start off from an identity matrix initialization. The second is to use the ReLU instead of the sigmoid function. 
 
 ### Stacked RNNs
 
