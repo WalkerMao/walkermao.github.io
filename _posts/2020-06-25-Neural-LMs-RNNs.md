@@ -58,6 +58,7 @@ The following figures illustrate the structure of a simple RNN with one hidden l
 #### Forward Inference in Simple RNNs
 
 **Forward inference** in a RNN maps a sequence of inputs to a sequence of outputs. To compute an output $y_t$ for an input $x_t$, we need the activation value for the hidden layer $h_t$. To calculate this, we multiply the input $x_t$ with the weight matrix $W$, and the hidden layer from the previous time-step $h_{t-1}$ with the weight matrix $U$. We add these values together and pass them through a suitable activation function, $g(\cdot)$, to arrive at the activation value for the current hidden layer, $h_t$:
+
 $$
 h_t = g(Uh_{t-1} + Wx_t).
 $$
@@ -155,4 +156,9 @@ Bidirectional RNNs have proven to be quite effective for sequence classification
 
 ---
 
-**Reference**: Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
+**References**: 
+
+Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
+
+Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). *CS224n: Natural Language Processing with Deep
+Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM*. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf.
