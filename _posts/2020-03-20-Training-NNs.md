@@ -58,7 +58,7 @@ The solution to computing the gradient is an algorithm called error **backpropag
 
 Now let's take an example. Say there is a feed forward neural network for regression, as shown in the picture below. 
 
-<div style="text-align: center"> <img src="/pictures/neural_network_example_2.png" alt="Grid Search and Random Search" style="zoom:40%;" /> </div>
+<div style="text-align: center"> <img src="/pictures/neural_network_example_2.png" alt="Grid Search and Random Search" style="zoom:25%;" /> </div>
 
 Suppose the activation function $$\sigma(\cdot)$$ for hidden layer is sigmoid, and there is no activation function for output layer. Denote the input vector as $$x\in\mathbb{R}^{p}$$, the target as $$y\in\mathbb{R}$$, the output scalar as $$\hat{y}\in\mathbb{R}$$, the weights of hidden layer as $W\in\mathbb{R}^{p \times q}$, the weights of output layer as $$V\in\mathbb{R}^{q}$$, the loss function as $$L(\hat{y},y)=(\hat{y}-y)^2$$. This network can be expressed mathematically as
 
