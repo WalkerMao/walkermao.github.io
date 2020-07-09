@@ -110,10 +110,24 @@ A feedforward network is a multilayer network in which the units are connected w
 
 <div style="text-align: center"> <img src="/pictures/neural_network_example.png" alt="neural_network_example" style="zoom:80%;" /> </div>
 
-Let's assume there are $n_1$ hidden units in hidden layer $1$ and $n_2$ units in layer $2$. The output of the hidden layer $1$ can be expressed by $x^{[2]}=\sigma(W^{[1]} x^{[1]} + b^{[1]})$, where the outputs $x^{[2]} \in \mathbb{R}^{n_2}$, the weight matrix $W^{[1]} \in \mathbb{R}^{n_2 \times n_1}$, the inputs $x^{[1]} \in\mathbb{R}^{n_1}$, the bias vector $b\in\mathbb{R}^{n_1}$.
+Let's assume there are $n^{[l-1]}$ hidden units in the hidden layer $l-1$ and $n^{[l]}$ units in the layer $l$. Denote the output of the layer $$l-1$$ (it is also the input of the layer $$l$$) as $a^{[l-1]} \in \mathbb{R}^{n^{[l-1]}}$. In the layer $$l$$, denote the weight matrix as $W^{[l]} \in \mathbb{R}^{n^{[l]}\times n^{[l-1]}}$, bias vector as $b^{[l]}\in\mathbb{R}^{n^{[l]}}$, activation function as $$\sigma^{[l]}(\cdot)$$, then the output of the layer $$l$$ is 
 
-We apply **softmax** function at output layer for $K$-class classification: 
+$$
+a^{[l]} = \sigma^{[l]}(W^{[l]} a^{[l-1]} + b^{[l]}) \in \mathbb{R}^{n^{[l]}}.
+$$
 
+For example, the picture below shows a fully-connected layer (layer 2). There are two units in layer 1 and three units in layer 2. 
+
+<img src="../pictures/two-layers.png" alt="two-layers" style="zoom:40%;" />
+
+The mathematical expression of this plot is (dimension is labeled under the symbol):
+
+$$
+\underset{3\times1}{a^{[2]}} = \sigma^{[2]}(\underset{3\times2}{W^{[2]}} \underset{2\times1}{a^{[1]}} + \underset{3\times1}{b^{[2]}}).
+$$
+
+
+For $K$-class classification problems, we usually apply **softmax** function at output layer : 
 $$
 \sigma (\mathbf {z} )_k={\frac {e^{z_k}}{\sum _{l=1}^{K}e^{z_{l}}}}{\text{ for }}k=1,\dotsc ,K {\text{, where }}\mathbf {z} =(z_{1},\dotsc ,z_{K})\in \mathbb {R} ^{K}.
 $$

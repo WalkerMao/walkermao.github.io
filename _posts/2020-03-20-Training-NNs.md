@@ -8,24 +8,33 @@ comments: true
 
 ## Optimization
 
-The goal of the training procedure is to learn parameters $W^{[l]}$ and $b^{[l]}$ for each layer $l$ that minimize the loss function plus regularization term.
+Given a neural network, the goal of the training procedure is to learn parameters $W^{[l]}$ and $b^{[l]}$ for each layer $l$ that minimize the loss function plus regularization term. 
+
+We first assume there are $n^{[l-1]}$ hidden units in the hidden layer $l-1$ and $n^{[l]}$ units in the layer $l$. Denote the output of the layer $$l-1$$ (it is also the input of the layer $$l$$) as $a^{[l-1]} \in \mathbb{R}^{n^{[l-1]}}$. In the layer $$l$$, denote the weight matrix as $W^{[l]} \in \mathbb{R}^{n^{[l]}\times n^{[l-1]}}$, bias vector as $b^{[l]}\in\mathbb{R}^{n^{[l]}}$, activation function as $$\sigma^{[l]}(\cdot)$$, then the output of the layer $$l$$ is 
+
+$$
+a^{[l]} = \sigma^{[l]}(W^{[l]} a^{[l-1]} + b^{[l]}) \in \mathbb{R}^{n^{[l]}}.
+$$
 
 ### Loss Function 
 
-For regression problem, **L2 loss** is most commonly used:
+The observations for target variable are $$y=(y_1,y_2,\cdots,y_n)^T\in\mathbb{R}^n$$, and the corresponding predictions are $$\hat{y}=(\hat{y}_1, \hat{y}_2, \cdots, \hat{y}_n)^T \in \mathbb{R}^n$$.
+
+For regression problems, the **L2 loss** is most commonly used:
 
 $$
 L(\hat{y}_i, y_i) = (y_i - \hat{y}_i)^2, \text{ or } L(\hat{y}, y) = \| \hat{y} - y \|_2^2.
 $$
 
-For $K$-class classification problem, we usually use **cross-entropy loss** function:
+For $K$-class classification problems, we usually use **cross-entropy loss** function:
+
 $$
 L(\hat{p}_i, y_i) = -\sum_{k=1}^{K} \mathbf{1}(y_i \text{ in class } k)\log(\hat{p}_{ik}),
 $$
 
-where $$\hat{p}_{ik}$$ is the estimated probability of $y_i$ belongs to class $k$. The estimated probabilities $\hat{p}_{ik}$ by softmax function is $$\frac{e^{z_{ik}}}{\sum _{k=1}^{K}e^{z_{ik}}}$$. 
+where $$\hat{p}_{ik}$$ is the estimated probability of $y_i$ belongs to class $k$, and $$\mathbf{1}(\cdot)$$ is the indicator function. The estimated probabilities $\hat{p}_{ik}$ by softmax function is $$\frac{e^{z_{ik}}}{\sum _{k=1}^{K}e^{z_{ik}}}$$. 
 
-For binary classification, the cross-entropy is
+For binary classification, the cross-entropy loss is
 
 $$
 L(\hat{p}_i, y_i) = -y_i\log(\hat{p}_i) - (1-y_i)\log(1-\hat{p}_i),
@@ -35,32 +44,105 @@ where $y_i\in\{0,1\}$, $\hat{p}_i$ is the estimated probability of $y_i=1$.
 
 ### Initialization
 
-If the weights in a network start too small/large, then the signal shrinks/grows as it passes through each layer until it is too tiny/massive to be useful, because it may lead to vanishing or exploding gradients. 
+If the weights in a network start too small/large, then the backpropagated gradient signal shrinks/grows as it passes through and it may lead to vanishing/exploding gradients, and that can result in divergence/slow-down in the training of the network.
 
-The appropriate initialization should have the following rules of thumb: 
+The appropriate initialization that follows the rules below guarantees no exploding/vanishing (either forward or backward) signal.
 
-1. The mean of the activations should be zero;
-2. The variance of the activations should stay the same across every layer.
+1. The mean (expectation) of the activations should be same and be zero. i.e. $$E(a^{[l-1]}) = E(a^{[l]})=0$$;
+2. The variance of the activations should stay the same across every layer. i.e. $$\text{Var}(a^{[l-1]}) = \text{Var}(a^{[l]})$$.
 
-**Xavier** initialization: For every layer $l$: 
+#### Xavier Initialization
+
+Xavier initialization was introduced by Glorot Xavier, and it works for activation functions like sigmoid, tanh and linear etc.. 
+
+That is, for every layer $l$, we initialize 
 
 $$
-W^{[l]} \sim N(0,1/n^{[l-1]}),\ b^{[l]}=0.
+W^{[l]} \sim N\left(0,\frac{1}{n^{[l-1]}}\right) \text{ or } N\left(0,\frac{2}{n^{[l-1]} + n^{[l]}}\right), \ b^{[l]}=0.
 $$
+
+We first derive the Xavier initialization through the forward propagation. Now the purpose of the initialization is to avoid the vanishing or exploding of the forward propagated signal.
+
+Based on some assumptions (assume the activation function is tanh. etc.), we can show that 
+
+$$
+\text{Var}(a^{[l]}) = n^{[l-1]} \text{Var}(W^{[l]}) \cdot \text{Var}(a^{[l-1]}).
+$$
+
+It follows that setting $$\text{Var}(W^{[l]}) = 1/n^{[l-1]}$$ leads to $$\text{Var}(a^{[l-1]}) = \text{Var}(a^{[l]})$$. 
+
+At every layer, we can link this layer's variance to the input layer’s variance:
+$$
+\begin{align}
+\text{Var}(a^{[l]}) &= n^{[l-1]} \text{Var}(W^{[l]}) \cdot \text{Var}(a^{[l-1]}) \\
+&= n^{[l-1]} \text{Var}(W^{[l]}) \cdot n^{[l-2]} \text{Var}(W^{[l-1]}) \cdot \text{Var}(a^{[l-2]}) \\
+&= \cdots \\
+&= \left[ \prod_{s=1}^l n^{[s-1]} \text{Var}(W^{[s]}) \right] \cdot \text{Var}(x).
+\end{align}
+$$
+
+Then we have the following three cases:
+
+$$
+\begin{align}
+
+&\text{For all } s=1,\cdots,l, \\
+
+&n^{[s-1]} \text{Var}(W^{[s]}) 
+\begin{cases}
+<1 \implies \text{Var}(a^{[l]}) \ll \text{Var}(x); \\
+=1 \implies \text{Var}(a^{[l]}) = \text{Var}(x); \\
+>1 \implies \text{Var}(a^{[l]}) \gg \text{Var}(x). \\
+\end{cases}
+
+\end{align}
+$$
+
+Since the mean is zero (i.e. $$E(a^{[l]})=0$$), low variance (i.e. $$\text{Var}(a^{[l]})$$ is small) means that the activations $$a^{[l]}$$ would be very close to zero (forward signal vanishing), and high variance means that the activations would be very large in absolute value (forward signal exploding).
+
+Throughout the justification, we worked on activations computed during the forward propagation, and we conclude that, to avoid the vanishing or exploding of the forward propagated signal, we initialize 
+
+$$
+\text{Var}(W^{[l]}) = \frac{1}{n^{[l-1]}}.
+$$
+
+The same result can be derived for the backpropagated gradients. Doing so, you will see that in order to avoid the vanishing or exploding gradient problem, we should initialize 
+
+$$
+\text{Var}(W^{[l]}) = \frac{1}{n^{[l]}}.
+$$
+
+As a compromise, we can roughly took the harmonic mean of the two:
+
+$$
+\text{Var}(W^{[l]}) = \frac{2}{n^{[l-1]} + n^{[l]}}.
+$$
+
+#### He Initialization
+
+He initialization was introduced by Kaiming He, and it works for activation functions like ReLU and leaky ReLU etc..
+
+That is, for every layer $l$, we initialize 
+
+$$
+W^{[l]} \sim N\left(0,\frac{2}{n^{[l-1]}}\right), \ b^{[l]}=0.
+$$
+
+For activation functions like ReLU and leaky ReLU etc., this initialization avoid the vanishing or exploding of both the forward propagated signal and backpropagated gradients.
 
 ### Backpropagation
 
-We use GD or SGD to optimize the objective function $\text{Obj}(w)$. For weight, we have $w_t=w_{t-1} - \eta \frac{\partial\ \text{Obj}(w_{t-1})}{\partial\ w_{t-1}}$, where $\eta$ is the step-size (learning rate).
+We usually use gradient descent to optimize the objective function $\text{Obj}(w)$. For weight, we have $w_t=w_{t-1} - \eta \frac{\partial\ \text{Obj}(w_{t-1})}{\partial\ w_{t-1}}$, where $\eta$ is the step-size (learning rate).
 
 The solution to computing the gradient is an algorithm called error **backpropagation**, which use the chain rules in calculus. (Note: the regularization term is not considered in the pictures below.) 
 
 <div style="text-align: center"> <img src="/pictures/backpropagation.png" alt="backpropagation" style="zoom: 40%;" /> </div> 
 
-Now let's take an example. Say there is a feed forward neural network for regression, as shown in the picture below. 
+Here let's take an example. Say there is a feed forward neural network for regression, as shown in the picture below. 
 
 <div style="text-align: center"> <img src="/pictures/neural_network_example_2.png" alt="Grid Search and Random Search" style="zoom:25%;" /> </div>
 
-Suppose the activation function $$\sigma(\cdot)$$ for hidden layer is sigmoid, and there is no activation function for output layer. Denote the input vector as $$x\in\mathbb{R}^{p}$$, the target as $$y\in\mathbb{R}$$, the output scalar as $$\hat{y}\in\mathbb{R}$$, the weights of hidden layer as $W\in\mathbb{R}^{p \times q}$, the weights of output layer as $$V\in\mathbb{R}^{q}$$, the loss function as $$L(\hat{y},y)=(\hat{y}-y)^2$$. This network can be expressed mathematically as
+Suppose the activation function $$\sigma(\cdot)$$ for hidden layer is sigmoid, and the activation function for output layer is identity function. Denote the input vector as $$x\in\mathbb{R}^{p}$$, the target as $$y\in\mathbb{R}$$, the output scalar as $$\hat{y}\in\mathbb{R}$$, the weights of hidden layer as $W\in\mathbb{R}^{p \times q}$, the weights of output layer as $$V\in\mathbb{R}^{q}$$, the loss function as $$L(\hat{y},y)=(\hat{y}-y)^2$$. This network can be expressed mathematically as
 
 $$
 \hat{y} = \sigma(x^TW) \cdot V,
@@ -173,6 +255,12 @@ Dropout is an extremely effective, simple and recently introduced regularization
 
 **References**:
 
-Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. [*Deep learning*](http://www.deeplearningbook.org/). MIT press, 2016.
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.
+
+Glorot, Xavier, and Yoshua Bengio. "Understanding the difficulty of training deep feedforward neural networks." *Proceedings of the thirteenth international conference on artificial intelligence and statistics*. 2010. 
+
+He, Kaiming, et al. "Delving deep into rectifiers: Surpassing human-level performance on imagenet classification." *Proceedings of the IEEE international conference on computer vision*. 2015.
+
+Katanforoosh & Kunin, "[Initializing neural networks](https://www.deeplearning.ai/ai-notes/initialization/)", deeplearning.ai, 2019.
 
 [CS231n Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/).
