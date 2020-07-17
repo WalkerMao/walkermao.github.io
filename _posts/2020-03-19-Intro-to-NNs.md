@@ -118,7 +118,7 @@ $$
 
 For example, the picture below shows a fully-connected layer (layer 2). There are two units in layer 1 and three units in layer 2. 
 
-<img src="../pictures/two-layers.png" alt="two-layers" style="zoom:40%;" />
+<div style="text-align: center"> <img src="/pictures/two-layers.png" alt="two-layers" style="zoom:30%;" /> </div>
 
 The mathematical expression of this plot is (dimension is labeled under the symbol):
 
@@ -155,7 +155,7 @@ One disadvantage of model ensembles is that they take longer to evaluate on test
 
 As for neural networks, the L2 loss (MSE) for regression problem is much harder to optimize than a more stable loss such as Softmax for classification problem. Intuitively, it requires a very specific property from the network to output exactly one correct value for each input (and its augmentations). The **L2 loss is less robust** because outliers can introduce huge gradients. 
 
-When faced with a regression task, first consider if it is absolutely necessary. Instead, have a strong preference to discretizing your outputs to bins and perform classification over them whenever possible. For example, if you are predicting star rating for a product, it might work much better to use 5 independent classifiers for ratings of 1-5 stars instead of a regression loss.
+When faced with a regression task, first consider if it is absolutely necessary. Instead, have a strong preference to discretizing your outputs to bins and perform classification over them whenever possible. For example, if you are predicting star rating for a product, it might work much better to use 5 independent classifiers for ratings of 1~5 stars instead of a regression loss.
 
 If you’re certain that classification is not appropriate, use the L2 but be careful: For example, the L2 is more fragile and applying dropout in the network (especially in the layer right before the L2 loss) is not a great idea. 
 
