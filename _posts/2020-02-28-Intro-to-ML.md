@@ -62,6 +62,8 @@ MSE is the most commonly used metric. MAE is more robust and less sensitive to o
 
 ### 4.2 For Classification
 
+#### 4.3.1 Loss Functions
+
 For $K$ classification problem,
 
 Misclassification error:  $$ \text{Loss}(y_i,\hat{y}_i) = \frac{1}{2} \sum_{k=1}^{K} I(y_{ik} \neq  \hat{y}_{ik} ) $$.
@@ -74,9 +76,43 @@ Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n
 
 Cross-entropy is differentiable, and hence more amenable to numerical optimization. 
 
-**ROC & AUC**: If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$\hat{y}_i = \text{sign}(\hat{p}_i > \text{threshold})$$. We can change the threshold from $$1$$ to $$0$$ and plot the TPR (true positive rate) v.s. FPR (false positive rate). The plot is known as ROC (receiver operating characteristic) curve. When the threshold is $$1$$, $$\text{TPR} = \text{FPR} = 0$$. When the threshold is $$0$$, $$\text{TPR} = \text{FPR} = 1$$.  The AUC (area under curve) is the area under the ROC curve. The larger of the AUC, the better of the classification model. 
+#### 4.3.2 Metrics
 
-![Confusion matrix](https://miro.medium.com/max/600/0*UdqpQ0-AHVlN-hF4.gif) <img src="https://miro.medium.com/max/865/0*ysufmKF9prSFhgve.png" alt="ROC" style="zoom: 50%;" />
+If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$\hat{y}_i = \text{sign}(\hat{p}_i > \text{threshold})$$. We can change the threshold from $$1$$ to $$0$$ and plot the TPR (true positive rate, or sensitivity, or recall) v.s. FPR (false positive rate, or $$1-$$ specificity). When the threshold is $$1$$, all cases are classified as negative, and $$\text{TPR} = \text{FPR} = 0$$. When the threshold is $$0$$, all cases are classified as positive, and $$\text{TPR} = \text{FPR} = 1$$.  
+
+The plot is known as ROC (receiver operating characteristic) curve. The AUC (area under curve) is the area under the ROC curve. The larger of the AUC, the better of the classification model. 
+
+<img src="/pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom: 66%;" />  <img src="/pictures/ROC.png" alt="ROC" style="zoom: 50%;" />
+
+Note that the metrics are not the loss functions. 
+
+If we predict all cases as positive (or negative), we get the straight ROC curve, and the AUC is $0.5$. Also, if we generate estimated probabilities randomly as $$\hat{p}_i \overset{\text{i.i.d.}}{\sim} \text{Uniform}(0,1)$$, the corresponding ROC curve is also very close to a straight line. As simulated below.
+
+```python
+from random import random
+from sklearn.metrics import roc_curve
+import matplotlib.pyplot as plt
+
+test = [0] * 900 + [1] * 100
+predict1 = [0] * 1000
+predict2 = [random() for _ in range(1000)]
+fpr1, tpr1, _ = roc_curve(test, predict1)
+fpr2, tpr2, _ = roc_curve(test, predict2)
+
+plt.plot(fpr1, tpr1)
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC curve for all p_hat = 0.')
+plt.show()
+
+plt.plot(fpr2, tpr2)
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC curve for p_hat ~ Uniform(0,1).')
+plt.show()
+```
+
+<img src="/pictures/ROC1.png" alt="ROC curve for all p_hat = 0" style="zoom:100%;" /> <img src="/pictures/ROC2.png" alt="img" style="zoom:100%;" />
 
 ## 5. Regularization
 
@@ -84,7 +120,7 @@ Cross-entropy is differentiable, and hence more amenable to numerical optimizati
 
 If a model learned too much noise in the training data, it tends to be overfitting, and the training error is much lower than the test error. Overfitting often happens for flexible models. An overfitted model has low bias but high variance. Regularization discourages learning a more complex or flexible model, so as to reduce overfitting. 
 
-<img src="https://github.com/WalkerMao/Notes/blob/master/Pictures/overfitting.png?raw=true" style="width:70%;height:70%;" alt="Overfitting">
+<img src="/pictures/overfitting.png" style="width:70%;height:70%;" alt="Overfitting">
 
 ### 5.2 L1 and L2 Norm
 
@@ -96,7 +132,7 @@ The hyperparameter $\lambda$ depends the regularization strength. Note: a hyperp
 
 Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
 
-![LASSO and Ridge](https://qph.fs.quoracdn.net/main-qimg-2a88e2acc009fa4de3edeb51e683ca02)
+![LASSO and Ridge](/pictures/LASSO-and-Ridge.png)
 
 L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more robust and also more computationally efficient when doing prediction. 
 
