@@ -46,7 +46,7 @@ We first grow a large tree $T_0$, stopping the splitting process only when some 
 
 Either the number of leaf nodes or the depth can be used to measure the complexity of a tree. Here we take the previous one for example.
 
-We define a subtree $T ⊂ T_0$ to be any tree that can be obtained by pruning $T_0$, that is, collapsing any number of its internal (non-terminal) nodes. We index terminal nodes by $m$, with node $m$ representing region $R_m$. Let $\mid T \mid$ denote the number of terminal nodes in $T$, which refers to the complexity of the tree. Letting 
+We define a subtree $T ⊂ T_0$ to be any tree that can be obtained by pruning $T_0$, that is, collapsing any number of its internal (non-terminal) nodes. We index nodes by $m$, with node $m$ representing region $R_m$. Let $\mid T \mid$ denote the number of terminal nodes in $T$, which refers to the complexity of the tree. Letting 
 
 $$
 N_m = \# \{x_i ∈ R_m \}, \\
@@ -85,18 +85,24 @@ $$
 Different measures $Q_m(T)$ of node impurity include the following: 
 
 $$
-\text{Misclassification error: } 1-\hat{p}_{mk(m)} = \frac{1}{N_m} \sum_{x_i \in R_m} I(y_i \neq k(m)). \\\text{Gini index: } \sum_{k=1}^{K} \hat{p}_{mk} (1-\hat{p}_{mk}). \\\text{Cross entropy or deviance: } −\sum_{k=1}^{K} \hat{p}_{mk} \log(\hat{p}_{mk}).
+\text{Misclassification error: } 1-\hat{p}_{mk(m)} = \frac{1}{N_m} \sum_{x_i \in R_m} I(y_i \neq k(m)). \\\text{Gini index: } \sum_{k=1}^{K} \hat{p}_{mk} (1-\hat{p}_{mk}). \\\text{Entropy or deviance: } −\sum_{k=1}^{K} \hat{p}_{mk} \log(\hat{p}_{mk}).
 $$
 
 For binary classification:
 
 $$
-\text{Misclassification error: } \frac{1}{2} -  \mid \hat{p}_{m1}-\frac{1}{2} \mid. \\\text{Gini index: } 2 \hat{p}_{m1} (1-\hat{p}_{m1}). \\\text{Cross entropy or deviance: } - \hat{p}_{m1} \log(\hat{p}_{m1}) - (1-\hat{p}_{m1}) \log(1-\hat{p}_{m1}).
+\text{Misclassification error: } \frac{1}{2} -  \mid \hat{p}_{m1}-\frac{1}{2} \mid. \\\text{Gini index: } 2 \hat{p}_{m1} (1-\hat{p}_{m1}). \\\text{Entropy or deviance: } - \hat{p}_{m1} \log(\hat{p}_{m1}) - (1-\hat{p}_{m1}) \log(1-\hat{p}_{m1}).
 $$
 
 <div style="text-align: center"> <img src="/pictures/Three-measures.png" alt="Three-measures" style="zoom: 70%;" /> </div>
 
-All three are similar, but cross-entropy and the Gini index are differentiable, and hence more amenable to numerical optimization.
+All three are similar, but entropy and the Gini index are differentiable, and hence more amenable to numerical optimization. 
+
+**Information gain** measures the reduction in entropy after splitting, and we select the feature and splitting point for a node that maximize the information gain. Denote the entropy for node $m$ as $H_m$. After splitting the node $m$ to two child nodes $m_L$ (left node) and $m_R$ (right node), we can calculate the information gain as 
+$$
+\text{IG}_m = H_m - \frac{N_{m_L}}{N_m} H_{m_L} - \frac{N_{m_R}}{N_m} H_{m_R}.
+$$
+Note that $$N_m = N_{m_L} + N_{m_R}$$.
 
 *Cross-entropy and the Gini index are more sensitive to changes in the node probabilities than the misclassification rate. For example, in a two-class problem with 400 observations in each class (denote this by (400, 400)), suppose one split created nodes (300, 100) and (100, 300), while the other created nodes (200, 400) and (200, 0). Both splits produce a misclassification rate of 0.25, but the second split produces a pure node and is probably preferable. Both the Gini index and cross entropy are lower for the second split.*
 
