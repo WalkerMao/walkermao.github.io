@@ -31,7 +31,7 @@ Next we introduce three general classes of feature selection methods: filter met
 
 Filter methods are often univariate and consider the features independently with regard to the dependent variable. However, **a single feature that is completely useless by itself can provide a significant performance improvement when taken with others**, so we may try kernel methods to produce some new features (e.g. cross products) before applying filter methods. 
 
-Some examples of some filter methods include the **correlation coefficient**, **Chi squared test**, **information gain** and **mutual information** and . 
+Some examples of some filter methods include the **correlation coefficient**, **Chi squared test**, **information gain** and **mutual information**. 
 
 ### Correlation Coefficient
 
