@@ -55,7 +55,7 @@ $$
 H(y\mid x_j) = \sum_v \frac{\#\{x_j = v\}}{n} H(\{x_j=v\}),
 $$
 
-where $$\#\{x_j=v\}$$ is the number of observations in the dataset with feature $x_j$ has the value $v$, and $H(\{x_j=v\})$ is the entropy of group of obseravtions where variable $x_j$ has the value $v$. 
+where $$\#\{x_j=v\}$$ is the number of observations in the dataset with feature $x_j$ has the value $v$, and $$H(\{x_j=v\})$$ is the entropy of group of obseravtions where variable $x_j$ has the value $v$. 
 
 High information gain means that the feature is useful for predicting the target.
 
