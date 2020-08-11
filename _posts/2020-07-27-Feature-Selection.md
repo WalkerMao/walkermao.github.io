@@ -113,7 +113,7 @@ However, the defenders of backward elimination argue that weaker subsets are fou
 
 ## Embedded Methods
 
-**Embedded methods** learn which features best contribute to the performance of the model while the model is being created. The most common type of embedded methods are regularization methods. Remember that we need to normalize features before applying regularization methods. 
+**Embedded methods** learn which features best contribute to the performance of the model while the model is being trained. The most common type of embedded methods are regularization methods. Remember that we need to normalize features before applying regularization methods. Also, **tree based** or **tree ensemble** methods can also evaluate feature importance through training. 
 
 Examples of embedded methods are linear or logistic regression with **L1 regularization**, since L1-norm shrinks some coefficients to $0$ and produces sparse coefficients. 
 
