@@ -16,7 +16,7 @@ A tree is a collection of nodes. The collection can be empty; otherwise, a tree 
 
 <div style="text-align: center"> <img src="/pictures/terminology-of-tree.png" alt="Terminology-of-tree" style="zoom:60%;" /> </div>
 
-We define the **depth** of a node as the length of the unique path from the root to the node, and the **height** of a node as the longest path from the node to a leaf. In the plot above, $$\text{Depth}(P)=0, \text{Depth}(M)=3, \text{Height}(E)=0, \text{Height}(Q)=3$$.
+We define the **depth** of a node as the length of the unique path from the root to the node, and the **height** of a node as the longest path from the node to a leaf. In the plot above, $$ \text{Depth}(P)=0, \text{Depth}(M)=3, \text{Height}(E)=0, \text{Height}(Q)=3 $$.
 
 ## Binary Tree
 
