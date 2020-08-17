@@ -6,7 +6,7 @@ categories: CS
 comments: true
 ---
 
-### Git
+## Git
 
 Initialize a new local repository:
 
@@ -70,7 +70,7 @@ $ git pull --all
 
 ---
 
-### SQL 
+## SQL 
 
 The input of the function `MAX()` must be a group of data.
 
@@ -81,7 +81,7 @@ SELECT id, name FROM table where id = (SELECT MAX(id) FROM table); # valid
 
 ---
 
-### Jekyll
+## Jekyll
 
 Make the local Jekyll server work:
 

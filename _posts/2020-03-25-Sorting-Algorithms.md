@@ -6,7 +6,7 @@ categories: CS
 comments: true
 ---
 
-Here is the cheat sheet for commonly used sorting algorithms: 
+Here is a cheat sheet for big-O complexity of commonly used sorting algorithms: 
 
 | Algorithm | Best Time   | Average Time | Worst Time | Space            | Stable? | In-place? |
 | --------- | ----------- | ------------ | ---------- | ---------------- | ------- | --------- |
@@ -22,13 +22,21 @@ Here is the cheat sheet for commonly used sorting algorithms:
 | Radix     | $l(n+c)$    | $l(n+c)$     | $l(n+c)$   | $n+c$            | ✓       | ✗         |
 | Bucket    | $n+b$       | $n+b$        | $n^2$      | $n+b$            | ✓       | ✗         |
 
+Big-O asymptotic: 
+
+- Definition: $T(N) = O(f (N))$ if there are positive constants $c$ and $n_0$ such that $$T(N) \le c \cdot f(N)$$ for all $$N \geq n_0$$. 
+
+- Description: When $T(N) = O(f (N))$, we say that $T(N)$ is bounded above by $f(N)$ asymptotically (ignoring constant factors).
+
+- Checking: When $T(N) = O(f (N))$, check if $$\lim_{N\to\infty} \frac{T(N)}{f(N)} \approx \text{Constant}$$.
+
 ## Insertion Sort and Shell Sort
 
 ### Insertion Sort
 
 Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.
 
-<img src="https://media.geeksforgeeks.org/wp-content/uploads/insertionsort.png" alt="InsertionSort" style="zoom: 70%;" />
+<img src="/pictures/insertion-sort.png" alt="InsertionSort" style="zoom: 70%;" />
 
 ### Shell Sort
 
@@ -73,7 +81,7 @@ def HeapSort(A):
 		Heapify(A[:i])
 ```
 
-<img src="https://www.codesdope.com/staticroot/images/algorithm/heapsort2.png" alt="Heap sort" style="zoom:100%;" />
+<img src="/pictures/heap-sort.png" alt="Heap sort" style="zoom:100%;" />
 
 The left part (in heap) of the array is unsorted and the right part (not in heap) is sorted. We swap the first and last element in the unsorted array, then the last element is  in the sorted array. Heap sort can be thought of as an improved selection sort. 
 
@@ -93,7 +101,7 @@ Both them employ the **divide-and-conquer** paradigm based on recursion. This pa
 
 Divide the array into two sublists recursively and merge them.
 
-<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Merge-Sort-Tutorial.png" alt="Merge sort" style="zoom: 80%;" />
+<img src="/pictures/merge-sort.png" alt="Merge sort" style="zoom: 80%;" />
 
 Space complexity: 
 
@@ -182,7 +190,7 @@ class Solution:
 
 Recursively pick an element as pivot and partition the other elements by comparing them with the picked pivot. 
 
-![Quick sort](https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/01/QuickSort2.png)
+![Quick sort](/pictures/quick-sort.png)
 
 Best case: In the best case, each time we perform a partition we divide the list into two nearly equal pieces. The depth of the recurrence tree is $\log_2n$. The time in each level of the  recurrence tree is $O(n)$. Thus, in the best case, the time complexity is $O(n\log_2n)$ and the space complexity is $O(\log_2n)$.
 
@@ -249,7 +257,7 @@ class Solution(object):
 
 Counting sort is usually used for sorting integers or characters. It is based on keys between a specific range. It works by counting the number of objects having distinct key values (kind of hashing). Then doing some arithmetic to calculate the position of each object in the output sequence.
 
-![counting_sort](https://www.cs.rit.edu/~vcss233/Labs/lab05/images/count_sort_exp.gif)
+![counting_sort](/pictures/count_sort_example.gif)
 
 Suppose the elements are in range from $1$ to $k$, thus there are $k$ keys.
 
@@ -276,7 +284,7 @@ Counting sort is a linear time sorting algorithm that sort in $O(n+k)$ time when
 
 In this case, radix sort can sort such an array in linear time. The idea of Radix sort is to do digit by digit sort starting from least significant digit to most significant digit. Radix sort uses counting sort as a subroutine to sort. 
 
-<img src="https://camo.githubusercontent.com/4376d13c2f2b6425681038a614ccdce1cf0c1893/68747470733a2f2f7777772e7265736561726368676174652e6e65742f7075626c69636174696f6e2f3239313038363233312f6669677572652f666967312f41533a36313432313434353234303432343040313532333435313534353536382f53696d706c69737469632d696c6c757374726174696f6e2d6f662d7468652d73746570732d706572666f726d65642d696e2d612d72616469782d736f72742d496e2d746869732d6578616d706c652d7468652e706e67" alt="Radix Sort" style="zoom: 60%;" />
+<img src="/pictures/radix-sort.png" alt="radix-sort" style="zoom:60%;" />
 
 Suppose there are $l$ digits(or characters) in each input integer(or string), and there are $c$ different digits(or characters), for example, $c=10$ for digits and $c=26$ for characters. Note that $c$ is the size of the count array in each counting sort of each pass, also $k=O(c^l)$. 
 
