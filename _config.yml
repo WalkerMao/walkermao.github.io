@@ -43,7 +43,6 @@ plainwhite:
     # telegram: jekyll
     # googleplus: +jekyll
     # microdotblog: jekyll
-
     # Mastodon instances
     mastodon:
     - username: jekyll
@@ -62,3 +61,5 @@ theme: plainwhite
 plugins:
   - jekyll-seo-tag
 #  - jekyll-feed
+
+permalink: /:categories/:title:output_ext
