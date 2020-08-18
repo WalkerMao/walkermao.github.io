@@ -20,10 +20,10 @@ plainwhite:
   disqus_shortname: Weikai Mao
   show_excerpts: true
   # navigation:
-    # - title: TechBlogs
-    #  url: "/techblog"
-    # - title: Posts
-    #  url: "/posts"
+    # - title: CS
+    # url: "/cs"
+    # - title: ML
+    # url: "/ml"
 
   # generate social links in footer
   social_links:
