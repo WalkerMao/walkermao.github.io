@@ -11,13 +11,13 @@ comments: true
 
 For a finite sample space, **uniform distribution has maximum entropy among all distributions**.
 
-Given a random variable $X$ with sample space $$\mathcal{X}$$ and outcomes $$x \in \mathcal{X}$$. Suppose $X$ follows the distribution $$P_X$$. Denote $$\mid\mathcal{X}\mid$$ as the number of elements in the set $$\mathcal{X}$$, 
+Given a random variable $$X$$ with sample space $$\mathcal{X}$$ and outcomes $$x \in \mathcal{X}$$. Suppose $$X$$ follows the distribution $$P_X$$. Denote $$\mid\mathcal{X}\mid$$ as the number of elements in the set $$\mathcal{X}$$, 
 
 **Theorem.** $$H(X)\leq\log\mid\mathcal{X}\mid$$. Equality iff $X$ has uniform distribution on $$\mathcal{X}$$.
 
 Proof: 
 
-Denote $U_{\mathcal{X}}$ as the uniform distribution on the sample space $$\mathcal{X}$$, then we have $$U_{\mathcal{X}}(x)=\frac{1}{\mid\mathcal{X}\mid}$$.
+Denote $$U_{\mathcal{X}}$$ as the uniform distribution on the sample space $$\mathcal{X}$$, then we have $$U_{\mathcal{X}}(x)=\frac{1}{\mid\mathcal{X}\mid}$$.
 
 By the non-negativity of KL divergence, or equivalently by Gibbs' inequality, 
 
@@ -52,7 +52,7 @@ $$\begin{align}
 \mathcal{L}\big(P(x_1),\cdots,P(x_n),\lambda_0,\cdots,\lambda_m\big) = &-\sum_{i=1}^n P(x_i) \log_b P(x_i) + \lambda_0 \left(\sum_{i=1}^{n}P(x_i)-1\right) \\ &+ \sum_{j=1}^{m} \lambda_j \left( \sum_{i=1}^n P(x_i)g_j(x_i) - E\left[g_j(X)\right] \right).
 \end{align}$$
 
-Take derivative with respect to $$P(x_i)$$ and set to $0$, we have
+Take derivative with respect to $$P(x_i)$$ and set to $$0$$, we have
 
 $$
 \frac{\partial \mathcal{L}\big(P(x_1),\cdots,P(x_n),\lambda_0,\cdots,\lambda_m\big)}{\partial P(x_1)} = 0 \implies P^*(x_i) = b^{\lambda_0 - 1 + \sum_{j=1}^m \lambda_jE\left[g_j(X)\right]}.
@@ -84,7 +84,7 @@ Walker usually buys meals from a fast food restaurant, Berger's Burger, which of
 
 Now Walker tells you that his average cost of each meal is $$$2.5$$. What is the frequency that each item being ordered? We can solve this problem by the technique we discussed in the previous section. 
 
-Denote the item he orders as a random variable $X$, which has possible outcomes $$x_1,x_2,x_3,x_4$$. The entropy of $X$ is $$H(X)=-\sum_{i=1}^4 P(x_i) \log_2 P(x_i)$$. 
+Denote the item he orders as a random variable $$X$$, which has possible outcomes $$x_1,x_2,x_3,x_4$$. The entropy of $$X$$ is $$H(X)=-\sum_{i=1}^4 P(x_i) \log_2 P(x_i)$$. 
 
 The formulation of maximizing entropy is
 
