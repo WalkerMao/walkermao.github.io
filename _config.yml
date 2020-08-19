@@ -20,6 +20,8 @@ plainwhite:
   disqus_shortname: Weikai Mao
   show_excerpts: true
   post-categories:
+    - categ: "all"
+      url: ""
     - categ: "cs"
       url: "categories/cs"
     - categ: "dl"
