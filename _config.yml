@@ -75,4 +75,4 @@ plugins:
   - jekyll-seo-tag
 #  - jekyll-feed
 
-permalink: /:categories/:title:output_ext
+permalink: /:title:output_ext
