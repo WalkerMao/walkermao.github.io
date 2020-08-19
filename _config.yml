@@ -73,6 +73,9 @@ theme: plainwhite
 
 plugins:
   - jekyll-seo-tag
-#  - jekyll-feed
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/posts/page:num/"
 
 permalink: /:title:output_ext

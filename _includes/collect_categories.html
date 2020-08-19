@@ -6,12 +6,12 @@
 {% assign rawcategories = rawcategories | split:'|' | sort %}
 
 {% assign site.categories = "" %}
-{% for tag in rawcategories %}
-  {% if tag != "" %}
+{% for categ in rawcategories %}
+  {% if categ != "" %}
     {% if categories == "" %}
-      {% assign categories = tag | split:'|' %}
+      {% assign categories = categ | split:'|' %}
     {% endif %}
-    {% unless categories contains tag %}
+    {% unless categories contains categ %}
       {% assign categories = categories | join:'|' | append:'|' | append:tag | split:'|' %}
     {% endunless %}
   {% endif %}

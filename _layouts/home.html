@@ -8,13 +8,13 @@ layout: default
 
 {{ content }}
 
-{%- if site.posts.size > 0 -%}
+{%- if paginator.posts.size > 0 -%}
   <ul class="posts">
     <li>
       <h1 id="posts-label">ALL POSTS</h1>
     </li>
 
-    {%- for post in site.posts -%}
+    {% for post in paginator.posts %}
       <li>
         {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
         <a class="post-link" href="{{ post.url | relative_url }}">
@@ -37,10 +37,9 @@ layout: default
         </div>
       </li>
     <HR color=#EAEDED SIZE=1>
-    {%- endfor -%}
+    {% endfor %}
   </ul>
 
-  <!-- <p class="feed-subscribe"><svg class="svg-icon orange">
-		<use xlink:href="{{ '/assets/minima-social-icons.svg#rss' | relative_url }}"></use>
-	</svg><a href="{{ "/feed.xml" | relative_url }}">Subscribe</a></p> -->
+  {% include paginator.html %}
+
 {%- endif -%}
