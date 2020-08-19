@@ -2,7 +2,7 @@
 layout: post
 title:  "Decision Trees"
 date: 2020-03-11
-categories: ML
+categories: ml
 comments: true
 ---
 

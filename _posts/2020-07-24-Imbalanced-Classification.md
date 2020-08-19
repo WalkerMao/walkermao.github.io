@@ -2,7 +2,7 @@
 layout: post
 title: "Imbalanced Classification Problems"
 date: 2020-07-24
-categories: ML
+categories: ml
 published: true
 comments: true
 ---

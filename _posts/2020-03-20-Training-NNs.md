@@ -2,7 +2,7 @@
 layout: post
 title:  "Training Neural Networks"
 date: 2020-03-20
-categories: DL
+categories: dl
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Sorting Algorithms"
 date: 2020-03-25
-categories: CS
+categories: cs
 comments: true
 ---
 

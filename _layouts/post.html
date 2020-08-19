@@ -9,7 +9,7 @@ layout: default
   <div class="post-meta">
     <ul class="post-categories">
       {%- for categ in page.categories -%}
-      <a class="post-link" href="{{ categ | downcase | relative_url }}"> <li>{{ categ }}</li> </a>
+      <a class="post-link" href="/categories/{{ categ | downcase }}"> <li>{{ categ }}</li> </a>
       {%- endfor -%}
     </ul>
     <div class="post-date"><i class="icon-calendar"></i>{{ page.date | date: date_format }}</div>

@@ -19,11 +19,24 @@ plainwhite:
   sitemap: true # set to true to generate sitemap.xml content
   disqus_shortname: Weikai Mao
   show_excerpts: true
-  # navigation:
-    # - title: CS
-    # url: "/cs"
-    # - title: ML
-    # url: "/ml"
+  post-categories:
+    - categ: "cs"
+      url: "categories/cs"
+    - categ: "dl"
+      url: "categories/dl"
+    - categ: "math"
+      url: "categories/math"
+    - categ: "ml"
+      url: "categories/ml"
+    - categ: "nlp"
+      url: "categories/nlp"
+    - categ: "stat"
+      url: "categories/stat"
+    - categ: "杂记"
+      url: "categories/杂记"
+    - categ: "杂想"
+      url: "categories/杂想"
+
 
   # generate social links in footer
   social_links:

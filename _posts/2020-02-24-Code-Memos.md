@@ -2,7 +2,7 @@
 layout: post
 title:  "Code Memos"
 date: 2020-02-24
-categories: CS
+categories: cs
 comments: true
 ---
 

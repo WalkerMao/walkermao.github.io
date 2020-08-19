@@ -2,7 +2,7 @@
 layout: post
 title:  "Linear Regression"
 date: 2020-03-01
-categories: ML
+categories: ml
 comments: true
 ---
 

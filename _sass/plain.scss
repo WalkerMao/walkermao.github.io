@@ -6,7 +6,7 @@ $linkColor: #0a59b0;
 $mobileW: 768px;
 $smallMobileW: 480px;
 $bigScreenW: 1600px;
-$leftWidth: 220px;
+$leftWidth: 225px;
 
 *,
 *:before,
@@ -75,7 +75,8 @@ main {
   .about {
     display: flex;
     height: 100vh;
-    padding-bottom: 15vh;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
     @media screen and (max-width: $mobileW) {
       height: auto;
       padding: 10vh 0;
@@ -97,7 +98,7 @@ main {
     .tagline {
       font-size: 22px;
       margin-top: 17px;
-      color: #aaa;
+      color: #606060;
       white-space: pre-wrap;
       line-height: normal;
     }
@@ -164,6 +165,7 @@ main {
   padding: 0;
   li {
     font-size: 14px;
+    text-transform: uppercase;
     float: left;
     background-color: #e3e3e3;
     padding: 5px 20px;
@@ -240,12 +242,13 @@ main {
 }
 
 #posts-label {
-  border-bottom: 1px solid #eee;
-  font-size: 15px;
-  color: #777;
+  font-size: 35px;
+  background-color: WhiteSmoke;
+  color: Gray;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding-bottom: 10px;
+  letter-spacing: 1px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   font-weight: normal;
 }
 

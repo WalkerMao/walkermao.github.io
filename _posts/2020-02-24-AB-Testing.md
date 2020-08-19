@@ -2,7 +2,7 @@
 layout: post
 title:  "A/B Testing"
 date: 2020-02-24
-categories: Stat
+categories: stat
 comments: true
 ---
 

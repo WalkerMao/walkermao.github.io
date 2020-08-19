@@ -11,7 +11,7 @@ layout: default
 {%- if site.posts.size > 0 -%}
   <ul class="posts">
     <li>
-      <h1 id="posts-label">posts</h1>
+      <h1 id="posts-label">ALL POSTS</h1>
     </li>
 
     {%- for post in site.posts -%}
@@ -21,9 +21,9 @@ layout: default
           <h2 class="post-title">{{ post.title | escape }}</h2>
         </a>
         <div class="post-meta">
-	  <ul class="post-categories"> 
+	        <ul class="post-categories"> 
             {%- for categ in post.categories -%}
-              <a class="post-link" href="{{ categ | downcase | relative_url }}"> <li>{{ categ }}</li> </a>
+              <a class="post-link" href="/categories/{{ categ | downcase }}"> <li>{{ categ }}</li> </a>
             {%- endfor -%}
           </ul>
           <div class="post-date">

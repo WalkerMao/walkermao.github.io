@@ -6,7 +6,12 @@
   <body>
     <main class="container">
       <section class="about">
-        <a href="/"><img src="{{ "/assets/portfolio.png" | relative_url }}" alt="{{ site.plainwhite.name }}"></a>
+        <a href="/" style="text-decoration: none;"> 
+          <h3 style="color:darkgray; font-weight:bold"> 
+            <img style="width:16px;height:16x;" src="{{ "/assets/home.ico" | relative_url }}"> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="{{ "/assets/portfolio.png" | relative_url }}" alt="{{ site.plainwhite.name }}"></a>
         <h2 id="title">
           <a href="/">{{ site.plainwhite.name }}</a>
         </h2>
@@ -35,20 +40,17 @@
           {%- endif -%}
         </ul>
 
-        {%- if site.plainwhite.navigation -%}
-          <nav class="navigation">
-            <ul>
-              {% for link in site.plainwhite.navigation %}
-                <li>
-                  <a href="{{ link.url }}">{{ link.title }}</a>
-                </li>
+        {%- if site.plainwhite.post-categories -%}
+          <h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              {% for link in site.plainwhite.post-categories %}
+                  <a class="post-link" href="/{{ link.url }}"> <li style="padding: 4px 8px;"> {{ link.categ }} </li> </a>
               {% endfor %}
             </ul>
-          </nav>
         {%- endif -%}
 
-        <p>&copy;
-          {{ "now" | date: "%Y" }}</p>
+        <p>&copy; {{ "now" | date: "%Y" }} </p>
+
       </section>
       <section class="content">
         {{ content }}
@@ -66,13 +68,3 @@
     {%- endif -%}
   </body>
 </html>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    processEscapes: true
-  }
-});
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
