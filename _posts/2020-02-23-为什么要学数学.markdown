@@ -2,8 +2,8 @@
 layout: post
 title:  "为什么要学数学"
 date: 2020-02-23
-categories: 杂想
-published: false
+categories: 杂
+published: true
 comments: true
 ---
 

@@ -272,7 +272,7 @@ td{
 .pagination {
   display: block;
   font-size: 18px;
-  word-spacing: 1px;
+  word-spacing: 0px;
   margin-bottom: 60px;
   overflow: visible;
   font-family: Arial;
@@ -282,10 +282,10 @@ td{
   a {
     text-decoration: none; 
     color: #606060;
-    padding: 6px 12px;
+    padding: 5px 11px;
     }
   span {
-    padding: 6px 12px;
+    padding: 5px 11px;
     }
 }
 

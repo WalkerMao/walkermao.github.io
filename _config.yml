@@ -34,10 +34,8 @@ plainwhite:
       url: "categories/nlp"
     - categ: "stat"
       url: "categories/stat"
-    - categ: "杂记"
-      url: "categories/杂记"
-    - categ: "杂想"
-      url: "categories/杂想"
+    - categ: "杂"
+      url: "categories/杂"
 
 
   # generate social links in footer
