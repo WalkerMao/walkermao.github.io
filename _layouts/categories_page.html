@@ -3,10 +3,8 @@ layout: default
 ---
 
 {%- if site.posts.size > 0 -%}
-  <ul class="posts">
-    <li>
-      <h1 id="posts-label">Category: {{ page.categories }}</h1>
-    </li>
+  <ul class="posts" id="viewpoint">
+    <h1 id="posts-label">Category: {{ page.categories }}</h1>
     {%- for post in site.posts -%}
       {%- if post.categories contains page.categories -%}
         <li>
@@ -34,5 +32,6 @@ layout: default
       {%- endif -%}
     {%- endfor -%}
   </ul>
-
 {%- endif -%}
+
+<script src="{{ base.url | prepend: site.url }}/assets/js/scrollIntoView.js"></script>
