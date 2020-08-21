@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script>
     {%- include head.html -%}
   </head>
   <body>
     <main class="container">
       <section class="about">
-        <a href="/" style="text-decoration: none;"> 
-          <h3 style="color:darkgray; font-weight:bold"> 
-            <img style="width:16px;height:16x;" src="{{ "/assets/home.ico" | relative_url }}"> HOME 
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
           </h3> 
         </a>
         <a href="/"> <img src="{{ "/assets/portfolio.png" | relative_url }}" alt="{{ site.plainwhite.name }}"></a>
         <h2 id="title"> {{ site.plainwhite.name }} </h2>
         <p style="font-size:90%" class="tagline">{{ site.plainwhite.tagline }}</p>
+        
         <ul class="social">
           {%- if site.plainwhite.social_links.github -%}
             <a href="https://github.com/{{ site.plainwhite.social_links.github }}">
               <li>
-                <i class="icon-github-circled"></i>
+                <i class="fab fa-github"></i>
               </li>
             </a>
           {%- endif -%}
+
           {%- if site.plainwhite.social_links.linkedIn -%}
             <a href="https://www.linkedin.com/{{ site.plainwhite.social_links.linkedIn }}">
               <li>
-                <i class="icon-linkedin-squared"></i>
+                <i class="fab fa-linkedin"></i>
               </li>
             </a>
           {%- endif -%}
+          
+          {%- if site.plainwhite.social_links.linkedIn -%}
+            <a href="{{ site.plainwhite.social_links.wechat }}">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a>
+          {%- endif -%}
+
           {%- if site.plainwhite.social_links.twitter -%}
             <a href="https://twitter.com/{{ site.plainwhite.social_links.twitter }}">
               <li>
-                <i class="icon-twitter-squared"></i>
+                <i class="fab fa-twitter-square"></i>
               </li>
             </a>
           {%- endif -%}

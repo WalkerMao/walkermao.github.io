@@ -40,9 +40,10 @@ plainwhite:
 
   # generate social links in footer
   social_links:
-    github: WalkerMao/
-    linkedIn: in/weikai-mao-000249124/
-    # twitter: thelehhman
+    github: WalkerMao
+    linkedIn: in/weikai-mao-000249124
+    wechat: /wechat-qr-code.html
+    # twitter: ttqrzt7szod3l87
     # rss: rss
     # dribbble: jekyll
     # facebook: jekyll
