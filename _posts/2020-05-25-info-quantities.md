@@ -2,7 +2,7 @@
 layout: post
 title: "Quantities of Information"
 date: 2020-05-31
-categories: stat
+categories: cs stat
 published: true
 comments: true
 ---

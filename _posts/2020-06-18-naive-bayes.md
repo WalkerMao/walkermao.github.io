@@ -2,7 +2,7 @@
 layout: post
 title: "Naive Bayes Classifiers"
 date: 2020-06-18
-categories: nlp
+categories: stat nlp
 published: true
 comments: true
 ---
