@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "微信二维码 Wechat QR Code"
+title:  "微信二维码 WeChat QR Code"
 date: 2020-02-22
 categories: 
 published: true
