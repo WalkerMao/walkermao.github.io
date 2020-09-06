@@ -149,6 +149,8 @@ A key advantage of the recursive binary tree is its interpretability.
 
 One major problem with trees is their high variance, which makes interpretation somewhat precarious. The major reason for this instability is the hierarchical nature of the process: the effect of an error in the top split is propagated down to all of the splits below it. Bagging averages many trees to reduce the variance. 
 
+Trees or tree ensemble methods are not suitable for high dimensional sparse data. ([Explanation](https://zhuanlan.zhihu.com/p/88234363) in Chinese) 
+
 Some aspects of decision tree learning:
 
 - Multi-way splits?
