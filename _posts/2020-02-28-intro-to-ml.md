@@ -2,7 +2,7 @@
 layout: post
 title:  "Intro to Statistical Learning"
 date: 2020-02-28
-categories: ml
+categories: ml stat
 comments: true
 ---
 
