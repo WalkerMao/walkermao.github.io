@@ -207,7 +207,37 @@ Quick sort is usually faster than most other $O(n\log_2n)$ comparison based algo
 
 [Comparison between merge sort and quick sort](https://www.geeksforgeeks.org/quick-sort-vs-merge-sort/)
 
-#### Quick Sort on Linked List
+#### In-place Quick Sort on Array in Python
+
+```python
+def quicksort(arr: list) -> list:
+    """in-place quicksort function"""
+    
+    def partition(arr: list, start: int, end: int) -> int:
+        """returns the partition index"""
+        j = start
+        for i in range(start, end):
+            # use arr[end] as pivot
+            if arr[i] < arr[end]:
+                # swap to make the elements in arr[:j] be smaller than pivot
+                arr[j], arr[i] = arr[i], arr[j]
+                j += 1
+        arr[j], arr[end] = arr[end], arr[j]
+        # now the elements in arr[:j] are smaller than arr[j],
+        # and the elements in arr[j+1:] are larger than arr[j]
+        return j
+
+    def helper(arr: list, start: int, end: int) -> None:
+        """recursive helper"""
+        if start >= end: return None
+        j = partition(arr, start, end) # partition index
+        helper(arr, start, j-1) # sort the left part arr[:j]
+        helper(arr, j+1, end) # sort the right part arr[j+1:]
+    
+    helper(arr, 0, len(arr)-1)
+```
+
+#### In-place Quick Sort on Linked List in Python
 
 ```python
 # Definition for singly-linked list.
