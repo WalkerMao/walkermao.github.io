@@ -45,7 +45,7 @@ Accuracy is not the metric to use when working with an imbalanced dataset, as we
 
 #### F1 Score
 
-The F1 score is the harmonic mean of the precision and recall (sensitivity), where an F1 score reaches its best value at $1$ (perfect precision and recall). It is defined as 
+The **F1 score** is the harmonic mean of the precision and recall (sensitivity), where an F1 score reaches its best value at $1$ (perfect precision and recall). It is defined as 
 
 $$
 F_1 := \frac{2}{\frac{1}{\text{Recall}} + \frac{1}{\text{Precision}}} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{TP}{TP + \frac{1}{2}(FP+FN)}.
@@ -53,7 +53,7 @@ $$
 
 #### Cohen's kappa Coefficient
 
-Cohen's kappa coefficient measures the agreement between two raters. In classification problem, these two raters are true labels and predictions, and the Cohen's kappa coefficient represents the classification accuracy normalized by the imbalance of the classes in the data. It basically tells you how much better your classifier is performing over the performance of a classifier that simply guesses at random according to the frequency of each class.
+**Cohen's kappa coefficient** measures the agreement between two raters. In classification problem, these two raters are true labels and predictions, and the Cohen's kappa coefficient represents the classification accuracy normalized by the imbalance of the classes in the data. It basically tells you how much better your classifier is performing over the performance of a classifier that simply guesses at random according to the frequency of each class.
 
 The probability of observed agreement is 
 
@@ -83,7 +83,7 @@ The plot below is an ROC curve labeled with different probability cutoffs (or th
 
 <div style="text-align: center"> <img src="/pictures/ROC-with-different-cutoffs.png" alt="ROC-with-different-cutoffs" style="zoom:40%;" />  </div>
 
-Several techniques exist for determining a new cutoff. First, if there is a particular target that must be met for the sensitivity or specificity, this point can be found on the ROC curve and the corresponding cutoff can be determined. Another approach for determining a cutoff is to find the point on the ROC curve that is closest (i.e. the shortest distance) to the upper left corner of the plot. Another approach is to find the cutoff associated with the largest value of the Youden's $J$ index. The index is defined as
+Several techniques exist for determining a new cutoff. First, if there is a particular target that must be met for the sensitivity or specificity, this point can be found on the ROC curve and the corresponding cutoff can be determined. Another approach for determining a cutoff is to find the point on the ROC curve that is closest (i.e. the shortest distance) to the upper left corner of the plot. Another approach is to find the cutoff associated with the largest value of the **Youden's $J$ index**. The index is defined as
 
 $$
 J := \text{Sensitivity} + \text{Specificity} - 1.
@@ -105,7 +105,7 @@ However, the new class probabilities did not change the rankings of the customer
 
 Many of the predictive models for classification have the ability to use case weights where each individual data point can be given more emphasis in the model training phase. For example, AdaBoost creates a sequence of weak learners, each of which apply different case weights at each iteration. 
 
-One approach to rebalancing the training set would be to **increase the weights for the samples in the minority classes**.
+One approach to rebalancing the training set would be to **increase the weights for the samples in minority classes**.
 
 Denote $r_i$ as the instance weight for the $i$-th instance, the total weighted average loss is then calculated as 
 
@@ -121,7 +121,7 @@ Here we introduce two general sampling approaches: **down-sampling** and **up-sa
 
 The most basic down-sampling approach is to randomly sample the majority classes so that all classes have approximately the same size. Similarity, the most basic up-sampling approach is to sample the cases from the minority classes with replacement until each class has approximately the same number. 
 
-The **synthetic minority over-sampling technique** (**SMOTE**), described by Chawla et al. (2002), is a data sampling procedure that uses both up-sampling and down-sampling, depending on the class, and has three operational parameters: the amount of up-sampling, the amount of down-sampling, and the number of neighbors that are used to impute new cases. To up-sample for the minority class, SMOTE synthesizes new cases. To do this, a data point is randomly selected from the minority class and its $K$ (say $5$) nearest neighbors are determined. The new synthetic data point is a combination of the predictors (features) of the randomly selected data point and its neighbors. The SMOTE algorithm down-sample case from the majority class via random sampling in order to help balance the training set. 
+The **synthetic minority over-sampling technique** (**SMOTE**), described by Chawla et al. (2002), is a data sampling procedure that uses both up-sampling and down-sampling, depending on the class, and has three operational parameters: the amount of up-sampling, the amount of down-sampling, and the number of neighbors that are used to impute new cases. To up-sample for the minority class, SMOTE synthesizes new cases. To do this, a data point is randomly selected from the minority class and its $K$ (say $5$) **nearest neighbors** are determined. The new synthetic data point is a combination of the predictors (features) of the randomly selected data point and its neighbors. The SMOTE algorithm down-sample case from the majority class via random sampling in order to help balance the training set. 
 
 Note that when using modified versions of the training set, resampled estimates of model performance can become biased. 
 
