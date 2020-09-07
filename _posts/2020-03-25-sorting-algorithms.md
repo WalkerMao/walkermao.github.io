@@ -210,23 +210,45 @@ Quick sort is usually faster than most other $O(n\log_2n)$ comparison based algo
 #### In-place Quick Sort on Array in Python
 
 ```python
+def partition(arr: list, start: int, end: int) -> int:
+    """returns the partition index"""
+    j = start
+    for i in range(start, end):
+        # use arr[end] as pivot
+        if arr[i] < arr[end]:
+            # swap to make the elements in arr[:j] be smaller than pivot
+            arr[j], arr[i] = arr[i], arr[j]
+            j += 1
+    arr[j], arr[end] = arr[end], arr[j]
+    # now the elements in arr[:j] are smaller than arr[j],
+    # and the elements in arr[j+1:] are larger than arr[j]
+    return j
+
+# another partition method
+def partition(arr: list, start: int, end: int) -> int:
+    """returns the partition index"""
+    i, j = start, end # left index i, and right index j
+    # use arr[end] as pivot
+    while i < j:
+        # find i that makes arr[i] >= pivot
+        while i < j and arr[i] < arr[end]:
+            i += 1
+        # find j that makes arr[j] < pivot
+        while i < j and arr[j] >= arr[end]:
+            j -= 1
+        # swap left large element arr[i] and right small element arr[j]
+        arr[i], arr[j] = arr[j], arr[i]
+    # now i == j, swap pivot and arr[j]
+    arr[end], arr[j] = arr[j], arr[end]
+    # now the elements in arr[:j] are < arr[j],
+    # and the elements in arr[j+1:] are >= arr[j]
+    return j
+```
+
+```python
 def quicksort(arr: list) -> list:
     """in-place quicksort function"""
     
-    def partition(arr: list, start: int, end: int) -> int:
-        """returns the partition index"""
-        j = start
-        for i in range(start, end):
-            # use arr[end] as pivot
-            if arr[i] < arr[end]:
-                # swap to make the elements in arr[:j] be smaller than pivot
-                arr[j], arr[i] = arr[i], arr[j]
-                j += 1
-        arr[j], arr[end] = arr[end], arr[j]
-        # now the elements in arr[:j] are smaller than arr[j],
-        # and the elements in arr[j+1:] are larger than arr[j]
-        return j
-
     def helper(arr: list, start: int, end: int) -> None:
         """recursive helper"""
         if start >= end: return None
