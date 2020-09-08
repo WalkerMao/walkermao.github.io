@@ -9,7 +9,7 @@ comments: true
 
 ## Naive Bayes
 
-Naive Bayes is a probabilistic classifier, meaning that for a document $d$, out of all classes $ c \in C$ the classifier returns the class $\hat{c}$ which has the maximum posterior probability given the document. 
+Naive Bayes is a probabilistic classifier, meaning that for a document $d$, out of all classes $ c \in C$ the classifier returns the class $\hat{c}$ which has the **maximum posterior probability** given the document. 
 
 $$
 \hat{c}(d) = \underset{c \in C}{\operatorname{argmax}} P(c \mid d) = \underset{c \in C}{\operatorname{argmax}} \frac{P(d \mid c)P(c)}{P(d)} = \underset{c \in C}{\operatorname{argmax}} P(d \mid c)P(c),
@@ -36,7 +36,7 @@ $$
 The calculations are usually done in log space, to avoid underflow and increase speed. Thus the previous equation can be expressed as 
 
 $$
-\hat{c}_{NB}(d) = \underset{c \in C}{\operatorname{argmax}} \log P(c) + \sum_{ w \in d} \log P(w \mid c).
+\hat{c}_{NB}(d) = \underset{c \in C}{\operatorname{argmax}} \left[\log P(c) + \sum_{ w \in d} \log P(w \mid c)\right].
 $$
 
 By considering features in log space, naive Bayes classifier computes the predicted class as a linear function of input features. Classifiers that use a linear combination of the input features to make a classification decision (like naive Bayes and also logistic regression) are called **linear classifiers**.

@@ -315,7 +315,7 @@ Suppose the elements are in range from $1$ to $k$, thus there are $k$ keys.
 
 ```python
 # Python code for counting sort.
-def CountingSort(input: list, k: int) -> list:
+def countingSort(input: list, k: int) -> list:
     count = k * [0]
     for x in input:
         count[key(x)] += 1

@@ -137,7 +137,7 @@ Either in the average or worst case, the time complexity of search, insertion an
 
 ### Compared with Other Self-Balancing Search Trees
 
-When the data is too huge to fit in main memory and the data is read from disk, the total disk accesses in a B-tree are reduced significantly since height of the B-tree is low. 
+When the data is too huge to fit in main memory and the data is read from disk, the total disk accesses in a B-tree are reduced significantly since the height of the B-tree is low. 
 
 In most of the other self-balancing search trees (like AVL and red-black trees), it is assumed that everything is in main memory. To understand the use of B-Trees, we must think of the huge amount of data that cannot fit in main memory. When the number of keys is high, the data is read from disk in the form of blocks. Disk access time is very high compared to the main memory access time. 
 

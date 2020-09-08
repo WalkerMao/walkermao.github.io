@@ -41,7 +41,7 @@ $$
 E[f(X)] ≥ f(EX).
 $$
 
-Moreover, if $f$ is strictly convex, then $E[f(X)] = f(EX)$ holds true if and only if $X = E[X]$ with probability $1$ (i.e., if $X$ is a constant).
+Moreover, if $f$ is strictly convex, then $E[f(X)] = f(EX)$ holds true if and only if $X = E(X)$ with probability $1$ (i.e., if $X$ is a constant).
 
 Note that $f$ is (strictly) concave when $-f$ is (strictly) convex, thus we have $$E[-f(X)] ≥ -f(EX) \implies E[f(X)] \leq f(EX)$$ for concave functions $f$. 
 
@@ -53,7 +53,7 @@ Here, $f$ is a convex function shown by the solid line. Also, $X$ is a random va
 
 ### Derivation of EM Algorithm
 
-The expectation-maximization (EM) algorithm is a very general iterative algorithm for parameter estimation (model fitting) by maximum likelihood, when some of data (random variables) involved are not observed, i.e. missing or incomplete. These unobservable variables are usually called as latent variables.
+The expectation-maximization (EM) algorithm is a very general iterative algorithm for parameter estimation (model fitting) by maximum likelihood, when some of data (random variables) involved are not observed, i.e. missing or incomplete. These unobservable variables are usually called as **latent variables**.
 
 Suppose there are latent variables $z_i$'s ($z_i$ can be a scalar or vector). For each $i$, let $q_i(\cdot)$ be the probability distribution function of the random variable $z_i$. Denote $$X:= (x_1, \cdots, x_n)^T, Z := (z_1, \cdots, z_n)^T$$, where $X$ is observable data and $Z$ is unobservable (hidden, missing) data. 
 
@@ -153,7 +153,7 @@ Q(\theta;\theta^{(t)}) &= \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) 
 
 ## Gaussian Mixture Model
 
-The mixture models can be used for clustering problems. We assume observations in the same cluster follow the same distribution, while observations in different clusters follow different distributions. For gaussian mixture model, we assume the observations follow the gaussian distributions. 
+The mixture models can be used for clustering problems. We assume observations in the same cluster follow the same distribution, while observations in different clusters follow different distributions. For Gaussian mixture model, we assume the observations follow the Gaussian distributions. 
 
 These assumptions can be written as $$x_i \mid z_{ik}=1 \sim N(\mu_k, \Sigma_k)$$ for every $$i$$, where $$z_{ik} = 1$$ if $$x_i$$ is from $k$-th cluster and $$z_{ik} = 0$$ otherwise. Here, $$z_i\text{'s} \overset{\text{i.i.d.}}{\sim} \text{Multinoulli}(\pi)$$, where $$\mathbf{\pi} = (\pi_1, \cdots, \pi_K)^T \in \mathbb{R}^K$$ and $$\sum_{k=1}^K \pi_k = 1$$. Note that $z_i$'s are latent random variables, which are hidden and unobservable. 
 

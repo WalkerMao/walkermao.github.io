@@ -85,7 +85,7 @@ An example of a wrapper method is the **recursive feature elimination** algorith
 
 Forward selection methods sequentially add into the model the feature that most improves the model performance. It is a greedy algorithm, producing $p$ models, then we can select a single best model from among using cross-validated prediction error, $C_p$, AIC or BIC etc. 
 
-Advantages: computationally efficient; can be used even when $p>n$. 
+Advantages: computationally efficient; can be used even when $p>n$ for models like linear regression. 
 
 Disadvantages: errors made at the beginning cannot be corrected later. 
 
@@ -95,7 +95,7 @@ Backward selection starts with the full model, and sequentially deletes the feat
 
 Advantages: can throw out the "right" feature by looking at the full model. 
 
-Disadvantages: computationally inefficient (start with the full model); cannot work if $p>n$.
+Disadvantages: computationally inefficient (start with the full model); cannot work if $p>n$ for models like linear regression.
 
 ### Forward vs. Backward Selection
 

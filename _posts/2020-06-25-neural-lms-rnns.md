@@ -17,7 +17,7 @@ However, neural net language models are strikingly slower to train than traditio
 
 ### Embeddings
 
-In neural language models, the prior context is represented by embeddings of the previous words. Representing the prior context as embeddings, rather than by exact words as used in n-gram language models, allows neural language models to generalize to unseen data much better than n-gram language models. 
+In neural language models, the prior context is represented by embeddings of the previous words. Representing the prior context as embeddings, rather than by exact words as used in n-gram language models, allows neural language models to **generalize to unseen data** much better than n-gram language models. 
 
 For example, suppose we've seen this sentence in training: "I have to make sure when I get home to feed the cat", but we’ve never seen the word "dog" after the words "feed the". In our test set we are trying to predict what comes after the prefix "I forgot when I got home to feed the". An n-gram LM will predict "cat", but not "dog". But a neural LM, which can make use of the fact that "cat" and "dog" have similar embeddings, will be able to assign a reasonably high probability to "dog" as well as "cat". 
 
@@ -93,6 +93,7 @@ As with other neural networks, we use a training set, a loss function, and backp
 Given an input sequence $x=(x_1,x_3,\cdots,x_N)$, the total loss (error) $L$ of an RNN is the sum of the loss at each time-step: $$L = \sum_{t=1}^N L_t = \sum_{t=1}^N \text{Loss}(\hat{y}_t, y_t)$$. 
 
 Then the gradient of $W$ is
+
 $$
 \frac{\partial L}{\partial W} = \frac{\partial \sum_{t=1}^N L_t}{\partial W} = \sum_{t=1}^N \frac{\partial L_t}{\partial W}.
 $$
@@ -115,7 +116,7 @@ $$
 \frac{\partial L}{\partial W} = \sum_{t=1}^N \sum_{s=1}^t \frac{\partial L_t}{\partial y_t} \frac{\partial y_t}{\partial h_t} \left( \prod_{r={s+1}}^{t} \frac{\partial h_r}{\partial h_{r-1}} \right) \frac{\partial h_s}{\partial W}.
 $$
 
-The product form of these derivatives may lead to **gradient explosion** or **gradient vanishing** problem. Due to vanishing gradients, we don't know whether there is no dependency between different time steps in the data, or we just cannot capture the true dependency due to this issue. 
+The product form of these derivatives may lead to **gradient explosion** or **gradient vanishing** problem. Due to vanishing gradients, we don't know whether there is dependency between different time steps in the data, or we just cannot capture the true dependency due to this issue. 
 
 To solve the problem of exploding gradients, Thomas Mikolov first introduced a simple heuristic solution that clips gradients to a small number whenever they reach a certain threshold, as shown below:
 
