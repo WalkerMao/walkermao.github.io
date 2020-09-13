@@ -1,56 +1,14 @@
 ---
 layout: post
-title:  "Intro to Statistical Learning"
+title:  "Intro to Machine Learning (Part 2)"
 date: 2020-02-28
 categories: ml stat
 comments: true
 ---
 
-## 1. Basic Assumption
+## 6. Evaluating Model Performance 
 
-We assume that there is some relationship between $Y$ and $X$ which can be written as $Y = f(X) + \epsilon$. Here $f$ is some fixed but unknown function and $\epsilon$ is a random error term, which is independent of $X$ and has mean zero. 
-
-## 2. Why Estimate $f$ ?
-
-There are two main reasons: prediction and inference.
-
-### 2.1 Prediction
-
-The prediction $\hat{Y} = \hat{f}(X).$ The goal of prediction is to learn a function $f$ such that $f(X)$ is closed to $Y$.
-
-The accuracy of $\hat{Y}$ as a prediction for $Y$ depends on two quantities, which we will call the reducible error (introduced by $$X$$) and the irreducible error (introduced by $\epsilon$). $Y$ is a function of $X$ and $\epsilon$. Consider the expectation of the squared loss:
-
-$$
-E(Y-\hat{Y})^2 = E[f(X)+\epsilon-\hat{f}(X)]^2 = E[f(X)-\hat{f}(X)]^2 + \text{Var} (\epsilon).
-$$
-
-The first item (expectation) is reducible and the second (variance) is irreducible.                     
-
-### 2.2 Inference
-
-For inference, we want to understand the relationship between $X$ and $Y$, or more specifically, to understand how $Y$ changes as a function of $X_1 , . . . , X_p$. Now $\hat{f}$ cannot be treated as a black box, because we need to know its exact form. 
-
-## 3. How Do We Estimate $f$ ?
-
-### 3.1 Parametric Methods
-
-Parametric methods involve a two-step model-based approach.
-
-1. Select model. We make an assumption about the functional form, or shape of $f$. For example, linear model. 
-
-2. Fit or train the model. 
-
-Advantages compared to non-parametric methods: need less observations, harder to over-fit, more interpretable, easier to do inference.
-
-### 3.2 Non-parametric Methods
-
-Non-parametric methods do not make explicit assumptions about the functional form of $f$. Instead they seek an estimate of $f$ that gets as close to the data points as possible without being too rough or wiggly. 
-
-Advantage compared to parametric methods: flexible. By avoiding the assumption of a particular functional form for $f$, they have the potential to accurately fit a wider range of possible shapes for $f$ compared to parametric method. 
-
-## 4. Evaluating Model Accuracy 
-
-### 4.1 For Regression
+### 6.1 For Regression
 
 Mean absolute error (MAE): $$ \frac{1}{n} \Vert Y - \hat{Y} \Vert_1 = \frac{1}{n} \sum_{i=1}^{n} \vert y_i - \hat{y}_i \vert $$.
 
@@ -60,13 +18,13 @@ Root MSE: $$ \sqrt{\frac{1}{n} \| Y - \hat{Y} \| _2^2 }= \sqrt{\frac{1}{n} \sum_
 
 MSE is the most commonly used metric. MAE is more robust and less sensitive to outliers or influential points. However, MAE is not differentiable at the point $y_i-\hat{y}_i = 0$, which is not amenable to numerical optimization. 
 
-### 4.2 For Classification
+### 6.2 For Classification
 
-#### 4.3.1 Loss Functions
+#### 6.2.1 Loss Functions for Classification
 
 For $K$ classification problem,
 
-Misclassification error:  $$ \text{Loss}(y_i,\hat{y}_i) = \frac{1}{2} \sum_{k=1}^{K} I(y_{ik} \neq  \hat{y}_{ik} ) $$.
+Misclassification error:  $$ \text{Loss}(y_i,\hat{y}_i) = \frac{1}{2} \sum_{k=1}^{K} \mathbf{1}(y_{ik} \neq  \hat{y}_{ik} ) $$.
 
 Cross entropy loss: $$ \text{Loss}(y_i,\hat{p}_i) = \sum_{k=1}^K -y_{ik} \log \hat{p}_{ik} $$.
 
@@ -76,7 +34,7 @@ Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n
 
 Cross-entropy is differentiable, and hence more amenable to numerical optimization. 
 
-#### 4.3.2 Metrics
+#### 6.2.2 Metrics for Classification
 
 If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$\hat{y}_i = \text{sign}(\hat{p}_i > \text{threshold})$$. We can change the threshold from $$1$$ to $$0$$ and plot the TPR (true positive rate, or sensitivity, or recall) v.s. FPR (false positive rate, or $$1-$$ specificity). When the threshold is $$1$$, all cases are classified as negative, and $$\text{TPR} = \text{FPR} = 0$$. When the threshold is $$0$$, all cases are classified as positive, and $$\text{TPR} = \text{FPR} = 1$$.  
 
@@ -114,15 +72,17 @@ plt.show()
 
 <img src="/pictures/ROC1.png" alt="ROC curve for all p_hat = 0" style="zoom:100%;" /> <img src="/pictures/ROC2.png" alt="img" style="zoom:100%;" />
 
-## 5. Regularization
+There are more metrics like F1 score and Cohen’s kappa coefficient, etc.. 
 
-### 5.1 Overfitting
+## 7. Regularization
+
+### 7.1 Overfitting
 
 If a model learned too much noise in the training data, it tends to be overfitting, and the training error is much lower than the test error. Overfitting often happens for flexible models. An overfitted model has low bias but high variance. Regularization discourages learning a more complex or flexible model, so as to reduce overfitting. 
 
-<img src="/pictures/overfitting.png" style="width:70%;height:70%;" alt="Overfitting">
+<img src="/pictures/overfitting.png" style="width:90%;height:90%;" alt="Overfitting">
 
-### 5.2 L1 and L2 Norm
+### 7.2 L1 and L2 Regularization
 
 L1-norm regularization: $\text{Loss} + \lambda \Vert w \Vert_1$.
 
@@ -138,40 +98,9 @@ L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it
 
 L2-norm encouraging the model to use all of its inputs a little rather than some of its inputs a lot. It is differentiable so it has an analytical solution and can be calculated efficiently when training model. Notice that during gradient descent parameters update, using the L2-norm regularization ultimately means that the parameter is decayed linearly: `W -= lambda * W` towards zero. 
 
-## 6. Trade-off 
+## 8. Optimization
 
-### 6.1 Flexibility-Interpretability Trade-off
-
-The flexible models are usually more accurate and less interpretable. For example, linear regression is interpretable but not flexible, and neural network is the opposite. 
-
-[high Interpretability, low Flexibility] Subset Selection (e.g. LASSO), Least Squares, Generalized Additive Models (GAM) (e.g. Trees), Bagging or Boosting, SVM. [low Interpretability, high Flexibility] 
-
-Note: SVM with non-linear kernels is non-linear methods.
-
-### 6.2 Bias-Variance Trade-off
-
-For regression, assume $Y = f+\epsilon,E(\epsilon) = 0$, and $\epsilon$ is independent with $f$ and $\hat{f}$, then we have 
-
-$$\begin{align*}
-E[(Y-\hat{f})^2] &= E[(f-\hat{f}+\epsilon)^2] \\
-&= E[(f-\hat{f})^2] + E(\epsilon^2) + 2E(f-\hat{f})E(\epsilon) \\ 
-&= E(\hat{f}^2) + f^2 - 2fE(\hat{f}) + \text{Var}(\epsilon) + 0\\ 
-&= \big[ E(\hat{f}^2) - E^2(\hat{f}) \big] + \big[ E^2(\hat{f}) + f^2 - 2fE(\hat{f}) \big] + \text{Var}(\epsilon) \\
-&= \text{Var}(\hat{f}) + [E(\hat{f})-f]^2 + \text{Var}(\epsilon) \\
-&= \text{Var}(\hat{f}) + \text{Bias}^2(\hat{f}) + \text{Var}(\epsilon).
-\end{align*}$$
-
-**More flexible methods leads to higher variance and lower bias.**
-
-Variance $\text{Var}(\hat{f})$ refers to the amount by which $ \hat{f} $ would change if it is by a different training data set. In general, more flexible statistical methods have higher variance.
-
-Bias $\text{Bias}(\hat{f})$ refers to the error that is introduced by approximating a real-life problem. For example, linear regression assumes that there is a linear relationship between $Y$ and $X$. It is unlikely that any real-life problem truly has such a simple linear relationship, and so performing linear regression will undoubtedly result in some bias in the estimate of $f$. Generally, more flexible methods result in less bias.
-
-Note: It is possible to have a model that has lower variance and lower bias simultaneously. For example, boosting method can reduce both variance and bias. 
-
-## 7. Optimization
-
-The objective function
+Assume we have the objective function
 
 $$
 \text{Obj}(Y, X, \theta) = \frac{1}{n} \sum_{i=1}^n L \big( y_i, f(x_i; \theta) \big) + \Omega \big( f(\cdot;\theta) \big),
@@ -183,7 +112,7 @@ Our objective is to minimize the objective function with respect to $\theta$: $\
 
 In the following two sections, I interpret the gradient descent and Newton's method as iteratively minimizing the local Taylor approximation to the objective function.
 
-### 7.1 Gradient Descent
+### 8.1 Gradient Descent
 
 We perform $\theta^{(t)} = \theta^{(t-1)} + \Delta\theta^{(t)}$ iteratively until the objective function converges. Denote $\Delta \theta = \alpha \mathbf{u}$, where $\alpha$ is a non-negative scalar (length of $\Delta\theta$) and $\mathbf{u}$ is a unit vector (direction of $\Delta\theta$).  
 
@@ -205,7 +134,7 @@ $$
 
 where $$\eta^{(t)} = \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|}$$ is called the step size or learning rate. 
 
-### 7.2 Newton's Method
+### 8.2 Newton's Method
 
 We use the Taylor polynomial of degree two to decompose the objective function, 
 
@@ -241,10 +170,14 @@ where $\eta^{(t)}$ is the step size or learning rate.
 
 Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
 
-### 7.3 Proximal Gradient Descent
+### 8.3 Proximal Gradient Descent
 
 If the objective function is not differentiable everywhere (e.g. L1 norm), we can use the proximal gradient descent. 
 
 ---
 
-Reference: James, Gareth, et al. "Statistical Learning." *An introduction to statistical learning*. Vol. 112. New York: springer, 2013.
+**References**: 
+
+James, Gareth, et al. "Statistical Learning." *An introduction to statistical learning*. Vol. 112. New York: springer, 2013.
+
+Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. *The elements of statistical learning*. Vol. 1. No. 10. New York: Springer series in statistics, 2001.
