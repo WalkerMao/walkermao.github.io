@@ -26,6 +26,8 @@ We use three main types of layers to build CNN architectures: **Convolutional La
 
 The convolutional layer is the core building block of a CNN that does most of the computational heavy lifting. 
 
+Convolution in CNN is similar to discrete convolution computation, but a bit different (180 degrees rotation). Read this [post](https://colah.github.io/posts/2014-07-Understanding-Convolutions/) to understand convolutions and this [answer](https://www.zhihu.com/question/52237725/answer/545340892) in Zhihu to understand the difference. 
+
 #### Local Connectivity
 
 We connect each neuron in the convolutional layer (blue) to only a local region of the input volume (red). The spatial extent of this connectivity is a hyperparameter called the **receptive field** of the neuron (equivalently this is the filter size). 
