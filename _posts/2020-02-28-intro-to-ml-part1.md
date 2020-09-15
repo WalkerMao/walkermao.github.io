@@ -52,9 +52,9 @@ Advantage compared to parametric methods: flexible. By avoiding the assumption o
 
 ### 4.1 Regression and Classification
 
-- Regression problem: Target variable is continuous.
+- Regression problem: Target variable $$Y$$ is continuous.
 
-- Classification problem: Target variable is discrete.
+- Classification problem: Target variable $$Y$$ is discrete.
 
 ### 4.2 Supervised, Unsupervised, Semi-supervised, and Reinforcement
 

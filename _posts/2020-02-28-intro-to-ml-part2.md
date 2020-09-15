@@ -110,7 +110,7 @@ where $\theta$ is a vector of dimension $p_\theta \times 1$ that contains the pa
 
 Our objective is to minimize the objective function with respect to $\theta$: $\theta^* = \underset{\theta}{\text{argmin }} \text{Obj}(Y,X,\theta)$.
 
-In the following two sections, I interpret the gradient descent and Newton's method as iteratively minimizing the local Taylor approximation to the objective function.
+In the following two sections, let's introduce the gradient descent and Newton's method as iteratively minimizing the local Taylor approximation to the objective function.
 
 ### 8.1 Gradient Descent
 
@@ -148,13 +148,13 @@ $$
 \mathbf{H} = \text{Obj}''(\theta) = 
 \begin{pmatrix}
   \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1^2} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_{p_{\theta}}} \\
-  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2^2} & \cdots & 0 \\
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2^2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial\theta_{p_{\theta}}} \\
   \vdots  & \vdots  & \ddots & \vdots  \\
   \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial  \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial \theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial \theta_{p_{\theta}}}
  \end{pmatrix}.
 $$
 
-To find the minimum of the objective $\text{Obj}(\theta + \Delta\theta)$, we take its first derivative and equate it with $0$ and solve for $\Delta\theta$,
+To find the minimum of the objective $\text{Obj}(\theta + \Delta\theta)$, we take its first derivative with respect to $\Delta\theta$, then equate it with $0$ and solve for $\Delta\theta$,
 
 $$
 \text{Obj}'(\theta) + \text{Obj}''(\theta) \Delta\theta = 0 \implies \Delta\theta = - [\text{Obj}''(\theta)]^{-1} \text{Obj}'(\theta).

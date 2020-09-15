@@ -32,7 +32,19 @@ We connect each neuron in the convolutional layer (blue) to only a local region 
 
 <img src="http://cs231n.github.io/assets/cnn/cnn.jpeg" alt="CNN" style="zoom:60%; padding-right:100px;" />  <img src="http://cs231n.github.io/assets/cnn/depthcol.jpeg" alt="Convolutional Layer" style="zoom: 50%;" /> 
 
-As shown in the picture above, suppose that the input volume (red) has size $$[32\times 32 \times3]$$, (e.g. an RGB CIFAR-10 image). If the receptive field (or the filter size) is $$[5\times5]$$, then each neuron in the convolutional Layer (blue) will have weights to a $$[5\times5\times3]$$ region in the input volume, for a total of $$5\times5\times3 = 75$$ weights and $$1$$ bias parameter. Each neuron in the convolutional layer is connected only to a local region in the input volume spatially, but to the full depth (i.e. all color channels). Note, there are multiple neurons ($$5$$ in this example) along the depth, all looking at the same region in the input. 
+As shown in the picture above, suppose that the input volume (red) has size $$[32\times 32 \times3]$$, (e.g. an RGB CIFAR-10 image). If the receptive field (or the filter size) is $$[5\times5]$$, then each neuron in the convolutional Layer (blue) will have weights to a $$[5\times5\times3]$$ region in the input volume, for a total of $$5\times5\times3 = 75$$ weights and $$1$$ bias parameter. 
+
+The matrix of weights is called **convolutional filter** or **convolutional kernel**, as shown below.
+
+<div style="text-align: center">
+<figure>
+<img src="/pictures/working-of-a-convolutional-layer.png" alt="working-of-a-convolutional-layer" style="zoom: 60%;" />
+<figcaption style="font-size: 80%;">Figure. Working of a convolutional layer. (<a href="https://arxiv.org/abs/1902.05655">Source</a>)</figcaption>
+</figure>
+</div>
+
+
+Each neuron in the convolutional layer is connected only to a local region in the input volume spatially, but to the full depth (i.e. all color channels). Note, there are multiple neurons ($$5$$ in this example) along the depth, all looking at the same region in the input. 
 
 #### Spatial Arrangement
 
