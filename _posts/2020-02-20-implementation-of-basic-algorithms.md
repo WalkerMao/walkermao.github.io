@@ -260,3 +260,39 @@ def radixSort(self, nums: list) -> int:
     output = [int(num[::-1], 2) for num in nums]
     return output
 ```
+
+## BFS and DFS
+
+### Combinations
+
+```python
+# Example input: [[1, 2], [3, 4, 5], [6]].
+# Example output: [[1, 3, 6], [1, 4, 6], [1, 5, 6], [2, 3, 6], [2, 4, 6], [2, 5, 6]].
+```
+
+```python
+# method1: BFS
+from collections import deque
+def BFS(params):
+    ans = deque([[]])
+    for i, param in enumerate(params):
+        while len(ans[0]) == i:
+            temp = ans.popleft()
+            for p in param:
+                ans.append(temp + [p])
+    return ans
+```
+
+```python
+# method2: DFS
+def DFS(params):
+    ans = list()
+    def helper(path: list):
+        if len(path) == len(params):
+            ans.append(path)
+            return None
+        for p in params[len(path)]:
+            helper(path + [p])
+    helper([])
+    return ans
+```
