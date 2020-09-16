@@ -108,9 +108,11 @@ $$
 
 where $\theta$ is a vector of dimension $p_\theta \times 1$ that contains the parameters of predictive model $f(\cdot)$, $L(\cdot)$ is the loss function, and $\Omega(\cdot)$ is the regularization term. 
 
-Our objective is to minimize the objective function with respect to $\theta$: $\theta^* = \underset{\theta}{\text{argmin }} \text{Obj}(Y,X,\theta)$.
+Our objective is to minimize the objective function with respect to $\theta$: $\theta^* = \underset{\theta}{\text{argmin }} \text{Obj}(Y,X,\theta)$. 
 
-In the following two sections, let's introduce the gradient descent and Newton's method as iteratively minimizing the local Taylor approximation to the objective function.
+Sometimes the objective function is **convex** with respect to $$\theta$$, and also the **exact** solution of $$\theta$$ is available by solving $$\frac{\partial \text{Obj}(Y,X,\theta)}{\partial \theta} = 0$$, like linear regression, then applying **gradient based methods** is not a must. However, in some cases, like the sample size or the number of features is very large, even when these two conditions are satisfied and the unique exact solution is available, it is also worth to use gradient based methods since it is usually computationally cheaper. For example, we can use gradient descent to get the solution of linear regression, when the data matrix $$X$$ is huge and the computation of the exact solution $$\hat{\beta} = (X^TX)^{-1}X^TY$$ is too expensive to afford. 
+
+However, the conditions of convex and exact solution are not satisfied in most cases, and we need to apply gradient based methods to find the minimum of objective function. In the following sections, let's first introduce the gradient descent and Newton's method as iteratively minimizing the local Taylor approximation to the objective function, and then some advanced gradient based methods.
 
 ### 8.1 Gradient Descent
 
