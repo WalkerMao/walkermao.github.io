@@ -176,7 +176,7 @@ Computing the inverse of the Hessian matrix is very expensive, so we can try Qua
 
 If the objective function is not differentiable everywhere (e.g. L1 norm), we can use the proximal gradient descent. 
 
-## 9. Other Notes
+## 9. Data Preprocessing
 
 ### 9.1 Feature Scaling
 
