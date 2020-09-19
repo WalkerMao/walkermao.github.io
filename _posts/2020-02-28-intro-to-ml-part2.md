@@ -194,10 +194,11 @@ Thirdly, feature scaling helps gradient descent converges faster. Suppose the sc
 
 <div style="text-align: center">
 <figure>
-<img src="../pictures/feature-scaling-and-gradient-descent.png" alt="feature-scaling-and-gradient-descent.png" style="zoom: 90%;" />
-<figcaption style="font-size: 80%;"> <a href="https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35">Source</a> </figcaption>
+<img src="../pictures/feature-scaling-and-gradient-descent.png" alt="feature-scaling-and-gradient-descent.png" style="zoom: 60%;" />
+<figcaption style="font-size: 80%;"> <a href="https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35">Figure source</a> </figcaption>
 </figure>
 </div>
+
 We also expect the features are zero-centered, otherwise it could introduce zig-zagging dynamics in the gradient updates for the weights. This is explained in my another [post](https://walkermao.github.io/intro-to-nns.html).
 
 #### 9.1.2 Common Scaling Methods
