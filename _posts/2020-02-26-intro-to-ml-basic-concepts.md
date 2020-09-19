@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Intro to Machine Learning (Part 1)"
-date: 2020-02-28
+title:  "Intro to Machine Learning: Basic Concepts"
+date: 2020-02-26
 categories: ml stat
 comments: true
 ---

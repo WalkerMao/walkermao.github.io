@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Intro to Machine Learning (Part 2)"
+title:  "Intro to Machine Learning: Training Models"
 date: 2020-02-28
 categories: ml stat
 comments: true
@@ -176,46 +176,7 @@ Computing the inverse of the Hessian matrix is very expensive, so we can try Qua
 
 If the objective function is not differentiable everywhere (e.g. L1 norm), we can use the proximal gradient descent. 
 
-## 9. Data Preprocessing
-
-### 9.1 Feature Scaling
-
-Since the range of values of different features varies widely, in some machine learning algorithms, objective functions will not work properly without normalization. Feature scaling makes the values of different features approximately in the same scale.
-
-#### 9.1.1 Why Feature Scaling
-
-There are several reasons why we need feature scaling.
-
-Firstly, many algorithms (such as K-means, KNN) calculate the distance between two points by the Euclidean distance. If one of the features has a broad range of values, the distance will be governed by this particular feature. 
-
-Secondly, L1 or L2 regularization penalize the weights. If a feature has a small scale, the weight corresponding to this feature tends to be large, and the penalization for the weight of this feature will be heavier and that is unfair. 
-
-Thirdly, feature scaling helps gradient descent converges faster. Suppose the scale of feature $$x^{[1]}$$ is large and that of $$x^{[2]}$$ is small, that leads to the range of weight $$w_1$$ is smaller than the range of $$w_2$$. The problem is that these gradients usually share the same learning rate. If the learning rate is large, then $$w_1$$ cannot converge. Otherwise, if the learning rate is small, then $$w_2$$ converges very slow. 
-
-<div style="text-align: center">
-<figure>
-<img src="../pictures/feature-scaling-and-gradient-descent.png" alt="feature-scaling-and-gradient-descent.png" style="zoom: 60%;" />
-<figcaption style="font-size: 80%;"> <a href="https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35">Figure source</a> </figcaption>
-</figure>
-</div>
-
-We also expect the features are zero-centered, otherwise it could introduce zig-zagging dynamics in the gradient updates for the weights. This is explained in my another [post](https://walkermao.github.io/intro-to-nns.html).
-
-#### 9.1.2 Common Scaling Methods
-
-Standardization: 
-
-$$
-x^* = \frac{x-\bar{x}}{\text{std}(x)}.
-$$
-
-Mean normalization: 
-
-$$
-x^* = \frac{x-\bar{x}}{\text{max}(x) - \text{min}(x)}.
-$$
-
----
+<br>
 
 **References**: 
 
