@@ -11,7 +11,9 @@ comments: true
 
 Matrix chain multiplication is an optimization problem that can be solved using dynamic programming. Given a sequence of matrices, the goal is to find the most efficient way to multiply these matrices. There are many options because matrix multiplication is associative. 
 
-Given two matrices $$A$$ with dimension $$a \times b$$ and $$B$$ with dimension $$c \times d$$, then computing the multiplication $$AB$$ needs $$a \times b \times c$$ operations. Given three matrices, say $$A$$ is a $$10 × 30$$ matrix, $$B$$ is a $$30 × 5$$ matrix, and $$C$$ is a $$5 × 60$$ matrix, then we have two ways to computing the multiplication $$ABC$$: 
+Given two matrices $$A$$ with dimension $$a \times b$$ and $$B$$ with dimension $$b \times c$$, then computing the multiplication $$AB$$ needs $$a \times b \times c$$ operations. 
+
+Given three matrices, say $$A$$ is a $$10 × 30$$ matrix, $$B$$ is a $$30 × 5$$ matrix, and $$C$$ is a $$5 × 60$$ matrix, then we have two ways to computing the product $$ABC$$: 
 
 - computing $$(AB)C$$ needs $$(10×30×5) + (10×5×60) = 1500 + 3000 = 4500$$ operations, while
 
