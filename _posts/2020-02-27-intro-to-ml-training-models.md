@@ -131,10 +131,10 @@ We want to find the unit vector $\mathbf{u}$ that minimize $\text{Obj}(\theta + 
 Thus, we have
 
 $$
-\theta^{(t)} = \theta^{(t-1)} - \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|} \text{Obj}'(\theta^{(t-1)}) = \theta^{(t-1)} - \eta^{(t)}\text{Obj}'(\theta^{(t-1)}),
+\theta^{(t)} = \theta^{(t-1)} - \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|} \text{Obj}'(\theta^{(t-1)}) = \theta^{(t-1)} - \eta_{t}\text{Obj}'(\theta^{(t-1)}),
 $$
 
-where $$\eta^{(t)} = \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|}$$ is called the step size or learning rate. 
+where $$\eta_{t} = \frac{\alpha^{(t-1)}}{\| \text{Obj}'(\theta^{(t-1)}) \|}$$ is called the step size or learning rate. 
 
 ### 8.2 Newton's Method
 
@@ -165,12 +165,12 @@ $$
 Thus, we have 
 
 $$
-\theta^{(t)} = \theta^{(t-1)} - \eta^{(t)} \cdot [\text{Obj}''(\theta^{(t-1)})]^{-1} \text{Obj}'(\theta^{(t-1)}),
+\theta^{(t)} = \theta^{(t-1)} - \eta_{t} \cdot [\text{Obj}''(\theta^{(t-1)})]^{-1} \text{Obj}'(\theta^{(t-1)}),
 $$
 
-where $\eta^{(t)}$ is the step size or learning rate.
+where $\eta_{t}$ is the step size or learning rate.
 
-Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
+By using the Taylor polynomial of degree two, Newton's method is more accurate than gradient descent, thus needs less iterations. On the other hand, it is more computationally expensive. Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
 
 ### 8.3 Proximal Gradient Descent
 
