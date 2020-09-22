@@ -29,11 +29,15 @@ $$\begin{align}
 
 Equality iff $$P_X \equiv U_{\mathcal{X}}$$. $$□$$
 
+Note that entropy is different from variance. Variance is the expectation of the squared deviation of a random variable from its mean. Also note that the properties of the entropy of continuous distribution is different from that of discrete distribution.
+
+<div align="center"> <img src="../pictures/variance-and-entropy.png" alt="variance-and-entropy" style="zoom:60%;" /> </div>
+
 ## Principle of Maximum Entropy
 
 Bayesian methods usually need to assume the prior distribution. Naturally we want to avoid inadvertently assuming more knowledge than we actually have, and the **principle of maximum entropy** is the technique for doing this, which states that **the probability distribution which best represents the current state of knowledge is the one with largest entropy**. 
 
-Suppose the outcomes of random variable $X$ are $$\mathcal{X}=\{x_i\}_{i=1}^n$$, then entropy is $$H(X)=-\sum_{i=1}^n P(x_i) \log_b P(x_i)$$. (*Common values of the logarithm base $b$ are $2$, and the corresponding units of entropy are the bits for $$b=2$$*). Now we want to estimate the probabilities $$P(x_1),P(x_2),\cdots,P(x_n)$$ given $m$ constraints $$\sum_{i=1}^n P(x_i)g_j(x_i)=E\left[g_j(X)\right], j=1,2,\cdots,m$$, where $$g_j(x_i)$$ and $$E\left[g_j(X)\right]$$ are all known for each $$i,j$$.
+Suppose the outcomes of random variable $X$ are $$\mathcal{X}=\{x_i\}_{i=1}^n$$, then entropy is $$H(X)=-\sum_{i=1}^n P(x_i) \log_b P(x_i)$$. (Common values of the logarithm base $b$ are $2$, and the corresponding units of entropy are the bits for $$b=2$$). Now we want to estimate the probabilities $$P(x_1),P(x_2),\cdots,P(x_n)$$ given $m$ constraints $$\sum_{i=1}^n P(x_i)g_j(x_i)=E\left[g_j(X)\right], j=1,2,\cdots,m$$, where $$g_j(x_i)$$ and $$E\left[g_j(X)\right]$$ are all known for each $$i,j$$.
 
 The **formulation** of maximizing entropy is
 

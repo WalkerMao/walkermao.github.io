@@ -23,19 +23,27 @@ $$
 I(x) := -\log P(x).
 $$
 
-The entropy quantifies how "informative" or "surprising" the entire random variable is, averaged on all its possible outcomes. Given a random variable $X$ with possible outcomes $x$'s, and the sample space $\mathcal{X}$ is the set of these outcomes, the entropy $H(X)$ of $X$ is defined as follows:
+The entropy quantifies how "informative" or "surprising" the entire random variable is, averaged on all its possible outcomes. Given a discrete random variable $X$ with possible outcomes $x$'s, and the sample space $\mathcal{X}$ is the set of these outcomes, the entropy $H(X)$ of $X$ is defined as follows:
 
 $$
 H(X) := E[I(X)] = E[-\log_b P(X)] = - \sum_{x \in \mathcal{X}} P(x) \log_b P(x).
 $$
 
+For a continuous random variable $$X$$ with probability density $$p(x)$$, we have **differential entropy**
+
+$$
+H(X) = -\int_{x\in\mathcal{X}} p(x) \log_b p(x).
+$$
+
+In the following we mainly discuss the entropy of discrete random variables.  
+
 Common values of the logarithm base $b$ are $2$, and the corresponding units of entropy are the **bits** for $b = 2$. 
 
-For example, tossing a fair die contains more information than tossing a fair coin, and it can be seen from the perspective of entropy: the entropy of tossing a fair coin is $\log 2$ and the entropy of tossing a fair die is $\log 6$.
+For example, tossing a fair die contains more information than tossing a fair coin, and it can be seen from the perspective of entropy: the entropy of tossing a fair coin is $\log 2$ and the entropy of tossing a fair die is $\log 6$. 
 
 ### Properties
 
-**Non-negativity:** The entropy is always non-negative. i.e. $$H(X)\geq0$$ for any random variable $X$. 
+**Non-negativity:** The entropy is always non-negative. i.e. $$H(X)\geq0$$ for any random variable $X$. Note that this property does not apply to differential entropy. For example, the entropy for a uniform distribution in $$[a,b]$$ is $$\log(b-a)$$, and it can be negative when $$b-a<0$$. 
 
 **Decrease through any function:**
 
