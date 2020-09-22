@@ -37,7 +37,7 @@ For example, tossing a fair die contains more information than tossing a fair co
 
 **Non-negativity:** The entropy is always non-negative. i.e. $$H(X)\geq0$$ for any random variable $X$. 
 
-**Decrease through any function"**
+**Decrease through any function:**
 
 The entropy of a random variable can only decrease when the latter is passed through a function. Mathematically, that is, for a random variable $X$ and a arbitrary function $f(\cdot)$, we have
 
