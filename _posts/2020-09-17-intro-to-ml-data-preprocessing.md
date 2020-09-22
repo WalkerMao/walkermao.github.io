@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Intro to Machine Learning: Data Preprocessing"
-date: 2020-02-28
+date: 2020-09-17
 categories: ml stat
 comments: true
 ---
