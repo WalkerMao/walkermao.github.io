@@ -15,29 +15,45 @@ Tree-based methods partition the feature space into a set of rectangles, and the
 Suppose first that we have a partition into $$M$$ regions $R_1, R_2 , ..., R_M$ , and we model the response as a constant $c_m$ in each region: 
 
 $$
-f(x) = \sum_{m=1}^{M} c_m I(x ∈ R_m ).
+f(x) = \sum_{m=1}^{M} c_m \mathbf{1}(x \in R_m ).
 $$
 
 If we adopt as our criterion minimization of the sum of squares $(y_i −f (x_i )) ^2$, it is easy to see that the best $\hat{c}_m$ is just the average of $y_i$ in region $R_m$: $\hat{c}_m = \text{avg}(y_i \mid x_i ∈ R_m )$.
 
 ### 1.1 How to build a regression tree?
 
-Now finding the best binary partition in terms of minimum **sum of squares** is generally computationally infeasible. Hence we proceed with a **greedy algorithm**. Starting with all of the data, consider a splitting variable $$j$$ and split point $$s$$, and define the pair of half-planes 
+Now finding the best binary partition in terms of minimum **sum of squares** is generally computationally infeasible. Hence we proceed with a **greedy algorithm**. Starting with all of the data, consider a splitting variable $$j$$ and split point $$s$$, and define the regions of left and right node as 
 
 $$
-R_1(j, s) = \{X|X_j \leq s\} \text{ and } R_2(j, s) = \{X|X_j > s\}.
+R_L(j, s) = \{X \mid X_j \leq s\},\ R_R(j, s) = \{X \mid X_j > s\}.
 $$
 
-Then we seek the splitting variable $j$ and split point $s$ that solve
+The node splitting criteria is that, we seek the splitting variable $j$ and split point $s$ that solve
 
 $$
-\min_{j,s}\Big[\min_{c_1}\sum_{x_i \in R_1(j,s)} (y_i-c_1)^2 + \min_{c_2}\sum_{x_i \in R_2(j,s)} (y_i-c_2)^2 \Big].
+\min_{j,s}\Big[\min_{c_L}\sum_{x_i \in R_L(j,s)} (y_i-c_L)^2 + \min_{c_R}\sum_{x_i \in R_R(j,s)} (y_i-c_R)^2 \Big].
 $$
 
 For any choice $j$ and $s$, the inner minimization is solved by
 
 $$
-\hat{c}_1 = \text{avg}(y_i | x_i ∈ R_1 (j,s))\ \ \text{and}\ \ \hat{c}_2 = \text{avg}(y_i|x_i ∈ R_2 (j, s)).
+\hat{c}_L = \text{avg}(y_i \mid x_i \in R_L (j,s)),\ \hat{c}_R = \text{avg}(y_i \mid x_i \in R_R (j, s)).
+$$
+
+We index nodes by $m$, with node $m$ representing region $R_m$. Letting 
+
+$$
+N_m = \# \{x_i ∈ R_m \}, \\
+\hat{c}_m = \frac{1}{N_m} \sum_{x_i\in R_m} y_i, \\
+Q_m = \frac{1}{N_m} \sum_{x_i\in R_m} (y_i-\hat{c}_m)^2,
+$$
+
+where $Q_m$ is the node impurity, and is measured by squared loss. 
+
+Denote $$m_L$$ and $$m_R$$ as the two child nodes created by splitting node $$m$$. Then the **node splitting criteria** can be written as 
+
+$$
+\operatorname*{argmin}_{j,s}\left(N_{m_L}Q_{m_L} + N_{m_R}Q_{m_R} \right).
 $$
 
 ### 1.2 How to decide the tree size? 
@@ -46,25 +62,21 @@ We first grow a large tree $T_0$, stopping the splitting process only when some 
 
 Either the number of leaf nodes or the depth can be used to measure the complexity of a tree. Here we take the previous one for example.
 
-We define a subtree $T ⊂ T_0$ to be any tree that can be obtained by pruning $T_0$, that is, collapsing any number of its internal (non-terminal) nodes. We index nodes by $m$, with node $m$ representing region $R_m$. Let $\mid T \mid$ denote the number of terminal nodes in $T$, which refers to the complexity of the tree. Letting 
+We define a subtree $T ⊂ T_0$ to be any tree that can be obtained by pruning $T_0$, that is, collapsing any number of its internal (non-terminal) nodes. Let $\mid T \mid$ denote the number of terminal nodes in $T$, which refers to the complexity of the tree. 
+
+We define the cost complexity criterion for a tree $$T$$ as
 
 $$
-N_m = \# \{x_i ∈ R_m \}, \\
-\hat{c}_m = \frac{1}{N_m} \sum_{x_i\in R_m} y_i, \\
-Q_m(T) = \frac{1}{N_m} \sum_{x_i\in R_m} (y_i-\hat{c}_m)^2.\ \text{(loss function)}
+C_α(T) = \sum_{m=1}^{|T|}N_m Q_m + α|T| = \sum_{m=1}^{|T|}\sum_{x_i\in R_m} (y_i-\hat{c}_m)^2 + α|T|,
 $$
 
-Where $Q_m(T)$ is the node impurity, which is measured by squared loss. We define the cost complexity criterion
-
-$$
-C_α(T) = \sum_{m=1}^{|T|}N_m Q_m (T) + α|T| = \sum_{m=1}^{|T|}\sum_{x_i\in R_m} (y_i-\hat{c}_m)^2 + α|T|.
-$$
+where $$m$$ is the index of terminal node, and $$\alpha$$ is the regularization parameter (or strength). 
 
 The tuning parameter $α ≥ 0$ governs the trade-off between tree size and its goodness of fit to the data. The idea is to find, for each $α$, the subtree $T_α ⊆ T_0$ to minimize $C_α (T )$.
 
 Large values of $α$ result in smaller trees $T_α$, and conversely for smaller values of $$α$$. As the notation suggests, with $α$ = 0 the solution is the full tree $T_0$.
 
-For each $$\alpha$$ one can show that there is a unique smallest subtree $T_α$ that minimizes $C_α(T)$. For each $\alpha$, to find $T_α$, we use **weakest link pruning**: we successively collapse the internal node that produces the smallest per-node increase in $\sum_mN_mQ_m(T)$, and continue until we produce the single-node (root) tree. This gives a (finite) sequence of subtrees, and one can show this sequence must contain $T_α$.
+For each $$\alpha$$ one can show that there is a unique smallest subtree $T_α$ that minimizes $C_α(T)$. For each $\alpha$, to find $T_α$, we use **weakest link pruning**: we successively collapse the internal node that produces the smallest per-node increase in $\sum_mN_mQ_m$, and continue until we produce the single-node (root) tree. This gives a (finite) sequence of subtrees, and one can show this sequence must contain $T_α$.
 
 To choose $\alpha$, we use **cross-validation**: we choose the value $\hat{\alpha}$ to minimize the cross-validated loss. Our final tree is $T_\hat{\alpha}$.
 
@@ -82,7 +94,7 @@ $$
 k(m) = \operatorname*{argmax}_k \hat{p}_{mk}.
 $$
 
-Different measures $Q_m(T)$ of node impurity include the following: 
+Different measures $Q_m$ of the impurity of node $$m$$ include the following: 
 
 $$
 \text{Misclassification error: } 1-\hat{p}_{mk(m)} = \frac{1}{N_m} \sum_{x_i \in R_m} I(y_i \neq k(m)). \\\text{Gini index: } \sum_{k=1}^{K} \hat{p}_{mk} (1-\hat{p}_{mk}). \\\text{Entropy or deviance: } −\sum_{k=1}^{K} \hat{p}_{mk} \log(\hat{p}_{mk}).
@@ -98,18 +110,31 @@ $$
 
 All three are similar, but entropy and the Gini index are differentiable, and hence more amenable to numerical optimization. 
 
-**Information gain** measures the reduction in entropy after splitting, and we select the feature and splitting point for a node that maximize the information gain. Denote the entropy for node $m$ as $H_m$. After splitting the node $m$ to two child nodes $m_L$ (left node) and $m_R$ (right node), we can calculate the information gain as 
+Similar to regression tree, the node splitting criteria is that, finding the splitting variable $j$ and split point $s$ by 
+
 $$
-\text{IG}_m = H_m - \frac{N_{m_L}}{N_m} H_{m_L} - \frac{N_{m_R}}{N_m} H_{m_R}.
+\operatorname*{argmin}_{j,s}\left(N_{m_L}Q_{m_L} + N_{m_R}Q_{m_R} \right).
 $$
-Note that $$N_m = N_{m_L} + N_{m_R}$$.
 
-*Cross-entropy and the Gini index are more sensitive to changes in the node probabilities than the misclassification rate. For example, in a two-class problem with 400 observations in each class (denote this by (400, 400)), suppose one split created nodes (300, 100) and (100, 300), while the other created nodes (200, 400) and (200, 0). Both splits produce a misclassification rate of 0.25, but the second split produces a pure node and is probably preferable. Both the Gini index and cross entropy are lower for the second split.*
+We can also define a criteria called **gain** to measure the reduction in impurity after splitting, such as  **information gain** that measures the reduction in entropy. 
 
-For this reason, either the Gini index or cross-entropy should be used when growing the tree. To guide cost-complexity pruning, any of the three measures can be used, but typically it is the misclassification rate.
+We select the feature and splitting point for a node that maximize the gain. After splitting the node $m$ to two child nodes $m_L$ (left node) and $m_R$ (right node), we can calculate the gain as 
 
-Growing a tree: Gini index, cross-entropy.
-Cost-complexity pruning: any of the three.
+$$
+\text{Gain}_m = Q_m - \frac{N_{m_L}}{N_m} Q_{m_L} - \frac{N_{m_R}}{N_m} Q_{m_R}.
+$$
+
+Then the node splitting criteria can be written as 
+
+$$
+\operatorname*{argmin}_{j,s} \text{Gain}_m.
+$$
+
+Gini index and entropy are more sensitive to changes in the node probabilities than the misclassification rate. For example, in a two-class problem with 400 observations in each class (denote this by (400, 400)), suppose one split created nodes (300, 100) and (100, 300), while the other created nodes (200, 400) and (200, 0). Both splits produce a misclassification rate of 0.25, but the second split produces a pure node and is probably preferable. Both the Gini index and entropy are lower for the second split.
+
+For this reason, either the Gini index or entropy should be used when growing the tree. To guide cost-complexity pruning, any of the three measures can be used, but typically it is the misclassification rate.
+
+Growing a tree: Gini index, entropy. Cost-complexity pruning: any of the three.
 
 We usually treat the class proportions in the terminal node as the class probability estimates.
 
@@ -178,7 +203,7 @@ Some aspects of decision tree learning:
     * surrogate splits.
     
 
-	
+<br>
 
 **Reference**: 
 Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. *The elements of statistical learning*. Vol. 1. No. 10. New York: Springer series in statistics, 2001.
