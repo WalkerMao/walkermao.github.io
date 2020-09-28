@@ -178,7 +178,7 @@ Tree or ensemble tree methods are not suitable for high dimensional sparse data.
 
 Some aspects of decision tree learning:
 
-- Time complexity ($$N$$ and $$p$$ are the number of observations and features; $$d$$ is the depth of the tree):
+- Time complexity ($$N$$: number of observations; $$p$$: number of features; $$d$$: depth of the tree):
     - Training: $$O(Npd)$$;
     - Prediction: $$O(d)$$.
 - Multi-way splits?

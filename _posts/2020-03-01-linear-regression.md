@@ -98,7 +98,7 @@ Suppose $$X\in\mathbb{R}^{n\times p}$$ and $$y\in\mathbb{R}^n$$, then the comput
 3. The product $$X^T y$$ takes $$O(p n)$$ time;
 4. Finally, the multiplication of $$(X^T X)^{-1}$$ and $$X^T y$$ takes $$O(p^2)$$.
 
-If we use gradient descent, at the $$(t+1)$$-th iteration, computing the gradient $$\frac{\partial \text{RSS}(\beta_t)}{\partial \beta_t} = -2 X^T (y-X \beta_t)$$ takes $$O(np+n+pn)=O(np)$$ time. If we iterate $$m$$ times, the time is $$O(mnp)$$. Here are the time complexity analyses for a iteration:
+If we use gradient descent, at the $$(t+1)$$-th iteration, computing the gradient $$\frac{\partial \text{RSS}(\beta_t)}{\partial \beta_t} = -2 X^T (y-X \beta_t)$$ takes $$O(np+n+pn)=O(np)$$ time. If we iterate $$M$$ times, the time is $$O(Mnp)$$. Here are the time complexity analyses for a iteration:
 
 1. The product $$X\beta_t$$ takes $$O(np)$$ time; 
 2. The subtraction $$y-X \beta_t$$ takes $$O(n)$$ times;

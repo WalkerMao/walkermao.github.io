@@ -181,7 +181,7 @@ $$
 
 where $t$ is the index of iteration, and $\alpha$ is the learning rate (step size).
 
-In each iteration, computing the gradient for $$w$$ takes $$np^2$$ time, and computing that for $$b$$ takes $$np$$ time, the **time complexity** of each iteration is $$O(np^2+np)=O(np^2)$$. If we iterate $$m$$ times, then the time is $$O(mnp^2)$$.
+In each iteration, computing the gradient for $$w$$ takes $$np^2$$ time, and computing that for $$b$$ takes $$np$$ time, the **time complexity** of each iteration is $$O(np^2+np)=O(np^2)$$. If we iterate $$M$$ times, then the time is $$O(Mnp^2)$$.
 
 ### 2.4 Optimization by Maximum Likelihood
 
