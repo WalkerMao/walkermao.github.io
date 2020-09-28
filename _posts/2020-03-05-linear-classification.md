@@ -169,14 +169,19 @@ $$
 \frac{\partial \text{Loss}(y_i, \hat{p}_i)} {\partial b} = \frac{\partial \text{Loss}(y_i, \hat{p}_i)} {\partial \hat{p}_i} \cdot \frac{\partial \hat{p}_i} {\partial z_i} \cdot \frac{\partial z_i} {\partial b} = \hat{p}_i - y_i.
 $$
 
-The gradient descent of parameters can be shown as:
-
+For the $$t$$-th iteration, if we use $$n$$ observations to compute the gradients, then the gradients for $$w^{[t-1]}$$ and $$b^{[t-1]}$$ are 
 $$
-w^{[t]} = w^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} \frac{\partial \text{Loss}(y_i, \hat{p}_i^{[t-1]})} {\partial w^{[t-1]}} = w^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i) x_i, \\
-b^{[t]} = b^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} \frac{\partial \text{Loss}(y_i, \hat{p}_i^{[t-1]})} {\partial b^{[t-1]}} = b^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i).
+\frac{1}{n}\sum_{i=1}^{n} \frac{\partial \text{Loss}(y_i, \hat{p}_i^{[t-1]})} {\partial w^{[t-1]}} = \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i) x_i, \\\frac{1}{n}\sum_{i=1}^{n} \frac{\partial \text{Loss}(y_i, \hat{p}_i^{[t-1]})} {\partial b^{[t-1]}} = \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i).
+$$
+The gradient updates for parameters can be written as:
+$$
+w^{[t]} =  w^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i) x_i, \\
+b^{[t]} = b^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i).
 $$
 
 where $t$ is the index of iteration, and $\alpha$ is the learning rate (step size).
+
+In each iteration, computing the gradient for $$w$$ takes $$np^2$$ time, and computing that for $$b$$ takes $$np$$ time, the **time complexity** of each iteration is $$O(np^2+np)=O(np^2)$$. If we iterate $$m$$ times, then the time is $$O(mnp^2)$$.
 
 ### 2.4 Optimization by Maximum Likelihood
 

@@ -6,13 +6,15 @@ categories: stat ml
 comments: true
 ---
 
-A linear regression model assumes that the regression function $$E(y_i \mid x_i)$$ is linear in the inputs $$ x_i^{(1)}, \cdots, x_i^{(p)} $$. The linear regression model has the form $$ \hat{y}_i = f(x_i) =  \beta_0 + \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \beta_0 + \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)} $$. If we set a $$1$$ in the first position of the vector $$x_i$$, then we can dismiss the intercept and the regression model can be written as $$ \hat{y}_i = f(x_i) = \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)} $$.
+A linear regression model assumes that the regression function $$E(y_i \mid x_i)$$ is linear in the inputs $$ x_i^{(1)}, \cdots, x_i^{(p)} $$. The linear regression model has the form $$ \hat{y}_i = f(x_i) =  \beta_0 + \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \beta_0 + \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)} $$. If we set a $$1$$ in the first position of the vector $$x_i$$, then we can dismiss the intercept and the regression model can be written as $$ \hat{y}_i = f(x_i) = \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)} $$. 
+
+Let's first suppose $$X\in\mathbb{R}^{n\times p}$$ and $$y\in\mathbb{R}^n$$, which means we have $$n$$ observations and $$p$$ features.  
 
 ### Ordinary Least Squares
 
 The residual sum of squares: $$ \text{RSS}(\beta) = (y-X \beta)^T (y-X \beta) = \|y - X\beta \|^2_2 = \sum_{i=1}^{n}(y_i - \beta^T x_i)^2$$.
 
-OLS (ordinary least squares) estimator $$\hat{\beta} = \underset{\beta \in \mathbb{R}^p}{\text{argmin}} \ \text{RSS}(\beta) = (X^T X)^{-1} X^T y$$. 
+Closed-form solution for OLS (ordinary least squares) estimator $$\hat{\beta} = \underset{\beta \in \mathbb{R}^p}{\text{argmin}} \ \text{RSS}(\beta) = (X^T X)^{-1} X^T y$$. 
 
 Hat matrix $$H = X (X^T X)^{-1} X^T$$, which is positive semi-definite.
 
@@ -22,7 +24,9 @@ More on *The elements of Statistical Learning* Page 47-49.
 
 The Gauss-Markov Theorem: Least squares estimates of the parameter $\beta $ has the smallest variance among all linear unbiased estimates. This theorem means that the OLS estimator is BLUE (best linear unbiased estimator).
 
-Derivation of OLS estimator: The first and second partial derivatives are $$\frac{\partial \text{RSS}(\beta)}{\partial \beta} = -2 X^T (y-X \beta), \frac{\partial^2 \text{RSS}(\beta)}{\partial \beta \partial \beta^T} = 2 X^T X$$. Assuming that $$X$$ has full column rank, and hence $$X^TX$$ is positive definite, we set the first derivative to zero and then we get the solution $$\hat{\beta} = (X^T X)^{-1} X^T y$$.
+Derivation of OLS estimator: The first and second partial derivatives are $$\frac{\partial \text{RSS}(\beta)}{\partial \beta} = -2 X^T (y-X \beta), \frac{\partial^2 \text{RSS}(\beta)}{\partial \beta \partial \beta^T} = 2 X^T X$$. Assuming that $$X$$ has full column rank, and hence $$X^TX$$ is positive definite, we set the first derivative to zero and then we get the solution $$\hat{\beta} = (X^T X)^{-1} X^T y$$. 
+
+We can also use gradient descent to find $$\hat{\beta}$$. The gradient at $$(t+1)$$-th iteration is $$\frac{\partial \text{RSS}(\beta_t)}{\partial \beta_t} = -2 X^T (y-X \beta_t)$$. 
 
 ### Subset Selection
 
@@ -62,3 +66,26 @@ Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
 ![LASSO-and-Ridge](/pictures/LASSO-and-Ridge.png)
 
 L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more computationally efficient when doing prediction. L2-norm is differentiable so it has an analytical solution and can be calculated efficiently when training model. 
+
+### Tips
+
+#### Time Complexity
+
+Suppose $$X\in\mathbb{R}^{n\times p}$$ and $$y\in\mathbb{R}^n$$, then the computational complexity of computing closed-form solution $$(X^T X)^{-1} X^T y$$ is $$O(pnp + p^3 + pn + p^2) = O(np^2+p^3)$$. Here are the analyses:
+
+1. The product $$X^TX$$ takes $$O(pnp)$$ time;
+2. The inversion of $$X^TX$$ takes $$O(p^3)$$ time;
+3. The product $$X^T y$$ takes $$O(p n)$$ time;
+4. Finally, the multiplication of $$(X^T X)^{-1}$$ and $$X^T y$$ takes $$O(p^2)$$.
+
+If we use gradient descent, at the $$(t+1)$$-th iteration, computing the gradient $$\frac{\partial \text{RSS}(\beta_t)}{\partial \beta_t} = -2 X^T (y-X \beta_t)$$ takes $$O(np+n+pn)=O(np)$$ time. If we iterate $$m$$ times, the time is $$O(mnp)$$. Here are the time complexity analyses for a iteration:
+
+1. The product $$X\beta_t$$ takes $$O(np)$$ time; 
+2. The subtraction $$y-X \beta_t$$ takes $$O(n)$$ times;
+3. The multiplication of $$-2X^T$$ and  $$(y-X \beta_t)$$ takes $$O(pn)$$ time. 
+
+We may prefer gradient descent than computing the closed-form solution when $$p$$ is very large. 
+
+We can also use the mini-batch gradient descent (say batch size $$b$$ and $$b< n$$), then the time of computing the gradient will be $$O(bp)$$. However, we usually need more iterations than ordinary gradient, since the gradient is not that accurate. Note that if we set $$b=1$$, it is stochastic gradient descent.  
+
+ 

@@ -106,7 +106,7 @@ $$
 \text{Obj}(Y, X, \theta) = \frac{1}{n} \sum_{i=1}^n L \big( y_i, f(x_i; \theta) \big) + \Omega \big( f(\cdot;\theta) \big),
 $$
 
-where $\theta$ is a vector of dimension $p_\theta \times 1$ that contains the parameters of predictive model $f(\cdot)$, $L(\cdot)$ is the loss function, and $\Omega(\cdot)$ is the regularization term. 
+where $\theta$ is a vector of dimension $$d$$ that contains the parameters of predictive model $f(\cdot)$, $L(\cdot)$ is the loss function, and $\Omega(\cdot)$ is the regularization term. 
 
 Our objective is to minimize the objective function with respect to $\theta$: $\theta^* = \underset{\theta}{\text{argmin }} \text{Obj}(Y,X,\theta)$. 
 
@@ -149,10 +149,10 @@ $\text{Obj}''(\theta)$ is the **Hessian** matrix that contains all second order 
 $$
 \mathbf{H} = \text{Obj}''(\theta) = 
 \begin{pmatrix}
-  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1^2} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_{p_{\theta}}} \\
-  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2^2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial\theta_{p_{\theta}}} \\
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1^2} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_1 \partial\theta_{d}} \\
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2^2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_2 \partial\theta_{d}} \\
   \vdots  & \vdots  & \ddots & \vdots  \\
-  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial  \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial \theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{p_{\theta}} \partial \theta_{p_{\theta}}}
+  \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{d} \partial  \theta_1} & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{d} \partial \theta_2} & \cdots & \frac{\partial^2 \text{Obj}(\theta)}{\partial \theta_{d} \partial \theta_{d}}
  \end{pmatrix}.
 $$
 
@@ -170,7 +170,7 @@ $$
 
 where $\eta_{t}$ is the step size or learning rate.
 
-By using the Taylor polynomial of degree two, Newton's method is more accurate than gradient descent, thus needs less iterations. On the other hand, it is more computationally expensive. Computing the inverse of the Hessian matrix is very expensive, so we can try Quasi-Newton methods. 
+By using the Taylor polynomial of degree two, Newton's method is more accurate than gradient descent, thus needs less iterations. On the other hand, it is more computationally expensive. Computing the inverse of the Hessian matrix costs $$O(d^3)$$ time, which is very expensive, and we can try Quasi-Newton methods. 
 
 ### 8.3 Proximal Gradient Descent
 

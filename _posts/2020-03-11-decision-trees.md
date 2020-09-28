@@ -170,30 +170,30 @@ The plots above show the partial dependence of house value on average occupancy 
 
 ## 4. Some Tips
 
-A key advantage of the recursive binary tree is its interpretability. 
+Time complexity analysis: Suppose we have $$N$$ observations with $$p$$ features. Splitting a non-leaf node with $$N_m$$ observations costs $$N_mp$$ time, and the total number of observations in each level of the tree is $$N$$, and it follows that the training time costs in each level are all $$Np$$. Thus the time complexity of training a tree of depth $$d$$ is $$O(Npd)$$. If every leaf node contains one observation, then $$d=\log_2N$$ in the best case of a balanced tree and $$d=N-1$$ in the worst case of a skewed tree. Also obviously, the prediction time complexity for a input is $$O(d)$$.  
 
-One major problem with trees is their high variance, which makes interpretation somewhat precarious. The major reason for this instability is the hierarchical nature of the process: the effect of an error in the top split is propagated down to all of the splits below it. Bagging averages many trees to reduce the variance. 
+A key advantage of the recursive binary tree is its interpretability. However, one major problem with trees is their high variance, which makes interpretation somewhat precarious. The major reason for this instability is the hierarchical nature of the process: the effect of an error in the top split is propagated down to all of the splits below it. Bagging averages many trees to reduce the variance. 
 
 Tree or ensemble tree methods are not suitable for high dimensional sparse data. ([Explanation](https://zhuanlan.zhihu.com/p/88234363) in Chinese) 
 
 Some aspects of decision tree learning:
 
+- Time complexity ($$N$$ and $$p$$ are the number of observations and features; $$d$$ is the depth of the tree):
+    - Training: $$O(Npd)$$;
+    - Prediction: $$O(d)$$.
 - Multi-way splits?
 
     * fragments the data very quickly;
     * you can always realize a multi-way split by doing a series of binary splits.
-
 - Linear combinations of splits? E.x. $R_1 = \{X: 2X_1+X_2 < 0 \}, R_2 = \{X: 2X_1+X_2 \geq 0 \}$ .
 
     * maybe good for prediction;
     * not good for interpretation;
     * expensive for computation.
-
 - What types of functions does regression tree have trouble approximating? 
 
     * additive function $f(X) = \sum_{j=1}^{p} f_j(X_j)$. e.x. $f(X)=\sum_{j=1}^{p} \beta_j X_j$. (note that $Y=f(X)+\epsilon$)
     * $f(X) = I\{X_1 \leq t_1 \} + I\{X_2 \leq t_2 \}$.
-
 - Ways to handle missing data
 
     * remove observations containing missing values;

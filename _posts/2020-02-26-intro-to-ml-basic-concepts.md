@@ -114,7 +114,7 @@ E[(Y-\hat{f})^2] &= E[(f-\hat{f}+\epsilon)^2] \\
 
 **More flexible methods leads to higher variance and lower bias.**
 
-Variance $\text{Var}(\hat{f})$ refers to the amount by which $ \hat{f} $ would change if it is by a different training data set. In general, more flexible statistical methods have higher variance.
+Variance $\text{Var}(\hat{f})$ refers to the amount by which $ \hat{f} $ would change if it is by a different training data set. If the model $$\hat{f}$$ uses too much information from the the training data, it may do not generalize well. Typically, the model will change a lot if you change the training set, hence the "high variance" name. In general, more flexible statistical methods have higher variance.
 
 Bias $\text{Bias}(\hat{f})$ refers to the error that is introduced by approximating a real-life problem. For example, linear regression assumes that there is a linear relationship between $Y$ and $X$. It is unlikely that any real-life problem truly has such a simple linear relationship, and so performing linear regression will undoubtedly result in some bias in the estimate of $f$. Generally, more flexible methods result in less bias.
 

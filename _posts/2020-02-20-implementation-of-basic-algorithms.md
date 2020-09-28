@@ -261,9 +261,40 @@ def radixSort(self, nums: list) -> int:
     return output
 ```
 
-## BFS and DFS
+## Traversal
 
-### Combinations
+### Binary Tree Traversals
+
+- Preorder: node -> left -> right;
+
+- Inorder: left -> node -> right;
+
+- Postorder: left -> right -> node.
+
+```python
+# definition for a binary tree node.
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+# traverse a binary tree recursively.
+def traverseTreeRecursively(self, root: TreeNode) -> tuple:
+    preorder, inorder, postorder = list(), list(), list()
+    def recursion(node: TreeNode):
+        if node:
+            preorder.append(node.val) # preorder traversal
+            recursion(node.left)
+            inorder.append(node.val) # inorder traversal
+            recursion(node.right)
+            postorder.append(node.val) # postorder traversal
+
+        recursion(root)
+        return preorder, inorder, postorder
+```
+
+### Combinations by BFS or DFS
 
 ```python
 # Example input: [[1, 2], [3, 4, 5], [6]].
