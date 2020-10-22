@@ -41,8 +41,9 @@ layout: default
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
       powered by Disqus.</a></noscript>
   {%- endif -%}
+  
+  {% include disqus.html %}
+  
 </div>
 
 <script src="{{ base.url | prepend: site.url }}/assets/js/scrollIntoView.js"></script>
-
-{% include disqus.html %}
