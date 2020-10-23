@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Imbalanced Classification Problems"
+title: "Imbalanced Classification (Part 1)"
 date: 2020-07-24
 categories: ml
 published: true
@@ -13,7 +13,7 @@ Imbalanced data typically refers to a problem with classification problems where
 
 Let's first review the confusion matrix, as shown below.
 
-<img src="/pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/> 
+<div style="text-align: center"> <img src="../pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/> </div>
 
 Say if we have a imbalanced data set, in which $$99\%$$ are of negative class and $$1\%$$ are of positive class, then a classification model that always predict "negative" can achieve $$0.99$$ accuracy on average. The specificity (true negative rate) of this model is $$\text{TNR} = \frac{TN}{TN+FP} = \frac{99\%}{99\% + 0\%}=1$$, however, the sensitivity (true positive rate, or recall) is $$\text{TPR} = \frac{TP}{TP+FN} = \frac{0\%}{0\%+1\%}=0$$. 
 
@@ -33,7 +33,7 @@ plt.ylabel('True Positive Rate')
 plt.show()
 ```
 
-![img](/pictures/Special-ROC.png)
+<div style="text-align: center"> <img src="../pictures/Special-ROC.png" alt="Special-ROC" style="zoom:100%;" /> </div>
 
 In the following sections, we discuss the approaches to deal with the class imbalance problems. 
 
@@ -81,7 +81,7 @@ To increase the prediction accuracy of the minority class samples, we can **dete
 
 The plot below is an ROC curve labeled with different probability cutoffs (or thresholds), and the numbers in the parentheses are the specificity and sensitivity. 
 
-<div style="text-align: center"> <img src="/pictures/ROC-with-different-cutoffs.png" alt="ROC-with-different-cutoffs" style="zoom:40%;" />  </div>
+<div style="text-align: center"> <img src="../pictures/ROC-with-different-cutoffs.png" alt="ROC-with-different-cutoffs" style="zoom:40%;" />  </div>
 
 Several techniques exist for determining a new cutoff. First, if there is a particular target that must be met for the sensitivity or specificity, this point can be found on the ROC curve and the corresponding cutoff can be determined. Another approach for determining a cutoff is to find the point on the ROC curve that is closest (i.e. the shortest distance) to the upper left corner of the plot. Another approach is to find the cutoff associated with the largest value of the **Youden's $J$ index**. The index is defined as
 
@@ -93,41 +93,7 @@ In the ROC curve above, we can see that the cutoff $0.064$ is the best with cons
 
 Note that changing cutoff does not influence the model parameters, and thus it does not increase the overall predictive effectiveness of the model. The main impact that an alternative cutoff has is to make trade-offs between particular types of errors. 
 
-## Adjusting Prior Probabilities
-
-Some models use prior probabilities, such as naive Bayes and discriminant analysis classifiers. Unless specified manually, these models typically derive the value of the priors from the training data. Weiss and Provost (2001) suggest that priors that reflect the natural class imbalance will materially bias predictions to the majority class. **Using more balanced priors may help deal with a class imbalance**.
-
-Take the insurance data for example, the priors are $6\%$ and $94\%$ for the insured and uninsured, respectively. The predicted probability of having insurance is extremely skewed and adjusting the priors can shift the probability distribution away from small values. For example, new priors of $60\%$ for the insured and $40\%$ for the uninsured in the FDA model (flexible discriminant analysis model with MARS hinge functions) increase the probability of having insurance significantly. With the default cutoff, predictions from the new model have a sensitivity of $71.2\%$ and a specificity of $66.9\%$ on the test set, that is much better than the FDA model with default priors. 
-
-However, the new class probabilities did not change the rankings of the customers in the test set and the model has the same area (AUC) under the ROC curve as the previous FDA model. Like the previous tactics for an alternative cutoff, this strategy did not change the model but allows for different trade-offs between sensitivity and specificity. 
-
-## Unequal Case Weights
-
-Many of the predictive models for classification have the ability to use case weights where each individual data point can be given more emphasis in the model training phase. For example, AdaBoost creates a sequence of weak learners, each of which apply different case weights at each iteration. 
-
-One approach to rebalancing the training set would be to **increase the weights for the samples in minority classes**.
-
-Denote $r_i$ as the instance weight for the $i$-th instance, the total weighted average loss is then calculated as 
-
-$$
-\frac{1}{\sum_{i=1}^n r_i} \sum_{i=1}^n r_i\text{Loss}(\hat{y}_i, y_i).
-$$
-
-For many models, this can be interpreted as having identical duplicate data points with the exact same predictor values. Logistic regression, for example, can utilize case weights in this way. This procedure for dealing with a class imbalance is related to the sampling methods discussed in next section. 
-
-## Sampling Methods
-
-Here we introduce two general sampling approaches: **down-sampling** and **up-sampling** (**over-sampling**) the data. Down-sampling refers to any technique that reduces the number of samples in majority classes to improve the balance across classes, while up-sampling is any technique that simulates or imputes additional data points in minority classes to improve balance across classes. 
-
-The most basic down-sampling approach is to randomly sample the majority classes so that all classes have approximately the same size. Similarity, the most basic up-sampling approach is to sample the cases from the minority classes with replacement until each class has approximately the same number. 
-
-The **synthetic minority over-sampling technique** (**SMOTE**), described by Chawla et al. (2002), is a data sampling procedure that uses both up-sampling and down-sampling, depending on the class, and has three operational parameters: the amount of up-sampling, the amount of down-sampling, and the number of neighbors that are used to impute new cases. To up-sample for the minority class, SMOTE synthesizes new cases. To do this, a data point is randomly selected from the minority class and its $K$ (say $5$) **nearest neighbors** are determined. The new synthetic data point is a combination of the predictors (features) of the randomly selected data point and its neighbors. The SMOTE algorithm down-sample case from the majority class via random sampling in order to help balance the training set. 
-
-Note that when using modified versions of the training set, resampled estimates of model performance can become biased. 
-
-It should be noted that there is no clear winner among the various sampling methods. Also, different modeling techniques react differently to sampling. 
-
----
+<br>
 
 **References**: 
 
@@ -139,7 +105,4 @@ Pykes, K. (2020, Feb 27). Cohen’s Kappa. *Toward data science*. Retrieved July
 
 Landis, J. R., & Koch, G. G. (1977). The measurement of observer agreement for categorical data. *biometrics*, 159-174. 
 
-Weiss, G., & Provost, F. (2001). The Effect of Class Distribution on Classifier Learning: An Empirical Study. *Department of Computer Science*, Rutgers University.
-
-Chawla, N., & Bowyer, K., & Hall, L., & Kegelmeyer, W. (2002). SMOTE: Synthetic Minority Over-Sampling Technique. *Journal of Artificial Intelligence Research*, 16(1), 321–357. 
-
+Weiss, G., & Provost, F. (2001). The Effect of Class Distribution on Classifier Learning: An Empirical Study. *Department of Computer Science*, Rutgers University. 
