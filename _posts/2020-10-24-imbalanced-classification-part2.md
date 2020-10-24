@@ -49,7 +49,7 @@ The **synthetic minority over-sampling technique** (**SMOTE**), described by Cha
 
 <div style="text-align: center">
 <figure>
-<img src="../pictures/SMOTE-KNN-interpolation.png" alt="SMOTE-KNN-interpolation.png" style="zoom: 90%;" />
+<img src="../pictures/SMOTE-KNN-interpolation.png" alt="SMOTE-KNN-interpolation.png" style="zoom: 80%;" />
 <figcaption style="font-size: 80%;"> Figure. Example for SMOTE: a. The original majority data (blue) and minority data (green); b. Randomly selected minority data point (balck) and its 3 nearest minority neighbors (yellow); c. New data point (red) synthesized by linear interpolation between the selected data point and its randomly selected neighbor (both black). <a href="https://www.researchgate.net/figure/Graphical-representation-of-the-SMOTE-algorithm-a-SMOTE-starts-from-a-set-of-positive_fig2_317489171"> Figure source</a>. </figcaption>
 </figure>
 </div>
@@ -106,10 +106,11 @@ EasyEnsemble and BalanceCascade are introduced by XuYing Liu, et al. to deal wit
 
 <div style="text-align: center">
 <figure>
-<img src="../pictures/EasyEnsemble.png" alt="EasyEnsemble.png" style="zoom:50%;" />
+<img src="../pictures/EasyEnsemble.png" alt="EasyEnsemble.png" style="zoom:40%;" />
 <figcaption style="font-size: 80%;"> Figure. EasyEnsemble example. </figcaption>
 </figure>
 </div>
+
 
 **BalanceCascade** is a boosting method. It trains the learners sequentially, where in each step the majority class examples which are correctly classified by the current trained learners are removed from further consideration. 
 
