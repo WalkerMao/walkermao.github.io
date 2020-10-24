@@ -45,16 +45,28 @@ There are some advanced down-sampling methods like RUS, NearMiss, ENN, Tomeklink
 
 Up-sampling refers to any technique that simulates or imputes additional data points in minority classes to improve balance across classes. The most basic up-sampling approach is to sample the cases from the minority classes with replacement until each class has approximately the same number. However, this basic approach may lead to overfitting since it bring in many duplicate samples. 
 
-The **synthetic minority over-sampling technique** (**SMOTE**), described by Chawla et al. (2002), synthesizes new cases to up-sample for the minority class. There are different methods to synthesizes new cases. For example, we can use the $$K$$ **nearest neighbors**, a data point is randomly selected from the minority class and its $K$ (say $5$) nearest neighbors are determined. The new synthetic data point is a combination of the predictors (features) of the randomly selected data point and its neighbors. We can also synthesize new data points by interpolation. 
+The **synthetic minority over-sampling technique** (**SMOTE**), described by Chawla et al. (2002), synthesizes new cases to up-sample for the minority class, to overcome the overfitting problem posed by random oversampling. There are different methods to synthesizes new cases. For example, we can use the $$K$$ **nearest neighbors**, a data point is randomly selected from the minority class and its $K$ (say $5$) nearest neighbors are determined. We then randomly select a neighbor and synthesize new data point by linear **interpolation** between the selected data point and neighbor.
+
+<div style="text-align: center">
+<figure>
+<img src="../pictures/SMOTE-KNN-interpolation.png" alt="SMOTE-KNN-interpolation.png" style="zoom: 90%;" />
+<figcaption style="font-size: 80%;"> Figure. Example for SMOTE: a. The original majority data (blue) and minority data (green); b. Randomly selected minority data point (balck) and its 3 nearest minority neighbors (yellow); c. New data point (red) synthesized by linear interpolation between the selected data point and its randomly selected neighbor (both black). <a href="https://www.researchgate.net/figure/Graphical-representation-of-the-SMOTE-algorithm-a-SMOTE-starts-from-a-set-of-positive_fig2_317489171"> Figure source</a>. </figcaption>
+</figure>
+</div>
+
+The new synthetic data point is a combination of the predictors (features) of the randomly selected data point and its neighbors. We can also synthesize new data points by interpolation. 
 
 There are some extensions to SMOTE that are more selective regarding the examples from the minority class that provide the basis for generating new synthetic examples, like Borderline-SMOTE, Borderline-SMOTE SVM, and Adaptive Synthetic Sampling (ADASYN). The idea is that, the data points that are in a region of the border of decision boundary (where class membership may overlap) are difficult to classify, and we use the difficult minority data points to synthesize new data points. 
 
 **Borderline-SMOTE** uses the $$K$$ nearest neighbors to determine whether a minority data point is difficult. Say there are $$K_{+}$$ data points in the  $$K$$ nearest neighbors of a minority data point $$x$$, then $$x$$ is difficult if $$\frac{1}{2} < \frac{K_{+}}{K} < 1$$. Note that $$x$$ may be a outlier if $$\frac{K_{+}}{K} = 1$$. 
 
-<div style="text-align: center"> <img src="../pictures/Borderline-SMOTE.png" alt="Borderline-SMOTE" style="zoom:120%;" /> </div>
+<div style="text-align: center">
+<figure>
+<img src="../pictures/Borderline-SMOTE.png" alt="Borderline-SMOTE.png" style="zoom: 120%;" />
+<figcaption style="font-size: 80%;"> Figure. Example for Borderline-SMOTE: (a) The original data; (b) The borderline minority examples (solid squares); (c) The borderline synthetic minority examples (hollow squares). Figure from the <a href="https://sci2s.ugr.es/keel/keel-dataset/pdfs/2005-Han-LNCS.pdf"> original paper</a>. </figcaption>
+</figure>
+</div>
 
-In the figure above, the Borderline-SMOTE technique is applied to a sample dataset. (a) The original dataset. (b) The borderline minority examples
-(solid squares). (c) The borderline synthetic minority examples (hollow squares). Figure from the [original paper](https://sci2s.ugr.es/keel/keel-dataset/pdfs/2005-Han-LNCS.pdf).
 
 For **Borderline-SMOTE SVM**, the borderline area is approximated by the support vectors obtained after training a standard SVM classifier on the original training set. Then the minority class support vectors are treated as difficult minority data points.
 
@@ -88,7 +100,18 @@ for the $$i$$-th sample at the $$m$$-th iteration.
 
 ### With Down-Sampling
 
-EasyEnsemble and BalanceCascade are introduced by XuYing Liu, et al. to deal with imbalance classification problems by down-sampling and ensemble methods. **EasyEnsemble** is similar to bagging. It samples several subsets from the majority class, trains a learner using each of them, and combines the outputs of those learners. **BalanceCascade** is a boosting method. It trains the learners sequentially, where in each step the majority class examples which are correctly classified by the current trained learners are removed from further consideration.
+EasyEnsemble and BalanceCascade are introduced by XuYing Liu, et al. to deal with imbalance classification problems by down-sampling and ensemble methods. 
+
+**EasyEnsemble** is similar to bagging. It samples several subsets from the majority class, trains a learner using each of them, and combines the outputs of those learners.
+
+<div style="text-align: center">
+<figure>
+<img src="../pictures/EasyEnsemble.png" alt="EasyEnsemble.png" style="zoom:50%;" />
+<figcaption style="font-size: 80%;"> Figure. EasyEnsemble example. </figcaption>
+</figure>
+</div>
+
+**BalanceCascade** is a boosting method. It trains the learners sequentially, where in each step the majority class examples which are correctly classified by the current trained learners are removed from further consideration. 
 
 <br>
 
