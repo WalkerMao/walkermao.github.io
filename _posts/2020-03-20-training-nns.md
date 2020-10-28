@@ -136,11 +136,11 @@ We usually use gradient descent to optimize the objective function $\text{Obj}(w
 
 The solution to computing the gradient is an algorithm called error **backpropagation**, which use the chain rules in calculus. (Note: the regularization term is not considered in the pictures below.) 
 
-<div style="text-align: center"> <img src="/pictures/backpropagation.png" alt="backpropagation" style="zoom: 40%;" /> </div> 
+<div style="text-align: center"> <img src="../pictures/backpropagation.png" alt="backpropagation" style="zoom: 40%;" /> </div> 
 
 Here let's take an example. Say there is a feed forward neural network for regression, as shown in the picture below. 
 
-<div style="text-align: center"> <img src="/pictures/neural_network_example_2.png" alt="Grid Search and Random Search" style="zoom:25%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/neural_network_example_2.png" alt="Grid Search and Random Search" style="zoom:25%;" /> </div>
 
 Suppose the activation function $$\sigma(\cdot)$$ for hidden layer is sigmoid, and the activation function for output layer is identity function. Denote the input vector as $$x\in\mathbb{R}^{p}$$, the target as $$y\in\mathbb{R}$$, the output scalar as $$\hat{y}\in\mathbb{R}$$, the weights of hidden layer as $W\in\mathbb{R}^{p \times q}$, the weights of output layer as $$V\in\mathbb{R}^{q}$$, the loss function as $$L(\hat{y},y)=(\hat{y}-y)^2$$. This network can be expressed mathematically as
 
@@ -208,7 +208,7 @@ Search for learning rate and regularization strength on log scale. For example, 
 
 We prefer random search to grid search. As argued by Bergstra and Bengio in [Random Search for Hyper-Parameter Optimization](http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf), "randomly chosen trials are more efficient for hyper-parameter optimization than trials on a grid". As it turns out, this is also usually easier to implement. 
 
-<div style="text-align: center"> <img src="/pictures/gridsearchbad.jpeg" alt="Grid Search and Random Search" style="zoom:50%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/gridsearchbad.jpeg" alt="Grid Search and Random Search" style="zoom:50%;" /> </div>
 
 ## Regularization
 
@@ -249,9 +249,9 @@ Another form of regularization is to enforce an absolute upper bound on the magn
 
 Dropout is an extremely effective, simple and recently introduced regularization technique by Srivastava et al. in [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf) that complements the other methods (L1, L2, maxnorm). While training, dropout is implemented by only keeping a neuron active with some probability $$p$$ (a hyperparameter), or setting it to zero otherwise. 
 
-<div style="text-align: center"> <img src="/pictures/dropout.jpeg" alt="Dropout" style="zoom:50%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/dropout.jpeg" alt="Dropout" style="zoom:50%;" /> </div>
 
----
+<br>
 
 **References**:
 

@@ -16,7 +16,7 @@ $leftWidth: 225px;
 
 body {
   font-family: "Raleway", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.2em;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -93,14 +93,14 @@ main {
     flex-direction: column;
     align-items: center;
     h2 {
-      font-size: 22px;
+      font-size: 21px;
       margin-top: 25px;
       margin-bottom: 0;
       color: #222222;
       font-weight: normal;
     }
     .tagline {
-      font-size: 22px;
+      font-size: 21px;
       margin-top: 17px;
       color: #606060;
       white-space: pre-wrap;
@@ -129,7 +129,7 @@ main {
     float: left;
     margin: 0px 5px;
     i {
-      font-size: 30px;
+      font-size: 29px;
     }
   }
 }
@@ -174,7 +174,7 @@ main {
   margin: 0;
   padding: 0;
   li {
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     float: left;
     background-color: #e3e3e3;
@@ -210,7 +210,7 @@ main {
 
 .post-title {
   line-height: 1.2em;
-  font-size: 28px;
+  font-size: 27px;
 }
 .posts,
 .post-container {
@@ -252,7 +252,7 @@ main {
 }
 
 #posts-label {
-  font-size: 35px;
+  font-size: 34px;
   background-color: WhiteSmoke;
   color: Gray;
   text-transform: uppercase;
@@ -281,7 +281,7 @@ td{
 
 .pagination {
   display: block;
-  font-size: 18px;
+  font-size: 17px;
   word-spacing: 0px;
   margin-bottom: 60px;
   overflow: visible;

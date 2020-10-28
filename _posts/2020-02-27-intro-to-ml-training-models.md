@@ -70,7 +70,10 @@ plt.title('ROC curve for p_hat ~ Uniform(0,1).')
 plt.show()
 ```
 
-<img src="/pictures/ROC1.png" alt="ROC curve for all p_hat = 0" style="zoom:100%;" /> <img src="/pictures/ROC2.png" alt="img" style="zoom:100%;" />
+<div style="text-align: center">
+<img src="../pictures/ROC1.png" alt="ROC curve for all p_hat = 0" style="zoom:100%;" /> <img src="../pictures/ROC2.png" alt="img" style="zoom:100%;" />
+</div>
+
 
 There are more metrics like F1 score and Cohen’s kappa coefficient, etc.. 
 
@@ -80,7 +83,9 @@ There are more metrics like F1 score and Cohen’s kappa coefficient, etc..
 
 If a model learned too much noise in the training data, it tends to be overfitting, and the training error is much lower than the test error. Overfitting often happens for flexible models. An overfitted model has low bias but high variance. Regularization discourages learning a more complex or flexible model, so as to reduce overfitting. 
 
-<img src="/pictures/overfitting.png" style="width:90%;height:90%;" alt="Overfitting">
+<div style="text-align: center">
+<img src="../pictures/overfitting.png" style="width:90%;height:90%;" alt="Overfitting">
+</div>
 
 ### 7.2 L1 and L2 Regularization
 
@@ -92,7 +97,9 @@ The hyperparameter $\lambda$ depends the regularization strength. Note: a hyperp
 
 Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
 
-![LASSO and Ridge](/pictures/LASSO-and-Ridge.png)
+<div style="text-align: center">
+<img src="../pictures/LASSO-and-Ridge.png" alt="LASSO and Ridge" style="zoom:100%;" />
+</div>
 
 L1-norm shrinks some coefficients (or weights) to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more robust and also more computationally efficient when doing prediction. 
 

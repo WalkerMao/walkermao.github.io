@@ -199,9 +199,9 @@ $$
 
 This is exact the softmax function (or multi-category version of the sigmoid function), and thus we showed that the maximum entropy classifier is equivalent to logistic regression.
 
----
+<br>
 
-**References:**
+**References**:
 
 Xie, Yao. (2010, Dec 9). *Chain rules and inequalities*. Retrieved June 4, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture2.pdf. 
 

@@ -36,15 +36,24 @@ Big-O asymptotic:
 
 Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.
 
-<img src="/pictures/insertion-sort.png" alt="InsertionSort" style="zoom: 70%;" />
-
+<div style="text-align: center">
+<figure>
+<img src="../pictures/insertion-sort.png" alt="InsertionSort" style="zoom: 70%;" />
+<figcaption style="font-size: 80%;"> Insertion sort example. (<a href="https://www.geeksforgeeks.org/insertion-sort/">Figure source</a>) </figcaption>
+</figure>
+</div>
 ### Shell Sort
 
 The shell sort, sometimes called the "diminishing increment sort", improves on the insertion sort by breaking the original list into a number of smaller sublists, each of which is sorted using an insertion sort. 
 
 The unique way that these sublists are chosen is the key to the shell sort. Instead of breaking the list into sublists of contiguous items, the shell sort creates the sublists by an increment (sometimes called the **gap**). 
 
-<img src="/pictures/shellsort.jpg" alt="shellsort" style="zoom:70%;" />
+<div style="text-align: center">
+<figure>
+<img src="../pictures/shellsort.jpg" alt="shellsort.jpg" style="zoom:70%;" />
+<figcaption style="font-size: 80%;"> Shell sort example. (<a href="https://www.geeksforgeeks.org/shellsort/">Figure source</a>) </figcaption>
+</figure>
+</div>
 
 There are two advantages of Shell Sort over Insertion Sort.
 
@@ -81,7 +90,13 @@ def HeapSort(A):
 		Heapify(A[:i])
 ```
 
-<img src="/pictures/heap-sort.png" alt="Heap sort" style="zoom:100%;" />
+<div style="text-align: center">
+<figure>
+<img src="../pictures/heap-sort.png" alt="Heap sort" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Heap sort example. </figcaption>
+</figure>
+</div>
+
 
 The left part (in heap) of the array is unsorted and the right part (not in heap) is sorted. We swap the first and last element in the unsorted array, then the last element is  in the sorted array. Heap sort can be thought of as an improved selection sort. 
 
@@ -101,9 +116,15 @@ Both them employ the **divide-and-conquer** paradigm based on recursion. This pa
 
 Divide the array into two sublists recursively and merge them.
 
-<img src="/pictures/merge-sort.png" alt="Merge sort" style="zoom: 80%;" />
+<div style="text-align: center">
+<figure>
+<img src="../pictures/merge-sort.png" alt="Merge sort" style="zoom: 80%;" />
+<figcaption style="font-size: 80%;"> Merge sort example. (<a href="https://www.geeksforgeeks.org/merge-sort/">Figure source</a>) </figcaption>
+</figure>
+</div>
 
-Space complexity: 
+
+Space complexity analysis: 
 
 Suppose $n=16$, the space tree can be drawn as:
 
@@ -190,7 +211,12 @@ class Solution:
 
 Recursively pick an element as pivot and partition the other elements by comparing them with the picked pivot. 
 
-![Quick sort](/pictures/quick-sort.png)
+<div style="text-align: center">
+<figure>
+<img src="../pictures/quick-sort.png" alt="Quick sort" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Quick sort example. (<a href="https://www.geeksforgeeks.org/quick-sort/">Figure source</a>) </figcaption>
+</figure>
+</div>
 
 Best case: In the best case, each time we perform a partition we divide the list into two nearly equal pieces. The depth of the recurrence tree is $\log_2n$. The time in each level of the  recurrence tree is $O(n)$. Thus, in the best case, the time complexity is $O(n\log_2n)$ and the space complexity is $O(\log_2n)$.
 
@@ -309,7 +335,12 @@ class Solution(object):
 
 Counting sort is usually used for sorting integers or characters. It is based on keys between a specific range. It works by counting the number of objects having distinct key values (kind of hashing). Then doing some arithmetic to calculate the position of each object in the output sequence.
 
-![counting_sort](/pictures/count_sort_example.gif)
+<div style="text-align: center">
+<figure>
+<img src="../pictures/count_sort_example.gif" alt="counting_sort" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Counting sort example. </figcaption>
+</figure>
+</div>
 
 Suppose the elements are in range from $1$ to $k$, thus there are $k$ keys.
 
@@ -336,7 +367,12 @@ Counting sort is a linear time sorting algorithm that sort in $O(n+k)$ time when
 
 In this case, radix sort can sort such an array in linear time. The idea of Radix sort is to do digit by digit sort starting from least significant digit to most significant digit. Radix sort uses counting sort as a subroutine to sort. 
 
-<img src="/pictures/radix-sort.png" alt="radix-sort" style="zoom:60%;" />
+<div style="text-align: center">
+<figure>
+<img src="../pictures/radix-sort.png" alt="radix-sort" style="zoom:60%;" />
+<figcaption style="font-size: 80%;"> Radix sort example. </figcaption>
+</figure>
+</div>
 
 Suppose there are $l$ digits(or characters) in each input integer(or string), and there are $c$ different digits(or characters), for example, $c=10$ for digits and $c=26$ for characters. Note that $c$ is the size of the count array in each counting sort of each pass, also $k=O(c^l)$. 
 
@@ -368,7 +404,12 @@ Bucket sort works as follows:
 3. Sort each non-empty bucket using bucket sort or other sorting methods.
 4. **Gather**: Visit the buckets in order and put all elements back into the original array.
 
-<img src="/pictures/bucket-sort.png" alt="bucket-sort" style="zoom:60%;" />
+<div style="text-align: center">
+<figure>
+<img src="../pictures/bucket-sort.png" alt="bucket-sort" style="zoom:60%;" />
+<figcaption style="font-size: 80%;"> Bucket sort example. </figcaption>
+</figure>
+</div>
 
 Bucket sort is mainly useful when input is uniformly distributed over a range. The worst-case scenario occurs when all the elements are placed in a single bucket. The overall performance would then be dominated by the algorithm used to sort each bucket, which is typically $O(n^{2}) $ insertion sort, making bucket sort less optimal than $O(n\log_2n)$ comparison sort algorithms.
 

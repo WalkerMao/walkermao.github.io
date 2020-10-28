@@ -157,7 +157,7 @@ A Markov process is uniquely defined by its transition probabilities $P(x'\mid x
 
 [3] Return samples $$\{x_i\}_{i=1}^N$$. END. 
 
----
+<br>
 
 **References**:
 
@@ -170,8 +170,3 @@ Collins, Robert. "[Intro to Sampling Methods](http://www.cse.psu.edu/~rtc12/CSE5
 Lecture notes from my professor [Sijian Wang](https://stat.rutgers.edu/people-pages/faculty/people/130-faculty/381-sijan-wang).
 
 [Wikipedia: Metropolis–Hastings algorithm]([https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm](https://en.wikipedia.org/wiki/Metropolis–Hastings_algorithm)).
-
-
-
-
-

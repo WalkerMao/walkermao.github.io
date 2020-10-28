@@ -117,7 +117,7 @@ However, the defenders of backward elimination argue that weaker subsets are fou
 
 Examples of embedded methods are linear or logistic regression with **L1 regularization**, since L1-norm shrinks some coefficients to $0$ and produces sparse coefficients. 
 
----
+<br>
 
 **References**: 
 

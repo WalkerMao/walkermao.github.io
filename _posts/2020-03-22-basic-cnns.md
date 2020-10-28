@@ -14,7 +14,12 @@ Convolutional Neural Networks (CNNs) are very similar to ordinary Neural Network
 
 A CNN arranges its neurons in three dimensions (width, height, depth), and the neurons in a layer will only be connected to a small region of the layer before it, instead of all of the neurons in a fully-connected manner. 
 
+<div style="text-align: center">
+<figure>
 <div style="text-align: center"> <img src="http://cs231n.github.io/assets/cnn/cnn.jpeg" alt="CNN" style="zoom:60%;" />  </div>
+<figcaption style="font-size: 80%;"> <a href="https://cs231n.github.io/convolutional-networks/">Figure source</a> </figcaption>
+</figure>
+</div>
 
 A CNN is made up of Layers. **Every layer transforms an input 3D volume to an output 3D volume with some differentiable function** that may or may not have parameters. As visualized in the picture above, the red input layer holds the image, so its width and height would be the dimensions of the image, and the depth would be 3 (Red, Green, Blue channels). 
 
@@ -32,7 +37,12 @@ Convolution in CNN is similar to discrete convolution computation, but a bit dif
 
 We connect each neuron in the convolutional layer (blue) to only a local region of the input volume (red). The spatial extent of this connectivity is a hyperparameter called the **receptive field** of the neuron (equivalently this is the filter size). 
 
+<div style="text-align: center">
+<figure>
 <img src="http://cs231n.github.io/assets/cnn/cnn.jpeg" alt="CNN" style="zoom:60%; padding-right:100px;" />  <img src="http://cs231n.github.io/assets/cnn/depthcol.jpeg" alt="Convolutional Layer" style="zoom: 50%;" /> 
+<figcaption style="font-size: 80%;"> <a href="https://cs231n.github.io/convolutional-networks/">Figure source</a> </figcaption>
+</figure>
+</div>
 
 As shown in the picture above, suppose that the input volume (red) has size $$[32\times 32 \times3]$$, (e.g. an RGB CIFAR-10 image). If the receptive field (or the filter size) is $$[5\times5]$$, then each neuron in the convolutional Layer (blue) will have weights to a $$[5\times5\times3]$$ region in the input volume, for a total of $$5\times5\times3 = 75$$ weights and $$1$$ bias parameter. 
 
@@ -40,8 +50,8 @@ The matrix of weights is called **convolutional filter** or **convolutional kern
 
 <div style="text-align: center">
 <figure>
-<img src="/pictures/working-of-a-convolutional-layer.png" alt="working-of-a-convolutional-layer" style="zoom: 60%;" />
-<figcaption style="font-size: 80%;">Figure. Working of a convolutional layer. (<a href="https://arxiv.org/abs/1902.05655">Source</a>)</figcaption>
+<img src="../pictures/working-of-a-convolutional-layer.png" alt="working-of-a-convolutional-layer" style="zoom: 60%;" />
+<figcaption style="font-size: 80%;">Figure. Working of a convolutional layer. (<a href="https://arxiv.org/abs/1902.05655">Figure source</a>)</figcaption>
 </figure>
 </div>
 
@@ -90,9 +100,14 @@ In practice, a **common setting** of the hyperparameters is $F=3,S=1,P=1$. Howev
 
 ### Pooling Layer
 
-It is common to periodically insert a Pooling layer in-between successive Conv layers. Its function is to progressively reduce the spatial size of the representation to reduce the amount of parameters and computation in the network, and hence to also control overfitting. The Pooling Layer operates independently on every depth slice of the input and resizes it spatially, using the operations like max, average or L2-norm. In practice, max pooling operation normally works better.
+It is common to periodically insert a Pooling layer in-between successive Conv layers. Its function is to progressively reduce the spatial size of the representation to reduce the amount of parameters and computation in the network, and hence to also control overfitting. The Pooling Layer operates independently on every depth slice of the input and resizes it spatially, using the operations like max, average or L2-norm. In practice, max pooling operation normally works better. 
 
+<div style="text-align: center">
+<figure>
 <img src="http://cs231n.github.io/assets/cnn/pool.jpeg" alt="Pooling Layer" style="zoom:50%; padding-right:100px;" />  <img src="http://cs231n.github.io/assets/cnn/maxpool.jpeg" style="zoom:50%;" />
+<figcaption style="font-size: 80%;"> <a href="https://cs231n.github.io/convolutional-networks/">Figure source</a> </figcaption>
+</figure>
+</div>
 
 The pooling layer:
 
@@ -137,20 +152,31 @@ Example Architecture: In CIFAR-10, images are only of size $$[32\times32\times3]
 - POOL layer will perform a downsampling operation along the spatial dimensions (width, height), resulting in volume such as $$[16\times16\times12]$$.
 - FC (i.e. fully-connected) layer will compute the class scores, resulting in volume of size $$[1\times1\times10]$$, where each of the $10$ numbers correspond to a class score, such as among the $10$ categories of CIFAR-10. As with ordinary Neural Networks and as the name implies, each neuron in this layer will be connected to all the numbers in the previous volume. 
 
-<div style="text-align: center">  <img src="http://cs231n.github.io/assets/cnn/convnet.jpeg" alt="CNN" style="zoom: 42%;" /> </div>
+
+<div style="text-align: center">
+<figure>
+<img src="http://cs231n.github.io/assets/cnn/convnet.jpeg" alt="CNN" style="zoom: 42%;" />
+<figcaption style="font-size: 80%;"> <a href="https://cs231n.github.io/convolutional-networks/">Figure source</a> </figcaption>
+</figure>
+</div>
 
 The picture above shows the activations of an example ConvNet architecture. The initial volume stores the raw image pixels (left) and the last volume stores the class scores (right). Each volume of activations along the processing path is shown as a column. Since it's difficult to visualize 3D volumes, we lay out each volume's slices in rows. The last layer volume holds the scores for each class, but here we only visualize the sorted top $5$ scores
 
 ### Summary
 
 - A ConvNet architecture is in the simplest case a list of Layers that transform the image volume into an output volume (e.g. holding the class scores)
+
 - There are a few distinct types of Layers (e.g. CONV/FC/RELU/POOL are by far the most popular)
+
 - Each Layer accepts an input 3D volume and transforms it to an output 3D volume through a differentiable function
+
 - Each Layer may or may not have parameters (e.g. CONV/FC do, RELU/POOL don’t)
+
 - Each Layer may or may not have additional hyperparameters (e.g. CONV/FC/POOL do, RELU doesn’t)
 
+<br>
 
-## References
+**References**:
 
 Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. [*Deep learning*](http://www.deeplearningbook.org/). MIT press, 2016.
 

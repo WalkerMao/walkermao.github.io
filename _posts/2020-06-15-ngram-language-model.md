@@ -242,7 +242,9 @@ This chapter introduced language modeling and the n-gram, one of the most widely
 * Both backoff and interpolation require discounting to create a probability distribution. 
 * Kneser-Ney smoothing makes use of the probability of a word being a novel continuation. The interpolated Kneser-Ney smoothing algorithm mixes a discounted probability with a lower-order continuation probability.
 
----
+<br>
 
-**Reference**: Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
+**Reference**: 
+
+Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
 

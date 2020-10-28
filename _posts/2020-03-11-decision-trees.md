@@ -8,7 +8,9 @@ comments: true
 
 Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one. They are conceptually simple yet powerful. 
 
+<div style="text-align: center">
 <img src="/pictures/Partitions-of-tree.jpg" alt="Partitions-of-tree" style="zoom:29%;" />    <img src="/pictures/Decision-tree.jpg" alt="Decision-tree" style="zoom:30%;" /> 
+</div>
 
 ## 1. Regression Trees
 
@@ -67,7 +69,7 @@ We define a subtree $T ⊂ T_0$ to be any tree that can be obtained by pruning $
 We define the cost complexity criterion for a tree $$T$$ as
 
 $$
-C_α(T) = \sum_{m=1}^{|T|}N_m Q_m + α|T| = \sum_{m=1}^{|T|}\sum_{x_i\in R_m} (y_i-\hat{c}_m)^2 + α|T|,
+C_\alpha(T) = \sum_{m=1}^{|T|}N_m Q_m + α|T| = \sum_{m=1}^{|T|}\sum_{x_i\in R_m} (y_i-\hat{c}_m)^2 + α|T|,
 $$
 
 where $$m$$ is the index of terminal node, and $$\alpha$$ is the regularization parameter (or strength). 
@@ -164,7 +166,9 @@ Partial dependence functions $$f_\mathcal{S}(X_\mathcal{S})$$ can be used to int
 
 The partial dependence of $f(X)$ on $X_\mathcal{S}$ is a marginal average of $f$, and can represent the **effect** of $X_\mathcal{S}$ on $f(X)$ after accounting for the (average) effects of the other variables $X_\mathcal{C}$ on $f(X)$. It is not the effect of $$X_\mathcal{S}$$ on $f(X)$ ignoring the effects of $X_\mathcal{C}$. The latter is given by the conditional expectation $$ \tilde{f}_\mathcal{S}(X_\mathcal{S}) = E[f(X_\mathcal{S}, X_\mathcal{C}) \mid f(X_\mathcal{S})]$$. 
 
+<div style="text-align: center">
 <img src="/pictures/Partial-dependence-plot-1.jpg" alt="Partial-dependence-plot-1" style="zoom: 33%;" /><img src="/pictures/Partial-dependence-plot-2.jpg" alt="Partial-dependence-plot-2" style="zoom: 33%;" /><img src="/pictures/Partial-dependence-plot-3.jpg" alt="Partial-dependence-plot-3" style="zoom: 28.5%;" />
+</div>
 
 The plots above show the partial dependence of house value on average occupancy and house age. There appears to be a strong interaction effect between these two variables.
 

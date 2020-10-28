@@ -14,7 +14,7 @@ A tree is a collection of nodes. The collection can be empty; otherwise, a tree 
 - a distinguished node called the root $r$; 
 - and zero or more nonempty (sub)trees, each of whose roots are connected by a directed edge from $r$. 
 
-<div style="text-align: center"> <img src="/pictures/terminology-of-tree.png" alt="Terminology-of-tree" style="zoom:60%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/terminology-of-tree.png" alt="Terminology-of-tree" style="zoom:60%;" /> </div>
 
 We define the **depth** of a node as the length of the unique path from the root to the node, and the **height** of a node as the longest path from the node to a leaf. In the plot above, 
 
@@ -37,7 +37,7 @@ class TreeNode:
 
 A **full binary tree** is a binary tree in which each node has exactly zero or two children. A **complete binary tree** is a binary tree, which is completely filled, with the possible exception of the bottom level, which is filled from left to right. 
 
-<div style="text-align: center"> <img src="/pictures/full-and-complete-tree.bmp" alt="full-and-complete-tree" style="zoom: 80%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/full-and-complete-tree.bmp" alt="full-and-complete-tree" style="zoom: 80%;" /> </div>
 
 ### Tree Traversals
 
@@ -45,7 +45,7 @@ A **full binary tree** is a binary tree in which each node has exactly zero or t
 - Inorder: left -> node -> right;
 - Postorder: left -> right -> node.
 
-<div style="text-align: center"> <img src="\pictures\binary-tree-traversal.png" alt="binary-tree-traversal" style="zoom:50%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/binary-tree-traversal.png" alt="binary-tree-traversal" style="zoom:50%;" /> </div>
 
 Postorder traversal can compute the heights of the nodes, while preorder tarversal can compute the depths of the nodes. 
 
@@ -75,7 +75,7 @@ Given a tree with $N$ nodes, the average time complexity of search in a binary t
 
 However, in the worst case, BST can have $O(N)$ height, when the skewed tree resembles a linked list. As shown below, 
 
-<div style="text-align: center"> <img src="/pictures/skewed-tree.webp" alt="skewed-tree" style="zoom: 50%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/skewed-tree.webp" alt="skewed-tree" style="zoom: 50%;" /> </div>
 
 In this worst case, the time complexity of search, insertion and deletion in a BST is $O(N)$.
 
@@ -83,7 +83,7 @@ In this worst case, the time complexity of search, insertion and deletion in a B
 
 An **AVL tree** is a self-balancing BST, in which each node stores a value called a **balance factor** which is the difference in height between its left subtree and right subtree and all the nodes must have a balance factor of $-1$, $0$ or $1$.
 
-<div style="text-align: center"> <img src="/pictures/AVL-tree.jpg" alt="AVL-tree" style="zoom:70%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/AVL-tree.jpg" alt="AVL-tree" style="zoom:70%;" /> </div>
 
 The height of an AVL tree is always $O(\log_2 N)$. Thus, either in the average or worst case, the time complexity of search, insertion and deletion in a AVL tree is $O(\log_2N)$. 
 
@@ -99,7 +99,7 @@ A **red-black tree** is a self-balancing BST in which every node follows followi
 
 - Every path from a node (including root) to any of its descendant leaf node has the same number of black nodes. 
 
-<div style="text-align: center"> <img src="/pictures/red-black.png" alt="Red-black-tree" style="zoom: 60%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/red-black.png" alt="Red-black-tree" style="zoom: 60%;" /> </div>
 
 Similar to AVL trees, the height of a red-black tree is always $O(\log_2 N)$. Thus, either in the average or worst case, the time complexity of search, insertion and deletion in a red-black tree is $O(\log_2N)$.  
 
@@ -113,7 +113,7 @@ The AVL tree and other self-balancing search trees like Red Black are useful to 
 
 A **splay tree** is a self-balancing BST in which the most recently accessed node is pushed to the root by a series of rotations, and thus it is quick to be accessed again. 
 
-<div style="text-align: center"> <img src="/pictures/splay-tree.png" alt="Splay-tree" style="zoom: 60%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/splay-tree.png" alt="Splay-tree" style="zoom: 60%;" /> </div>
 
 In a splay tree, the frequently accessed nodes will move nearer to the root where they can be accessed more quickly. The worst-case height (though unlikely) is $O(N)$, with the average being $O(\log_2N)$. Having frequently-used nodes near the root is an advantage for many practical applications like locality of reference, and is particularly useful for implementing  caches and garbage collection algorithms.
 
@@ -131,7 +131,7 @@ A **B-tree** is a self-balancing search tree that keeps data in sorted order. A 
 
 - All leaves are at the same depth. 
 
-<div style="text-align: center"> <img src="\pictures\B-tree.png" alt="B-tree" style="zoom:55%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/B-tree.png" alt="B-tree" style="zoom:55%;" /> </div>
 
 Either in the average or worst case, the time complexity of search, insertion and deletion in a B-tree of order $M$ is $O(\log_MN)$. 
 
@@ -143,7 +143,7 @@ In most of the other self-balancing search trees (like AVL and red-black trees),
 
 The main idea of using B-Trees is to reduce the number of disk accesses. Most of the tree operations (search, insert, delete, max, min, etc.) require $O(h)$ disk accesses where $h$ is the height of the tree. B-tree is a fat tree. The height of B-Trees is kept low by putting maximum possible keys in a B-Tree node. Generally, the B-Tree node size is kept equal to the disk block size. Since the height of the B-tree is low so total disk accesses for most of the operations are reduced significantly compared to balanced BST like AVL Tree, red-black Tree, etc..
 
----
+<br>
 
 **References**:
 

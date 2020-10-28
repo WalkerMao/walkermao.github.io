@@ -66,9 +66,14 @@ In most text classification applications, using a stop word list does not improv
 
 The final algorithm can be expressed as 
 
-<img src="/pictures/Naive-Bayes.png" alt="Naive-Bayes" style="zoom:70%;" />
+<div style="text-align: center">
+<figure>
+<img src="../pictures/Naive-Bayes.png" alt="Naive-Bayes" style="zoom:70%;" />
+</figure>
+</div>
+<br>
 
----
+**Reference**: 
 
-**Reference**: Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
+Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
 

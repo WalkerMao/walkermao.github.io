@@ -155,7 +155,7 @@ Bidirectional RNNs have proven to be quite effective for sequence classification
 
 <img src="/pictures/Bidirectional-RNN-for-Sequence-Classification.png" alt="Bidirectional-RNN-for-Sequence-Classification" style="zoom:65%;" />
 
----
+<br>
 
 **References**: 
 

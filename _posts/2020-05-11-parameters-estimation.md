@@ -76,6 +76,8 @@ $$
 
 The variance $$\text{Var}(\theta \mid X)$$ that we can calculate for $$\theta$$ from its posterior distribution allows us to express our confidence in any specific value we may use as an estimate. If the variance is too large, we may declare that there does not exist a good specific estimate for $$\theta$$.
 
----
+<br>
 
-**Reference**: [ML, MAP, and Bayesian --- The Holy Trinity of Parameter Estimation and Data Prediction](https://engineering.purdue.edu/kak/Tutorials/Trinity.pdf).
+**Reference**: 
+
+[ML, MAP, and Bayesian --- The Holy Trinity of Parameter Estimation and Data Prediction](https://engineering.purdue.edu/kak/Tutorials/Trinity.pdf).

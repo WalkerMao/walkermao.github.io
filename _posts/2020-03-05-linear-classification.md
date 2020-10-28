@@ -220,12 +220,12 @@ We can apply one of Newton’s Method, Fisher Scoring or Iteratively re-Weighted
 
 The LR model is more robust and more general, in that it makes less assumptions. LDA is not robust to gross outliers, because observations far from the decision boundary (which are down-weighted by logistic regression) play a role in estimating the common covariance matrix. LDA assumes the distribution of the data. By relying on the additional model assumptions, we have more information about the parameters, and hence can estimate them more efficiently (lower variance). Otherwise, it will pay a price for focusing on the (noisier) data.
 
----
+<br>
 
 **References**:
 
 Friedman, J., Hastie, T., & Tibshirani, R. (2001). *The elements of statistical learning* (Vol. 1, No. 10). New York: Springer series in statistics.
 
-周志华. (2016). *机器学习*. 清华大学出版社. 
+周, 志华. (2016). *机器学习*. 清华大学出版社. 
 
 Mount, John. (2011, Sep 23). *The equivalence of logistic regression and maximum entropy models*. Retrieved June 7, 2020, from https://pdfs.semanticscholar.org/19cc/c9e2937b3260ac2c93020174c09c2891672e.pdf

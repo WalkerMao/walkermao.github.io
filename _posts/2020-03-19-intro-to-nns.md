@@ -51,7 +51,7 @@ Since $$x_i>0$$ for all $$i=1,2,\cdots$$, the gradients $$\frac{\partial \text{L
 
 For example, say there are two parameters $$w_1,w_2$$, and the gradients of them are always of the same sign. That means $$w_1$$ and $$w_2$$ increase or decrease simultaneously in the parameters updates, and it also means we can only move roughly in the direction of northeast or southwest in the parameter space. If our goal happens to be in the northwest or southeast side of our current position, then it will cost a lot to move to our target position, as shown below. 
 
-<div style="text-align: center"> <img src="/pictures/zig-zagging-parameter-updates.png" alt="zig-zagging-parameter-updates" style="zoom: 30%;" />  </div>
+<div style="text-align: center"> <img src="../pictures/zig-zagging-parameter-updates.png" alt="zig-zagging-parameter-updates" style="zoom: 30%;" />  </div>
 
 #### ReLU, Leaky ReLU, ELU
 
@@ -108,7 +108,7 @@ Maxout neuron (introduced recently by [Goodfellow et al.](http://www-etud.iro.um
 
 A feedforward network is a multilayer network in which the units are connected with no cycles; the outputs from units in each layer are passed to units in the next higher layer, and no outputs are passed back to lower layers. Simple feedforward networks have three kinds of nodes: input units, hidden units, and output units. The core of the neural network is the **hidden layer** formed of **hidden units**, each of which is a neural unit. In the standard architecture, each layer is **fully-connected**. 
 
-<div style="text-align: center"> <img src="/pictures/neural_network_example.png" alt="neural_network_example" style="zoom:80%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/neural_network_example.png" alt="neural_network_example" style="zoom:80%;" /> </div>
 
 Let's assume there are $n^{[l-1]}$ hidden units in the hidden layer $l-1$ and $n^{[l]}$ units in the layer $l$. Denote the output of the layer $$l-1$$ (it is also the input of the layer $$l$$) as $a^{[l-1]} \in \mathbb{R}^{n^{[l-1]}}$. In the layer $$l$$, denote the weight matrix as $W^{[l]} \in \mathbb{R}^{n^{[l]}\times n^{[l-1]}}$, bias vector as $b^{[l]}\in\mathbb{R}^{n^{[l]}}$, activation function as $$\sigma^{[l]}(\cdot)$$, then the output of the layer $$l$$ is 
 
@@ -118,7 +118,7 @@ $$
 
 For example, the picture below shows a fully-connected layer (layer 2). There are two units in layer 1 and three units in layer 2. 
 
-<div style="text-align: center"> <img src="/pictures/two-layers.png" alt="two-layers" style="zoom:30%;" /> </div>
+<div style="text-align: center"> <img src="../pictures/two-layers.png" alt="two-layers" style="zoom:30%;" /> </div>
 
 The mathematical expression of this plot is (dimension is labeled under the symbol):
 
@@ -159,7 +159,7 @@ When faced with a regression task, first consider if it is absolutely necessary.
 
 If you’re certain that classification is not appropriate, use the L2 but be careful: For example, the L2 is more fragile and applying dropout in the network (especially in the layer right before the L2 loss) is not a great idea. 
 
----
+<br>
 
 **References**:
 

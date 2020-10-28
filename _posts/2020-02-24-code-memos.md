@@ -89,3 +89,13 @@ Make the local Jekyll server work:
 $ bundle exec jekyll serve --watch
 ```
 
+---
+
+## Ubuntu
+
+Run the command below before using a `*.AppImage` program. 
+
+```bash
+$ chmod a+x *.AppImage
+```
+

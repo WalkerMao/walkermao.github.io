@@ -99,6 +99,8 @@ Overall, TF is big when term $t$ occurs often in document, and IDF is big when t
 
 Cosine similarity works better with TF-IDF values than with original frequencies. 
 
----
+<br>
 
-**Reference**: Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
+**Reference**: 
+
+Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
