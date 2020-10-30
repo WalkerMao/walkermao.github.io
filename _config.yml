@@ -76,7 +76,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
 
-paginate: 10
+paginate: 15
 paginate_path: "/posts/page:num/"
 
 permalink: /:title:output_ext
