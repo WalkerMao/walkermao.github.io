@@ -37,6 +37,14 @@ plt.show()
 
 In the following sections, we discuss the approaches to deal with the class imbalance problems. 
 
+## Model Selecting
+
+Some models like Logistic Regression with loss functions of the form $$\frac{1}{n}\sum_{i=1}^{n}\text{Loss}(\hat{y}_i, y_i)$$ are very sensitive to imbalanced dataset. However, models like Decision Tree, Ensemble Trees, and SVM are less sensitive. 
+
+As for the tree based methods, the objective of splitting a node is to maximize the information gain and make the sub-nodes as pure as possible, so tree based methods also pay attention to minority class because the minority class can also make the node impure. 
+
+As for the SVM, the loss is composed by margin and support vectors, not by all data, thus SVM works well if the support vectors are balanced, and the balanced original dataset is not that necessary. 
+
 ## Changing Performance Metric
 
 Note that the metrics are not the loss functions. 
