@@ -126,7 +126,7 @@ $$
 &= \frac{1}{2}\left(\sum_{j=1}^p \sum_{j'=1}^p \sum_{f=1}^k v_{fj} v_{fj'} x_{j} x_{j'} \right)  - \frac{1}{2}\left( \sum_{j=1}^p \sum_{f=1}^k v_{fj} v_{fj} x_{j} x_{j} \right) \\
 &= \frac{1}{2}\left(\sum_{j=1}^p \sum_{j'=1}^p \sum_{f=1}^k v_{fj} v_{fj'} x_{j} x_{j'}  -  \sum_{j=1}^p \sum_{f=1}^k v_{fj} v_{fj} x_{j} x_{j} \right) \\
 &= \frac{1}{2} \sum_{f=1}^{k} \left( \left(\sum_{j=1}^p v_{fj}x_{j} \right) \left( \sum_{j'=1}^p v_{fj'}x_{j'} \right) - \sum_{j=1}^{p} v_{fj}^2 x_{j}^2 \right) \\
-&= \frac{1}{2} \sum_{f=1}^{k} \left( \left( \sum_{j}^{p} v_{fj}x_{j} \right)^2  - \sum_{j=1}^{p} v_{fj}^2 x_{j}^2 \right) \tag {10}
+&= \frac{1}{2} \sum_{f=1}^{k} \left( \left( \sum_{j=1}^{p} v_{fj}x_{j} \right)^2  - \sum_{j=1}^{p} v_{fj}^2 x_{j}^2 \right) \tag {10}
 \end{align}
 $$
 
