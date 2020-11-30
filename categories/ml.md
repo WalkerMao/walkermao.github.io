@@ -1,5 +1,5 @@
 ---
 layout: categories_page
-title: "Category: ML"
+title: "Category: Machine Learning"
 categories: ml
 ---
