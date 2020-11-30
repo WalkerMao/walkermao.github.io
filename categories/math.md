@@ -1,5 +1,5 @@
 ---
 layout: categories_page
-title: "Category: Math"
+title: "Category: Mathematics"
 categories: math
 ---

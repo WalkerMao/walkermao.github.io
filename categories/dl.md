@@ -1,5 +1,5 @@
 ---
 layout: categories_page
-title: "Category: DL"
+title: "Category: Deep Learning"
 categories: dl
 ---

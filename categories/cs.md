@@ -1,5 +1,5 @@
 ---
 layout: categories_page
-title: "Category: CS"
+title: "Category: Computer Science"
 categories: cs
 ---

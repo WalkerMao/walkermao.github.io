@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Intro to Machine Learning: Data Preprocessing"
+title:  "Feature Engineering: Data Preprocessing"
 date: 2020-09-17
-categories: ml stat
+categories: fe stat
 comments: true
 ---
 
