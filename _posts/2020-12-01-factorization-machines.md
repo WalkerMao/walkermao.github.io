@@ -115,6 +115,37 @@ $$
 \hat{y} = w_0 + \sum_{j=1}^p w_jx_j + \sum_{j=1}^p\sum_{j'=j+1}^p \langle v_j, v_{j'} \rangle x_jx_{j'}. \tag {9}
 $$
 
+## Learning Factorization Machines
+
+The pairwise interactions can be reformulated:
+
+$$
+\begin{align}
+& \sum_{j=1}^p \sum_{j'=j+1}^p \langle \textbf{v}_j , \textbf{v}_{j'} \rangle x_{j} x_{j'} \\
+&= \frac{1}{2} \sum_{j=1}^p \sum_{j'=1}^p \langle \textbf{v}_j , \textbf{v}_{j'} \rangle x_{j} x_{j'} - \frac{1}{2} \sum_{j=1}^p \langle \textbf{v}_j , \textbf{v}_{j} \rangle x_{j} x_{j} \\
+&= \frac{1}{2}\left(\sum_{j=1}^p \sum_{j'=1}^p \sum_{f=1}^k v_{fj} v_{fj'} x_{j} x_{j'} \right)  - \frac{1}{2}\left( \sum_{j=1}^p \sum_{f=1}^k v_{fj} v_{fj} x_{j} x_{j} \right) \\
+&= \frac{1}{2}\left(\sum_{j=1}^p \sum_{j'=1}^p \sum_{f=1}^k v_{fj} v_{fj'} x_{j} x_{j'}  -  \sum_{j=1}^p \sum_{f=1}^k v_{fj} v_{fj} x_{j} x_{j} \right) \\
+&= \frac{1}{2} \sum_{f=1}^{k} \left( \left(\sum_{j=1}^p v_{fj}x_{j} \right) \left( \sum_{j'=1}^p v_{fj'}x_{j'} \right) - \sum_{j=1}^{p} v_{fj}^2 x_{j}^2 \right) \\
+&= \frac{1}{2} \sum_{f=1}^{k} \left( \left( \sum_{j}^{p} v_{fj}x_{j} \right)^2  - \sum_{j=1}^{p} v_{fj}^2 x_{j}^2 \right) \tag {10}
+\end{align}
+$$
+
+This equation has only linear complexity in both $$k$$ and $$p$$, i.e. its computation is in $$O(kp)$$.
+
+As we have shown, FMs have a closed model equation that can be computed in linear time. The model parameters ($$w_0$$, $$w_j$$'s and $$V$$) of FMs can be learned efficiently by gradient descent methods, e.g. stochastic gradient descent (SGD), for a variety of losses, among them are square, logit or hinge loss. The gradient of the FM model is:
+$$
+\begin{align}
+\frac{\partial\hat{y}}{\partial\theta} =
+\begin{cases}
+1,  & \text{if $\theta$ is $w_0$}; \\
+x_j, & \text{if $\theta$ is $w_j$}; \\
+x_j\sum_{j'=1}^{p} v_{fj'}x_{j'} - v_{fj}x_{j}^2, & \text{if $\theta$ is $v_{fj}$}.
+\end{cases}
+\end{align} \tag{11}
+$$
+
+The sum $$\sum_{j'=1}^{p} v_{fj'}x_{j'}$$ is independent of $$j$$ and thus can be precomputed (e.g. when computing $$\hat{y}$$). In general, each gradient can be computed in constant time $$O(1)$$. And all parameter updates for a case $$(x,y)$$ can be done in $$O(kp)$$.
+
 ## Tips and Summary
 
 **Expressiveness**: A FM can express any interaction matrix $$W$$ if $$k$$ is chosen large enough. Nevertheless in sparse settings, typically a small $$k$$ should be chosen because there is not enough data. Restricting $$k$$, and also the restricting the expressiveness of the FM, leads to better generalization and thus improved interaction matrix $$W$$ under sparsity.
@@ -122,7 +153,7 @@ $$
 **Parameter Estimation Under Sparsity**: In sparse settings, there is usually not enough data to estimate interactions
 between variables directly and independently. Factorization machines can estimate interactions even in these settings well because they break the independence of the interaction parameters by factorizing them. In general this means that the data for one interaction helps also to estimate the parameters for related interactions. Read the [original paper](https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf) for an intuitive example.
 
-**Computation**: The model equation of a factorization machine (equation $$(2)$$) can be computed in linear time $$O(kn)$$. Read the [original paper](https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf) Lemma $$3.1$$ for the proof.
+**Computation**: The model equation of a factorization machine (equation $$(2)$$) can be computed in linear time $$O(kp)$$. 
 
 In summary, FMs model all possible interactions between values in the feature vector x using factorized interactions instead of full parametrized ones. This has two main advantages: 
 
@@ -131,8 +162,9 @@ In summary, FMs model all possible interactions between values in the feature ve
 
 <br>
 
-**Reference**:
+**References**:
 
 Rendle, Steffen. "Factorization machines." *2010 IEEE International Conference on Data Mining*. IEEE, 2010.
 
+Kafunah, Jefkine. "Factorization machines." 27 Mar. 2017. https://www.jefkine.com/recsys/2017/03/27/factorization-machines/. Accessed 1 Dec. 2020.
 
