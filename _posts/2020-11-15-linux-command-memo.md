@@ -2,7 +2,7 @@
 layout: post
 title: "Linux Command Memo"
 date: 2020-11-15
-categories: cs
+categories: CS
 published: true
 comments: true
 ---

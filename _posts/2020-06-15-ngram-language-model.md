@@ -2,7 +2,7 @@
 layout: post
 title: "N-Gram Language Models"
 date: 2020-06-15
-categories: nlp
+categories: NLP
 published: true
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "Imbalanced Classification (Part 2)"
 date: 2020-10-24
-categories: ml
+categories: ML
 published: true
 comments: true
 ---

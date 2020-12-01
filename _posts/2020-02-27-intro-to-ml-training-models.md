@@ -2,7 +2,7 @@
 layout: post
 title:  "Intro to Machine Learning: Training Models"
 date: 2020-02-27
-categories: ml stat
+categories: ML Stat
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: "Fourier Series and Transform"
 date: 2020-07-17
-categories: math
+categories: Math
 published: true
 comments: true
 ---

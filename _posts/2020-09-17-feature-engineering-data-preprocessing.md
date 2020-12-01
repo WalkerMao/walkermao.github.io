@@ -2,7 +2,7 @@
 layout: post
 title:  "Feature Engineering: Data Preprocessing"
 date: 2020-09-17
-categories: fe stat
+categories: FE Stat
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: "Feature Selection Methods"
 date: 2020-07-27
-categories: fe
+categories: FE
 published: true
 comments: true
 ---

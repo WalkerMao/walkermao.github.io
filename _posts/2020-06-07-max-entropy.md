@@ -2,7 +2,7 @@
 layout: post
 title: "Maximum Entropy"
 date: 2020-06-07
-categories: cs stat
+categories: CS Stat
 published: true
 comments: true
 ---
