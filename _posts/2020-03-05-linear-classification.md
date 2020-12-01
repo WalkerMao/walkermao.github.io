@@ -170,10 +170,13 @@ $$
 $$
 
 For the $$t$$-th iteration, if we use $$n$$ observations to compute the gradients, then the gradients for $$w^{[t-1]}$$ and $$b^{[t-1]}$$ are 
+
 $$
 \frac{1}{n}\sum_{i=1}^{n} \frac{\partial \text{Loss}(y_i, \hat{p}_i^{[t-1]})} {\partial w^{[t-1]}} = \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i) x_i, \\\frac{1}{n}\sum_{i=1}^{n} \frac{\partial \text{Loss}(y_i, \hat{p}_i^{[t-1]})} {\partial b^{[t-1]}} = \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i).
 $$
+
 The gradient updates for parameters can be written as:
+
 $$
 w^{[t]} =  w^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i) x_i, \\
 b^{[t]} = b^{[t-1]} - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} (\hat{p}_i^{[t-1]} - y_i).
