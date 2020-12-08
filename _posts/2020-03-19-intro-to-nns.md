@@ -159,7 +159,7 @@ When faced with a regression task, first consider if it is absolutely necessary.
 
 If you’re certain that classification is not appropriate, use the L2 but be careful: For example, the L2 is more fragile and applying dropout in the network (especially in the layer right before the L2 loss) is not a great idea. 
 
-#### Use GPU
+### Use GPU
 
 GPUs are used heavily in deep learning, because GPUs are well suited for parallel computing, and neural networks are embarrassingly parallel.
 
