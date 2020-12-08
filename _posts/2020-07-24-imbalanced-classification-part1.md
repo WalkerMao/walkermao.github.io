@@ -2,7 +2,7 @@
 layout: post
 title: "Imbalanced Classification (Part 1)"
 date: 2020-07-24
-categories: ml
+categories: ML
 published: true
 comments: true
 ---
@@ -15,7 +15,7 @@ Let's first review the confusion matrix, as shown below.
 
 <div style="text-align: center"> <img src="../pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/> </div>
 
-Say if we have a imbalanced data set, in which $$99\%$$ are of negative class and $$1\%$$ are of positive class, then a classification model that always predict "negative" can achieve $$0.99$$ accuracy on average. The specificity (true negative rate) of this model is $$\text{TNR} = \frac{TN}{TN+FP} = \frac{99\%}{99\% + 0\%}=1$$, however, the sensitivity (true positive rate, or recall) is $$\text{TPR} = \frac{TP}{TP+FN} = \frac{0\%}{0\%+1\%}=0$$. 
+Say if we have a imbalanced data set, in which $$99\%$$ are of negative class and $$1\%$$ are of positive class, then a classification model that always predict "negative" can achieve $$0.99$$ accuracy on average. The specificity (true negative rate) of this model is $$\text{TNR} = \frac{TN}{TN+FP} = \frac{99\%}{99\% + 0\%}=1$$. However, the sensitivity (true positive rate, or recall) is $$\text{TPR} = \frac{TP}{TP+FN} = \frac{0\%}{0\%+1\%}=0$$, which is the fraction of the total amount of positive instances that were actually retrieved. 
 
 In this case, the ROC curve is a straight line and the AUC is $0.5$, as shown below.
 

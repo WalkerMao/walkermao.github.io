@@ -2,7 +2,7 @@
 layout: post
 title: "Tree Data Structures"
 date: 2020-08-16
-categories: cs
+categories: CS
 published: true
 comments: true
 ---

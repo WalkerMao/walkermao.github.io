@@ -2,7 +2,7 @@
 layout: post
 title: "Word Vectors (Part 1)"
 date: 2020-06-22
-categories: nlp
+categories: NLP
 published: true
 comments: true
 ---

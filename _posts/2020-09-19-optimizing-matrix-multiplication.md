@@ -2,7 +2,7 @@
 layout: post
 title: "Optimizing Matrix Multiplication"
 date: 2020-09-19
-categories: cs math
+categories: CS Math
 published: true
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Monte Carlo Methods"
 date: 2020-05-12
-categories: stat
+categories: Stat
 comments: true
 ---
 

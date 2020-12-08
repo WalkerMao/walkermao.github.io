@@ -2,7 +2,7 @@
 layout: post
 title:  "Intro to Neural Networks"
 date: 2020-03-19
-categories: dl
+categories: DL
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Intro to Machine Learning: Training Models"
 date: 2020-02-27
-categories: ml stat
+categories: ML Stat
 comments: true
 ---
 
@@ -36,11 +36,13 @@ Cross-entropy is differentiable, and hence more amenable to numerical optimizati
 
 #### 6.2.2 Metrics for Classification
 
-If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$\hat{y}_i = \text{sign}(\hat{p}_i > \text{threshold})$$. We can change the threshold from $$1$$ to $$0$$ and plot the TPR (true positive rate, or sensitivity, or recall) v.s. FPR (false positive rate, or $$1-$$ specificity). When the threshold is $$1$$, all cases are classified as negative, and $$\text{TPR} = \text{FPR} = 0$$. When the threshold is $$0$$, all cases are classified as positive, and $$\text{TPR} = \text{FPR} = 1$$.  
+**Precision** $$=\frac{TP}{TP+FP}$$ is the fraction of true positive instances among the predicted positive instances. **Recall** (**Sensitivity**) $$=\frac{TP}{TP+FN}$$ is the fraction of the total amount of positive instances that were actually retrieved. 
+
+If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$\hat{y}_i = \text{sign}(\hat{p}_i > \text{threshold})$$. We can change the threshold from $$1$$ to $$0$$ and plot the TPR (true positive rate, or sensitivity, or recall) v.s. FPR (false positive rate, or $$1-$$ specificity). When the threshold is $$1$$, all cases are classified as negative, and $$\text{TPR} = \text{FPR} = 0$$. When the threshold is $$0$$, all cases are classified as positive, and $$\text{TPR} = \text{FPR} = 1$$. 
 
 The plot is known as ROC (receiver operating characteristic) curve. The AUC (area under curve) is the area under the ROC curve. The larger of the AUC, the better of the classification model. 
 
-<img src="/pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom: 66%;" />  <img src="/pictures/ROC.png" alt="ROC" style="zoom: 50%;" />
+<div style="text-align: center"> <img src="../pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/>  <img src="../pictures/ROC.png" alt="ROC" style="zoom: 70%;" /> </div>
 
 Note that the metrics are not the loss functions. 
 

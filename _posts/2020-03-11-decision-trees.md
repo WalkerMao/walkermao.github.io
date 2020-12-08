@@ -2,15 +2,16 @@
 layout: post
 title:  "Decision Trees"
 date: 2020-03-11
-categories: ml
+categories: ML
 comments: true
 ---
 
 Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one. They are conceptually simple yet powerful. 
 
 <div style="text-align: center">
-<img src="/pictures/Partitions-of-tree.jpg" alt="Partitions-of-tree" style="zoom:29%;" />    <img src="/pictures/Decision-tree.jpg" alt="Decision-tree" style="zoom:30%;" /> 
+<img src="../pictures/Partitions-of-tree.jpg" alt="Partitions-of-tree" style="zoom:29%;" />    <img src="../pictures/Decision-tree.jpg" alt="Decision-tree" style="zoom:30%;" /> 
 </div>
+
 
 ## 1. Regression Trees
 

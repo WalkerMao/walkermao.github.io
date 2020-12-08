@@ -2,7 +2,7 @@
 layout: post
 title:  "Implementation of Basic Algorithms"
 date: 2020-02-20
-categories: cs
+categories: CS
 comments: true
 ---
 
