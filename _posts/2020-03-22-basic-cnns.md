@@ -23,7 +23,7 @@ A CNN arranges its neurons in three dimensions (width, height, depth), and the n
 
 A CNN is made up of Layers. **Every layer transforms an input 3D volume to an output 3D volume with some differentiable function** that may or may not have parameters. As visualized in the picture above, the red input layer holds the image, so its width and height would be the dimensions of the image, and the depth would be 3 (Red, Green, Blue channels). 
 
-## CNN Layers
+## Layers in CNN
 
 We use three main types of layers to build CNN architectures: **Convolutional Layer**, **Pooling Layer**, and **Fully-Connected Layer** (exactly as seen in regular Neural Networks). We will stack these layers to form a full CNN architecture. 
 
@@ -43,8 +43,9 @@ We connect each neuron in the convolutional layer (blue) to only a local region 
 <figcaption style="font-size: 80%;"> <a href="https://cs231n.github.io/convolutional-networks/">Figure source</a> </figcaption>
 </figure>
 </div>
-
 As shown in the picture above, suppose that the input volume (red) has size $$[32\times 32 \times3]$$, (e.g. an RGB CIFAR-10 image). If the receptive field (or the filter size) is $$[5\times5]$$, then each neuron in the convolutional Layer (blue) will have weights to a $$[5\times5\times3]$$ region in the input volume, for a total of $$5\times5\times3 = 75$$ weights and $$1$$ bias parameter. 
+
+Each neuron in the convolutional layer is connected only to a local region in the input volume spatially, but to the full depth (i.e. all color channels). Note, there are multiple neurons ($$5$$ in this example) along the depth, all looking at the same region in the input. 
 
 The matrix of weights is called **convolutional filter** or **convolutional kernel**, as shown below.
 
@@ -55,8 +56,6 @@ The matrix of weights is called **convolutional filter** or **convolutional kern
 </figure>
 </div>
 
-
-Each neuron in the convolutional layer is connected only to a local region in the input volume spatially, but to the full depth (i.e. all color channels). Note, there are multiple neurons ($$5$$ in this example) along the depth, all looking at the same region in the input. 
 
 #### Spatial Arrangement
 
@@ -97,6 +96,15 @@ To summarize, the Convolutional Layer:
 - To keep the conv layer $1$ and layer $2$ have the same size, set $P=(W_1S-S-W_1+F)/2$.
 
 In practice, a **common setting** of the hyperparameters is $F=3,S=1,P=1$. However, there are common conventions and rules of thumb that motivate these hyperparameters. See the [ConvNet architectures](http://cs231n.github.io/convolutional-networks/#architectures) section below. 
+
+The CNN layers we introduced above are 2D (2 dimensional). There are also 1D and 3D, as shown below. Read this [blog](https://towardsdatascience.com/understanding-1d-and-3d-convolution-neural-network-keras-9d8f76e29610) for more.
+
+| Convolutional dimension | Kernel moves in | Input and output data dimension | Mostly used on |
+|---|---|---|---|
+| 1D | 1 direction | 2D | Time-Series data |
+|2D|2 directions|3D|Image data|
+|3D|3 directions|4D|3D image data (MRI, CT Scans, Video)|
+
 
 ### Pooling Layer
 
