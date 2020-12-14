@@ -183,7 +183,7 @@ By using the Taylor polynomial of degree two, Newton's method is more accurate t
 
 ### 8.3 Proximal Gradient Descent
 
-If the objective function is not differentiable everywhere (e.g. L1 norm), we can use the proximal gradient descent. 
+If the function is not differentiable everywhere (e.g. L1 norm, ReLU), we can use the sub-gradient of the function  to update the parameters. However, for LASSO, we usually use the proximal gradient descent, rather than the sub-gradient descent. For ReLU, we usually simply set the sub-gradient as $$0$$ or $$1$$ when it comes to the zero point (indifferentiable). We don't use proximal gradient descent for ReLU because we need a (sub-)gradient to backprobagate.  
 
 <br>
 
