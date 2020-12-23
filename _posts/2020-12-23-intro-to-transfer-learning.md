@@ -64,7 +64,7 @@ How do we decide what type of transfer learning we should perform on a new datas
 
 Keeping in mind that the CNN features are more generic in early layers and more original-dataset-specific in later layers. If our new dataset is large enough, we can fine-tune the pretrained model. If not, then we should not funetune the pretrained model due to overfitting concerns, and it may be better to use these data to train a linear classifier based on the CNN features. If the new dataset is similar to the original dataset, we expect higher (latter) level features in the pretrained model to be relevant to this new dataset as well, hence the feature extraction may be a good idea. However, if the two datasets are different, it might not be best to train a linear classifier form the top of the network, which contains more dataset-specific features. Instead, it might work better to train a linear classifier from CNN features somewhere earlier in the network.
 
-<div align="center"> <img src="../pictures/CNN-transfer-learning.png" alt="surrogate-loss-functions.png" style="zoom:=100%;" /> </div>
+<div align="center"> <img src="../pictures/CNN-transfer-learning.png" alt="surrogate-loss-functions.png" style="zoom:=90%;" /> </div>
 
 ### Other Tips
 
@@ -72,7 +72,7 @@ Practical advice on learning rates: It's common to use a smaller learning rate f
 
 <br>
 
-**References**：
+**References:**
 
 Pan, Sinno Jialin, and Qiang Yang. "[A survey on transfer learning.](https://www.cse.ust.hk/~qyang/Docs/2009/tkde_transfer_learning.pdf)" *IEEE Transactions on knowledge and data engineering* 22.10 (2009): 1345-1359.
 
