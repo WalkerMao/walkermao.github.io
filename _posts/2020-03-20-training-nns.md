@@ -251,6 +251,12 @@ Dropout is an extremely effective, simple and recently introduced regularization
 
 <div style="text-align: center"> <img src="../pictures/dropout.jpeg" alt="Dropout" style="zoom:50%;" /> </div>
 
+## Other Tips
+
+Batch Gradient Descent (BGD) is usually computationally expensive, thus we use Stochastic Gradient Descent (SGD) or Mini-Batch Gradient Descent (MBGD). However, SGD and MBGD are more sensitive to learning rate and initialization. A large learning rate or an improper initialization may lead to vanishing gradient or exploding gradient.
+
+
+
 <br>
 
 **References**:
