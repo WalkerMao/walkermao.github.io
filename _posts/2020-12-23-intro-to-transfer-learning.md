@@ -2,7 +2,7 @@
 layout: post
 title:  "Intro to Transfer Learning"
 date: 2020-12-23
-categories: ML
+categories: ML DL
 comments: true
 published: true
 hidden: false
