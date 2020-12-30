@@ -247,15 +247,23 @@ Another form of regularization is to enforce an absolute upper bound on the magn
 
 ### Dropout
 
-Dropout is an extremely effective, simple and recently introduced regularization technique by Srivastava et al. in [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf) that complements the other methods (L1, L2, maxnorm). While training, dropout is implemented by only keeping a neuron active with some probability $$p$$ (a hyperparameter), or setting it to zero otherwise. 
+Dropout is an extremely effective, simple and recently introduced regularization technique by Srivastava et al. that complements the other methods (L1, L2, maxnorm). While training, dropout is implemented by only keeping a neuron active with some probability $$p$$ (a hyperparameter), or setting it to zero temporarily  otherwise. 
 
 <div style="text-align: center"> <img src="../pictures/dropout.jpeg" alt="Dropout" style="zoom:50%;" /> </div>
+
+A wider network, e.g. more nodes, may be required when using dropout.
+
+The following are three different motivations of dropout.
+
+Dropout prevents neurons from co-adapting too much. During the training of a network, neurons may change in a way that they fix up the mistakes of the other neurons. This may lead to complex co-adaptations. This in turn leads to overfitting because these co-adaptations do not generalize to unseen data. With dropout, each hidden neuron in a neural network trained must learn to work with a randomly chosen sample of other neurons. This should reduce the coupling of neurons, and make each hidden neuron more robust and drive it towards creating useful features on its own without relying on other hidden neurons to correct its mistakes.
+
+Dropout makes network learn multiple independent internal representations. You can imagine that if hidden neurons are randomly dropped out of the network during training, that other hidden neurons will have to step in and handle the representation required to make predictions for the missing neurons. This is believed to result in multiple independent internal representations being learned by the network.
+
+Dropout can be interpreted as a way of regularizing a network by adding noise to its hidden neurons. 
 
 ## Other Tips
 
 Batch Gradient Descent (BGD) is usually computationally expensive, thus we use Stochastic Gradient Descent (SGD) or Mini-Batch Gradient Descent (MBGD). However, SGD and MBGD are more sensitive to learning rate and initialization. A large learning rate or an improper initialization may lead to vanishing gradient or exploding gradient.
-
-
 
 <br>
 
@@ -268,5 +276,7 @@ Glorot, Xavier, and Yoshua Bengio. "Understanding the difficulty of training dee
 He, Kaiming, et al. "Delving deep into rectifiers: Surpassing human-level performance on imagenet classification." *Proceedings of the IEEE international conference on computer vision*. 2015.
 
 Katanforoosh & Kunin, "[Initializing neural networks](https://www.deeplearning.ai/ai-notes/initialization/)", deeplearning.ai, 2019.
+
+Srivastava, Nitish , et al. "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." *Journal of Machine Learning Research* 15.1(2014):1929-1958.
 
 [CS231n Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/).
