@@ -8,8 +8,6 @@ comments: true
 
 ## Regularization
 
-We usually need to regularize the weight parameters, but It is not common to regularize the bias parameters because they do not interact with the data through multiplicative interactions, and therefore do not have the interpretation of controlling the influence of a data dimension on the final objective. 
-
 ### Why Don't Control Depth
 
 Why we don't control the depth of networks to avoid overfitting?
@@ -22,7 +20,9 @@ In conclusion, you should use as big of a neural network as your computational b
 
 ### L1 regularization
 
-L1 regularization is another relatively common form of regularization, where for each weight $w$ we add the term $$λ \| w \|_1$$ to the objective.
+We usually need to regularize the weight parameters, but It is not common to regularize the bias parameters because they do not interact with the data through multiplicative interactions, and therefore do not have the interpretation of controlling the influence of a data dimension on the final objective. 
+
+L1 regularization regularizes the weight parameters by adding the term $$λ \| w \|_1$$ to the objective for each weight $$w$$.
 
 The L1 regularization has the intriguing property that it leads the weight vectors to become sparse during optimization (i.e. very close to exactly zero). In other words, neurons with L1 regularization end up using only a sparse subset of their most important inputs and become nearly invariant to the "noisy" inputs. 
 
@@ -53,7 +53,7 @@ At test time, the weights of this network are scaled-down versions (multiplied b
 
 <div style="text-align: center"> <img src="../pictures/dropout-testing.png" alt="dropout-testing" style="zoom:55%;" /> </div>
 
-A wider network, e.g. more nodes, may be required when using dropout.
+A wider network may be required when using dropout.
 
 Although dropout alone gives significant improvements, using dropout along with max norm constraints, large decaying learning rates and high momentum provides a significant boost over just using dropout, especially the max norm constraints. 
 
@@ -63,7 +63,7 @@ Dropout prevents overfitting and provides a way of approximately combining expon
 
 Dropout prevents neurons from co-adapting too much. During the training of a network, neurons may change in a way that they fix up the mistakes of the other neurons. This may lead to complex co-adaptations. This in turn leads to overfitting because these co-adaptations do not generalize to unseen data. With dropout, each hidden neuron in a neural network trained must learn to work with a randomly chosen sample of other neurons. This should reduce the coupling of neurons, and make each hidden neuron more robust and drive it towards creating useful features on its own without relying on other hidden neurons to correct its mistakes.
 
-Dropout makes network learn multiple "thinned" networks. Applying dropout to a neural network amounts to sampling a "thinned" network from it. The thinned network consists of all the units that survived dropout. A neural net with $$n$$ neurons, can be seen as a collection of $$2^n$$ possible thinned neural networks, so training a neural network with dropout can be seen as training a collection of $$2^n$$ thinned networks. At test time, we average these thinned networks by multiplying the weights by $$p$$. 
+Dropout makes network learn multiple "thinned" networks. Applying dropout to a neural network amounts to sampling a "thinned" network from it. The thinned network consists of all the neurons that survived dropout. A neural net with $$n$$ neurons, can be seen as a collection of $$2^n$$ possible thinned neural networks, so training a neural network with dropout can be seen as training a collection of $$2^n$$ thinned networks. At test time, we average these thinned networks by multiplying the weights by $$p$$. 
 
 Dropout can be interpreted as a way of regularizing a network by adding noise to its hidden neurons. 
 
