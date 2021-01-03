@@ -28,7 +28,7 @@ The L1 regularization has the intriguing property that it leads the weight vecto
 
 ### L2 regularization
 
-L2 regularization is perhaps the most common form of regularization. It can be implemented by penalizing the squared magnitude of all parameters directly in the objective. That is, for every weight $w$ in the network, we add the term $$\frac{1}{2}λ\|w\|_2^2$$ to the objective, where $λ$ is the regularization strength. (It is common to see the factor of $\frac{1}{2
+L2 regularization (also called weight decay) is a common form of regularization. It can be implemented by penalizing the squared magnitude of all parameters directly in the objective. That is, for every weight $w$ in the network, we add the term $$\frac{1}{2}λ\|w\|_2^2$$ to the objective, where $λ$ is the regularization strength. (It is common to see the factor of $\frac{1}{2
 }$ in front because then the gradient of this term with respect to the parameter $w$ is simply $λw$ instead of $2λw$.) 
 
 The L2 regularization has the intuitive interpretation of heavily penalizing peaky weight vectors and preferring diffuse weight vectors. Due to multiplicative interactions between weights and inputs this has the appealing property of encouraging the network to use all of its inputs a little rather than some of its inputs a lot. Lastly, notice that during gradient descent parameter update, using the L2 regularization ultimately means that every weight is decayed linearly: `W += -lambda * W` towards zero. 

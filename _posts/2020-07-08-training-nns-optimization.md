@@ -132,7 +132,13 @@ For activation functions like ReLU and leaky ReLU etc., this initialization avoi
 
 ### Backpropagation
 
-We usually use gradient descent to optimize the objective function $\text{Obj}(w)$. For weight, we have $w_t=w_{t-1} - \eta \frac{\partial\ \text{Obj}(w_{t-1})}{\partial\ w_{t-1}}$, where $\eta$ is the step-size (learning rate).
+We usually use gradient descent to optimize the objective function $\text{Obj}(w)$. For weight, we have 
+
+$$
+w_t = w_{t-1} - \eta \frac{\partial \text{Obj}(w_{t-1})}{\partial w_{t-1}},
+$$
+
+where $\eta$ is the step-size (learning rate).
 
 The solution to computing the gradient is an algorithm called error **backpropagation**, which use the chain rules in calculus. (Note: the regularization term is not considered in the pictures below.) 
 
@@ -174,6 +180,30 @@ $$
 \end{align}
 $$
 
+### Gradient Descent with Momentum
+
+The basic idea of momentum is to compute an moving average of the gradients, and use that average gradient to update the parameters. 
+
+At the $$t$$-th step of gradient update of weights, we have $$w_t = w_{t-1} - \eta v_{w_{t}}$$. In standard gradient descent (GD), we set $$v_{w_{t}}$$ as $$\frac{\partial\text{Obj}(w_{t-1})}{\partial w_{t-1}}$$. But in the gradient descent (GD) with momentum, we set 
+$$
+v_{w_{t}} = \beta v_{w_{t-1}} + (1-\beta) \cdot \frac{\partial\text{Obj}(w_{t-1})}{\partial w_{t-1}}.
+$$
+
+The hyperparameter $$\beta$$ is usually set to $$0.9$$ or a similar value.
+
+In the GD with momentum, if the history gradients $$\frac{\partial\text{Obj}(w_{t'})}{\partial w_{t'}^{(j)}}$$, ($$t'=t-1,t-2,\cdots$$) in dimension $$j$$ point in the same direction, then the parameter updating amplitude $$\mid v_{w_t^{(j)}} \mid$$ is increased through the moving average, compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(j)})}{\partial w_{t-1}^{(j)}}\mid$$ in standard GD. Otherwise, if the history gradients change directions, the parameter updating amplitude is decreased through the moving average. As a result, GD with momentum accelerates convergence and reduces oscillation.
+
+<div align="center">
+<figure>
+<img src="../pictures/gradient-descent-with-momentum.png" alt="gradient-descent-with-momentum" style="zoom: 80%;" />
+<figcaption style="font-size: 80%;"> 
+	Gradient deacent with momentum accelerates convergence and reduces oscillation.
+    (<a href="https://programmersought.com/article/63854417042/">Figure source</a>) </figcaption>
+</figure>
+</div>
+
+As shown in the plot above, suppose the parameter in horizontal direction is $$w^{(1)}$$ and that in vertical direction is $$w^{(2)}$$. The updating amplitude $$\mid v_{w_t^{(1)}} \mid$$ is increased compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(1)})}{\partial w_{t-1}^{(1)}}\mid$$, thus the GD with momentum accelerates the convergence of $$w^{(1)}$$. On the other hand, the updating amplitude $$\mid v_{w_t^{(2)}} \mid$$ is decreased compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(2)})}{\partial w_{t-1}^{(2)}}\mid$$, thus the GD with momentum reduces the oscillation of $$w^{(2)}$$.  
+
 ## Other Tips
 
 Batch Gradient Descent (BGD) is usually computationally expensive, thus we use Stochastic Gradient Descent (SGD) or Mini-Batch Gradient Descent (MBGD). However, SGD and MBGD are more sensitive to learning rate and initialization. A large learning rate or an improper initialization may lead to vanishing gradient or exploding gradient.
@@ -188,6 +218,9 @@ Glorot, Xavier, and Yoshua Bengio. "Understanding the difficulty of training dee
 
 He, Kaiming, et al. "Delving deep into rectifiers: Surpassing human-level performance on imagenet classification." *Proceedings of the IEEE international conference on computer vision*. 2015.
 
-Katanforoosh & Kunin, "[Initializing neural networks](https://www.deeplearning.ai/ai-notes/initialization/)", deeplearning.ai, 2019.
+Katanforoosh & Kunin. "[Initializing neural networks](https://www.deeplearning.ai/ai-notes/initialization/)". *DeepLearning.AI*. 2019.
 
 [CS231n Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/).
+
+Ng, Andrew. "[Gradient descent with momentum](https://www.coursera.org/lecture/deep-neural-network/gradient-descent-with-momentum-y0m1f)". *DeepLearning.AI*.
+
