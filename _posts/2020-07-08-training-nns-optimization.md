@@ -32,7 +32,7 @@ $$
 L(\hat{p}_i, y_i) = -\sum_{k=1}^{K} \mathbf{1}(y_i \text{ in class } k)\log(\hat{p}_{ik}),
 $$
 
-where $$\hat{p}_{ik}$$ is the estimated probability of $y_i$ belongs to class $k$, and $$\mathbf{1}(\cdot)$$ is the indicator function. The estimated probabilities $\hat{p}_{ik}$ by softmax function is $$\frac{e^{z_{ik}}}{\sum _{k=1}^{K}e^{z_{ik}}}$$. 
+where $$\hat{p}_{ik}$$ is the estimated probability of $y_i$ belongs to class $k$, and $$\mathbf{1}(\cdot)$$ is the indicator function. The estimated probabilities $$\hat{p}_{ik}$$ is usually calculated by softmax function: $$ \hat{p}_{ik} = \frac{e^{z_{ik}}}{\sum _{k=1}^{K}e^{z_{ik}}} $$.
 
 For binary classification, the cross-entropy loss is
 
