@@ -22,7 +22,7 @@ Taking a weighted sum of its inputs and then applying a activation function. $\s
 
 For linear regression, $\sigma(z)=z$. For logistic regression, $\sigma(z)=\frac{1}{1+e^{-z}}$. 
 
-<img src="/pictures/single-neuron.png" alt="1573539428065" style="zoom: 42%;" /><img src="/pictures/activation-functions.png" alt="activation functions" style="zoom: 78%;" />
+<img src="../pictures/single-neuron.png" alt="1573539428065" style="zoom: 40%;" /><img src="../pictures/activation-functions.png" alt="activation functions" style="zoom: 76%;" />
 
 ### Activation Functions
 
@@ -97,10 +97,10 @@ Cons of ELU: 1. 2. same as that of ReLU; 3. more computationally expensive since
 #### Maxout
 
 $$
-\text{ Maxout: } \sigma(z^{[1]},...,z^{[m]})=\max({w^{[1]}}^Tx + b^{[1]}, ...,{w^{[m]}}^Tx + b^{[m]}).
+\text{ Maxout: } \sigma(z_{1},\cdots,z_{k})=\max(w_1^Tx + b_1,\cdots,w_k^Tx + b_k).
 $$
 
-Maxout neuron (introduced recently by [Goodfellow et al.](http://www-etud.iro.umontreal.ca/~goodfeli/maxout.html)) generalizes the ReLU and its leaky version. Notice that both ReLU and Leaky ReLU are a special case of this form (for example, for ReLU we have $\max(w^Tx+b, 0^Tx+0)$). The Maxout neuron therefore enjoys all the benefits of a ReLU unit (linear regime of operation, no saturation) and does not have its drawbacks (dying ReLU). However, compared to ReLU, it have $m$ times of the number of parameters for every single neuron, leading to a high total number of parameters. 
+A maxout unit can learn a piecewise linear, convex function with up to $ k $ pieces. Maxout units can thus be seen as learning the activation function itself rather than just the relationship between units. With large enough $ k, $ a maxout unit can learn to approximate any convex function with arbitrary fidelity. In particular, a maxout layer with two pieces can learn to implement the same function of the input $ x $ as a traditional layer using the ReLU, the absolute ReLU, or the leaky or parametric ReLU, or it can learn to implement a new function. For example, for ReLU we have $\max(w^Tx+b, 0^Tx+0)$. However, a maxout unit have $k$ times of the number of parameters for every single unit, leading to a high total number of parameters. 
 
 *What neuron type should I use?* Use the ReLU non-linearity, be careful with your learning rates and possibly monitor the fraction of "dead" units in a network. If this concerns you, give Leaky ReLU or Maxout a try. Never use sigmoid. Try tanh, but expect it to work worse than ReLU/Maxout.
 
