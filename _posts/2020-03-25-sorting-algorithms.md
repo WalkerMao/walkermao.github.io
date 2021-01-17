@@ -30,11 +30,70 @@ Big-O asymptotic:
 
 - Checking: When $T(N) = O(f (N))$, check if $$\lim_{N\to\infty} \frac{T(N)}{f(N)} \approx \text{Constant}$$.
 
+## Selection Sort and Bubble Sort
+
+### Selection Sort
+
+The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning of the previous unsorted part. 
+
+```python
+def selectionSort(arr):
+    for i in range(len(arr)): 
+        # Find the minimum element in remaining unsorted array 
+        min_idx = i 
+        for j in range(i+1, len(arr)): 
+            if arr[min_idx] > arr[j]: 
+                min_idx = j 
+        # Swap the found minimum element with the first element of the remaining unsorted array
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+```
+
+### Bubble Sort
+
+Bubble sort works by repeatedly swapping the adjacent elements if they are in wrong order.
+
+```python
+def bubbleSort(arr): 
+    for n in range(len(arr)-1, -1, -1): 
+        # arr[:n+1] are remaining unsorted 
+        swapped = False
+        for j in range(0, n): 
+            # traverse the array from 0 to n, and swap if the element found is greater than the next element 
+            if arr[j] > arr[j+1] : 
+                arr[j], arr[j+1] = arr[j+1], arr[j] 
+                swapped = True
+        if swapped == False:
+            break
+```
+
+<div align="center">
+<figure>
+<img src="../pictures/bubble_sort.png" alt="BubbleSort" style="zoom: 100%;" />
+<figcaption style="font-size: 80%;"> Bubble sort example. (<a href="https://eleni.blog/2019/06/09/sorting-in-go-using-bubble-sort/">Figure source</a>) </figcaption>
+</figure>
+</div>
+
+Note that $$O(n)$$ is the best-case running time for bubble sort. By keeping track of the number of swaps it performs, if an array is already in sorted order, then bubble sort makes no swaps, the algorithm can terminate after one pass. 
+
 ## Insertion Sort and Shell Sort
 
 ### Insertion Sort
 
 Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.
+
+Python code:
+
+```python
+def insertionSort(arr): 
+    for i in range(1, len(arr)): 
+        key = arr[i] 
+        # Move elements of arr[0..i-1], that are greater than key, to one position ahead their current position 
+        j = i-1
+        while j >= 0 and key < arr[j] : 
+                arr[j + 1] = arr[j] 
+                j -= 1
+        arr[j + 1] = key 
+```
 
 <div style="text-align: center">
 <figure>
@@ -71,9 +130,9 @@ Tree sort builds a binary search tree (BST) for the elements and then traverses 
 Pseudo code:
 
 ```pseudocode
-def TreeSort(A): 
-	BST = BuildBST(A)
-	return InOrderTraverse(BST)
+def treeSort(arr): 
+	BST = buildBST(arr)
+	return inOrderTraverse(BST)
 ```
 
 ### Heap Sort
@@ -83,11 +142,11 @@ Heap sort first transforms the array into a heap (implemented as an array) in-pl
 Pseudo code:
 
 ```pseudocode
-def HeapSort(A):
-	BuildHeap(A) # in-place
-	for i from len(A)-1 to 1:
-		swap(A[0], A[i])
-		Heapify(A[:i])
+def heapSort(arr):
+	buildHeap(arr) # in-place
+	for i from len(arr)-1 to 1:
+		swap(arr[0], arr[i])
+		heapify(arr[:i])
 ```
 
 <div style="text-align: center">
