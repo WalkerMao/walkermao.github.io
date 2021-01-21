@@ -32,7 +32,7 @@ In the formula above, $y_i$, $\hat{y}_ {i}$ or $\hat{p}_ i$ is a vector with dim
 
 Cross entropy loss for binary classification problem: $ \frac{1}{n} \sum_{i=1}^n \big[ -y_i \log \hat{p}_i - (1-y_i) \log(1-\hat{p}_i) \big]$. 
 
-Cross-entropy is differentiable, and hence more amenable to numerical optimization. 
+Cross-entropy loss measures the difference between two probability distributions, but not the distance, because it is asymmetric. Cross-entropy loss is differentiable, and hence more amenable to numerical optimization. 
 
 #### 6.2.2 Metrics for Classification
 

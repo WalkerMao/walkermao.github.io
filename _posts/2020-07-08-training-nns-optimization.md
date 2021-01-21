@@ -44,6 +44,8 @@ where $y_i\in\{0,1\}$, $\hat{p}_i$ is the estimated probability of $y_i=1$.
 
 ### Initialization
 
+If all weights are initialized to the same value, the activations of neurons in each layer are same, and the gradients of weights in each layer are same, it follows that the network has the same effectiveness as a network that has only single neuron in each layer. In a special case that all weights are initialized to $$0$$ and we use the activation function that $$\sigma(0)=0$$ (such as Tanh, ReLU), then all activations and gradients are $$0$$, and the weights cannot be updated through gradient descent. Thus, the weights in same layer should be initialized differently (usually randomly) to break symmetry during training.
+
 If the weights in a network start too small/large, then the backpropagated gradient signal shrinks/grows as it passes through and it may lead to vanishing/exploding gradients, and that can result in divergence/slow-down in the training of the network.
 
 The appropriate initialization that follows the rules below guarantees no exploding/vanishing (either forward or backward) signal.
