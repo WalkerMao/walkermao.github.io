@@ -23,6 +23,8 @@ plainwhite:
       url: ""
     - categ: "CS"
       url: "categories/cs"
+    - categ: "CV"
+      url: "categories/cv"
     - categ: "DL"
       url: "categories/dl"
     - categ: "FE"
