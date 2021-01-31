@@ -16,9 +16,9 @@ Histograms measure the frequency of brightness within the image: how many times 
 <img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/histogram_sample.jpg" alt="Histogram Example" style="zoom:120%;" />
 </div>
 
-Note that, this histogram is drawn for grayscale image, not color image. 
+The pixel intensity is a single value for a grayscale image, or three values for a color image. The histogram above is drawn for grayscale image, not color image. 
 
-### High & Low Key; Over & Under Exposure; Contrast
+### High & Low Key; Over & Under Exposure
 
 The region where most of the brightness values are present is called the "tonal range".
 
@@ -44,7 +44,19 @@ Images where most of the tones occur in the shadows are called "low key," wherea
 <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey_hist.png" alt="High Key Histogram" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey_hist_auto.png" alt="High Key Histogram" style="zoom:80%;" />
 </div>
 
-Contrast is a measure of the difference in brightness between light and dark areas in a scene. Broad histograms reflect a scene with significant contrast, whereas narrow histograms reflect less contrast. Contrast can have a significant visual impact on an image by emphasizing texture. 
+### Contrast
+
+Contrast is a measure of the difference in brightness between light and dark areas in a scene. 
+
+Root mean square (RMS) contrast is defined as the standard deviation of the pixel intensities: 
+
+$$
+\sqrt{\frac{1}{W H} \sum_{i=0}^{W-1} \sum_{j=0}^{H-1}\left(I_{i j}-\bar{I}\right)^{2}}
+$$
+
+where intensities $$ I_{i j} $$ are the $$ i $$-th $$ j $$-th element of the two-dimensional image of size $$ W $$ by $$ H $$. $$ \bar{I} $$ is the average intensity of all pixel values in the image. The image $$ I $$ is assumed to have its pixel intensities normalized in the range $$[0,1]$$. 
+
+Broad histograms reflect a scene with significant contrast, whereas narrow histograms reflect less contrast. Contrast can have a significant visual impact on an image by emphasizing texture. 
 
 <div align='center'>
 <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowcont.jpg" alt="img" style="zoom:80%;" /> <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highcont.jpg" alt="img" style="zoom:80%;" />
