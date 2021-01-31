@@ -34,8 +34,9 @@ Images where most of the tones occur in the shadows are called "low key," wherea
 <div align='center'>
 <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowkey_hist.png" alt="Low Key Histogram" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowkey_auto_hist.png" alt="Low Key Histogram" style="zoom:80%;" />
 </div>
-<br>
-
+<div style="line-height:50%;">
+    <br>
+</div>
 <div align='center'>
 <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey.jpg" alt="High Key Image" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey_auto.jpg" alt="img" style="zoom:80%;" />
 </div>
@@ -73,10 +74,13 @@ p_f(k) = \frac{\text{Number of pixels with intensity }  k}{\text{Total number of
 $$
 
 The corresponding cumulative distribution function (CDF) is 
+
 $$
 F_f(l) = \sum_{k=0}^{l} p_f(k).
 $$
+
 The histogram equalized image $ g $ will be defined by
+
 $$
 g_{i, j} = T_f(f_{i,j}) = \text{floor}\left((L-1) F_f(f_{i,j}) \right) = \text{floor}\left((L-1) \sum_{k=0}^{f_{i, j}} p_f(k)\right)
 $$
@@ -94,6 +98,7 @@ The method is useful in images with backgrounds and foregrounds that are both br
 <figcaption style="font-size: 80%;"> Figure. Image before and after histogram equalization. </figcaption>
 </figure>
 </div>
+
 A key advantage of the method is that it is a fairly straightforward technique and an invertible operator. So in theory, if the histogram equalization function is known, then the original histogram can be recovered. The calculation is not computationally intensive. A disadvantage of the method is that it is indiscriminate. It may increase the contrast of background noise, while decreasing the usable signal.
 
 ## AHE and CLAHE
@@ -102,7 +107,9 @@ Ordinary histogram equalization uses the same transformation derived from the im
 
 Adaptive histogram equalization (AHE) improves on this by transforming each pixel with a transformation function derived from a neighborhood region, as in the figure below. The derivation of the transformation functions from the histograms is exactly the same as for ordinary histogram equalization. 
 
+<div align='center'>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AHE-neighbourhoods.svg/300px-AHE-neighbourhoods.svg.png" alt="AHE-neighbourhoods.svg" style="zoom:80%;" />
+</div>
 
 Ordinary AHE tends to overamplify the contrast in near-constant regions of the image, since the histogram in such regions is highly concentrated. As a result, AHE may cause noise to be amplified in near-constant regions. **Contrast Limited AHE** (**CLAHE**) is a variant of adaptive histogram equalization in which the contrast amplification is limited, so as to reduce this problem of noise amplification.
 
@@ -110,7 +117,9 @@ In CLAHE, the contrast amplification in the vicinity of a given pixel value is g
 
 It is advantageous not to discard the part of the histogram that exceeds the clip limit but to redistribute it equally among all histogram bins, as shown below.
 
+<div align='center'>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Clahe-redist.svg/300px-Clahe-redist.svg.png" alt="Clahe-redist.svg" style="zoom:100%;" />
+</div>
 
 The redistribution will push some bins over the clip limit again (region shaded green in the figure). If this is undesirable, the redistribution procedure can be repeated recursively until the excess is negligible.
 
