@@ -13,8 +13,9 @@ hidden: false
 Histograms measure the frequency of brightness within the image: how many times does a particular pixel value appear in an image. A histogram shows the contrast, brightness, intensity distribution etc. of that image. 
 
 <div align='center'>
-<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/histogram_sample.jpg" alt="Histogram Example" style="zoom:120%;" />
+<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/histogram_sample.jpg" alt="Histogram Example" style="zoom:100%;" />
 </div>
+
 
 The pixel intensity is a single value for a grayscale image, or three values for a color image. The histogram above is drawn for grayscale image, not color image. 
 
@@ -76,8 +77,9 @@ Contrast can also vary for different regions within the same image due to both s
 Histogram equalization usually increases the contrast of our images, especially when the usable data of the image is represented by close contrast values. Through this adjustment, the intensities can be better distributed on the histogram. Histogram equalization accomplishes this by effectively **spreading out the most frequent intensity values**.
 
 <div align='center'>
-<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Histogrammeinebnung.png" alt="Histogram equalization" style="zoom:45%;" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Histogrammeinebnung.png" alt="Histogram equalization" style="zoom:40%;" />
 </div>
+
 
 Let $$f$$ be a given image represented as a matrix of integer pixel intensities ranging from $$0$$ to $$L-1$$. $$L$$ is the number of possible intensity values, often $$256$$. Let $$p_f(k) $$ denote the probability density function (PDF) of the normalized histogram of $$f$$ with a bin for each possible intensity $$k$$. So
 
@@ -115,7 +117,11 @@ A key advantage of the method is that it is a fairly straightforward technique a
 
 ## AHE and CLAHE
 
-Ordinary histogram equalization uses the same transformation derived from the image histogram to transform all pixels. This works well when the distribution of pixel values is similar throughout the image. However, when the image contains regions that are significantly lighter or darker than most of the image, the contrast in those regions will not be sufficiently enhanced.
+Ordinary histogram equalization uses the same transformation derived from the image histogram to transform all pixels. This works well when the distribution of pixel values is similar throughout the image. However, when the image contains regions that are significantly lighter or darker than most of the image, the contrast in those regions will not be sufficiently enhanced, or even weakened. 
+
+As shown below, it is true that the background contrast has improved after histogram equalization. But the contrast on the face of statue is weakened and we lost most of the information there due to over-brightness. It is because its histogram is not confined to a particular region.
+
+<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/clahe_1.jpg" alt="Problem of Global HE" style="zoom:50%;" />
 
 Adaptive histogram equalization (AHE) improves on this by transforming each pixel with a transformation function derived from a neighborhood region, as in the figure below. The derivation of the transformation functions from the histograms is exactly the same as for ordinary histogram equalization. 
 
@@ -132,8 +138,11 @@ It is advantageous not to discard the part of the histogram that exceeds the cli
 <div align='center'>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Clahe-redist.svg/300px-Clahe-redist.svg.png" alt="Clahe-redist.svg" style="zoom:100%;" />
 </div>
+The redistribution will push some bins over the clip limit again (region shaded green in the figure). If this is undesirable, the redistribution procedure can be repeated recursively until the excess is negligible. 
 
-The redistribution will push some bins over the clip limit again (region shaded green in the figure). If this is undesirable, the redistribution procedure can be repeated recursively until the excess is negligible.
+The picture below is the result after CLAHE.
+
+<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/clahe_2.jpg" alt="Result of CLAHE" style="zoom:60%;" />
 
 <br>
 
