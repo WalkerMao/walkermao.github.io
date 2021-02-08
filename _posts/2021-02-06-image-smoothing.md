@@ -161,7 +161,7 @@ An important characteristic of bilateral filtering is that the weights are multi
 
 **References:**
 
-[OpenCV-Python Tutorial: Smoothing Images](https://docs.opencv.org/master/d4/d13/tutorial_py_filtering.html)
+[OpenCV-Python Tutorials: Smoothing Images](https://docs.opencv.org/master/d4/d13/tutorial_py_filtering.html)
 
 [CS376 - Computer Vision: Linear Filters](https://www.cs.utexas.edu/~huangqx/CS376_Lecture_2.pdf)
 
