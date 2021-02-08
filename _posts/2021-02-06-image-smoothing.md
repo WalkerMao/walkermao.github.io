@@ -48,9 +48,10 @@ The standard deviation $$\sigma$$ determines extent of smoothing. We usually set
 <div align='center'>
 <figure>
 <img src="https://miro.medium.com/max/1452/1*vOCU6Tje1M3IoBiXsm6EtQ.png" alt="Image for post" style="zoom:80%;" />
-<figcaption style="font-size: 80%;"> Figure. 3D structure, 2D structure and example of filter (a) Box filter (b) Gaussian filter and (c) Laplace filter. (<a href="https://towardsdatascience.com/image-processing-class-egbe443-4-filters-aa1037676130">Figure source</a>)</figcaption>
+<figcaption style="font-size: 80%;"> Figure. 3D structure, 2D structure and example of filter (a) Box filter (b) Gaussian filter and (c) Laplace filter. (<a href="https://towardsdatascience.com/image-processing-class-egbe443-4-filters-aa1037676130">Source</a>)</figcaption>
 </figure>
 </div>
+
 
 Gaussian filter has several amiable properties.
 
