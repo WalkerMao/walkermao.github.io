@@ -35,7 +35,7 @@ This is a box filter and may lead to edge effects (little squares) as shown belo
 
 <div align='center'>
 <figure>
-<img src="https://slideplayer.com/slide/6380297/22/images/23/Smoothing+by+Averaging.jpg" alt="Image result for box filter edge effect" style="zoom:70%;" />
+<img src="https://slideplayer.com/slide/6380297/22/images/23/Smoothing+by+Averaging.jpg" alt="Image result for box filter edge effect" style="zoom:60%;" />
 </figure>
 </div>
 
@@ -53,16 +53,16 @@ The standard deviation $$\sigma$$ determines extent of smoothing. We usually set
 
 <div align='center'>
 <figure>
-<img src="https://miro.medium.com/max/1452/1*vOCU6Tje1M3IoBiXsm6EtQ.png" alt="Image for post" style="zoom:80%;" />
+<img src="https://miro.medium.com/max/1452/1*vOCU6Tje1M3IoBiXsm6EtQ.png" alt="Image for post" style="zoom:70%;" />
 <figcaption style="font-size: 80%;"> Figure. 3D structure, 2D structure and example of filter (a) Box filter (b) Gaussian filter and (c) Laplace filter. (<a href="https://towardsdatascience.com/image-processing-class-egbe443-4-filters-aa1037676130">Source</a>)</figcaption>
 </figure>
 </div>
+
 Gaussian filter has several amiable properties.
 
 **Convolution with self is another Gaussian.** So Gaussian filter can smooth with small-$$\sigma$$ kernel, repeat, and get same result as larger-$$\sigma$$ kernel would have. Also, convolving two times with Gaussian kernel with std. dev. $$\sigma$$ is same as convolving once with kernel with std. dev. $$\sqrt{2}\sigma$$. 
 
 **Separability of the Gaussian filter.** The 2D Gaussian can be expressed as the product of two functions, one a function of $$ x $$ and the other a function of $$ y $$. In this case, the two functions are the (identical) 1D Gaussian. 
-
 $$
 \begin{aligned}
 G_{\sigma}(x, y) &=\frac{1}{2 \pi \sigma^{2}} \exp \left({-\frac{x^{2}+y^{2}}{2 \sigma^{2}}} \right)\\
@@ -85,6 +85,7 @@ Medium filter is robustness to outliers and hence it is highly effective against
 <div align='center'>
 <img src="../pictures/median-filter-is-robust-to-outliers.png" alt="image-20210208234629956" style="zoom:45%;" /> <img src="../pictures/median-filter-for-salt-and-pepper-noise.png" alt="image-20210208234710400" style="zoom:50%;" /> 
 </div>
+
 
 ## Bilateral Filtering
 
@@ -133,10 +134,11 @@ Parameters $$ \sigma_{s} $$ and $$ \sigma_{r} $$ will measure the amount of filt
 
 <div align='center'>
 <figure>
-<img src="../pictures/bilateral-filter-on-a-height-field.jpg" alt="image-20210209004651041" style="zoom: 50%;" />
+<img src="../pictures/bilateral-filter-on-a-height-field.jpg" alt="image-20210209004651041" style="zoom:40%;" />
 <figcaption style="font-size: 80%;"> Figure. Bilateral Filter on a Height Field. (<a href="http://people.csail.mit.edu/sparis/bf_course/slides08/03_definition_bf.pdf">Source</a>)</figcaption>
 </figure>
 </div>
+
 
 The bilateral filter is controlled by two parameters: $$\sigma_{r}$$ and $$\sigma_{r}$$. 
 
