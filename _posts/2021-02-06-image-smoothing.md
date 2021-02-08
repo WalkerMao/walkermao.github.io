@@ -63,6 +63,7 @@ Gaussian filter has several amiable properties.
 **Convolution with self is another Gaussian.** So Gaussian filter can smooth with small-$$\sigma$$ kernel, repeat, and get same result as larger-$$\sigma$$ kernel would have. Also, convolving two times with Gaussian kernel with std. dev. $$\sigma$$ is same as convolving once with kernel with std. dev. $$\sqrt{2}\sigma$$. 
 
 **Separability of the Gaussian filter.** The 2D Gaussian can be expressed as the product of two functions, one a function of $$ x $$ and the other a function of $$ y $$. In this case, the two functions are the (identical) 1D Gaussian. 
+
 $$
 \begin{aligned}
 G_{\sigma}(x, y) &=\frac{1}{2 \pi \sigma^{2}} \exp \left({-\frac{x^{2}+y^{2}}{2 \sigma^{2}}} \right)\\
