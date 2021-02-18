@@ -74,6 +74,7 @@ $$
 It follows that setting $$\text{Var}(W^{[l]}) = 1/n^{[l-1]}$$ leads to $$\text{Var}(a^{[l-1]}) = \text{Var}(a^{[l]})$$. 
 
 At every layer, we can link this layer's variance to the input layer’s variance:
+
 $$
 \begin{align}
 \text{Var}(a^{[l]}) &= n^{[l-1]} \text{Var}(W^{[l]}) \cdot \text{Var}(a^{[l-1]}) \\
@@ -87,16 +88,13 @@ Then we have the following three cases:
 
 $$
 \begin{align}
-
 &\text{For all } s=1,\cdots,l, \\
-
 &n^{[s-1]} \text{Var}(W^{[s]}) 
 \begin{cases}
 <1 \implies \text{Var}(a^{[l]}) \ll \text{Var}(x); \\
 =1 \implies \text{Var}(a^{[l]}) = \text{Var}(x); \\
 >1 \implies \text{Var}(a^{[l]}) \gg \text{Var}(x). \\
 \end{cases}
-
 \end{align}
 $$
 
@@ -204,11 +202,17 @@ In the GD with momentum, if the history gradients $$\frac{\partial\text{Obj}(w_{
 </figure>
 </div>
 
-As shown in the plot above, suppose the parameter in horizontal direction is $$w^{(1)}$$ and that in vertical direction is $$w^{(2)}$$. The updating amplitude $$\mid v_{w_t^{(1)}} \mid$$ is increased compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(1)})}{\partial w_{t-1}^{(1)}}\mid$$, thus the GD with momentum accelerates the convergence of $$w^{(1)}$$. On the other hand, the updating amplitude $$\mid v_{w_t^{(2)}} \mid$$ is decreased compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(2)})}{\partial w_{t-1}^{(2)}}\mid$$, thus the GD with momentum reduces the oscillation of $$w^{(2)}$$.  
+As shown in the plot above, suppose the parameter in horizontal direction is $$w^{(1)}$$ and that in vertical direction is $$w^{(2)}$$. The updating amplitude $$\mid v_{w_t^{(1)}} \mid$$ is increased compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(1)})}{\partial w_{t-1}^{(1)}}\mid$$, thus the GD with momentum accelerates the convergence of $$w^{(1)}$$. On the other hand, the updating amplitude $$\mid v_{w_t^{(2)}} \mid$$ is decreased compared to the size of the current gradient $$\mid\frac{\partial\text{Obj}(w_{t-1}^{(2)})}{\partial w_{t-1}^{(2)}}\mid$$, thus the GD with momentum reduces the oscillation of $$w^{(2)}$$. 
 
 ## Other Tips
 
-Batch Gradient Descent (BGD) is usually computationally expensive, thus we use Stochastic Gradient Descent (SGD) or Mini-Batch Gradient Descent (MBGD). However, SGD and MBGD are more sensitive to learning rate and initialization. A large learning rate or an improper initialization may lead to vanishing gradient or exploding gradient.
+Batch Gradient Descent (BGD) is usually computationally expensive, thus we use Stochastic Gradient Descent (SGD) or Mini-Batch Gradient Descent (MBGD). 
+
+In SGD, at every gradient updating step, we take only one example to calculate the gradient, and update the parameters. 
+
+In MBGD, we use a batch of a fixed number of training examples which is less than the actual dataset and call it a mini-batch. We first create the mini-batches of fixed size, at every epoch, we iterate over every mini-batches, and calculate the mean gradient of the mini-batch, and update the parameters.
+
+However, SGD and MBGD are more sensitive to learning rate and initialization. A large learning rate or an improper initialization may lead to vanishing gradient or exploding gradient.
 
 <br>
 
