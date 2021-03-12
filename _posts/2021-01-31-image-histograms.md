@@ -121,7 +121,9 @@ Ordinary histogram equalization uses the same transformation derived from the im
 
 As shown below, it is true that the background contrast has improved after histogram equalization. But the contrast on the face of statue is weakened and we lost most of the information there due to over-brightness. It is because its histogram is not confined to a particular region.
 
+<div align='center'>
 <img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/clahe_1.jpg" alt="Problem of Global HE" style="zoom:50%;" />
+</div>
 
 Adaptive histogram equalization (AHE) improves on this by transforming each pixel with a transformation function derived from a neighborhood region, as in the figure below. The derivation of the transformation functions from the histograms is exactly the same as for ordinary histogram equalization. 
 
@@ -138,11 +140,14 @@ It is advantageous not to discard the part of the histogram that exceeds the cli
 <div align='center'>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Clahe-redist.svg/300px-Clahe-redist.svg.png" alt="Clahe-redist.svg" style="zoom:100%;" />
 </div>
+
 The redistribution will push some bins over the clip limit again (region shaded green in the figure). If this is undesirable, the redistribution procedure can be repeated recursively until the excess is negligible. 
 
 The picture below is the result after CLAHE.
 
+<div align='center'>
 <img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/clahe_2.jpg" alt="Result of CLAHE" style="zoom:60%;" />
+</div>
 
 <br>
 
