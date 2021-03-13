@@ -16,9 +16,9 @@ Hough transform can be used to detect lines in a image. To do this, we want to l
 
 ### Detecting lines using Hough Transform in $$a, b$$ space
 
-Say we have a $$(x_i, y_i)$$. There are infinite lines that could pass through this point. We can define a line that passes through this pixel $$(x_i, y_i)$$ as $$y_i = ax_i + b.$$ Using this, we can transform each pixel into $$a,b$$ space by rewriting this equation as: $$b = -ax_i + y_i.$$
+Say we have a $$(x_i, y_i)$$. There are infinite lines that could pass through this point. We can define a line that passes through this pixel $$(x_i, y_i)$$ as $$y_i = ax_i + b.$$ Using this, we can transform each pixel into $$a,b$$ space by rewriting this equation as: $$b = -ax_i + y_i$$.
 
-This equation represents a line in $$a,b$$ space, and each $$a,b$$ point on the line represents a possible line passing through our point $$x_i,y_i$$. Thus, for each pixel $$x_i,y_i$$ in our set of edge pixels, we transform it into $$a,b$$ space to get a line. 
+This equation represents a line in $$a,b$$ space, and each $$a,b$$ point on the line represents a possible line in $$x,y$$ space passing through our point $$x_i,y_i$$. Thus, for each pixel $$x_i,y_i$$ in our set of edge pixels, we transform it into $$a,b$$ space to get a line. 
 
 <div align='center'>
 <figure>
@@ -27,6 +27,8 @@ This equation represents a line in $$a,b$$ space, and each $$a,b$$ point on the 
 original (x,y) space to (a,b) space. (<a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture06/lecture06.pdf">Source</a>) </figcaption>
 </figure>
 </div>
+An arbitrary point $$(x_i,y_i)$$ in $$x,y$$ space correspond to a line $$b = -ax_i + y_i$$ in $$a,b$$ space, and any line $$y=a_ix+b_i$$ in $$x,y$$ space correspond to a point $$(a_i,b_i)$$ in $$a,b$$ space. 
+
 The intersection of lines in $$a,b$$ space represent the $$a,b$$ values that compromise a line $$y_i = ax_i + b$$ passing through those points.
 
 Example: Say we have two points $$x_1,y_1 = (0,1)$$, and $$x_2,y_2 = (1,2)$$. We transform these points into $$a,b$$ space with the lines $$b = 0 \times a + 1$$ and $$b = -1 \times a + 2$$. Solving for the intersection of these two lines gives us $$a=1$$ and $$b=1$$. This intersection point in $$(a,b)$$ space gives us the values for the line that goes through both points in $$x,y$$ space: $$y=1 \times x + 1$$.
@@ -46,6 +48,7 @@ In $$\rho, \theta$$ space, points are not represented as lines but instead as si
 original (x,y) space to (\rho,\theta) space. (<a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture06/lecture06.pdf">Source</a>) </figcaption>
 </figure>
 </div>
+An arbitrary point $$(x_i,y_i)$$ in $$x,y$$ space correspond to a curve $$\rho = x_i\cos\theta + y_i\sin\theta$$ in $$\rho,\theta$$ space, and any line $$\rho_i = x\cos\theta_i + y\sin\theta_i$$ in $$x,y$$ space correspond to a point $$(\rho_i,\theta_i)$$ in $$\rho,\theta$$ space. 
 
 The intersection of these curves in $$\rho, \theta$$ space still correspond to the $$\rho, \theta$$ that comprise a line passing through those points. In the previous figure , the $$(\rho, \theta)$$ in left plot equals to the $$(\rho', \theta')$$ in right plot. The straight line in left plot that
 crosses points $$(x_i, y_i)$$ and $$(x_j, y_j)$$ can be expressed as $$x\cos\theta' + y\sin\theta' = \rho'$$ in $$x, y$$ space.
@@ -60,17 +63,32 @@ For each pixel $$x_i, y_i$$ we transform it into a function in $$\rho, \theta$$ 
 <figcaption style="font-size: 80%;"> Figure. Hough transform example result. (<a href="https://en.wikipedia.org/wiki/Hough_transform">Source</a>) </figcaption>
 </figure>
 </div>
+
+**Algorithm. Hough transform.**
+
+For each edge point $$(x_i,y_i)$$:
+
+&nbsp; # Traverse through the curve $$\rho = x_i\cos\theta + y_i\sin\theta$$ and vote
+
+&nbsp; For $$\theta$$ in Range($$-\pi, \pi$$) with the grid size as step size:
+
+&nbsp; &nbsp; $$\rho = x_i\cos\theta + y_i\sin\theta$$
+
+&nbsp; &nbsp; $$H(\rho, \theta) \mathrel{+}= 1$$ \# vote
+
+End
+
 When applying Hough transform in $$\rho, \theta$$ space, it is useful to make use of gradient information which is often available as output from an edge detector. For example, if we know the direction of the edge point is $$\theta'$$, then this point votes for $$\theta'-\frac{\pi}{8} \sim \theta' + \frac{\pi}{8}$$ in $$\rho, \theta$$ space. This reduces the computation time and has the effect of reducing the number of useless votes. This modified Hough transform can be expressed as
 
 **Algorithm. Modified Hough transform.**
 
-For each edge point $$(x, y)$$:
+For each edge point $$(x_i,y_i)$$:
 
-&nbsp; $$\theta'$$ = gradient orientation at $$(x, y)$$
+&nbsp; $$\theta'$$ = gradient orientation at $$(x_i,y_i)$$
 
-&nbsp; For $$\theta$$ in Range($$\theta'-\frac{\pi}{8}, \theta' + \frac{\pi}{8}$$):
+&nbsp; For $$\theta$$ in Range($$\theta'-\frac{\pi}{8}, \theta' + \frac{\pi}{8}$$) with the grid size as step size:
 
-&nbsp; &nbsp; $$\rho = x\cos\theta + y\sin\theta$$
+&nbsp; &nbsp; $$\rho = x_i\cos\theta + y_i\sin\theta$$
 
 &nbsp; &nbsp; $$H(\rho, \theta) \mathrel{+}= 1$$ \# voting
 
