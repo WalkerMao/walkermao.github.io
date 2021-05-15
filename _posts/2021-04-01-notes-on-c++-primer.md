@@ -6,9 +6,8 @@ categories: CS
 comments: true
 published: true
 hidden: true
+toc: true
 ---
-
-[TOC]
 
 ## 1. Getting Started
 

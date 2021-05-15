@@ -33,7 +33,7 @@
             </a>
           {%- endif -%}
           
-          {%- if site.plainwhite.social_links.linkedIn -%}
+          {%- if site.plainwhite.social_links.wechat -%}
             <a href="{{ site.plainwhite.social_links.wechat }}">
               <li>
                 <i class="fab fa-weixin"></i>
@@ -76,6 +76,10 @@
 		gtag('config', '{{ site.plainwhite.analytics_id }}');
 	</script>
     {%- endif -%}
+    
     {% include tracking.html %}
+    
+    {% include back_top_button.html %}
+    
   </body>
 </html>

@@ -305,3 +305,23 @@ td{
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd; border-radius: 5px;}
+
+/*  Back Top Button  */
+#back-top {
+  position: fixed;
+  bottom: 60px;
+  margin-left: 1260px;
+}
+#back-top a {
+  width: 40px;
+  height: 40px;
+  display: block;
+  -webkit-mask: url(/assets/arrow-up-circle.svg) no-repeat center;
+  background-color: lightgray;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  background-color: gray;
+}

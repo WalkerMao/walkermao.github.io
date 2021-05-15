@@ -1,6 +1,6 @@
-# frozen_string_literal: true
-gem 'jekyll-paginate'
 source "https://rubygems.org"
-gem 'jekyll-sitemap'
+gem "jekyll-paginate"
+gem "jekyll-sitemap"
+gem "jekyll-toc"
 gemspec
 
