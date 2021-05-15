@@ -18,7 +18,7 @@ layout: default
   </div>
   <div class="post">
     {%- if page.toc -%}
-      {% toc %}
+      {% include toc.html html=content %}
       <br> </br>
     {%- endif -%}
     {{ content }}
