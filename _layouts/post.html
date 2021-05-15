@@ -17,9 +17,9 @@ layout: default
     <div class="post-date"><i class="icon-calendar"></i>{{ page.date | date: date_format }}</div>
   </div>
   <div class="post">
-    {%- if page.toc -%}
+    {%- if page.toc != false -%}
       {% include toc.html html=content %}
-      <br> </br>
+      <br>
     {%- endif -%}
     {{ content }}
   </div>
@@ -49,5 +49,3 @@ layout: default
   {% include disqus.html %}
   
 </div>
-
-<script src = "/assets/js/scrollIntoView.js"></script>
