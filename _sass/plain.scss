@@ -309,19 +309,19 @@ td{
 /*  Back Top Button  */
 #back-top {
   position: fixed;
-  bottom: 60px;
-  margin-left: 1260px;
+  bottom: 10%;
+  margin-left: 93%;
 }
 #back-top a {
   width: 40px;
   height: 40px;
   display: block;
   -webkit-mask: url(/assets/arrow-up-circle.svg) no-repeat center;
-  background-color: lightgray;
+  background-color: rgb(163, 163, 163);
   -webkit-transition: 1s;
   -moz-transition: 1s;
   transition: 1s;
 }
 #back-top a:hover {
-  background-color: gray;
+  background-color: rgb(106, 106, 106);
 }

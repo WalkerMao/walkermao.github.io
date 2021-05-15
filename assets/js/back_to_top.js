@@ -2,18 +2,16 @@
 mybutton = document.getElementById("back-top");
 mybutton.style.display = "none";
 const minTh = 100;
-const maxTh = 1000;
+const maxTh = 1500;
 
 function scrollFunction() {
   var scrollTop = document.documentElement.scrollTop;
   if (scrollTop < minTh) {
     mybutton.style.display = "none";
-  } else if (scrollTop < maxTh) {
-    mybutton.style.display = "block";
-    mybutton.style.opacity = (scrollTop - minTh) / (maxTh - minTh);
   } else {
     mybutton.style.display = "block";
-  }
+    mybutton.style.opacity = Math.min(0.6, (scrollTop - minTh) / (maxTh - minTh));
+  } 
 }
 
 // When the user scrolls down 100px from the top of the document, show the button
