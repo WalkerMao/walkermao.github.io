@@ -14,7 +14,7 @@ Hough transform can be used to detect any structure whose paramteric equation is
 
 Hough transform can be used to detect lines in a image. To do this, we want to locate sets of pixels that make up straight lines in the image. This works to detect lines in an image after an edge detector is applied to get the pixels of just the edges.
 
-### Detecting lines using Hough Transform in $$a, b$$ space
+### Detecting Lines Using Hough Transform in $$a, b$$ Space
 
 Say we have a $$(x_i, y_i)$$. There are infinite lines that could pass through this point. We can define a line that passes through this pixel $$(x_i, y_i)$$ as $$y_i = ax_i + b.$$ Using this, we can transform each pixel into $$a,b$$ space by rewriting this equation as: $$b = -ax_i + y_i$$.
 
