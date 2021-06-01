@@ -12,11 +12,17 @@ The aim of clustering is to divide observations into several non-overlap cluster
 
 The K-means clustering algorithm is an iterative algorithm. In each step, we assign each data point (observation) to the closest cluster (centroid), then recompute the centroids for the clusters by taking the average of the all data points that belong to each cluster.
 
+Given the hyperparameter $$K$$, the objective of K-Means clustering is to minimize total intra-cluster variance, or, the sum of Euclidean distances of samples to their closest cluster:
+$$
+D = \sum_{i=1}^n \sum_{k=1}^K \mathbf{1}\{ c_i = k\} \| x_i - \mu_k \|_2^2,
+$$
+where $$K$$ is the number of clusters, $$c_i$$ is the cluster index of $$x_i$$, and $$\mu_k$$ is the centroid of the cluster $$k$$. 
+
 **Algorithm. K-Means:** 
 
 [1] Initialize cluster centroids $$\mu_1, \cdots, \mu_K \in \mathbb{R}^p$$ randomly.
 
-[2] Repeat until convergence: 
+[2] Repeat until $$\mu_1, \cdots, \mu_K$$ do not change: 
 
 (a) For every $$i=1, \cdots, n$$, set the cluster label for the data point $$i$$ as $$c_i := \underset{k}{\text{argmin}} \| x_i - \mu_k \|_2^2$$;
 
@@ -25,6 +31,17 @@ The K-means clustering algorithm is an iterative algorithm. In each step, we ass
 Here is a visualization of K-means algorithm: 
 
 <div style="text-align: center"> <img src="../pictures/kmeansViz.png" alt="K-means visualization" style="zoom:100%;" />  </div>
+
+We can select the hyperparameter $$K$$ by the knee point (or elbow point) of the $$D \text{ v.s. } K$$ plot, as shown below.
+
+<div align='center'>
+<figure>
+<img src="https://www.datanovia.com/en/wp-content/uploads/dn-tutorials/002-partitional-clustering/figures/006b-kmeans-clustering-k-means-optimal-clusters-wss-1.png" alt="img" style="zoom: 55%;" />
+<figcaption style="font-size: 80%;"> Figure. Elbow method for optimal K. (<a href="https://www.datanovia.com/en/lessons/k-means-clustering-in-r-algorith-and-practical-examples/">Source</a>) </figcaption>
+</figure>
+</div>
+
+The knee point can also be selected automatically by [Kneedle algorithm](https://www1.icsi.berkeley.edu/~barath/papers/kneedle-simplex11.pdf), or we can identity the suggedted $$K$$ by the [gap statistic](https://statweb.stanford.edu/~gwalther/gap). 
 
 K-means algorithm is susceptible to local optima, so we usually reinitialize $$\mu_1, \cdots, \mu_K$$ at several different initial parameters.
 
