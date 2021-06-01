@@ -2,10 +2,10 @@
 layout: post
 title: "Root Cause Localization: iDice"
 date: 2021-05-23
-categories: ML
+categories: Temp
 comments: true
 published: true
-hidden: false
+hidden: true
 ---
 
 ## Notes on "iDice: Problem Identifification for Emerging Issues"
@@ -20,7 +20,7 @@ We formulate the problem of identifying emerging issues as a pattern mining prob
 
 #### An Example
 
-Sometimes the number of issue reports associated with a certain attribute combination could suddenly increase, i.e. an emerging issue could occur.  We call such an attribution combination **Effffective Combination**.
+Sometimes the number of issue reports associated with a certain attribute combination could suddenly increase, i.e. an emerging issue could occur.  We call such an attribution combination **Effective Combination**.
 
 <div align='center'>
 <figure>
@@ -56,6 +56,7 @@ For two attribute combinations $$X$$ and $$Y$$, if the data containing $$X$$ is 
 <figcaption style="font-size:80%;"> Figure 2: Effective combination (<a href="https://www.semanticscholar.org/paper/iDice%3A-Problem-Identification-for-Emerging-Issues-Lin-Lou/a79f23b151dedd9ff6f1f1a87666b2d4c5802fda">Source</a>) </figcaption>
 </figure>
 </div>
+
 #### Requirements
 
 We have identified the following requirements for an effective combination:
@@ -97,30 +98,37 @@ I P(X) &=-\frac{1}{\overline{\Omega_{a}}+\overline{\Omega_{b}}}\left(\overline{X
 &\left.+\left(\overline{\Omega_{a}}-\overline{X_{a}}\right) \ln \frac{1}{P(a \mid \bar{X})}+\left(\overline{\Omega_{b}}-\overline{X_{b}}\right) \ln \frac{1}{P(b \mid \bar{X})}\right).
 \end{aligned}
 $$
+
 Let $ S_{X} $ be the time series data corresponding to the attribute combination $ X, X_{a} $ denotes the volume of time series data in $ S_{X} $ during the change region of $ X $, and $ X_{b} $ denotes the volume of time series data in $ S_{X} $ before the change point of $ X . \Omega_{a} $ denotes the entire volume during the change region of $ X $, and $ \Omega_{b} $ denotes the entire volume before the change point of $ X $. All $ \bar{*} $ denote the mean value of the corresponding time series. Also:
+
 $$
 P(a \mid X)=\frac{\overline{X_{a}}}{\overline{X_{b}}+\overline{X_{a}}}, P(b \mid X)=\frac{\overline{X_{b}}}{\overline{X_{b}}+\overline{X_{a}}}, \\
 P(a \mid \bar{X})=\frac{\overline{\Omega_{a}}-\overline{X_{a}}}{\overline{\Omega_{a}}+\overline{\Omega_{b}}-\overline{X_{b}}-\overline{X_{a}}}, \\
 P(b \mid \bar{X})=\frac{\overline{\Omega_{b}}-\overline{X_{b}}}{\overline{\Omega_{a}}+\overline{\Omega_{b}}-\overline{X_{b}}-\overline{X_{a}}} . 
 $$
+
 The proposed Isolation Power is based on the idea of Information Entropy. As discussed in Section 3 and illustrated by Figure 2, the entire set of attribute combinations form a lattice, and every node in the lattice can split the dataset into two parts: the issue reports that contain the attributes, and the reports that do not contain the attributes. If an attribute combination is an effective combination, all its subset nodes in the lattice exhibit significant increases in the same change region, but its sibling nodes do not. Therefore, an effective combination is the node that can exactly split the entire dataset into two parts: with and without a significant increase. 
 
 According to the information theory, the overall entropy of two datasets (e.g., $$A$$ and $$B$$) where each dataset ($$A$$ or $$B$$) contains samples with an identical property (e.g., all of them exhibit increases, or all of them do not exhibit increases) is much smaller than the entropy of two datasets where samples with different properties are mixed together. Based on this concept, we calculate Isolation Power to mimic the calculation of entropy. 
 
 During the search process, if the current set has a higher isolation power than its direct supersets and subsets, then the current set is an effective attribute combination, satisfying the requirements for effective combinations described in Section 3. In this case, all its subsets will not be searched. In this way, we can reduce search space using the Isolation Power measure. Considering a simple example with three attribute combinations: 
+
 $$
 X=\{\text{Country}=\text{India}\} \\
 Y=\{\text{Country}=\text{India}; \text{TenantType}=\text{Edu}; \text{DataCenter}=\text{DC6}\} \\
 Z=\{\text{Country}=\text{India}; \text{TenantType}=\text{Edu}; \text{DataCenter}=\text{DC6}; \text{Package}=\text{Lite}\}
 $$
+
 If $$Y$$ has a higher isolation power than its subset $$Z$$ and superset $$X$$, $$Y$$ will be considered and $$Z$$ and $$X$$ will be removed from the search space.
 
 #### Result Ranking
 
 In real-world scenarios, we may obtain a set of effective combinations from the data. We rank the effective combinations according to their relative significance. We adopt a score similar to Fisher distance for the ranking:
+
 $$
 R=p_{a} * \ln \frac{p_{a}}{p_{b}}
 $$
+
 In the above equation, $ p $ denotes the ratio: $ p=\frac{V_{X t}}{V_{t}} $, where $ V_{X t} $ denotes the volume of current effective combination during a time period $ t $ and $ V_{t} $ denotes the total volume during $ t $. $ p_{a}, p_{b} $ are the ratios during the detected change region and before the detected change point respectively.
 
 In our implementation, we prune away the attribute combinations whose $$R$$ score is lower than a cutoff threshold (which is empirically set to $1.0$ in our implementation).
@@ -135,7 +143,6 @@ Finally, we rank the remaining attribute combinations and output them as the eff
 <figcaption style="font-size:80%;"> iDice Algorithm </figcaption>
 </figure>
 </div>
-
 
 For each closed itemset $$p_i$$ returned by the BFS (Breadth First Search) based closed itemset mining process, iDice performs Impact-based pruning (lines 6-10), Change Detection based pruning (lines 11-14), and Isolation Power based pruning (lines 15-19). These steps prune away attribute combinations and reduce the search space, making it possible to identify effective combinations from a large number of attribute combinations. Lines 21 to 26 denote the result ranking part of iDice.
 
