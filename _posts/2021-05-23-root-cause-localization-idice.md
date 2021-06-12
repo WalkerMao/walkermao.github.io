@@ -2,10 +2,10 @@
 layout: post
 title: "Root Cause Localization: iDice"
 date: 2021-05-23
-categories: Temp
+categories: ML
 comments: true
 published: true
-hidden: true
+hidden: false
 ---
 
 ## Notes on "iDice: Problem Identifification for Emerging Issues"
@@ -36,7 +36,7 @@ Sometimes the number of issue reports associated with a certain attribute combin
 </figure>
 </div>
 
- #### Challenge
+#### Challenge
 
 The dataset of issue reports can be treated as an combination of multi-dimensional data and time series data. Most of the closed itemset approaches only handle multi-dimensionality without considering the temporal property. They cannot detect the change point at which the volume of issue reports significantly increases.
 

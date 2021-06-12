@@ -10,7 +10,7 @@ function scrollFunction() {
     mybutton.style.display = "none";
   } else {
     mybutton.style.display = "block";
-    mybutton.style.opacity = Math.min(0.6, (scrollTop - minTh) / (maxTh - minTh));
+    mybutton.style.opacity = Math.min(0.7, 0.2+(scrollTop - minTh) / (maxTh - minTh));
   } 
 }
 
