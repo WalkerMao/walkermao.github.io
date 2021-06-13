@@ -1,8 +1,8 @@
 //Get the button:
 mybutton = document.getElementById("back-top");
 mybutton.style.display = "none";
-const minTh = 100;
-const maxTh = 1500;
+const minTh = 1000;
+const maxTh = 5000;
 
 function scrollFunction() {
   var scrollTop = document.documentElement.scrollTop;
@@ -10,7 +10,7 @@ function scrollFunction() {
     mybutton.style.display = "none";
   } else {
     mybutton.style.display = "block";
-    mybutton.style.opacity = Math.min(0.7, 0.2+(scrollTop - minTh) / (maxTh - minTh));
+    mybutton.style.opacity = Math.min(0.8, 0.2 + (scrollTop - minTh) / (maxTh - minTh));
   } 
 }
 
