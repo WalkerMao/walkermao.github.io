@@ -8,8 +8,6 @@ published: true
 hidden: false
 ---
 
-## Notes on "iDice: Problem Identifification for Emerging Issues"
-
 The following sections are excerpted from the paper "iDice: Problem Identification for Emerging Issues" [^1].
 
 ### Introduction
@@ -102,9 +100,9 @@ $$
 Let $ S_{X} $ be the time series data corresponding to the attribute combination $ X, X_{a} $ denotes the volume of time series data in $ S_{X} $ during the change region of $ X $, and $ X_{b} $ denotes the volume of time series data in $ S_{X} $ before the change point of $ X . \Omega_{a} $ denotes the entire volume during the change region of $ X $, and $ \Omega_{b} $ denotes the entire volume before the change point of $ X $. All $ \bar{*} $ denote the mean value of the corresponding time series. Also:
 
 $$
-P(a \mid X)=\frac{\overline{X_{a}}}{\overline{X_{b}}+\overline{X_{a}}}, P(b \mid X)=\frac{\overline{X_{b}}}{\overline{X_{b}}+\overline{X_{a}}}, \\
-P(a \mid \bar{X})=\frac{\overline{\Omega_{a}}-\overline{X_{a}}}{\overline{\Omega_{a}}+\overline{\Omega_{b}}-\overline{X_{b}}-\overline{X_{a}}}, \\
-P(b \mid \bar{X})=\frac{\overline{\Omega_{b}}-\overline{X_{b}}}{\overline{\Omega_{a}}+\overline{\Omega_{b}}-\overline{X_{b}}-\overline{X_{a}}} . 
+P(a \mid X)=\frac{\bar{X}_{a}}{\bar{X}_{b}+\bar{X}_{a}}, P(b \mid X)=\frac{\bar{X}_{b}}{\bar{X}_{b}+\bar{X}_{a}}, \\
+P(a \mid \bar{X})=\frac{\bar{\Omega}_{a}-\bar{X}_{a}}{\bar{\Omega}_{a}+\bar{\Omega}_{b}-\bar{X}_{b}-\bar{X}_{a}}, \\
+P(b \mid \bar{X})=\frac{\bar{\Omega}_{b}-\bar{X}_{b}}{\bar{\Omega}_{a}+\bar{\Omega}_{b}-\bar{X}_{b}-\bar{X}_{a}}.
 $$
 
 The proposed Isolation Power is based on the idea of Information Entropy. As discussed in Section 3 and illustrated by Figure 2, the entire set of attribute combinations form a lattice, and every node in the lattice can split the dataset into two parts: the issue reports that contain the attributes, and the reports that do not contain the attributes. If an attribute combination is an effective combination, all its subset nodes in the lattice exhibit significant increases in the same change region, but its sibling nodes do not. Therefore, an effective combination is the node that can exactly split the entire dataset into two parts: with and without a significant increase. 

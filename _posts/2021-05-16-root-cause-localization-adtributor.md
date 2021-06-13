@@ -9,8 +9,6 @@ hidden: False
 
 ---
 
-## Notes on "Adtributor: Revenue debugging in advertising systems"
-
 The following sections are excerpted from the paper "Adtributor: Revenue debugging in advertising systems" [^1].
 
 ### Problem Statement
