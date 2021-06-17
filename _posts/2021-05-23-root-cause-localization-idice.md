@@ -57,7 +57,7 @@ For two attribute combinations $$X$$ and $$Y$$, if the data containing $$X$$ is 
 
 #### Requirements
 
-We have identified the following requirements for an effective combination:
+The author have identified the following requirements for an effective combination:
 
 - Impactful: An effective combination should associate with an emerging issue that corresponds to a relatively large number of issue reports.
 
