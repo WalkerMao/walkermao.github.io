@@ -31,7 +31,7 @@ The degradation (of training accuracy) indicates that not all systems are simila
 - The irreversible information loss caused by ReLU. [^3]
 
 In the paper, the authors address the degradation problem by introducing a deep residual learning framework. Instead of hoping each few stacked layers directly fit a
-desired underlying mapping, the authors explicitly let these layers fit a residual mapping. Formally, denoting the desired underlying mapping as $ \mathcal{H}(\mathbf{x}) $, we let the stacked nonlinear layers fit another mapping of $ \mathcal{F}(\mathbf{x}):=\mathcal{H}(\mathbf{x})-\mathbf{x} . $ The original mapping is recast into $ \mathcal{F}(\mathbf{x})+\mathbf{x} $. We hypothesize that **it is easier to optimize the residual mapping than to optimizet he original, unreferenced mapping**. To the extreme, if an identity mapping were optimal, **it would be easier to fit the residual of zero than to fit an identity mapping by a stack of nonlinear layers**. 
+desired underlying mapping, the authors explicitly let these layers fit a residual mapping. Formally, denoting the desired underlying mapping as $$ \mathcal{H}(\mathbf{x}) $$, we let the stacked nonlinear layers fit another mapping of $$ \mathcal{F}(\mathbf{x}):=\mathcal{H}(\mathbf{x})-\mathbf{x} . $$ The original mapping is recast into $$ \mathcal{F}(\mathbf{x})+\mathbf{x} $$. We hypothesize that **it is easier to optimize the residual mapping than to optimizet he original, unreferenced mapping**. To the extreme, if an identity mapping were optimal, **it would be easier to fit the residual of zero than to fit an identity mapping by a stack of nonlinear layers**. 
 
 <div align='center'>
 <figure>
@@ -39,6 +39,7 @@ desired underlying mapping, the authors explicitly let these layers fit a residu
 <figcaption style="font-size:80%;"> Figure 2. Residual learning: a building block. (<a href="https://www.semanticscholar.org/paper/Deep-Residual-Learning-for-Image-Recognition-He-Zhang/2c03df8b48bf3fa39054345bafabfeff15bfd11d">Source</a>) </figcaption>
 </figure>
 </div>
+
 The formulation of $$ \mathcal{F}(\mathbf{x})+\mathbf{x} $$ can be realized by feedforward neural networks with "shortcut connections" (Fig. 2). Shortcut connections are those skipping one or more layers. In our case, the shortcut connections simply perform identity mapping, and their outputs are added to the outputs of the stacked layers (Fig. 2). Identity shortcut connections add neither extra parameter nor computational complexity. The entire network can still be trained end-to-end by SGD with backpropagation, and can be easily implemented using common libraries (e.g., Caffe) without modifying the solvers.
 
 ### Deep Residual Learning
@@ -53,27 +54,29 @@ $$
 \mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)+\mathbf{x}. \tag{1}
 $$
 
-Here $ \mathrm{x} $ and $ \mathrm{y} $ are the input and output vectors of the layers considered. The function $ \mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right) $ represents the residual mapping to be learned. For the example in Fig. 2 that has two layers, $ \mathcal{F}=W_{2} \sigma\left(W_{1} \mathbf{x}\right) $ in which $ \sigma $ denotes ReLU and the biases are omitted for simplifying notations. We adopt the second nonlinearity after the addition (i.e., $ \sigma(\mathbf{y}) $, see Fig. 2).
+Here $$ \mathrm{x} $$ and $$ \mathrm{y} $$ are the input and output vectors of the layers considered. The function $$ \mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right) $$ represents the residual mapping to be learned. For the example in Fig. 2 that has two layers, $$ \mathcal{F}=W_{2} \sigma\left(W_{1} \mathbf{x}\right) $$ in which $$ \sigma $$ denotes ReLU and the biases are omitted for simplifying notations. We adopt the second nonlinearity after the addition (i.e., $$ \sigma(\mathbf{y}) $$, see Fig. 2).
 
-The dimensions of $ \mathbf{x} $ and $ \mathcal{F} $ must be equal in Eqn.(1). If this is not the case $ (e . g . $, when changing the input/output channels), we can perform a linear projection $ W_{s} $ by the shortcut connections to match the dimensions:
+The dimensions of $$ \mathbf{x} $$ and $$ \mathcal{F} $$ must be equal in Eqn.(1). If this is not the case $$ (e . g . $$, when changing the input/output channels), we can perform a linear projection $$ W_{s} $$ by the shortcut connections to match the dimensions:
+
 $$
 \mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)+W_{s} \mathbf{x}. \tag{2}
 $$
-We can also use a square matrix $ W_{s} $ in Eqn.(2). But the authors showed by experiments that the identity mapping is sufficient for addressing the degradation problem and is economical, and thus $ W_{s} $ is only used when matching dimensions. 
 
-The form of the residual function $ \mathcal{F} $ is flexible. Experiments in the paper involve a function $ \mathcal{F} $ that has two or three layers (Fig. 5), while more layers are possible. But if $ \mathcal{F} $ has only a single layer, Eqn.(1) is similar to a linear layer: $ \mathbf{y}=W_{1} \mathbf{x}+\mathbf{x} $. 
+We can also use a square matrix $$ W_{s} $$ in Eqn.(2). But the authors showed by experiments that the identity mapping is sufficient for addressing the degradation problem and is economical, and thus $$ W_{s} $$ is only used when matching dimensions. 
 
-Also note that although the above notations are about fully-connected layers for simplicity, they are applicable to convolutional layers. The function $ \mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right) $ can represent multiple convolutional layers. The element-wise addition is performed on two feature maps, channel by channel.
+The form of the residual function $$ \mathcal{F} $$ is flexible. Experiments in the paper involve a function $$ \mathcal{F} $$ that has two or three layers (Fig. 5), while more layers are possible. But if $$ \mathcal{F} $$ has only a single layer, Eqn.(1) is similar to a linear layer: $$ \mathbf{y}=W_{1} \mathbf{x}+\mathbf{x} $$. 
+
+Also note that although the above notations are about fully-connected layers for simplicity, they are applicable to convolutional layers. The function $$ \mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right) $$ can represent multiple convolutional layers. The element-wise addition is performed on two feature maps, channel by channel.
 
 #### Network Architectures
 
 In a CNN, the identity shortcuts (Eqn.(1)) can be directly used when the input and output are of the same dimensions. However, through the forward pass in a CNN, convolutional layers are usually deeper for depth and smaller for width and height. 
 
-As for increasing the depth of $ \mathbf{x} $ to match the depth of $ \mathcal{F} $, we consider three options: (A) The shortcut still performs identity mapping, with extra zero entries padded for increasing depth. This option introduces no extra parameter; (B) The projection shortcut (done by 1×1 convolutions) in Eqn.(2) is used to increase dimensions, and other shortcuts are identity; (C) all shortcuts are projections. 
+As for increasing the depth of $$ \mathbf{x} $$ to match the depth of $$ \mathcal{F} $$, we consider three options: (A) The shortcut still performs identity mapping, with extra zero entries padded for increasing depth. This option introduces no extra parameter; (B) The projection shortcut (done by 1×1 convolutions) in Eqn.(2) is used to increase dimensions, and other shortcuts are identity; (C) all shortcuts are projections. 
 
 Experiments showed that (B) is slightly better than (A). The authors argue that this is because the zero-padded dimensions in (A) indeed have no residual learning. (C) is marginally better than (B), and the authors attribute this to the extra parameters introduced by many projection shortcuts. But the small differences among (A)/(B)/(C) indicate that projection shortcuts are not essential for addressing the degradation problem. The authors dropped option (C) in further experiments to reduce memory/time complexity and model sizes. Identity shortcuts are particularly important for not increasing the complexity of the bottleneck architectures.
 
-Then, as for decreasing the width and height of $ \mathbf{x} $ to match that of $ \mathcal{F} $, we apply 1×1 convolutions with stride larger than 1 on each feature map in $ \mathbf{x} $.
+Then, as for decreasing the width and height of $$ \mathbf{x} $$ to match that of $$ \mathcal{F} $$, we apply 1×1 convolutions with stride larger than 1 on each feature map in $$ \mathbf{x} $$.
 
 <br>
 
