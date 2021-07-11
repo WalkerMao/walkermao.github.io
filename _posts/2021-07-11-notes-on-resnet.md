@@ -46,6 +46,8 @@ The formulation of $$ \mathcal{F}(\mathbf{x})+\mathbf{x} $$ can be realized by f
 
 #### Residual Learning
 
+See the previous section "Introduction".
+
 #### Identity Mapping by Shortcuts
 
 The authors adopt residual learning to every few stacked layers. A building block is shown in Fig. 2. Formally, a building block defined as:
