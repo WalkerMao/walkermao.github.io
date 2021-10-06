@@ -86,8 +86,7 @@ $$
 Here is the architecture of an LSTM. 
 
 <div align='center'>
-<img src="../pictures/The detailed internals of a LSTM.png" alt="The detailed internals of a
-LSTM" style="zoom:80%;" />
+<img src="../pictures/The detailed internals of a LSTM.png" alt="The detailed internals of a LSTM" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^4] </figcaption>
 </div>
 
@@ -136,7 +135,7 @@ $$
 ### Summary for GRU
 
 <div align='center'>
-<img src="../pictures/The detailed internals of a GRU.png" alt="The detailed internals of a GRU style="zoom:80%;" />
+<img src="../pictures/The detailed internals of a GRU.png" alt="The detailed internals of a GRU" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^4] </figcaption>
 </div>
 
