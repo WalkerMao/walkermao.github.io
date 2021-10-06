@@ -34,7 +34,7 @@ Now let's introduce three gates and two generation cells in the context layer of
 The purpose of the forget gate is to delete information from the past memory (context) $$c_{t-1}$$ that is no longer needed. The forget gate computes a weighted sum of the previous state's hidden layer $h_{t-1}$ and the current input $$x_t$$ and passes that through a sigmoid $$\sigma(\cdot)$$ to produce the indicator $f_t$.
 
 $$
-\text{Forget gate: } f_t = \sigma (W_{f}x_t + U_f h_{t-1}).
+f_t = \sigma (W_{f}x_t + U_f h_{t-1}).
 $$
 
 We then use $f_t$ as an indicator to gate the past memory (context) $$c_{t-1}$$. 
@@ -147,8 +147,6 @@ Although LSTM unit and GRU are much more complex than basic recurrent unit, we c
 <img src="../pictures/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^3] </figcaption>
 </div>
-
-
 <br>
 
 **References**: 
