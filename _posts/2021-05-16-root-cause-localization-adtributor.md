@@ -9,7 +9,7 @@ hidden: False
 
 ---
 
-The following sections are excerpted from the paper "Adtributor: Revenue debugging in advertising systems" [^1].
+The contents in this post are excerpted from the paper "Adtributor: Revenue debugging in advertising systems" [^1].
 
 ### Problem Statement
 
@@ -44,6 +44,7 @@ Our algorithm use a per-element threshold of the change in the measure, $$T_{EEP
 <img src="https://d3i71xaburhd42.cloudfront.net/95a9ac4dca271352a14a8c8c95f598d9b164719f/7-Table5-1.png" alt="Table 5: Notation" style="zoom:120%;" /> <figcaption style="font-size:80%;"> Table 5: Notation (<a href="https://www.semanticscholar.org/paper/Adtributor%3A-Revenue-Debugging-in-Advertising-Bhagwan-Kumar/95a9ac4dca271352a14a8c8c95f598d9b164719f#extracted">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 For fundamental measures, the overall measure is simply the summation of value of the measures of the elements of the respective dimensions, but the same is not true for derived measures as they are not additive (Section 4).
 
@@ -81,7 +82,7 @@ We use the Jensen-Shannon (JS) divergence for computing surprise, defined as
 
 $$
 \begin{aligned}
-D_{JS}(P, Q) &= \frac{1}{2} \left(D_{KL}(P \| Q) + D_{KL}(Q \| P) \right) \\
+D_{JS}(P, Q) &= \frac{1}{2} \left(D_{KL}\left(P \| \frac{P+Q}{2}\right) + D_{KL}\left(Q \| \frac{P+Q}{2}\right) \right) \\
 &= \frac{1}{2} \left(\Sigma_{i} p_{i} \log \frac{2 p_{i}}{p_{i}+q_{i}}+\Sigma_{i} q_{i} \log \frac{2 q_{i}}{p_{i}+q_{i}}\right).
 \end{aligned}
 $$
@@ -125,6 +126,7 @@ While the above definition is general and applicable to derived measures that ar
 <figcaption style="font-size:80%;"> (<a href="https://www.semanticscholar.org/paper/Adtributor%3A-Revenue-Debugging-in-Advertising-Bhagwan-Kumar/95a9ac4dca271352a14a8c8c95f598d9b164719f#extracted">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 The partial derivative in finite-differences of $$ f(\cdot) / g(\cdot) $$ is of the form $$ (\Delta f * g-\Delta g * f) /(g *(g+\Delta g)) $$, and is similar to continuous domain partial derivative, except for the extra $$ \Delta g $$ in the denominator.
 

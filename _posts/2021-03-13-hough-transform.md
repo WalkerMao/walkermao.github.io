@@ -27,6 +27,7 @@ This equation represents a line in $$a,b$$ space, and each $$a,b$$ point on the 
 original (x,y) space to (a,b) space. (<a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture06/lecture06.pdf">Source</a>) </figcaption>
 </figure>
 </div>
+
 An arbitrary point $$(x_i,y_i)$$ in $$x,y$$ space correspond to a line $$b = -ax_i + y_i$$ in $$a,b$$ space, and any line $$y=a_ix+b_i$$ in $$x,y$$ space correspond to a point $$(a_i,b_i)$$ in $$a,b$$ space. 
 
 The intersection of lines in $$a,b$$ space represent the $$a,b$$ values that compromise a line $$y_i = ax_i + b$$ passing through those points.
