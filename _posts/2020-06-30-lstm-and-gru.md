@@ -145,9 +145,10 @@ $$
 Although LSTM unit and GRU are much more complex than basic recurrent unit, we can still maintain modularity of LSTM unit and GRU and to easily experiment with different architectures. To see this, the following figure illustrates the inputs and outputs associated with each kind of unit.
 
 <div align='center'>
-<img src="../pictures/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:100%;" />
+<img src="../pictures/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^3] </figcaption>
 </div>
+
 
 <br>
 
