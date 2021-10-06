@@ -21,7 +21,7 @@ To address these issues, more complex network architectures have been designed t
 
 ## Long Short Term Memory (LSTM)
 
-**Long short term memory** (**LSTM**) network was introduced by Hochreiter and Schmidhuber in 1997. It divides the context management problem into two sub-problems: removing information no longer needed from the context, and adding information likely to be needed for later decision making. 
+**Long short term memory** (**LSTM**) [^1] network was introduced by Hochreiter and Schmidhuber in 1997. It divides the context management problem into two sub-problems: removing information no longer needed from the context, and adding information likely to be needed for later decision making. 
 
 LSTMs accomplish this by first adding an explicit context layer to the architecture in addition to the usual recurrent hidden layer, and through the use of specialized neural units that make use of gates to control the flow of information into and out of the units that comprise the network layers. 
 
@@ -97,7 +97,7 @@ In the context layer of an LSTM, the new memory generation cell generates new me
 
 ## Gated Recurrent Unit (GRU)
 
-The Gated Recurrent Unit (GRU) was introduced by Cho et al. in 2014. It is motivated by LSTM unit but is much simpler to compute and implement.
+The Gated Recurrent Unit (GRU) [^2] was introduced by Cho et al. in 2014. It is motivated by LSTM unit but is much simpler to compute and implement.
 
 We have 8 sets of weights to learn (i.e., the $$U$$ and $$W$$ for each of the 4 gates within each unit) in LSTM, whereas with simple recurrent units we only had 2. Training these additional parameters imposes a much significantly higher training cost. GRU eases this burden by **dispensing with the use of a separate context vector**, and by **reducing the number of gates to 2 — a reset gate and an update gate**.
 
