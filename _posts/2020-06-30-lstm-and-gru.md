@@ -7,7 +7,7 @@ published: true
 comments: true
 ---
 
-The contents in this post are mainly excerpted from [^3] (thanks Jurafsky and Martin for this excellent textbook), and also [^4].
+The contents in this post are mainly excerpted from [^1] (thanks Jurafsky and Martin for this excellent textbook), and also [^2].
 
 ## Inability of RNNs to Maintain Critical Memory
 
@@ -21,7 +21,7 @@ To address these issues, more complex network architectures have been designed t
 
 ## Long Short Term Memory (LSTM)
 
-**Long short term memory** (**LSTM**) [^1] network was introduced by Hochreiter and Schmidhuber in 1997. It divides the context management problem into two sub-problems: removing information no longer needed from the context, and adding information likely to be needed for later decision making. 
+**Long short term memory** (**LSTM**) [^3] network was introduced by Hochreiter and Schmidhuber in 1997. It divides the context management problem into two sub-problems: removing information no longer needed from the context, and adding information likely to be needed for later decision making. 
 
 LSTMs accomplish this by first adding an explicit context layer to the architecture in addition to the usual recurrent hidden layer, and through the use of specialized neural units that make use of gates to control the flow of information into and out of the units that comprise the network layers. 
 
@@ -87,7 +87,7 @@ Here is the architecture of an LSTM.
 
 <div align='center'>
 <img src="../pictures/The detailed internals of a LSTM.png" alt="The detailed internals of a LSTM" style="zoom:80%;" />
-<figcaption style="font-size: 80%;"> Figure source: [^4] </figcaption>
+<figcaption style="font-size: 80%;"> Figure source: [^2] </figcaption>
 </div>
 
 An LSTM accepts as input the context layer $$c_{t-1}$$, and hidden layer $$h_{t-1}$$ from the previous time step, along with the current input vector $$x_t$$. It then generates updated memory (context) $$c_t$$ and hidden vectors $$h_t$$ as output.
@@ -96,7 +96,7 @@ In the context layer of an LSTM, the new memory generation cell generates new me
 
 ## Gated Recurrent Unit (GRU)
 
-The Gated Recurrent Unit (GRU) [^2] was introduced by Cho et al. in 2014. It is motivated by LSTM unit but is much simpler to compute and implement.
+The Gated Recurrent Unit (GRU) [^4] was introduced by Cho et al. in 2014. It is motivated by LSTM unit but is much simpler to compute and implement.
 
 We have 8 sets of weights to learn (i.e., the $$U$$ and $$W$$ for each of the 4 gates within each unit) in LSTM, whereas with simple recurrent units we only had 2. Training these additional parameters imposes a much significantly higher training cost. GRU eases this burden by **dispensing with the use of a separate context vector**, and by **reducing the number of gates to 2 — a reset gate and an update gate**.
 
@@ -136,7 +136,7 @@ $$
 
 <div align='center'>
 <img src="../pictures/The detailed internals of a GRU.png" alt="The detailed internals of a GRU" style="zoom:80%;" />
-<figcaption style="font-size: 80%;"> Figure source: [^4] </figcaption>
+<figcaption style="font-size: 80%;"> Figure source: [^2] </figcaption>
 </div>
 
 ## Summary
@@ -145,16 +145,16 @@ Although LSTM unit and GRU are much more complex than basic recurrent unit, we c
 
 <div align='center'>
 <img src="../pictures/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:80%;" />
-<figcaption style="font-size: 80%;"> Figure source: [^3] </figcaption>
+<figcaption style="font-size: 80%;"> Figure source: [^1] </figcaption>
 </div>
 <br>
 
 **References**: 
 
-[^1]: Hochreiter, S., & Schmidhuber, J. (1997). Long short-term memory. *Neural computation*, *9*(8), 1735-1780.
+[^1]: Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft.
 
-[^2]: Cho, K., Van Merriënboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H., & Bengio, Y. (2014). Learning phrase representations using RNN encoder-decoder for statistical machine translation. *arXiv preprint arXiv:1406.1078*.
+[^2]: Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). CS224n: Natural Language Processing with Deep Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf.
 
-[^3]: Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft.
+[^3]: Hochreiter, S., & Schmidhuber, J. (1997). Long short-term memory. *Neural computation*, *9*(8), 1735-1780.
 
-[^4]: Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). CS224n: Natural Language Processing with Deep Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf.
+[^4]: Cho, K., Van Merriënboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H., & Bengio, Y. (2014). Learning phrase representations using RNN encoder-decoder for statistical machine translation. *arXiv preprint arXiv:1406.1078*.
