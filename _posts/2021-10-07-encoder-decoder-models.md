@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "RNN Encoder-Decoder Models"
-date: 2020-06-30
+date: 2021-10-07
 categories: NLP DL
 published: true
 comments: true
