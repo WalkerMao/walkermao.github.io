@@ -90,6 +90,8 @@ We can understand the approach of taking a weighted sum of all the annotations a
 
 The probability $ \alpha_{t j} $, or its associated energy $ e_{t j} $, reflects the importance of the annotation $ h_{j} $ with respect to the previous hidden state $ s_{t-1} $ in deciding the next state $ s_{t} $ and generating $ y_{t} . $ Intuitively, this implements a mechanism of attention in the decoder. The decoder decides parts of the source sentence to pay attention to. By letting the decoder have an attention mechanism, we relieve the encoder from the burden of having to encode all information in the source sentence into a fixed length vector. With this new approach the information can be spread throughout the sequence of annotations, which can be selectively retrieved by the decoder accordingly.
 
+Read the appendix A in the paper [^2] for detail description and math expression of the model architecture.
+
 ## Tips
 
 ### Reversing the Source Sentences
