@@ -37,9 +37,11 @@ $$
 where $$f$$ is can be as simple as a basic RNN unit i.e. $$h_t = \text{acti}(Uh_{t-1}+Wx_t)$$, and as complex as a LSTM unit or GRU. Here $$\text{acti}$$ is a activation function and $$U, V, W$$ are trained weights. 
 
 As for the RNN Encoder-Decoder, the encoder is a RNN that reads each symbol of an input sequence $$\mathbf{x}$$ sequentially. As it reads each symbol, the hidden state of the encoder changes according to 
+
 $$
 h_t = f(h_{t-1}, x_t).
 $$
+
 After reading the end of the sequence (marked by an end-of-sequence symbol), the final hidden state of the encoder is a summary $$\mathbf{c}$$ of the whole input sequence, and it is a fixed-length vector representation as mentioned before. 
 
 The decoder is another RNN that generates the output sequence by predicting the next symbol sequentially, with $$\mathbf{c}$$ as the initial hidden state, i.e. $$s_0 = \mathbf{c}$$. The hidden state updating and the output of decoder can be expressed as
@@ -61,7 +63,9 @@ To address this issue, they proposed an extension to the basic RNN Encoder-Decod
 <img src="https://hyunyoung2.github.io/img/Image/NaturalLanguageProcessing/NLPLabs/Paper_Investigation/Translation/2019-01-01-Neural_Machine_Translation_by_Jointly_Learning_to_Align_And_Translate/Bahdanau_et_al_(2015).png" alt="Bahdanau_et_al_(2015)" style="zoom:120%;" />
 <figcaption style="font-size: 80%;"> Source: Bahdanau et al., (2015). </figcaption>
 </div>
+
 The hidden state updating of decoder can be expressed as 
+
 $$
 s_t = f(s_{t-1}, y_{t-1}, c_t).
 $$
@@ -71,17 +75,23 @@ Note that here each $$s_t$$ is conditioned on each distinct context vector $$c_t
 Each annotation $$h_t$$ contains information about the whole input sequence with a strong focus on the parts surrounding the $$t$$-th word $$x_t$$ of the input sequence. 
 
 The context vector $ c_{t} $ is, then, computed as a weighted sum of these annotations $$(h_1,\cdots,h_{T_x})$$:
+
 $$
 c_{t} = \sum_{j=1}^{T_{x}} \alpha_{tj} h_{j}.
 $$
+
 The weight $ \alpha_{tj} $ of each annotation $ h_{j} $ is computed by
+
 $$
 \alpha_{t j}=\frac{\exp \left(e_{t j}\right)}{\sum_{k=1}^{T_{x}} \exp \left(e_{t k}\right)},
 $$
+
 where
+
 $$
 e_{t j} = a\left(s_{t-1}, h_{j}\right),
 $$
+
 is an alignment model which scores how well the inputs around position $ j $ and the output at position $ t $ match. The score is based on the RNN hidden state $ s_{t-1} $ and the $ j $-th annotation $ h_{j} $ of the input sentence.
 
 The alignment model $$a$$ is parametrized as a feedforward neural network which is jointly trained with all the other components of the proposed system.
