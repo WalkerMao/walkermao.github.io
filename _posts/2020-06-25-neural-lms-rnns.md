@@ -23,13 +23,13 @@ For example, suppose we've seen this sentence in training: "I have to make sure 
 
 We can use the pre-trained word embeddings. As shown in the Figure 7.12, a **feedforward neural LM** with pre-trained embeddings as the inputs, and each embedding is of dimension $$d \times 1$$. 
 
-<img src="/pictures/feedforward-neural-LM-1.png" alt="feedforward-neural-LM-1" style="zoom:80%;" />
+<img src="../pictures/feedforward-neural-LM-1.png" alt="feedforward-neural-LM-1" style="zoom:80%;" />
 
 However, often **we’d like to learn the embeddings simultaneously with training the network.** This is true when whatever task the network is designed for (sentiment classification, or translation, or parsing) places strong constraints on what makes a good representation. 
 
 To do this, we’ll add an extra layer to the network, and propagate the error all the way back to the embedding vectors. For this to work at the input layer, instead of pre-trained embeddings, we’re going to represent each of the previous context words as a one-hot vector of length $\mid \mathcal{V} \mid$.
 
-<img src="/pictures/feedforward-neural-LM-2.png" alt="feedforward-neural-LM-2" style="zoom:80%;" />
+<img src="../pictures/feedforward-neural-LM-2.png" alt="feedforward-neural-LM-2" style="zoom:80%;" />
 
 ## Sequence Processing with RNNs
 
@@ -51,9 +51,9 @@ Compared to non-recurrent architectures, we need another set of weights that con
 
 The following figures illustrate the structure of a simple RNN with one hidden layer. 
 
-<img src="/pictures/Simple-RNN-1.png" alt="Simple-RNN-1" style="zoom:50%;" />
+<img src="../pictures/Simple-RNN-1.png" alt="Simple-RNN-1" style="zoom:50%;" />
 
-<img src="/pictures/Simple-RNN-2.png" alt="Simple-RNN-2" style="zoom:80%;" />
+<img src="../pictures/Simple-RNN-2.png" alt="Simple-RNN-2" style="zoom:80%;" />
 
 #### Forward Inference in Simple RNNs
 
@@ -136,7 +136,7 @@ To solve the problem of vanishing gradients, we introduce two techniques. The fi
 
 In stacked RNNs, we use the entire sequence of outputs from one RNN as an input sequence to another one. Stacked RNNs consist of multiple networks, where The output of one RNN serves as the input to a subsequent RNN, as shown in Figure 9.10. 
 
-<img src="/pictures/Stacked-RNN.png" alt="Stacked-RNN" style="zoom:65%;" />
+<img src="../pictures/Stacked-RNN.png" alt="Stacked-RNN" style="zoom:65%;" />
 
 Stacked RNNs can usually outperform single-layer networks. 
 
