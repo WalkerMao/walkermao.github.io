@@ -48,7 +48,7 @@ The decoder is another RNN that generates the output sequence by predicting the 
 
 $$
 s_t = f(s_{t-1}, y_{t-1}, \mathbf{c}), \\
-y_t = \text{softmax}(V^{\text{de}} s_t).
+y_t = \text{softmax}(V s_t).
 $$
 
 The fixed-length vector representation $$\mathbf{c}$$ is the final hidden state of the encoder and the initial hidden state of the decoder.
