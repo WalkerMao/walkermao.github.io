@@ -70,17 +70,17 @@ $$
 s_t = f(s_{t-1}, y_{t-1}, c_t).
 $$
 
-Note that here each $$s_t$$ is conditioned on each distinct context vector $$c_t$$, which depends on a sequence of annotations $$(h_1,\cdots,h_{T_x})$$ to which an encoder maps the input sentence $$(x_1, \cdots, x_{T_x})$$.  
+Note that here each $$s_t$$ is conditioned on each distinct context vector $$c_t$$, which depends on a sequence of annotations $$(h_1,\cdots,h_{T_x})$$ to which an encoder maps the input sentence $$(x_1, \cdots, x_{T_x})$$. 
 
 Each annotation $$h_t$$ contains information about the whole input sequence with a strong focus on the parts surrounding the $$t$$-th word $$x_t$$ of the input sequence. 
 
-The context vector $ c_{t} $ is, then, computed as a weighted sum of these annotations $$(h_1,\cdots,h_{T_x})$$:
+The context vector $$ c_{t} $$ is, then, computed as a weighted sum of these annotations $$(h_1,\cdots,h_{T_x})$$:
 
 $$
 c_{t} = \sum_{j=1}^{T_{x}} \alpha_{tj} h_{j}.
 $$
 
-The weight $ \alpha_{tj} $ of each annotation $ h_{j} $ is computed by
+The weight $$ \alpha_{tj} $$ of each annotation $$ h_{j} $$ is computed by
 
 $$
 \alpha_{t j}=\frac{\exp \left(e_{t j}\right)}{\sum_{k=1}^{T_{x}} \exp \left(e_{t k}\right)},
@@ -92,13 +92,13 @@ $$
 e_{t j} = a\left(s_{t-1}, h_{j}\right),
 $$
 
-is an alignment model which scores how well the inputs around position $ j $ and the output at position $ t $ match. The score is based on the RNN hidden state $ s_{t-1} $ and the $ j $-th annotation $ h_{j} $ of the input sentence.
+is an alignment model which scores how well the inputs around position $$ j $$ and the output at position $$ t $$ match. The score is based on the RNN hidden state $$ s_{t-1} $$ and the $$ j $$-th annotation $$ h_{j} $$ of the input sentence.
 
 The alignment model $$a$$ is parametrized as a feedforward neural network which is jointly trained with all the other components of the proposed system.
 
-We can understand the approach of taking a weighted sum of all the annotations as computing an expected annotation, where the expectation is over possible alignments. Let $ \alpha_{t j} $ be a probability that the target word $ y_{t} $ is aligned to, or translated from, a source word $ x_{j} . $ Then, the $ i $-th context vector $ c_{t} $ is the expected annotation over all the annotations with probabilities $ \alpha_{t j} $.
+We can understand the approach of taking a weighted sum of all the annotations as computing an expected annotation, where the expectation is over possible alignments. Let $$ \alpha_{t j} $$ be a probability that the target word $$ y_{t} $$ is aligned to, or translated from, a source word $$ x_{j} . $$ Then, the $$ i $$-th context vector $$ c_{t} $$ is the expected annotation over all the annotations with probabilities $$ \alpha_{t j} $$.
 
-The probability $ \alpha_{t j} $, or its associated energy $ e_{t j} $, reflects the importance of the annotation $ h_{j} $ with respect to the previous hidden state $ s_{t-1} $ in deciding the next state $ s_{t} $ and generating $ y_{t} . $ Intuitively, this implements a mechanism of attention in the decoder. The decoder decides parts of the source sentence to pay attention to. By letting the decoder have an attention mechanism, we relieve the encoder from the burden of having to encode all information in the source sentence into a fixed length vector. With this new approach the information can be spread throughout the sequence of annotations, which can be selectively retrieved by the decoder accordingly.
+The probability $$ \alpha_{t j} $$, or its associated energy $$ e_{t j} $$, reflects the importance of the annotation $$ h_{j} $$ with respect to the previous hidden state $$ s_{t-1} $$ in deciding the next state $$ s_{t} $$ and generating $$ y_{t} . $$ Intuitively, this implements a mechanism of attention in the decoder. The decoder decides parts of the source sentence to pay attention to. By letting the decoder have an attention mechanism, we relieve the encoder from the burden of having to encode all information in the source sentence into a fixed length vector. With this new approach the information can be spread throughout the sequence of annotations, which can be selectively retrieved by the decoder accordingly.
 
 Read the appendix A in the paper [^2] for detail description and math expression of the model architecture.
 
@@ -116,9 +116,9 @@ It is notable that Sutskever *et al.* (2014) [^3] also found that LSTMs trained 
 
 Bahdanau *et al.* (2015) [^2] also proposed to use a bidirectional RNN (BiRNN) as the encoder to make the annotation $$h_j$$ of each word to summarize not only the preceding words $$(x_1, \cdots, x_{j})$$, but also the following words $$(x_j, \cdots, x_{T_x})$$.
 
-A BiRNN consists of forward and backward RNN's. The forward RNN $ \overrightarrow{f} $ reads the input sequence as it is ordered (from $ x_{1} $ to $ \left.x_{T_{x}}\right) $ and calculates a sequence of forward hidden states $ \left(\overrightarrow{h}_{1}, \cdots, \overrightarrow{h}_{T_{x}}\right) $. The backward RNN $ \overleftarrow{f} $ reads the sequence in the reverse order (from $ x_{T_{x}} $ to $ \left.x_{1}\right) $, resulting in a sequence of backward hidden states $ \left(\overleftarrow{h}_{1}, \cdots, \overleftarrow{h}_{T_{x}}\right) $.
+A BiRNN consists of forward and backward RNN's. The forward RNN $$ \overrightarrow{f} $$ reads the input sequence as it is ordered (from $$ x_{1} $$ to $$ \left.x_{T_{x}}\right) $$ and calculates a sequence of forward hidden states $$ \left(\overrightarrow{h}_{1}, \cdots, \overrightarrow{h}_{T_{x}}\right) $$. The backward RNN $$ \overleftarrow{f} $$ reads the sequence in the reverse order (from $$ x_{T_{x}} $$ to $$ \left.x_{1}\right) $$, resulting in a sequence of backward hidden states $$ \left(\overleftarrow{h}_{1}, \cdots, \overleftarrow{h}_{T_{x}}\right) $$.
 
-We obtain an annotation for each word $ x_{j} $ by concatenating the forward hidden state $ \overrightarrow{h}_{j} $ and the backward one $ \overleftarrow{h}_{j} $, i.e., $ h_{j}=\left[\overrightarrow{h}_{j}^{T} ; \overleftarrow{h}_{j}^{T}\right]^{T} $. In this way, the annotation $ h_{j} $ contains the summaries of both the preceding words and the following words. Due to the tendency of RNNs to better represent recent inputs, the annotation $ h_{j} $ will be focused on the words around $ x_{j} . $ This sequence of annotations is used by the decoder and the alignment model $$a$$ later to compute the context vector.
+We obtain an annotation for each word $$ x_{j} $$ by concatenating the forward hidden state $$ \overrightarrow{h}_{j} $$ and the backward one $$ \overleftarrow{h}_{j} $$, i.e., $$ h_{j}=\left[\overrightarrow{h}_{j}^{T} ; \overleftarrow{h}_{j}^{T}\right]^{T} $$. In this way, the annotation $$ h_{j} $$ contains the summaries of both the preceding words and the following words. Due to the tendency of RNNs to better represent recent inputs, the annotation $$ h_{j} $$ will be focused on the words around $$ x_{j} . $$ This sequence of annotations is used by the decoder and the alignment model $$a$$ later to compute the context vector.
 
 ### Attention Weight Matrix ($$\alpha_{tj}$$'s) 
 
