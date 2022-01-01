@@ -72,12 +72,9 @@ plainwhite:
 header_pages:
   - about.md
 
-<<<<<<< HEAD
-=======
 # Build settings
 # theme: plainwhite
 
->>>>>>> cf981474c05546108d86ff4a723677464e35e6a8
 plugins:
   - jekyll-seo-tag
   - jekyll-paginate
