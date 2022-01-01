@@ -181,9 +181,9 @@ main {
     background-color: Gainsboro;
     padding: 5px 20px;
     border-radius: 2px;
-    @media screen and (max-width: $mobileW) {
-      margin-top: 9px;
-    }
+    // @media screen and (max-width: $mobileW) {
+    //   margin-top: 9px;
+    // }
     margin-right: 6px;
     margin-bottom: 9px;
   }
@@ -200,9 +200,9 @@ main {
     background-color: WhiteSmoke;
     padding: 3px 12px;
     border-radius: 1px;
-    @media screen and (max-width: $mobileW) {
-      margin-top: 3px;
-    }
+    // @media screen and (max-width: $mobileW) {
+    //   margin-top: 3px;
+    // }
     margin-right: 3px;
     margin-bottom: 3px;
   }
