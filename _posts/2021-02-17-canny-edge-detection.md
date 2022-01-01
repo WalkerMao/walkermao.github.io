@@ -3,6 +3,7 @@ layout: post
 title:  "Canny Edge Detection"
 date: 2021-02-17
 categories: CV
+tags: [traditional CV]
 comments: true
 published: true
 hidden: false

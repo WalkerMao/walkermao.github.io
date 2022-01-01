@@ -2,7 +2,7 @@
 layout: post
 title: "Factorization Machines"
 date: 2020-12-01
-categories: FE
+categories: FE ML
 published: true
 comments: true
 

@@ -3,6 +3,7 @@ layout: post
 title:  "Image Smoothing"
 date: 2021-02-06
 categories: CV
+tags: [traditional CV]
 comments: true
 published: true
 hidden: false
@@ -139,8 +140,6 @@ Parameters $$ \sigma_{s} $$ and $$ \sigma_{r} $$ will measure the amount of filt
 <figcaption style="font-size: 80%;"> Figure. Bilateral Filter on a Height Field. (<a href="http://people.csail.mit.edu/sparis/bf_course/slides08/03_definition_bf.pdf">Source</a>)</figcaption>
 </figure>
 </div>
-
-
 The bilateral filter is controlled by two parameters: $$\sigma_{r}$$ and $$\sigma_{r}$$. 
 
 - As the range parameter $$ \sigma_{r} $$ increases, the bilateral filter becomes closer to Gaussian blur because the range Gaussian is flatter, i.e., almost a constant over the intensity interval covered by the image.

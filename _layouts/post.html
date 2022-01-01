@@ -9,12 +9,22 @@ layout: default
     <h2 class="post-title">{{ page.title | escape }}</h2>
   </a>
   <div class="post-meta">
-    <ul class="post-categories">
-      {%- for categ in page.categories -%}
-      <a class="post-link" href="/categories/{{ categ | downcase }}"> <li>{{ categ }}</li> </a>
-      {%- endfor -%}
-    </ul>
-    <div class="post-date"><i class="icon-calendar"></i>{{ page.date | date: date_format }}</div>
+    <div>
+      <ul class="post-categories">
+        {%- for categ in page.categories -%}
+          <a class="post-link" href="/categories/{{ categ | downcase }}"> <li>{{ categ }}</li> </a>
+        {%- endfor -%}
+      </ul>
+      <ul class="post-tags">
+        {%- for tag in page.tags -%}
+          <a class="post-link" href="/tags/{{ tag | downcase }}"> <li>{{ tag }}</li> </a>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      {{ page.date | date: date_format }}
+    </div>
   </div>
   <div class="post">
     {%- if page.toc != false -%}

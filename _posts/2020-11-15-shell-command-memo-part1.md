@@ -3,6 +3,7 @@ layout: post
 title: "Shell Command Memo (Part 1)"
 date: 2020-11-15
 categories: CS
+tags: [programming]
 published: true
 comments: true
 ---

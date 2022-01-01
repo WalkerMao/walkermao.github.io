@@ -2,7 +2,8 @@
 layout: post
 title: "Naive Bayes Classifiers"
 date: 2020-06-18
-categories: Stat NLP
+categories: Stat NLP ML
+tags: [ML models]
 published: true
 comments: true
 ---

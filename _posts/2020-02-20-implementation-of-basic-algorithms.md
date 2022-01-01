@@ -3,6 +3,7 @@ layout: post
 title:  "Implementation of Basic Algorithms"
 date: 2020-02-20
 categories: CS
+tags: [algorithms in CS, programming]
 comments: true
 ---
 

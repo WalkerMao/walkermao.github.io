@@ -3,6 +3,7 @@ layout: post
 title:  "Sorting Algorithms"
 date: 2020-03-25
 categories: CS
+tags: [algorithms in CS]
 comments: true
 ---
 

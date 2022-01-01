@@ -3,6 +3,7 @@ layout: post
 title:  "Notes on C++ Primer"
 date: 2021-04-01
 categories: CS
+tags: [programming]
 comments: true
 published: true
 hidden: true

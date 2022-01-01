@@ -3,6 +3,7 @@ layout: post
 title: "LSTM and GRU"
 date: 2020-06-30
 categories: NLP DL
+tags: RNN
 published: true
 comments: true
 ---

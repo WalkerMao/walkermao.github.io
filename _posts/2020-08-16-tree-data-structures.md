@@ -3,6 +3,7 @@ layout: post
 title: "Tree Data Structures"
 date: 2020-08-16
 categories: CS
+tags: [data structures]
 published: true
 comments: true
 ---

@@ -3,6 +3,7 @@ layout: post
 title:  "Bagging and Random Forests"
 date: 2020-03-12
 categories: ML
+tags: [ensemble learning, ML models]
 comments: true
 ---
 

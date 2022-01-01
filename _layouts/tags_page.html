@@ -6,8 +6,8 @@ layout: default
   <ul class="posts" id="viewpoint">
     <h1 id="posts-label">{{ page.title }}</h1>
     {%- for post in site.posts -%}
-      {%- for categ in page.categories -%}
-        {%- if post.categories contains categ -%}
+      {%- for tag in page.tags -%}
+        {%- if post.tags contains tag -%}
           <li>
               {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
               <a class="post-link" href="{{ post.url | relative_url }}">

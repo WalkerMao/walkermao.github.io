@@ -3,6 +3,7 @@ layout: post
 title: "Optimizing Matrix Multiplication"
 date: 2020-09-19
 categories: CS Math
+tags: [optimization]
 published: true
 comments: true
 ---

@@ -3,6 +3,7 @@ layout: post
 title:  "Hough Transform"
 date: 2021-03-13
 categories: CV
+tags: [traditional CV]
 comments: true
 published: true
 hidden: false

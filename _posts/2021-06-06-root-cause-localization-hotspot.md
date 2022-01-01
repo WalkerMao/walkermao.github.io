@@ -3,6 +3,7 @@ layout: post
 title: "Root Cause Localization: HotSpot"
 date: 2021-06-06
 categories: ML
+tags: [root cause localization]
 comments: true
 published: true
 hidden: false

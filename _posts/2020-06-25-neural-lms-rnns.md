@@ -3,6 +3,7 @@ layout: post
 title: "Neural Language Models and RNNs"
 date: 2020-06-25
 categories: NLP DL
+tags: [RNN]
 published: true
 comments: true
 ---

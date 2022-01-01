@@ -3,6 +3,7 @@ layout: post
 title:  "Image Histograms"
 date: 2021-01-31
 categories: CV
+tags: [traditional CV,]
 comments: true
 published: true
 hidden: false
@@ -13,9 +14,8 @@ hidden: false
 Histograms measure the frequency of brightness within the image: how many times does a particular pixel value appear in an image. A histogram shows the contrast, brightness, intensity distribution etc. of that image. 
 
 <div align='center'>
-<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/histogram_sample.jpg" alt="Histogram Example" style="zoom:100%;" />
+<img src="https://docs.opencv.org/5.x/histogram_sample.jpg" alt="Histogram Example" style="zoom:100%;" />
 </div>
-
 
 The pixel intensity is a single value for a grayscale image, or three values for a color image. The histogram above is drawn for grayscale image, not color image. 
 
@@ -79,8 +79,6 @@ Histogram equalization usually increases the contrast of our images, especially 
 <div align='center'>
 <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Histogrammeinebnung.png" alt="Histogram equalization" style="zoom:40%;" />
 </div>
-
-
 Let $$f$$ be a given image represented as a matrix of integer pixel intensities ranging from $$0$$ to $$L-1$$. $$L$$ is the number of possible intensity values, often $$256$$. Let $$p_f(k) $$ denote the probability density function (PDF) of the normalized histogram of $$f$$ with a bin for each possible intensity $$k$$. So
 
 $$
@@ -122,8 +120,9 @@ Ordinary histogram equalization uses the same transformation derived from the im
 As shown below, it is true that the background contrast has improved after histogram equalization. But the contrast on the face of statue is weakened and we lost most of the information there due to over-brightness. It is because its histogram is not confined to a particular region.
 
 <div align='center'>
-<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/clahe_1.jpg" alt="Problem of Global HE" style="zoom:50%;" />
+<img src="https://docs.opencv.org/5.x/clahe_1.jpg" alt="Problem of Global HE" style="zoom:90%;" />
 </div>
+
 
 Adaptive histogram equalization (AHE) improves on this by transforming each pixel with a transformation function derived from a neighborhood region, as in the figure below. The derivation of the transformation functions from the histograms is exactly the same as for ordinary histogram equalization. 
 
@@ -146,8 +145,9 @@ The redistribution will push some bins over the clip limit again (region shaded 
 The picture below is the result after CLAHE.
 
 <div align='center'>
-<img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/clahe_2.jpg" alt="Result of CLAHE" style="zoom:60%;" />
+<img src="https://docs.opencv.org/5.x/clahe_2.jpg" alt="Result of CLAHE" style="zoom:100%;" />
 </div>
+
 
 <br>
 
