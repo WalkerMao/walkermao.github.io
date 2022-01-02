@@ -64,8 +64,7 @@ Branch and bound technique uses the appearance model to guide the search.
 
 ### 2.4 Novelty of Selective Search
 
-* Instead of an exhaustive search, we use segmentation as selective search yielding a small
-  set of class independent object locations.
+* Instead of an exhaustive search, we use segmentation as selective search yielding a small set of class independent object locations.
 
 * Instead of the segmentation methods that focus on the best segmentation algorithm, we use a variety of strategies to deal with as many image conditions as possible.
 
@@ -88,7 +87,6 @@ Our grouping procedure now works as follows. We first use ([Felzenszwalb and Hut
 <img src="https://lilianweng.github.io/lil-log/assets/images/selective-search-algorithm.png" alt="Selective Search Algorithm" style="zoom: 45%;" />
 </figure>
 </div>
-
 
 For the similarity $$s(r_i, r_j)$$ between region $$r_i$$ and $$r_j$$ we want a variety of complementary measures under the constraint that they are fast to compute. In effect, this means that the similarities should be based on features that can be propagated through the hierarchy, i.e. when merging region $$r_i$$ and $$r_j$$ into $$r_t$$, the features of region $$r_t$$ need to be calculated from the features of $$r_i$$ and $$r_j$$ without accessing the image pixels.
 
@@ -121,7 +119,7 @@ We define four complementary, fast-to-compute similarity measures (read the pape
 
 * $$s_{\text{colour}}(r_i, r_j)$$ measures colour similarity; 
 * $$s_{\text{texture}}(r_i, r_j)$$ measures texture similarity; 
-* $$s_{\text{size}}(r_i, r_j)$$​ encourages small regions to merge early. It prevents a single region from gobbling up all other regions one by one.
+* $$s_{\text{size}}(r_i, r_j)$$ encourages small regions to merge early. It prevents a single region from gobbling up all other regions one by one.
 * $$s_{\text{fill}}(r_i, r_j)$$ measures how well region $$r_i$$ and $$r_j$$ fit into each other.
 
 In this paper, our final similarity measure is a combination of the above four:
@@ -133,7 +131,7 @@ s\left(r_{i}, r_{j}\right) = &\ a_{1} s_{\text{colour}}\left(r_{i}, r_{j}\right)
 \end{aligned}
 $$
 
-where $ a_{i} \in\{0,1\} $ denotes if the similarity measure is used or not. 
+where $$ a_{i} \in\{0,1\} $$ denotes if the similarity measure is used or not. 
 
 #### 3.2.3 Complementary Starting Regions
 
@@ -145,7 +143,7 @@ In this paper, we combine the object hypotheses of several variations of our hie
 
 We choose to order the combined object hypotheses set based on the order in which the hypotheses were generated in each individual grouping strategy. That means earlier grouped regions (lower hierarchy) are more possible to be an object. However, as we combine results from up to 80 different strategies, such order would too heavily emphasize large regions, because larger regions are more possible to appear in different grouping strategies. To prevent this, we include some randomness as follows. 
 
-Given a grouping strategy $ s $, let $ r_{h}^{s} $ be the region which is created at position $ h $ in the hierarchy, where $ h=1 $ represents the top of the hierarchy (whose corresponding region covers the complete image). We now calculate the position value $ v_{h}^{s} $ as $ \text{RND} \times h $, where $$ \text{RND} $$ is a random number in range $ [0,1] $. The final ranking is obtained by ordering the regions using $ v_{h}^{s} $.
+Given a grouping strategy $$ s $$, let $$ r_{h}^{s} $$ be the region which is created at position $$ h $$ in the hierarchy, where $$ h=1 $$ represents the top of the hierarchy (whose corresponding region covers the complete image). We now calculate the position value $$ v_{h}^{s} $$ as $$ \text{RND} \times h $$, where $$ \text{RND} $$ is a random number in range $$ [0,1] $$. The final ranking is obtained by ordering the regions using $$ v_{h}^{s} $$.
 
 Thus, the possibility score of a region $$r$$ to be an object is
 
