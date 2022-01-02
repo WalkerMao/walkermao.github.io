@@ -80,7 +80,7 @@ Design considerations of selective search:
 
 ### 3.1 Selective Search by Hierarchical Grouping
 
-Our grouping procedure now works as follows. We first use ([Felzenszwalb and Huttenlocher (2004)](https://link.springer.com/article/10.1023/B:VISI.0000022288.19776.77)) to create initial regions. Then we use a greedy algorithm to iteratively group regions together: First the similarities between all neighbouring regions are calculated. The two most similar regions are grouped together, and new similarities are calculated between the resulting region and its neighbours. The process of grouping the most similar regions is repeated until the whole image becomes a single region. The general method is detailed in Algorithm 1.
+Our grouping procedure now works as follows. We first use "[Felzenszwalb and Huttenlocher (2004)](https://link.springer.com/article/10.1023/B:VISI.0000022288.19776.77)" to create initial regions. Then we use a greedy algorithm to iteratively group regions together: First the similarities between all neighbouring regions are calculated. The two most similar regions are grouped together, and new similarities are calculated between the resulting region and its neighbours. The process of grouping the most similar regions is repeated until the whole image becomes a single region. The general method is detailed in Algorithm 1.
 
 <div align='center'>
 <figure>
@@ -135,7 +135,7 @@ where $$ a_{i} \in\{0,1\} $$ denotes if the similarity measure is used or not.
 
 #### 3.2.3 Complementary Starting Regions
 
-Different starting regions are (already) obtained by varying the colour spaces, each which has different invariance properties. Additionally, we vary the threshold parameter $$k$$ in [Felzenszwalb and Huttenlocher (2004)](https://link.springer.com/article/10.1023/B:VISI.0000022288.19776.77).
+Different starting regions are (already) obtained by varying the colour spaces, each which has different invariance properties. Additionally, we vary the threshold parameter $$k$$ in "[Felzenszwalb and Huttenlocher (2004)](https://link.springer.com/article/10.1023/B:VISI.0000022288.19776.77)".
 
 ### 3.3 Combining Locations
 
