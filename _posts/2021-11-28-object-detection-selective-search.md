@@ -35,7 +35,6 @@ Three problems for segmentation based methods:
 </figure>
 </div>
 
-
 ### 1.2  Exhaustive Search
 
 Exhaustive search examines every location within the image as to not miss any potential object location. However, the search space is too huge and it has to be reduced by using restrictions like a regular grid, fixed scales, and fixed aspect ratios etc.. 
@@ -112,7 +111,6 @@ We want to account for different scene and lighting conditions. Therefore we per
 </figure>
 </div>
 
-
 #### 3.2.2 Complementary Similarity Measures
 
 We define four complementary, fast-to-compute similarity measures (read the paper for detail): 
@@ -154,6 +152,10 @@ $$
 &= \sum_{s,h} \mathbb{1}(r_{h}^{s}=r) \cdot \text{RND} \cdot h.
 \end{aligned}
 $$
+
+## Summary
+
+To generate class-independent object locations, "selective search" initialize regions by "[Felzenszwalb and Huttenlocher (2004)](https://link.springer.com/article/10.1023/B:VISI.0000022288.19776.77)" and do hierarchical grouping (algorithm 1) with diversification strategies, then order the object hypotheses (regions, locations) by the possibility to be an object.
 
 <br>
 
