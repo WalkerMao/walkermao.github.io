@@ -9,7 +9,7 @@ published: true
 hidden: false
 ---
 
-The following sections are mainly excerpted from the paper "Generic and robust localization of multi-dimensional root causes." [^1].
+The contents in this post are excerpted from the paper "Generic and robust localization of multi-dimensional root causes." [^1].
 
 ### Introduction
 

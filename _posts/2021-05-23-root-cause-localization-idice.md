@@ -9,7 +9,7 @@ published: true
 hidden: false
 ---
 
-The following sections are excerpted from the paper "iDice: Problem Identification for Emerging Issues" [^1].
+The contents in this post are excerpted from the paper "iDice: Problem Identification for Emerging Issues" [^1].
 
 ### Introduction
 
@@ -138,7 +138,7 @@ Finally, we rank the remaining attribute combinations and output them as the eff
 
 <div align='center'>
 <figure>
-<img src="../pictures/idice-algorithm.png" alt="image-20210528014952533" style="zoom:100%;" />
+<img src="../pictures/idice-algorithm.png" alt="image-20210528014952533" style="zoom:80%;" />
 <figcaption style="font-size:80%;"> iDice Algorithm </figcaption>
 </figure>
 </div>

@@ -9,7 +9,7 @@ published: true
 hidden: false
 ---
 
-The following sections are mainly excerpted from the paper "Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes" [^1].
+The contents in this post are excerpted from the paper "Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes" [^1].
 
 ### Introduction
 
