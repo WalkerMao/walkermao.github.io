@@ -4,7 +4,7 @@ title: "Object Detection: Fast R-CNN"
 date: 2022-01-12
 categories: CV DL
 tags: [object detection, CNN]
-published: true
+published: false
 comments: true
 ---
 
