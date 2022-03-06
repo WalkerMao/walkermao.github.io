@@ -2,7 +2,7 @@
 layout: post
 title: "Object Detection: R-CNN"
 date: 2021-12-05
-categories: CV
+categories: CV DL
 tags: [object detection, CNN]
 published: true
 comments: true
@@ -18,14 +18,14 @@ This method solves the CNN localization problem by operating within the "recogni
 2. extracts a fixed-length (4096-dimensional in experiment) feature vector from each proposal using a CNN as a blackbox feature extractor;
 2. classifies each region with category-specific linear SVMs. 
 
-This method use a simple technique (affine image warping) to compute a fixed-size CNN input from each region proposal, regard-less of the region's shape. 
+This method use a simple technique (affine image warping) to compute a fixed-size CNN input from each region proposal, regardless of the region's shape. 
 
 This method combines region proposals with CNNs, the authors dub it R-CNN: Regions with CNN features.
 
 <div align='center'>
 <figure>
 <img src="https://www.researchgate.net/profile/Carlos-Ferrin/publication/330093035/figure/fig2/AS:740722319831046@1553613371577/R-CNN-Region-with-Convolutional-Neural-Networks-features-Architecture-Taken-from-9.png" alt="Figure 1: ." style="zoom:70%;" />
-<figcaption style="font-size:80%;"> Figure 1: Object detection system overview. (1) takes an input image, (2) extracts around 2000 bottom-up regionproposals, (3) computes features for each proposal using a largeconvolutional neural network (CNN), and then (4) classifies eachregion using class-specific linear SVMs. (<a href="https://openaccess.thecvf.com/content_cvpr_2014/html/Girshick_Rich_Feature_Hierarchies_2014_CVPR_paper.html">Source</a>) </figcaption>
+<figcaption style="font-size:80%;"> Figure 1: Object detection system overview. (1) takes an input image, (2) extracts around 2000 bottom-up regionproposals, (3) computes features for each proposal using a largeconvolutional neural network (CNN), and then (4) classifies each region using class-specific linear SVMs. (<a href="https://openaccess.thecvf.com/content_cvpr_2014/html/Girshick_Rich_Feature_Hierarchies_2014_CVPR_paper.html">Source</a>) </figcaption>
 </figure>
 </div>
 
@@ -74,6 +74,8 @@ Two subtle issues while implementing bounding-box regression:
 
 1.  Regularization is important.
 1.  We select training pairs $$(P, Q)$$ such that $$\text{IoU}(P, Q) > 0.6$$. If more than one $$Q$$ satisfy this requirement, we select the $$Q$$ with the largest IoU.
+
+
 
 <br>
 

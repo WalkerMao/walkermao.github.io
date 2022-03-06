@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Object Detection: SPP-Net"
+title: "Spatial Pyramid Pooling (SPP)"
 date: 2021-12-19
-categories: CV
+categories: CV DL
 tags: [object detection, CNN]
 published: true
 comments: true
@@ -12,7 +12,7 @@ The contents in this post are excerpted from the paper "Spatial pyramid pooling 
 
 ## Abstract
 
-CNN requires a fixed-size input. SPP-net generates a fixed-length representation regardless of input size.
+CNN requires a fixed-size input. SPP generates a fixed-length representation regardless of input size.
 
 For object detection tasks, SPP-net is faster than R-CNN. Using SPP-net, we compute the feature maps from the entire image only once, and then pool features in arbitrary regions (sub-images) to generate fixed-length representations for training the detectors. This method avoids repeatedly computing the convolutional features.
 
@@ -20,7 +20,7 @@ For object detection tasks, SPP-net is faster than R-CNN. Using SPP-net, we comp
 
 A CNN mainly consists of two parts: convolutional layers, and fully-connected layers that follow. The fixed-size constraint comes only from the fully-connected layers,  while the convolutional layers accept inputs of arbitrary sizes.
 
-In this paper, we introduce a spatial pyramid pooling (SPP) layer to remove the fixed-size constraint of the network. Specifically, we add an SPP layer on top of the last convolutional layer. The SPP layer pools the features and generates fixed- length outputs, which are then fed into the fully-connected layers (or other classifiers). In other words, we perform some information "aggregation" at a deeper stage of the network hierarchy (between convolutional layers and fully-connected layers) to avoid the need for cropping or warping at the beginning.
+In this paper, the authors introduce a spatial pyramid pooling (SPP) layer to remove the fixed-size constraint of the network. Specifically, the authors add an SPP layer on top of the last convolutional layer. The SPP layer pools the features and generates fixed- length outputs, which are then fed into the fully-connected layers (or other classifiers). In other words, the authors perform some information "aggregation" at a deeper stage of the network hierarchy (between convolutional layers and fully-connected layers) to avoid the need for cropping or warping at the beginning.
 
 <div align='center'>
 <figure>
@@ -35,7 +35,6 @@ In this paper, we introduce a spatial pyramid pooling (SPP) layer to remove the 
 <figcaption style="font-size:80%;"> Figure. Traditional CNN and SPP-net. (<a href="https://www.pianshen.com/article/75161659567/">Source</a>) </figcaption>
 </figure>
 </div>
-
 
 SPP has several remarkable properties for deep CNNs compared to the sliding window pooling:
 
