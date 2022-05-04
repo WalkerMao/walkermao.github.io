@@ -1,16 +1,17 @@
 ---
 layout: post
-title:  "Notes on C++ Primer"
-date: 2021-04-01
+title: "Notes on \"C++ Primer\": Getting Started and Data Types (Chapter 1~3)"
+date: 2022-04-30
 categories: CS
-tags: [programming]
+tags: [C++]
 comments: true
 published: true
-hidden: true
-toc: true
+hidden: false
 ---
 
-## 1. Getting Started
+[TOC]
+
+## Chapter 1. Getting Started
 
 ### 1.1 Writing a Simple C++ Program
 
@@ -75,7 +76,7 @@ Most of the examples in this book use the `iostream` library. Fundamental to the
 | `cin`       | `istream` | Input                                                  | Standard input  |
 | `cout`      | `ostream` | Output                                                 | Standard output |
 | `cerr`      | `ostream` | Warning and error messages                             | Standard error  |
-| `clog`      | `ostream` | General information about the execution of the program | Standard error  |
+| `clog`      | `ostream` | General information about the execution of the program | -               |
 
 Ordinarily, the system associates each of these objects with the window in which the program is executed. So, when we read from `cin`, data are read from the window in which the program is executing, and when we write to `cout`, `cerr`, or `clog`, the output is written to the same window.
 
@@ -131,7 +132,7 @@ using namespace std;
 int main()
 {	
     cout << "Enter two numbers:" << endl;
-    ...
+    // ...
 }
 ```
 
@@ -241,7 +242,7 @@ if (condition){
 
 **In C++ we define our own data structures by defining a class.** **A class defines a type along with a collection of operations that are related to that type.** The class mechanism is one of the most important features in C++. In fact, a primary focus of the design of C++ is to make it possible to define class types that behave as naturally as the built-in types.
 
-As we've seen, to use a library facility, we must include the associated header. Similarly, we use headers to access classes defined for our own applications. Conventionally, header file names are derived from the name of a class defined in that header. Header files that we write usually have a suffix of `.h`, but some programmers use `.H`, `.hpp`, or `.hxx`. The standard library headers typically have no suffix at all. Compilers usually don’t care about the form of header file names, but IDEs sometimes do.
+As we've seen, to use a library facility, we must include the associated header. Similarly, we use headers to access classes defined for our own applications. Conventionally, header file names are derived from the name of a class defined in that header. Header files that we write usually have a suffix of `.h`, but some programmers use `.H`, `.hpp`, or `.hxx`. The standard library headers typically have no suffix at all. Compilers usually don't care about the form of header file names, but IDEs sometimes do.
 
 #### 1.5.1 The `Sales_item` Class
 
@@ -287,8 +288,7 @@ Assuming `$` is the system prompt and our addition program has been compiled int
 
 **main** Function called by the operating system to execute a C++ program. Each program must have one and only one function named main.
 
-**namespace** Mechanism for putting names defined by a library into a single place. Namespaces help avoid inadvertent name
-clashes. The names defined by the C++ library are in the namespace `std`.
+**namespace** Mechanism for putting names defined by a library into a single place. Namespaces help avoid inadvertent name clashes. The names defined by the C++ library are in the namespace `std`.
 
 **standard library** Collection of types and functions that every C++ compiler must support. The library provides the types that support IO. C++ programmers tend to talk about "the library", meaning the entire standard library. They also tend to refer to particular parts of the library by referring to a library type, such as the "`iostream` library", meaning the part of the standard library that defines the IO classes. 
 
@@ -300,7 +300,7 @@ clashes. The names defined by the C++ library are in the namespace `std`.
 
 **:: operator** Scope operator. Among other uses, the scope operator is used to access names in a namespace.
 
-## 2. Variables and Basic Types
+## Chapter 2. Variables and Basic Types
 
 Some languages, such as Smalltalk and Python, check types at run time. In contrast, **C++ is a statically typed language; type checking is done at compile time.** As a consequence, the compiler must know the type of every name used in the program.
 
@@ -338,7 +338,7 @@ The floating-point types represent single-, double-, and extended-precision valu
 
 MACHINE-LEVEL REPRESENTATION OF THE BUILT-IN TYPES
 
-Computers store data as a sequence of bits, each holding a 0 or 1, such as 000110110111000101... Most computers deal with memory as chunks of bits of sizes that are powers of 2. **The smallest chunk of addressable memory is referred to as a "byte".** The basic unit of storage, usually a small number of bytes, is referred to as a "word". In C++ a byte has at least as many bits as are needed to hold a character in the machine’s basic character set. **On most machines a byte contains 8 bits** and a word is either 32 or 64 bits, that is, 4 or 8 bytes.
+Computers store data as a sequence of bits, each holding a 0 or 1, such as 000110110111000101... Most computers deal with memory as chunks of bits of sizes that are powers of 2. **The smallest chunk of addressable memory is referred to as a "byte".** The basic unit of storage, usually a small number of bytes, is referred to as a "word". In C++ a byte has at least as many bits as are needed to hold a character in the machine's basic character set. **On most machines a byte contains 8 bits** and a word is either 32 or 64 bits, that is, 4 or 8 bytes.
 
 **Most computers associate a number (called an "address") with each byte in memory.** To give meaning to memory at a given address, we must know the type of the value stored there. The type determines how many bits are used and how to interpret those bits.
 
@@ -346,9 +346,9 @@ Computers store data as a sequence of bits, each holding a 0 or 1, such as 00011
 
 Except for `bool` and the extended character types, the integral types may be **signed** or **unsigned**. A signed type represents negative or positive numbers (including zero); an unsigned type represents only values greater than or equal to zero. 
 
-The types `int`, `short`, `long`, and `long long` are all signed. We obtain the corresponding unsigned type by adding unsigned to the type, such as unsigned long. The type unsigned int may be abbreviated as unsigned.
+The types `int`, `short`, `long`, and `long long` are all signed. We obtain the corresponding unsigned type by adding `unsigned` to the type, such as `unsigned long`. The type `unsigned int` may be abbreviated as `unsigned`.
 
-Unlike the other integer types, there are three distinct basic character types: char, `signed char`, and `unsigned char`. In particular, char is not the same type as `signed char`. Although there are three character types, there are only two representations: signed and unsigned. The (plain) char type uses one of these representations. Which of the other two character representations is equivalent to char depends on the compiler.
+Unlike the other integer types, there are three distinct basic character types: `char`, `signed char`, and `unsigned char`. In particular, `char` is not the same type as `signed char`. Although there are three character types, there are only two representations: signed and unsigned. The (plain) char type uses one of these representations. Which of the other two character representations is equivalent to char depends on the compiler.
 
 In an unsigned type, all the bits represent the value. For example, an 8-bit `unsigned char` can hold the values from 0 through 255 inclusive.
 
@@ -454,7 +454,7 @@ A character enclosed within single quotes is a literal of type char. Zero or mor
 "Hello World!" // string literal
 ```
 
-The type of a string literal is array of constant chars.
+The type of a string literal is array of constant `char`s.
 
 ##### Escape Sequences
 
@@ -542,7 +542,7 @@ float b;
 
 The value of an object of built-in type that is not explicitly initialized depends on where it is defined. **Variables of built-in type defined outside any function body are initialized to zero. Variables of built-in type defined inside a function are uninitialized.** The value of an uninitialized variable of built-in type is **undefined** (§ 2.1.2, p. 36). It is an error to copy or otherwise try to access the value of a variable whose value is undefined.
 
-Most classes let us define objects without explicit initializers. Such classes supply an appropriate default value for us. For example, as we’ve just seen, the library string class says that if we do not supply an initializer, then the resulting string is the empty string:
+Most classes let us define objects without explicit initializers. Such classes supply an appropriate default value for us. For example, as we've just seen, the library string class says that if we do not supply an initializer, then the resulting string is the empty string:
 
 ```c++
 std::string empty; // empty implicitly initialized to the empty string
@@ -666,7 +666,7 @@ We define a pointer type by writing a declarator of the form `*d`, where `d` is 
 
 ```c++
 int *ip1, *ip2; // both ip1 and ip2 are pointers to int
-double dp, *dp2; // dp2 is a pointer to double ; dp is a double
+double dp, *dp2; // dp2 is a pointer to double; dp is a double
 ```
 
 ##### Taking the Address of an Object
@@ -685,8 +685,7 @@ The types of the pointer and the object to which it points must match:
 ```c++
 double dval;
 double *pd = &dval; // ok: initializer is the address of a double
-double *pd2 = pd;
-// ok: initializer is a pointer to double
+double *pd2 = pd; // ok: initializer is a pointer to double
 int *pi = pd; // error: types of pi and pd differ
 pi = &dval; // error: assigning the address of a double to a pointer to int
 ```
@@ -738,7 +737,7 @@ int &r2 = *p; // & is part of the declaration; * is the dereference operator
 A **null pointer** does not point to any object. There are several ways to obtain a null pointer:
 
 ```c++
-int *p1 = nullptr; // equivalentto int *p1 = 0;
+int *p1 = nullptr; // equivalent to int *p1 = 0;
 int *p2 = 0; // directly initializes p2 from the literal constant 0 
 // must #include cstdlib
 ```
@@ -1006,17 +1005,17 @@ constexpr int sz = size(); // ok only if size is a constexpr function
 
 `constexpr` functions must be simple enough that the compiler can evaluate them at compile time. We can use `constexpr` functions in the initializer of a `constexpr` variable.
 
-Best Practices: Generally, it is a good idea to use constexpr for variables that you intend to use as constant expressions.
+Best Practices: Generally, it is a good idea to use `constexpr` for variables that you intend to use as constant expressions.
 
 ##### Literal Types
 
 **The types we can use in a `constexpr` declaration are known as "literal types" because they are simple enough to have literal values.**
 
-Of the types we have used so far, the **arithmetic, reference, and pointer types are literal types**. Our `Sales_item` class and the **library IO and `string` types are not literal types**. Hence, we cannot define variables of these types as `constexpr`s. We’ll see other kinds of literal types in § 7.5.6 (p. 299) and § 19.3 (p. 832).
+Of the types we have used so far, the **arithmetic, reference, and pointer types are literal types**. Our `Sales_item` class and the **library IO and `string` types are not literal types**. Hence, we cannot define variables of these types as `constexpr`s. We'll see other kinds of literal types in § 7.5.6 (p. 299) and § 19.3 (p. 832).
 
 Although we can define both pointers and reference as `constexpr`s, the objects we use to initialize them are strictly limited. We can initialize a `constexpr` pointer from the `nullptr` literal or the literal (i.e., constant expression) `0`. We can also point to (or bind to) an object that remains at a fixed address.
 
-For reasons we’ll cover in § 6.1.1 (p. 204), **variables defined inside a function ordinarily are not stored at a fixed address**. Hence, we cannot use a `constexpr` pointer to point to such variables. On the other hand, the address of an object defined outside of any function is stored at a fixed address and is a constant expression, and so may be used to initialize a `constexpr` pointer. We'll see in § 6.1.1 (p. 205), that functions may define variables that exist across calls to that function. Like an object defined outside any function, these special local objects also have fixed addresses. Therefore, a `constexpr` reference may be bound to, and a `constexpr` pointer may address, such variables.
+For reasons we'll cover in § 6.1.1 (p. 204), **variables defined inside a function ordinarily are not stored at a fixed address**. Hence, we cannot use a `constexpr` pointer to point to such variables. On the other hand, the address of an object defined outside of any function is stored at a fixed address and is a constant expression, and so may be used to initialize a `constexpr` pointer. We'll see in § 6.1.1 (p. 205), that functions may define variables that exist across calls to that function. Like an object defined outside any function, these special local objects also have fixed addresses. Therefore, a `constexpr` reference may be bound to, and a `constexpr` pointer may address, such variables.
 
 ##### Pointers and `constexpr`
 
@@ -1106,7 +1105,8 @@ auto a = r; // a is an int (r is an alias for i, which has type int)
 ```c++
 const int ci = i, &cr = ci;
 auto b = ci; // b is an int (top-level const in ci is dropped)
-auto c = cr; // c is an int (cr is an alias for ci whose const is top-level) auto d = &i; // d is an int* (&of anintobject isint*)
+auto c = cr; // c is an int (cr is an alias for ci whose const is top-level) 
+auto d = &i; // d is an int* (&of anintobject isint*)
 auto e = &ci; // e is a const int*, i.e. a pointer to const int (& of a const object is low-level const)
 ```
 
@@ -1120,7 +1120,7 @@ We can also specify that we want a reference to the auto-deduced type.
 
 ```c++
 auto &g = ci; // g is a const int& (a reference to const int) that is bound to ci
-auto &h = 42; // error: we can’t bind a plain reference to a literal const 
+auto &h = 42; // error: we can't bind a plain reference to a literal const 
 auto &j = 42; // ok: we can bind a const reference to a literal
 ```
 
@@ -1201,17 +1201,17 @@ Sales_data accum, trans, *salesptr;
 
 The key difference between a `struct` and `class` in C++ is the default accessibility of member variables and methods. In a `struct` they are public; in a class they are `private`.
 
-#### Using the `Sales_data` Class
+#### 2.6.2 Using the `Sales_data` Class
 
-##### Adding Two Sales_data Objects
+##### Adding Two `Sales_data` Objects
 
-##### Reading Data into a Sales_data Object
+##### Reading Data into a `Sales_data` Object
 
-##### Printing the Sum of Two Sales_data Objects
+##### Printing the Sum of Two `Sales_data` Objects
 
 #### 2.6.3 Writing Our Own Header Files
 
-As we’ll see in § 19.7 (p. 852), we can define a class inside a function, such classes have limited functionality. As a result, classes ordinarily are not defined inside functions. 
+As we'll see in § 19.7 (p. 852), we can define a class inside a function, such classes have limited functionality. As a result, classes ordinarily are not defined inside functions. 
 
 In order to ensure that the class definition is the same in each file, **classes are usually defined in header files.** For example, the `string` library type is defined in the `string` header. Similarly, as we have already seen, we will define our `Sales_data` class in a header file named `Sales_data.h`.
 
@@ -1219,7 +1219,13 @@ Note:  Whenever a header is updated, the source files that use that header must 
 
 ##### A Brief Introduction to the Preprocessor
 
-The most common technique for making it safe to include a header multiple times relies on the preprocessor.
+The most common technique for making it safe to include a header multiple times relies on the preprocessor. The preprocessor—which C++ inherits from C—is a program that runs before the compiler and changes the source text of our programs. Our programs already rely on one preprocessor facility, `#include`. When the preprocessor sees a `#include`, it replaces the `#include` with the contents of the specified header.
+
+C++ programs also use the preprocessor to define header guards. 
+
+WARNING: Preprocessor variable names do not respect C++ scoping rules.
+
+Best Practices: Headers should have guards.
 
 ### Chapter Summary
 
@@ -1231,11 +1237,13 @@ The language lets us define our own types by defining classes. The library uses 
 
 ### Defined Terms
 
-## 3. Strings, Vectors, and Arrays
+Almost all terms are important. Read p. 78-80 for detail.
+
+## Chapter 3. Strings, Vectors, and Arrays
 
 The built-in types that we covered in Chapter 2 are defined directly by the C++ language. These types represent facilities present in most computer hardware, such as numbers or characters. 
 
-The standard library defines a number of additional types (`string`, `vector`, etc.) of a higher-level nature that computer hardware usually does not implement directly. Associated with `string` and `vector` are companion types known as iterators, which are used to access the characters in a `string` or the elements in a `vector`.
+The standard library defines a number of additional types (`string`, `vector`, etc.) of a higher-level nature that computer hardware usually does not implement directly. Associated with `string` and `vector` are companion types known as **iterators**, which are used to access the characters in a `string` or the elements in a `vector`.
 
 The built-in array type represents facilities of the hardware. As a result, arrays are less convenient to use than the library `string` and `vector` types.
 
@@ -1247,14 +1255,13 @@ A `using` declaration has the form
 using namespace::name;
 ```
 
+Once the `using` declaration has been made, we can access `name` directly.
 
-Once the using declaration has been made, we can access `name` directly.
+##### A Separate `using` Declaration Is Required for Each Name
 
-##### A Separate using Declaration Is Required for Each Name
+##### Headers Should Not Include `using` Declarations
 
-##### Headers Should Not Include using Declarations
-
-Code inside headers (§ 2.6.3, p. 76) ordinarily should not use using declarations. The reason is that the contents of a header are copied into the including program's text. If a header has a using declaration, then every program that includes that header gets that same using declaration. As a result, a program that didn't intend to use the specified library name might encounter unexpected name conflicts.
+Code inside headers (§ 2.6.3, p. 76) ordinarily should not use `using` declarations. The reason is that the contents of a header are copied into the including program's text. If a header has a using declaration, then every program that includes that header gets that same using declaration. As a result, a program that didn't intend to use the specified library name might encounter unexpected name conflicts.
 
 ##### A Note to the Reader
 
@@ -1327,7 +1334,7 @@ for (declaration : expression)
 	statement
 ```
 
-where expression is an object of a type that represents a sequence. On each iteration, the variable in `declaration` is initialized from the value of the next element in `expression`.
+where expression is an object of a type that represents a sequence. On each iteration, the variable in `declaration` is initialized from the value of the next element in expression.
 
 ```c++
 string str("some string");
@@ -1336,9 +1343,14 @@ for (auto c : str) // for every char in str
 	cout << c << endl; // print the current character followed by a newline
 ```
 
+In this case `c` is of type `char`. On each iteration, the next character in `str` will be copied into `c`.
+
+We can declare references to the characters in `str` to avoid copying them: `for (auto &c : str)`. We can also declare constant references to the characters If we don't need to edit them: `for (auto &c : str)`.
+
 <img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-2.png" alt="img" style="zoom:100%;" />
 
 ##### Using a Range `for` to Change the Characters in a `string`
+
 If we want to change the value of the characters in a `string`, we must define the loop variable as a reference type.
 
 Converting a `string` to all uppercase letters:
@@ -1367,9 +1379,7 @@ As a another example, we'll change the first word in `s` to all uppercase:
 
 ```c++
 // process characters in s until we run out of characters or we hit a whitespace
-for (decltype(s.size()) index = 0; 
-	 index != s.size() && !isspace(s[index]); 
-	 ++index)
+for (decltype(s.size()) index = 0; index != s.size() && !isspace(s[index]); ++index)
 	s[index] = toupper(s[index]); // capitalize the current character
 ```
 
@@ -1478,7 +1488,7 @@ vector<int> v4{10, 1}; // v4 has two elements with values 10 and 1
 
 When we use parentheses, we are saying that the values we supply are to be used to *construct* the object. 
 
-When we use curly braces, `{...}`, we're saying that, if possible, we want to *list initialize* the object. That is, if there is a way to use the values inside the curly braces as a list of element initializers, the class will do so. Only if it is not possible to list initialize the object will the other ways to initialize the object be considered.
+When we use curly braces, `{...}`, we're saying that, if possible, we want to list initialize the object. That is, if there is a way to use the values inside the curly braces as a list of element initializers, the class will do so. Only if it is not possible to list initialize the object will the other ways to initialize the object be considered.
 
 On the other hand, if we use braces and there is no way to use the initializers to list initialize the object, then those values will be used to construct the object. 
 
@@ -1542,11 +1552,10 @@ We can compare two `vector`s only if we can compare the elements in those `vecto
 </figure>
 </div>
 
-
 ##### Computing a `vector` Index
 
 ```c++
-// count the number of grades by clusters of ten: 0--9, 10--19, . .. 90--99, 100
+// count the number of grades by clusters of ten: 0--9, 10--19, ... 90--99, 100
 vector<unsigned> scores(11, 0); // 11 buckets, all initially 0
 unsigned grade;
 while (cin >> grade) { // read the grades
@@ -1565,13 +1574,593 @@ As with pointers, an iterator may be valid or invalid. A valid iterator either d
 
 #### 3.4.1 Using Iterators
 
+Unlike pointers, we do not use the address-of operator to obtain an iterator. Instead, types that have iterators have members named `begin` and `end` that return iterators. 
 
+```c++
+// the compiler determines the type of b and e; see § 2.5.2 (p. 68)
+// b denotes the first element and e denotes one past the last element in v
+auto b = v.begin(), e = v.end(); // b and e have the same type
+```
+
+The `begin` member returns an iterator that denotes the first element (or first character), if there is one.
+
+The iterator returned by `end` member is often referred to as the off-the-end iterator or abbreviated as "the end iterator". This iterator denotes a nonexistent element "off the end" of the container. It is used as a marker indicating when we have processed all the elements. 
+
+If the container is empty, the iterators returned by `begin` and `end` are equal—they are both off-the-end iterators.
+
+In general, we do not know (or care about) the precise type that an iterator has. In this example, we used auto to define `b` and `e` (§ 2.5.2, p. 68). 
+
+##### Iterator Operations
+
+As with pointers, we can dereference an iterator to obtain the element denoted by an iterator. Also, like pointers, we may dereference only a valid iterator that denotes an element (§ 2.3.2, p. 53). Dereferencing an invalid iterator or an off-the-end iterator has undefined behavior.
+
+<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-6.png" alt="img" style="zoom:100%;" />
+
+As an example, we'll rewrite the program from § 3.2.3 (p. 94) that capitalized the first character of a `string` using an iterator instead of a subscript:
+
+```c++
+string s("some string");
+if (s.begin() != s.end()) { // make sure s is not empty
+    auto it = s.begin(); // it denotes the first character in s
+    *it = toupper(*it); // make that character uppercase
+    }
+```
+
+##### Moving Iterators from One Element to Another
+
+Iterators use the increment (`++`) operator (§ 1.4.1, p. 12) to move from one element to the next. 
+
+Note: Because the iterator returned from `end` does not denote an element, it may not be incremented or dereferenced.
+
+Change the case of the first word in a `string` by using iterator an `it` and the increment operator `++`:
+
+```c++
+// process characters in s until we run out of characters or we hit a whitespace
+for (auto it = s.begin(); it != s.end() && !isspace(*it); ++it)
+    *it = toupper(*it); // capitalize the current character
+```
+
+KEY CONCEPT: GENERIC PROGRAMMING
+
+Only a few library types, `vector` and `string` being among them, have the subscript operator. Similarly, all of the library containers have iterators. Most of those iterators define the `==` and `!=` operators but do not have the `<` operator.
+
+##### Iterator Types
+
+The library types that have iterators define types named `iterator` and `const_iterator` that represent actual iterator types:
+
+```c++
+vector<int>::iterator it; // it can read and write vector<int> elements
+string::iterator it2; // it2 can read and write characters in a string
+vector<int>::const_iterator it3; // it3 can read but not write elements
+string::const_iterator it4; // it4 can read but not write characters
+```
+
+If a `vector` or `string` is `const`, we may use only its `const_iterator` type.
+
+##### The `begin` and `end` Operations
+
+The type returned by `begin` and `end` depends on whether the object on which they operator is `const`. 
+
+```c++
+vector<int> v;
+const vector<int> cv;
+auto it1 = v.begin(); // it1 has type vector<int>::iterator
+auto it2 = cv.begin(); // it2 has type vector<int>::const_iterator
+```
+
+For reasons we'll explain in § 6.2.3 (p. 213), it is usually best to use a `const` type (such as `const_iterator`) when we need to read but do not need to write to an object. To let us ask specifically for the `const_iterator` type, the new standard introduced two new functions named `cbegin` and `cend`: 
+
+```c++
+auto it3 = v.cbegin(); // it3 has type vector<int>::const_iterator
+```
+
+##### Combining Dereference and Member Access
+
+Assuming `it` is an iterator into a `vector` of `string`s, we can check whether the `string` that `it` denotes is empty as follows:
+
+```c++
+(*it).empty()
+```
+
+To simplify expressions such as this one, the language defines the arrow operator (the `->` operator). The arrow operator combines dereference and member access into a single operation. That is, `it->mem` is a synonym for `(*it).mem`.
+
+```c++
+// print each line in text up to the first blank line
+for (auto it = text.cbegin(); it != text.cend() && !it->empty(); ++it)
+    cout << *it << endl;
+```
+
+##### Some `vector` Operations Invalidate Iterators
+
+We cannot add elements to a `vector` inside a range `for` loop. We'll explore how iterators become invalid in more detail in § 9.3.6 (p. 353).
+
+#### 3.4.2 Iterator Arithmetic
+
+<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-7.png" alt="img" style="zoom:60%;" />
+
+##### Arithmetic Operations on Iterators
+
+```c++
+// compute an iterator to the element closest to the midpoint of vi
+auto mid = vi.begin() + vi.size() / 2;
+if (it < mid)
+    // process elements in the first half of vi
+```
+
+We can also subtract two iterators to get the distance that refers to the amount by which we'd have to change one iterator to get the other. The result type is a signed integral type named `difference_type`.
+
+##### Using Iterator Arithmetic
+
+Do a binary search using iterators as follows:
+
+```c++
+// text must be sorted
+// beg and end will denote the range we're searching
+auto beg = text.begin(), end = text.end();
+auto mid = text.begin() + (end - beg)/2; // original midpoint
+// while there are still elements to look at and we haven't yet found sought
+while (mid != end && *mid != sought) {
+    if (sought < *mid) // is the element we want in the first half?
+		end = mid; // if so, adjust the range to ignore the second half
+	else // the element we want is in the second half
+		beg = mid + 1; // start looking with the element just after mid
+	mid = beg + (end - beg)/2; // new midpoint
+}
+```
+
+### 3.5 Arrays
+
+An array is a data structure that is similar to the library vector type (§ 3.3, p. 96) but offers a different trade-off between performance and flexibility. Like a vector, an array is a container of unnamed objects of a single type that we access by position. Unlike a vector, arrays have fixed size; we cannot add elements to an array. Because arrays have fixed size, they sometimes offer better run-time performance for specialized applications. 
+
+#### 3.5.1 Defining and Initializing Built-in Arrays
+
+Arrays are a compound type (§ 2.3, p. 50). An array declarator has the form `a[d]`, where `a` is the name being defined and `d` is the dimension of (the number of elements in) the array. The dimension is part of the array's type and must be known at compile time, which means that the dimension must be a constant expression (§ 2.4.4, p. 65):
+
+```c++
+unsigned cnt = 42; // not a constant expression
+constexpr unsigned sz = 42; // constant expression (§ 2.4.4, p. 66)
+int arr[10]; // array of ten ints
+int *parr[sz]; // array of 42 pointers to int
+string bad[cnt]; // error: cnt is not a constant expression
+string strs[get_size()]; // ok if get_size is constexpr, error otherwise
+```
+
+By default, the elements in an array are default initialized (§ 2.2.1, p. 43).
+
+WARNING: As with variables of built-in type, a default-initialized array of built-in type that is defined inside a function will have undefined values.
+
+As with vector, arrays hold objects. Thus, there are no arrays of references.
+
+##### Explicitly Initializing Array Elements
+
+We can list initialize (§ 3.3.1, p. 98) the elements in an array. When we do so, we can omit the dimension and let the compiler infers it from the number of initializers.
+
+```c++
+const unsigned sz = 3;
+int ia1[sz] = {0, 1, 2}; // array of three ints with values 0, 1, 2
+int a2[] = {0, 1, 2}; // an array of dimension 3
+int a3[5] = {0, 1, 2}; // equivalent to a3[] = {0, 1, 2, 0, 0}
+string a4[3] = {"hi", "bye"}; // same as a4[] = {"hi", "bye", ""}
+int a5[2] = {0, 1, 2}; // error: too many initializers
+```
+
+##### Character Arrays Are Special
+
+Character arrays have an additional form of initialization: We can initialize such arrays from a string literal (§ 2.1.3, p. 39). When we use this form of initialization, it is important to remember that string literals end with a null character. That null character is copied into the array along with the characters in the literal:
+
+```c++
+char a1[] = {'C', '+', '+'}; // list initialization, no null
+char a2[] = {'C', '+', '+', '\0'}; // list initialization, explicit null
+char a3[] = "C++"; // null terminator added automatically
+const char a4[6] = "Daniel"; // error: no space for the null!
+```
+
+The dimension of `a1` is 3; the dimensions of `a2` and `a3` are both 4.
+
+##### No Copy or Assignment
+
+```c++
+int a[] = {0, 1, 2}; // array of three ints
+int a2[] = a; // error: cannot initialize one array as a copy of another
+a2 = a; // error: cannot assign one array to another
+```
+
+WARNING: Some compilers allow array assignment as a compiler extension. It is usually a good idea to avoid using nonstandard features. Programs that use such features, will not work with a different compiler.
+
+##### Understanding Complicated Array Declarations
+
+Defining a pointer or reference to an array is a bit complicated:
+
+```c++
+int *ptrs[10]; // ptrs is an array of ten pointers to int
+int &refs[10] = /* ? */; // error: no arrays of references
+int (*Parray)[10] = &arr; // Parray points to an array of ten ints
+int (&arrRef)[10] = arr; // arrRef refers to an array of ten ints
+```
+
+**By default, type modifiers bind right to left.** Reading the definition of `ptrs` from right to left (§ 2.3.3, p. 58) is easy: We see that we're defining an array of size 10, named `ptrs`, that holds pointers to `int`.
+
+As for the definition of `Parray`, reading from the inside out makes it easier to understand the type of `Parray`:  `(*Parray)` says that `Parray` is a pointer; `[10]` says `Parray` points to an array of size 10; `int` says the elements in that array are `int`s. Thus, `Parray` is a pointer to an array of 10 `int`s. Similarly, `arrRef` is a reference to an array of 10 `int`s.
+
+Of course, there are no limits on how many type modifiers can be used:
+
+```c++
+int *(&arry)[10] = ptrs; // arry is a reference to an array of 10 pointers to int
+```
+
+Reading this declaration from the inside out: `(&arry)` says `arry` is a reference; `[10]` says `arry` points to an array of size 10; `int *` says the elements in the array are pointers to `int`.
+
+Tip: It can be easier to understand array declarations by starting with the array's name and reading them from the inside out.
+
+#### 3.5.2 Accessing the Elements of an Array
+
+As with the library `vector` and `string` types, we can use a range `for` or the subscript operator to access elements of an array. 
+
+When we use a variable to subscript an array, we normally should define that variable to have type `size_t`. `size_t` is a machine-specific unsigned type that is guaranteed to be large enough to hold the size of any object in memory. 
+
+Reimplement our grading program from § 3.3.3 (p. 104) to use an array:
+
+```c++
+// count the number of grades by clusters of ten: 0--9, 10--19, ... 90--99, 100
+unsigned scores[11] = {}; // 11 buckets, all value initialized to 0
+unsigned grade;
+while (cin >> grade) {
+    if (grade <= 100)
+        ++scores[grade/10]; // increment the counter for the current cluster
+}
+```
+
+As in the case of `string` or `vector`, it is best to use a range `for` when we want to traverse the entire array.
+
+```c++
+for (auto i : scores) // for each counter in scores
+    cout << i << " "; // print the value of that counter
+cout << endl;
+```
+
+As with `string` and `vector`, it is up to the programmer to ensure that the subscript value is in range. Nothing stops a program from stepping across an array boundary except careful attention to detail and thorough testing of the code. It is possible for programs to compile and execute yet still be fatally wrong.
+
+**WARNING: The most common source of security problems are buffer overflow bugs.** Such bugs occur when a program fails to check a subscript and mistakenly uses memory outside the range of an array or similar data structure.
+
+#### 3.5.3 Pointers and Arrays
+
+In C++ pointers and arrays are closely intertwined. In particular, when we use an array, the compiler ordinarily converts the array to a pointer.
+
+The elements in an array are objects. As with any other object, we can obtain a pointer to an array element by taking the address of that element:
+
+```c++
+string nums[] = {"one", "two", "three"}; // array of strings
+string *p = &nums[0]; // p points to the first element in nums
+```
+
+However, arrays have a special property—in most places when we use an array, the compiler automatically substitutes a pointer to the first element:
+
+```c++
+string *p2 = nums; // equivalent to `string *p2 = &nums[0]`
+```
+
+Note: In most expressions, when we use an object of array type, we are really using a pointer to the first element in that array.
+
+Operations on arrays are often really operations on pointers. 
+
+##### Pointers Are Iterators
+
+Pointers that address elements in an array have additional operations beyond those we described in § 2.3.2 (p. 52). In particular, pointers to array elements support the same operations as iterators on vectors or strings (§ 3.4, p. 106). For example, we can use the increment operator to move from one element in an array to the next:
+
+```c++
+int arr[] = {0,1,2,3,4,5,6,7,8,9};
+int *p = arr; // p points to the first element in arr
+++p; // p points to arr[1]
+```
+
+Just as we can use iterators to traverse the elements in a `vector`, we can use pointers to traverse the elements in an array.
+
+We can obtain an off-the-end pointer by taking the address of the nonexistent element one past the last element of an array:
+
+```c++
+int *e = &arr[10]; // pointer just past the last element in arr
+```
+
+Like an off-the-end iterator (§ 3.4.1, p. 106), an off-the-end pointer does not point to an element. As a result, we may not dereference or increment an off-the-end pointer, and the only thing we can do with it is to take its address.
+
+Using these pointers we can write a loop to print the elements in `arr` as follows:
+
+```c++
+for (int *b = arr; b != e; ++b)
+    cout << *b << endl; // print the elements in arr
+```
+
+##### The Library `begin` and `end` Functions
+
+Although we can compute an off-the-end pointer, doing so is error-prone. To make it easier and safer to use pointers, the new library includes two functions, named `begin` and `end`. These functions are defined in the iterator header. They take an argument that is an array:
+
+```c++
+int *beg = begin(arr); // pointer to the first element in arr
+int *last = end(arr); // pointer one past the last element in arr
+```
+
+Note: A pointer "one past" the end of a built-in array behaves the same way as the iterator returned by the end operation of a `vector`.
+
+##### Pointer Arithmetic
+
+Pointers that address array elements can use all the iterator operations listed in Table 3.6 (p. 107) and Table 3.7 (p. 111).
+
+When we add (or subtract) an integral value to (or from) a pointer, the result is a new pointer. That new pointer points to the element the given number ahead of (or behind) the original pointer:
+
+```c++
+constexpr size_t sz = 5;
+int arr[sz] = {1,2,3,4,5};
+int *ip = arr; // equivalent to int *ip = &arr[0]
+int *ip2 = ip + 4; // ip2 points to arr[4], the last element in arr
+// ok: arr is converted to a pointer to its first element; p points one past the end of arr
+int *p = arr + sz; // use caution -- do not dereference!
+int *p2 = arr + 10; // error: arr has only 5 elements; p2 has undefined value
+```
+
+Computing a pointer more than one past the last element is an error, although the compiler is unlikely to detect such errors.
+
+As with iterators, subtracting two pointers gives us the distance between those pointers. The pointers must point to elements in the same array:
+
+```c++
+auto n = end(arr) - begin(arr); // n is 5, the number of elements in arr
+```
+
+The result of subtracting two pointers is a library type named `ptrdiff_t`. Like `size_t`, the `ptrdiff_t` type is a machine-specific type and is defined in the `cstddef` header. 
+
+Traverse the elements in `arr` as follows:
+
+```c++
+int *b = arr, *e = arr + sz;
+while (b < e) {
+    // use *b
+    ++b;
+}
+```
+
+It is worth noting that pointer arithmetic is also valid for null pointers (§ 2.3.2, p. 53) and for pointers that point to an object that is not an array. 
+
+##### Interaction between Dereference and Pointer Arithmetic
+
+The result of adding an integral value to a pointer is itself a pointer.
+
+```c++
+int ia[] = {0,2,4,6,8}; // array with 5 elements of type int
+int last = *(ia + 4); // ok: initializes last to 8, the value of ia[4]
+int last = *ia + 4; // ok: equivalent to ia[0] + 4
+```
+
+##### Subscripts and Pointers
+
+In most places when we use the name of an array, we are really using a pointer to the first element in that array.
+
+When we subscript an array, we are really subscripting a pointer to an element in that array:
+
+```c++
+int i = ia[2]; // ia is converted to a pointer to the first element in ia; ia[2] fetches the element to which (ia + 2) points
+```
+
+is equivalent to
+
+```c++
+int *p = ia; // p points to the first element in ia
+int i = *(p + 2); // equivalent to int i = ia[2]
+```
+
+We can use the subscript operator on any pointer, as long as that pointer points to an element (or one past the last element) in an array:
+
+```c++
+int *p = &ia[2]; // p points to the element indexed by 2
+int j = p[1]; // p[1] is equivalent to *(p + 1),
+// p[1] is the same element as ia[3]
+int k = p[-2]; // p[-2] is the same element as ia[0]
+```
+
+This last example points out an important difference between arrays and library types such as `vector` and `string` that have subscript operators. The library types force the index used with a subscript to be an unsigned value. The built-in subscript operator does not. The index used with the built-in subscript operator can be a negative value. Of course, the resulting address must point to an element in (or one past the end of) the array to which the original pointer points.
+
+#### 3.5.4 C-Style Character Strings
+
+WARNING: Although C++ supports C-style strings, they should not be used by C++ programs. C-style strings are a surprisingly rich source of bugs and are the root cause of many security problems. They're also harder to use!
+
+##### C Library String Functions
+
+##### Comparing Strings
+
+##### Caller Is Responsible for Size of a Destination String
+
+Tip: For most applications, in addition to being safer, it is also more efficient to use library strings rather than C-style strings.
+
+#### 3.5.5 Interfacing to Older Code
+
+Many C++ programs predate the standard library and do not use the `string` and `vector` types. Moreover, many C++ programs interface to programs written in C or other languages that cannot use the C++ library. Hence, programs written in modern C++ may have to interface to code that uses arrays and/or C-style character strings. The C++ library offers facilities to make the interface easier to manage.
+
+##### Mixing Library `string`s and C-Style Strings
+
+##### Using an Array to Initialize a `vector`
+
+ADVICE: USE LIBRARY TYPES INSTEAD OF ARRAYS
+
+Pointers and arrays are surprisingly error-prone. **Modern C++ programs should use `vector`s and iterators instead of built-in arrays and pointers, and use `string`s rather than C-style array-based character strings.**
+
+### 3.6 Multidimensional Arrays
+
+Strictly speaking, there are no multidimensional arrays in C++. What are commonly referred to as multidimensional arrays are actually arrays of arrays.
+
+```c++
+int ia[3][4]; // ia is an array of size 3; each element is an array of int s of size 4
+// arr is an array of size 10; each element is a 20-element array whose elements are arrays of 30 int s
+int arr[10][20][30] = {0}; // initialize all elements to 0
+```
+
+In a two-dimensional array, the first dimension is usually referred to as the row and the second as the column.
+
+##### Initializing the Elements of a Multidimensional Array
+
+```c++
+int ia[3][4] = { // three elements; each element is an array of size 4
+    {0, 1, 2, 3}, // initializers for the row indexed by 0
+    {4, 5, 6, 7}, // row 1
+    {8, 9, 10, 11} // row 2
+};
+```
+
+is equivalent to
+
+```c++
+int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
+```
+
+As is the case for single-dimension arrays, elements may be left out of the initializer list.
+
+```c++
+// initialize only the first element of each row; the remaining elements are initialized to 0
+int ia[3][4] = { {0}, {4}, {8} };
+// explicitly initialize row 0; the remaining elements are initialized to 0
+int ix[3][4] = {0, 3, 6, 9};
+```
+
+##### Subscripting a Multidimensional Array
+
+```c++
+// assigns the first element of arr to the last element in the last row of ia
+ia[2][3] = arr[0][0][0];
+// defines row as a reference to an array of four ints; binds this reference to the second four-element array in ia
+int (&row)[4] = ia[1];
+```
+
+Use nested `for` loops to process the elements in a multidimensional array:
+
+```c++
+constexpr size_t rowCnt = 3, colCnt = 4;
+int ia[rowCnt][colCnt]; // 12 uninitialized elements
+// for each row
+for (size_t i = 0; i != rowCnt; ++i) {
+    // for each column within the row
+    for (size_t j = 0; j != colCnt; ++j) {
+        // assign the element's positional index as its value
+        ia[i][j] = i * colCnt + j;
+    }
+}
+```
+
+##### Using a Range for with Multidimensional Arrays
+
+Under the new standard we can simplify the previous loop by using a range `for`:
+
+```c++
+size_t cnt = 0;
+for (auto &row : ia) // for every element in the outer array
+    for (auto &col : row) { // for every element in the inner array
+        col = cnt; // give this element the next value
+        ++cnt; // increment cnt
+}
+```
+
+The first `for` iterates through the elements in `ia`. Those elements are arrays of size 4. Thus, the type of `row` is a reference to an array of four `int`s. The second `for` iterates through one of those 4-element arrays. Hence, `col` is `int&`. 
+
+It is worth noting that we define `row` and `col` as references rather than `for (auto row : ia)` and `for (auto col : row)` to avoid copying them. This way is more efficient than copying when `row` and `col` is large.
+
+The following loop does not write to the elements, yet we still define the control variable of the outer loop as a reference.
+
+```c++
+for (const auto &row : ia)
+    for (auto col : row)
+        cout << col << endl;
+```
+
+Note: To use a multidimensional array in a range for, the loop control variable for all but the innermost array must be references.
+
+##### Pointers and Multidimensional Arrays
+
+As with any array, when we use the name of a multidimensional array, it is automatically converted to a pointer to the first element in the array. For here the first element is the first inner array in the multidimensional array.
+
+```c++
+int ia[3][4]; // array of size 3; each element is an array of int s of size 4
+int (*p)[4] = ia; // pointer to an array of four ints
+p = &ia[2]; // p now points to the last element in ia
+```
+
+Applying the strategy from § 3.5.1 (p. 115), we start by noting that (`*p`) says `p` is a pointer. Looking right, we see that the object to which `p` points has a dimension of size 4, and looking left that the element type is `int`. Hence, `p` is a pointer to an array of four `int`s.
+
+Note: The parentheses in this declaration are essential:
+
+```c++
+int *ip[4]; // array of pointers to int
+```
+
+With the advent of the new standard, we can often avoid having to write the
+type of a pointer into an array by using `auto` or `decltype` (§ 2.5.2, p. 68):
+
+```c++
+// print the value of each element in ia, with each inner array on its own line
+// initialize p to point to the first array in ia
+// the increment, ++p, moves p to point to the next row (i.e., the next element, the next array) in ia
+for (auto p = ia; p != ia + 3; ++p) {
+    // initialize q point to the first element of the array to which p points; this array is of four ints; thus q points to an int
+    for (auto q = *p; q != *p + 4; ++q)
+        cout << *q << ''; // prints the int value to which q points
+    cout << endl;
+}
+```
+
+We can even more easily write this loop using the library `begin` and `end` functions (§ 3.5.3, p. 118):
+
+```c++
+for (auto p = begin(ia); p != end(ia); ++p) {
+    for (auto q = begin(*p); q != end(*p); ++q)
+        cout << *q << '';
+    cout << endl;
+}
+```
+
+##### Type Aliases Simplify Pointers to Multidimensional Arrays
+
+ Define `int_array` as a name for the type "array of four `int`s":
+
+```c++
+using int_array = int[4]; // new style type alias declaration; see § 2.5.1 (p. 68)
+```
+
+Or equivalently:
+
+```c++
+typedef int int_array[4]; // § 2.5.1 (p. 67)
+```
+
+Then we can rewrite the first line as:
+
+```c++
+for (int_array *p = ia; p != ia + 3; ++p) {
+    // ...
+```
+
+### Chapter Summary
+
+Among the most important library types are `vector` and `string`. A `string` is a variable-length sequence of characters, and a `vector` is a container of objects of a single type.
+
+Iterators allow indirect access to objects stored in a container. Iterators are used to access and navigate between the elements in `string`s and `vector`s.
+
+Arrays and pointers to array elements provide low-level analogs to the `vector` and `string` libraries. In general, the library classes should be used in preference to low-level array and pointer alternatives built into the language.
+
+### Defined Terms
+
+**buffer overflow** Serious programming bug that results when we use an index that is out-of-range for a container, such as a `string`, `vector`, or an array.
+
+**class template** A blueprint from which specific class types can be created. To use a class template, we must specify additional information. For example, to define a `vector`, we specify the element type: `vector<int>` holds `int`s.
+
+**container** A type whose objects hold a collection of objects of a given type. vector is a container type.
+
+**iterator** A type used to access and navigate among the elements of a container.
+
+**range for** Control statement that iterates through a specified collection of values.
+
+**string** Library type that represents a sequence of characters.
+
+**vector** Library type that holds a collection of elements of a specified type.
 
 <br>
 
-**References:**
+## References
 
 [^1]: Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. *C++ Primer*. Addison-Wesley Professional, 2012. 
 
 [^2]: Prata, Stephen. *C++ primer plus*. Addison-Wesley Professional, 2011.
-
