@@ -53,8 +53,8 @@ An expression with two or more operators is a compound expression. Precedence an
 
 ```c++
 int ia[] = {0,2,4,6,8}; // array with five elements of type int
-int last = *(ia + 4); // initializes last to 8 , the value of ia[4]
-last = *ia + 4; // last = 4 , equivalent to ia[0] + 4
+int last = *(ia + 4); // initializes last to 8, the value of ia[4]
+last = *ia + 4; // last = 4, equivalent to ia[0] + 4
 ```
 
 #### 4.1.3 Order of Evaluation

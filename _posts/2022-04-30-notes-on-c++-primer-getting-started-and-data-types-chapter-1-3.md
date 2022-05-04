@@ -139,9 +139,9 @@ int main()
 This way simplifies the code but modern practice regards this as a bit lazy and potentially a problem in large projects. The preferred approaches are to use the `std::` qualifier or to use something called a `using` declaration to make just particular names available: [^2]
 
 ```c++
-using std::cout;   // make cout available
-using std::endl;   // make endl available
-using std::cin;    // make cin available
+using std::cout; // make cout available
+using std::endl; // make endl available
+using std::cin; // make cin available
 ```
 
 ##### Reading from a Stream
@@ -1603,7 +1603,7 @@ string s("some string");
 if (s.begin() != s.end()) { // make sure s is not empty
     auto it = s.begin(); // it denotes the first character in s
     *it = toupper(*it); // make that character uppercase
-    }
+}
 ```
 
 ##### Moving Iterators from One Element to Another
