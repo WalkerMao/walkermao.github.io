@@ -1118,7 +1118,5 @@ In addition, there are expression statements and declaration statements. An expr
 
 ## References
 
-[^1]: Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. *C++ Primer*. Addison-Wesley Professional, 2012. 
-
-[^2]: Prata, Stephen. *C++ primer plus*. Addison-Wesley Professional, 2011.
+Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. *C++ Primer*. Addison-Wesley Professional, 2012. 
 
