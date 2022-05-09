@@ -9,8 +9,6 @@ published: true
 hidden: false
 ---
 
-[TOC]
-
 ## Chapter 4. Expressions
 
 An expression is composed of one or more operands and yields a result when it is evaluated. The simplest form of an expression is a single literal or variable. The result of such an expression is the value of the variable or literal. More complicated expressions are formed from an operator and one or more operands.

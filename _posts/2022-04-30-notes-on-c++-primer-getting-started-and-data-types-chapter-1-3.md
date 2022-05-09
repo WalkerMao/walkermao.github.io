@@ -9,8 +9,6 @@ published: true
 hidden: false
 ---
 
-[TOC]
-
 ## Chapter 1. Getting Started
 
 ### 1.1 Writing a Simple C++ Program
