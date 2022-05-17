@@ -68,7 +68,7 @@ My understanding: SVMs are suitable for small sample-size, and strict positive/n
 
 ### C. Bounding-box regression
 
-After scoring each selective search proposal with a class-specific detection SVM, we predict a new bounding box for the detection using a class-specific bounding-box regressor to improve localization performance.  Our goal is to learn a transformation that maps a proposed box $$P=(P_x, P_y, P_w, P_h)$$ to a groundtruth box $$P=(G_x, G_y, G_w, G_h)$$. We  parameterize  the  transformation in terms of four functions $$\{d_{\star}(P)=\mathbf{w}_{\star}^{\mathrm{T}} \boldsymbol{\phi}_{5}(P)\}_{\star=x,y,h,w}$$.
+After scoring each selective search proposal with a class-specific detection SVM, we predict a new bounding box for the detection using a class-specific bounding-box regressor to improve localization performance.  Our goal is to learn a transformation that maps a proposed box $$P=(P_x, P_y, P_w, P_h)$$ to a groundtruth box $$P=(G_x, G_y, G_w, G_h)$$. We  parameterize the transformation in terms of four functions $$\{d_{\star}(P)=\mathbf{w}_{\star}^{\mathrm{T}} \boldsymbol{\phi}_{5}(P)\}_{\star=x,y,h,w}$$.
 
 Two subtle issues while implementing bounding-box regression:
 

@@ -4,7 +4,7 @@ title: "Object Detection: Fast R-CNN"
 date: 2022-01-12
 categories: CV DL
 tags: [object detection, CNN]
-published: false
+published: true
 comments: true
 ---
 
@@ -68,7 +68,28 @@ In addition to hierarchical sampling, Fast R-CNN uses a streamlined training pro
 
 #### Multi-Task Loss
 
-...
+A Fast R-CNN network has two sibling output layers. The first outputs a discrete probability distribution (per RoI), $$ p=\left(p_{0}, \ldots, p_{K}\right) $$, over $$ K+1 $$ categories. As usual, $$ p $$ is computed by a softmax over the $$ K+1 $$ outputs of a fully connected layer. The second sibling layer outputs bounding-box regression offsets, $$ t^{k}=\left(t_{\mathrm{x}}^{k}, t_{\mathrm{y}}^{k}, t_{\mathrm{w}}^{k}, t_{\mathrm{h}}^{k}\right) $$, for each of the $$ K $$ object classes, indexed by $$ k $$. We use the parameterization for $$ t^{k} $$ given in R-CNN, in which $$ t^{k} $$ specifies a scale-invariant translation and log-space height/width shift relative to an object proposal.
+
+Each training RoI is labeled with a ground-truth class $$ u $$ and a ground-truth bounding-box regression target $$ v $$. We use a multi-task loss $$ L $$ on each labeled RoI to jointly train for classification and bounding-box regression:
+$$
+L\left(p, u, t^{u}, v\right)=L_{\mathrm{cls}}(p, u)+\lambda\mathbb{1}_{\{u \geq 1\}} L_{\mathrm{loc}}\left(t^{u}, v\right),
+$$
+in which $$ L_{\mathrm{cls}}(p, u)=-\log p_{u} $$ is log loss for true class $$ u $$.
+
+The second task loss, $$ L_{\text {loc }} $$, is defined over a tuple of true bounding-box regression targets for class $$ u, v= $$ $$ \left(v_{\mathrm{x}}, v_{\mathrm{y}}, v_{\mathrm{w}}, v_{\mathrm{h}}\right) $$, and a predicted tuple $$ t^{u}=\left(t_{\mathrm{x}}^{u}, t_{\mathrm{y}}^{u}, t_{\mathrm{w}}^{u}, t_{\mathrm{h}}^{u}\right) $$, again for class $$ u $$. By convention the catch-all background class is labeled $$ u=0 $$. For background RoIs there is no notion of a ground-truth bounding box and hence $$ L_{\text {loc }} $$ is ignored. For bounding-box regression, we use the loss
+$$
+L_{\mathrm{loc}}\left(t^{u}, v\right)=\sum_{i \in\{\mathrm{x}, \mathrm{y}, \mathrm{w}, \mathrm{h}\}} \operatorname{smooth}_{L_{1}}\left(t_{i}^{u}-v_{i}\right),
+$$
+in which
+$$
+\operatorname{smooth}_{L_{1}}(x)=\left\{\begin{array}{ll}
+0.5 x^{2} & \text { if }|x|<1 \\
+|x|-0.5 & \text { otherwise }
+\end{array}\right.
+$$
+is a robust $$ L_{1} $$ loss that is less sensitive to outliers than the $$ L_{2} $$ loss used in R-CNN and SPPnet. When the regression targets are unbounded, training with $$ L_{2} $$ loss can require careful tuning of learning rates in order to prevent exploding gradients. Eq. 3 eliminates this sensitivity.
+
+The hyper-parameter $$ \lambda $$ in Eq. 1 controls the balance between the two task losses. We normalize the ground-truth regression targets $$ v_{i} $$ to have zero mean and unit variance. All experiments use $$ \lambda=1 $$.
 
 The experiments show that the single stage (multi-task) training used by Fast R-CNN performs better than multi stage training used by R-CNN and SPP-net.
 
@@ -76,9 +97,7 @@ The experiments show that the single stage (multi-task) training used by Fast R-
 
 ### 3.1 Truncated SVD for Faster Detection
 
-...
-
-This simple compression method gives good speedups when the number of RoIs is large.
+For detection the number of RoIs to process is large and nearly half of the forward pass time is spent computing the fully connected layers. Large fully connected layers are easily accelerated by compressing them with truncated SVD. This simple compression method gives good speedups when the number of RoIs is large.
 
 <br>
 
