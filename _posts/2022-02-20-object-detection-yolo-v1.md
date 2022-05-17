@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "Object Detection: YOLO v1"
 date: 2022-02-20
@@ -29,10 +28,11 @@ individual component must be trained separately.
 
 <div align='center'>
 <figure>
-<img src="https://www.researchgate.net/profile/Rumin-Zhang/publication/330591711/figure/fig4/AS:999014401069061@1615195002164/The-YOLO-Detection-System-Processing-images-with-YOLO-is-simple-and-straightforward.jpg" alt="Figure 1: The YOLO Detection System." style="zoom:100%;" />
+<img src="https://www.researchgate.net/profile/Rumin-Zhang/publication/330591711/figure/fig4/AS:999014401069061@1615195002164/The-YOLO-Detection-System-Processing-images-with-YOLO-is-simple-and-straightforward.jpg" alt="Figure 1: The YOLO Detection System." style="zoom:80%;" />
 <figcaption style="font-size:80%;"> Figure 1: The YOLO Detection System. Processing images with YOLO is simple and straightforward. Our system (1) resizes the input image to 448 × 448, (2) runs a single convolutional network on the image, and (3) thresholds the resulting detections by the model's confidence. (<a href="https://www.researchgate.net/figure/The-YOLO-Detection-System-Processing-images-with-YOLO-is-simple-and-straightforward_fig4_330591711">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 YOLO is refreshingly simple: see Figure 1. A single convolutional network simultaneously predicts multiple bounding boxes and class probabilities for those boxes. YOLO trains on full images and directly optimizes detection performance. This unified model has several benefits over traditional methods of object detection:
 
@@ -60,10 +60,11 @@ which gives us class-specific confidence scores for each box. hese scores encode
 
 <div align='center'>
 <figure>
-<img src="https://www.researchgate.net/publication/347650835/figure/fig3/AS:1022069898768390@1620691861580/The-You-Only-Look-Once-YOLO-8-model.ppm" alt="Figure 2: The Model." style="zoom:100%;" />
+<img src="https://www.researchgate.net/publication/347650835/figure/fig3/AS:1022069898768390@1620691861580/The-You-Only-Look-Once-YOLO-8-model.ppm" alt="Figure 2: The Model." style="zoom:90%;" />
 <figcaption style="font-size:80%;"> Figure 2: The Model. (<a href="https://www.researchgate.net/figure/The-You-Only-Look-Once-YOLO-8-model_fig3_347650835">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 Our system models detection as a regression problem. It divides the image into an $$ S \times S $$ grid and for each grid cell predicts $$ B $$ bounding boxes, confidence for those boxes, and $$ C $$ class probabilities. These predictions are encoded as an $$ S \times S \times (5B + C) $$ tensor.
 
@@ -75,10 +76,11 @@ We implement this model as a convolutional neural network. The initial convoluti
 
 <div align='center'>
 <figure>
-<img src="https://www.researchgate.net/publication/329564805/figure/fig3/AS:702649875845129@1544536193578/Architecture-of-YOLO-CNN.ppm" alt="Architecture of YOLO CNN." style="zoom:100%;" />
+<img src="https://www.researchgate.net/publication/329564805/figure/fig3/AS:702649875845129@1544536193578/Architecture-of-YOLO-CNN.ppm" alt="Architecture of YOLO CNN." style="zoom:110%;" />
 <figcaption style="font-size:80%;"> Figure 3: The Architecture. Our detection network has 24 convolutional layers followed by 2 fully connected layers. Alternating 1 × 1 convolutional layers reduce the features space from preceding layers. The final output of our network is the 7 × 7 × 30 tensor of predictions. We pretrain the convolutional layers on the ImageNet classification task at half the resolution (224 × 224 input image) and then double the resolution for detection. (<a href="https://www.researchgate.net/figure/Architecture-of-YOLO-CNN_fig3_329564805">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 ### 2.2 Training
 
@@ -91,6 +93,7 @@ Our error metric should reflect that small deviations in large boxes matter less
 YOLO predicts multiple bounding boxes per grid cell. At training time we only want one bounding box predictor to be responsible for each object. We assign one predictor to be "responsible" for predicting an object based on which prediction has the highest current IOU with the ground truth. This leads to specialization between the bounding box predictors. Each predictor gets better at predicting certain sizes, aspect ratios, or classes of object, improving overall recall.
 
 During training we optimize the following, multi-part loss function:
+
 $$
 \begin{aligned}
 & \lambda_{\text {coord }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\text {obj }}\left[\left(x_{i}-\hat{x}_{i}\right)^{2}+\left(y_{i}-\hat{y}_{i}\right)^{2}\right] \\
@@ -100,6 +103,7 @@ $$
 &+\sum_{i=0}^{S^{2}} \mathbb{1}_{i}^{\text {obj }} \sum_{c \in \text { classes }}\left(p_{i}(c)-\hat{p}_{i}(c)\right)^{2}.
 \end{aligned}
 $$
+
 where $$ \mathbb{1}_{i}^{\text {obj }} $$ denotes if object appears in cell $$ i $$ and $$ \mathbb{1}_{i j}^{\text {obj }} $$ denotes that the $$ j $$ th bounding box predictor in cell $$ i $$ is "responsible" for that prediction.
 
 Note that the loss function only penalizes classification error if an object is present in that grid cell (hence the conditional class probability discussed earlier). It also only penalizes bounding box coordinate error if that predictor is "responsible" for the ground truth box (i.e. has the highest IOU of any predictor in that grid cell).

@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "Object Detection: Faster R-CNN"
 date: 2022-02-05
@@ -26,12 +25,12 @@ Region proposal methods typically rely on inexpensive features and economical in
 <img src="https://blog.kakaocdn.net/dn/96iUR/btq8FULhP1p/1VNfOUeLxuvu9c4jtyVxz1/img.png" alt="img" style="zoom:110%;" />
 </figure>
 </div>
-
 <div align='center'>
 <figure>
-<img src="https://blog.kakaocdn.net/dn/CrYbK/btq8EnUObH0/ftLSPBtaQETv7LxfNPvXr0/img.png" alt="img" style="zoom:100%;" />
+<img src="https://blog.kakaocdn.net/dn/CrYbK/btq8EnUObH0/ftLSPBtaQETv7LxfNPvXr0/img.png" alt="img" style="zoom:80%;" />
 </figure>
 </div>
+
 
 RPNs are designed to efficiently predict region proposals with a wide range of scales and aspect ratios. In contrast to prevalent methods like OverFeat, SPPnet and Fast R-CNN that use pyramids of images (Figure 1, a) or pyramids of filters (Figure 1, b), we introduce novel "anchor" boxes that serve as references at multiple scales and aspect ratios. Our scheme can be thought of as a pyramid of regression references (Figure 1, c), which avoids enumerating images or filters of multiple scales or aspect ratios. This model performs well when trained and tested using single-scale images and thus benefits running speed.
 
@@ -52,7 +51,7 @@ of maximum possible proposals for each location is denoted as $$ k $$. So the re
 
 <div align='center'>
 <figure>
-<img src="https://www.researchgate.net/publication/329263432/figure/fig3/AS:698144681623558@1543462071466/Region-Proposal-Network-RPN.png" alt="Region Proposal Network (RPN)." style="zoom:100%;" />
+<img src="https://www.researchgate.net/publication/329263432/figure/fig3/AS:698144681623558@1543462071466/Region-Proposal-Network-RPN.png" alt="Region Proposal Network (RPN)." style="zoom:80%;" />
 <figcaption style="font-size:80%;"> Figure 3: Region Proposal Network (RPN). (<a href="https://www.researchgate.net/figure/Region-Proposal-Network-RPN_fig3_329263432">Source</a>) </figcaption>
 </figure>
 </div>
@@ -72,12 +71,15 @@ Because of the multi-scale design based on anchors, we can simply use the convol
 For training RPNs, we assign a binary class label (of being an object or not) to each anchor. We assign a positive label to two kinds of anchors: (i) the anchor/anchors with the highest Intersection-over-Union (IoU) overlap with a ground-truth box, or (ii) an anchor that has an IoU overlap higher than $$ 0.7 $$ with any ground-truth box. We assign a negative label to a non-positive anchor if its IoU ratio is lower than $$ 0.3 $$ for all ground-truth boxes. Anchors that are neither positive nor negative do not contribute to the training objective.
 
 The loss function of RPN for an image is defined as:
+
 $$
 L\left(\left\{p_{i}\right\},\left\{t_{i}\right\}\right)=\frac{1}{N_{c l s}} \sum_{i} L_{c l s}\left(p_{i}, p_{i}^{*}\right) + \lambda \frac{1}{N_{r e g}} \sum_{i} p_{i}^{*} L_{r e g}\left(t_{i}, t_{i}^{*}\right).
 $$
+
 Here, $$ i $$ is the index of an anchor in a mini-batch and $$ p_{i} $$ is the predicted probability of anchor $$ i $$ being an object. The ground-truth label $$ p_{i}^{*} $$ is $$ 1 $$ if the anchor is positive, and is $$ 0 $$ if the anchor is negative. $$ t_{i} $$ is a vector representing the $$ 4 $$ parameterized coordinates of the predicted bounding box, and $$ t_{i}^{*} $$ is that of the ground-truth box associated with a positive anchor. The classification loss $$ L_{c l s} $$ is log loss over two classes (object vs. not object). For the regression loss, we use $$ L_{\text {reg }}\left(t_{i}, t_{i}^{*}\right)=R\left(t_{i}-t_{i}^{*}\right) $$ where $$ R $$ is the robust loss function (smooth $$ \mathrm{L}_{1} $$ ) defined in Fast R-CNN. The term $$ p_{i}^{*} L_{\text {reg }} $$ means the regression loss is activated only for positive anchors $$ \left(p_{i}^{*}=1\right) $$ and is disabled otherwise $$ \left(p_{i}^{*}=0\right) $$. The outputs of the $$ c l s $$ and reg layers consist of $$ \left\{p_{i}\right\} $$ and $$ \left\{t_{i}\right\} $$ respectively. The two terms are normalized by $$ N_{c l s} $$ and $$ N_{r e g} $$ and weighted by a balancing parameter $$ \lambda $$.
 
 For bounding box regression, we adopt the parameterizations of the $$ 4 $$ coordinates as that in R-CNN:
+
 $$
 \begin{aligned}
 t_{\mathrm{x}} &=\left(x-x_{\mathrm{a}}\right) / w_{\mathrm{a}}, \quad t_{\mathrm{y}}=\left(y-y_{\mathrm{a}}\right) / h_{\mathrm{a}}, \\
@@ -86,6 +88,7 @@ t_{\mathrm{x}}^{*} &=\left(x^{*}-x_{\mathrm{a}}\right) / w_{\mathrm{a}}, \quad t
 t_{\mathrm{w}}^{*} &=\log \left(w^{*} / w_{\mathrm{a}}\right), \quad t_{\mathrm{h}}^{*}=\log \left(h^{*} / h_{\mathrm{a}}\right),
 \end{aligned}
 $$
+
 where $$ x, y, w $$, and $$ h $$ denote the box's center coordinates and its width and height. Variables $$ x, x_{\mathrm{a}} $$, and $$ x^{*} $$ are for the predicted box, anchor box, and groundtruth box respectively (likewise for $$ y, w, h) $$. This can be thought of as bounding-box regression from an anchor box to a nearby ground-truth box.
 
 In the previous RoI (Region of Interest) based methods like SPPnet and Fast R-CNN, bounding-box regression is performed on features pooled from arbitrarily sized RoIs, and the regression weights are shared by all region sizes. In our formulation, the features used for regression are of the same spatial size ($$ 3 \times 3 $$) on the feature maps. To account for varying sizes, a set of $$ k $$ bounding-box regressors are learned. Each regressor is responsible for one scale and one aspect ratio, and the $$ k $$ regressors do not share weights.
