@@ -3,7 +3,7 @@ layout: post
 title: "Object Detection: R-CNN"
 date: 2021-12-05
 categories: CV DL
-tags: [object detection, CNN]
+tags: [Object detection, CNN]
 published: true
 comments: true
 ---

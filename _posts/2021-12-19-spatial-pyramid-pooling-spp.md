@@ -3,7 +3,7 @@ layout: post
 title: "Spatial Pyramid Pooling (SPP)"
 date: 2021-12-19
 categories: CV DL
-tags: [object detection, CNN]
+tags: [Object detection, CNN]
 published: true
 comments: true
 ---

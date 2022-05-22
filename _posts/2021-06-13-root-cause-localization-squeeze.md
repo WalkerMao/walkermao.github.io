@@ -3,7 +3,7 @@ layout: post
 title: "Root Cause Localization: Squeeze"
 date: 2021-06-13
 categories: ML
-tags: [root cause localization]
+tags: [Root cause localization]
 comments: true
 published: true
 hidden: false

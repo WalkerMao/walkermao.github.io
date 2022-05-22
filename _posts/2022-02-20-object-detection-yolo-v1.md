@@ -3,7 +3,7 @@ layout: post
 title: "Object Detection: YOLO v1"
 date: 2022-02-20
 categories: CV DL
-tags: [object detection, CNN]
+tags: [Object detection, CNN]
 published: true
 comments: true
 ---
@@ -33,7 +33,6 @@ individual component must be trained separately.
 </figure>
 </div>
 
-
 YOLO is refreshingly simple: see Figure 1. A single convolutional network simultaneously predicts multiple bounding boxes and class probabilities for those boxes. YOLO trains on full images and directly optimizes detection performance. This unified model has several benefits over traditional methods of object detection:
 
 First, YOLO is extremely fast. 
@@ -53,9 +52,11 @@ Each grid cell predicts $$ B $$ bounding boxes ($$x, y, w, h$$) and confidence s
 Each grid cell also predicts $$ C $$ conditional class probabilities, $$ \mathrm{Pr}(\mathrm{Class}_i \mid \mathrm{Object}) $$. These probabilities are conditioned on the grid cell containing an object. We only predict one set of class probabilities per grid cell, regardless of the number of boxes $$ B $$.
 
 At test time we multiply the conditional class probabilities and the individual box confidence predictions,
+
 $$
 \mathrm{Pr}(\mathrm{Class}_i \mid \mathrm{Object}) \times \mathrm{Pr}(\mathrm{Object}) \times \mathrm{IOU}_{\mathrm{pred}}^{\mathrm{truth}} = \mathrm{Pr}(\mathrm{Class}_i) \times \mathrm{IOU}_{\mathrm{pred}}^{\mathrm{truth}}
 $$
+
 which gives us class-specific confidence scores for each box. hese scores encode both the probability of that class appearing in the box and how well the predicted box fits the object.
 
 <div align='center'>
@@ -64,7 +65,6 @@ which gives us class-specific confidence scores for each box. hese scores encode
 <figcaption style="font-size:80%;"> Figure 2: The Model. (<a href="https://www.researchgate.net/figure/The-You-Only-Look-Once-YOLO-8-model_fig3_347650835">Source</a>) </figcaption>
 </figure>
 </div>
-
 
 Our system models detection as a regression problem. It divides the image into an $$ S \times S $$ grid and for each grid cell predicts $$ B $$ bounding boxes, confidence for those boxes, and $$ C $$ class probabilities. These predictions are encoded as an $$ S \times S \times (5B + C) $$ tensor.
 
@@ -80,7 +80,6 @@ We implement this model as a convolutional neural network. The initial convoluti
 <figcaption style="font-size:80%;"> Figure 3: The Architecture. Our detection network has 24 convolutional layers followed by 2 fully connected layers. Alternating 1 × 1 convolutional layers reduce the features space from preceding layers. The final output of our network is the 7 × 7 × 30 tensor of predictions. We pretrain the convolutional layers on the ImageNet classification task at half the resolution (224 × 224 input image) and then double the resolution for detection. (<a href="https://www.researchgate.net/figure/Architecture-of-YOLO-CNN_fig3_329564805">Source</a>) </figcaption>
 </figure>
 </div>
-
 
 ### 2.2 Training
 

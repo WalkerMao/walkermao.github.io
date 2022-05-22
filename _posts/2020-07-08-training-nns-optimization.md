@@ -3,7 +3,7 @@ layout: post
 title:  "Training Neural Networks: Optimization"
 date: 2020-07-08
 categories: DL
-tags: [optimization]
+tags: [Optimization]
 comments: true
 ---
 

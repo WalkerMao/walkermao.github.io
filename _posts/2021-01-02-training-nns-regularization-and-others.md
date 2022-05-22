@@ -3,6 +3,7 @@ layout: post
 title:  "Training Neural Networks: Regularization and Others"
 date: 2021-01-02
 categories: DL
+tags: [Optimization]
 comments: true
 ---
 

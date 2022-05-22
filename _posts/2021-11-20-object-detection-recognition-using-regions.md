@@ -3,7 +3,7 @@ layout: post
 title: "Object Detection: Recognition using Regions"
 date: 2021-11-20
 categories: CV
-tags: [object detection, traditional CV]
+tags: [Object detection, Traditional CV]
 published: true
 comments: true
 ---

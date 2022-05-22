@@ -3,7 +3,7 @@ layout: post
 title: "Root Cause Localization: iDice"
 date: 2021-05-23
 categories: ML
-tags: [root cause localization]
+tags: [Root cause localization]
 comments: true
 published: true
 hidden: false

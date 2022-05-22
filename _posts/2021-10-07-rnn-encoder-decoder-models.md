@@ -20,8 +20,9 @@ An RNN Encoder-Decoder consists of two recurrent neural networks (RNN) that act 
 
 <div align='center'>
 <img src="https://www.researchgate.net/profile/Y-Bengio/publication/262877889/figure/fig5/AS:668696091570179@1536440980075/An-illustration-of-the-proposed-RNN-Encoder-Decoder.png" alt="An illustration of the proposed RNN Encoder-Decoder." style="zoom:60%;" />
-<figcaption style="font-size: 80%;"> Fig. An illustration of the proposed RNN Encoder-Decoder. (source: Cho et al., 2014) </figcaption>
+<figcaption style="font-size: 80%;"> Fig. An illustration of the proposed RNN Encoder-Decoder. (Source: Cho et al., 2014) </figcaption>
 </div>
+
 
 For a RNN, the hidden state updating can be expressed as 
 
@@ -61,9 +62,10 @@ Bahdanau *et al.* (2015) [^2] conjectured that the use of a fixed-length vector 
 To address this issue, they proposed an extension to the basic RNN Encoder-Decoder which learns to align and translate jointly. That is, they implement a mechanism of **attention** to automatically (soft-)search for parts of a source sentence that are relevant to predicting a target word. This approach does not attempt to encode a whole input sentence into a single fixed-length vector. Instead, it encodes the input sentence into a sequence of vectors, and chooses a subset of these vectors adaptively, i.e. (soft-)aligning or (soft-)searching, while decoding.
 
 <div align='center'>
-<img src="https://hyunyoung2.github.io/img/Image/NaturalLanguageProcessing/NLPLabs/Paper_Investigation/Translation/2019-01-01-Neural_Machine_Translation_by_Jointly_Learning_to_Align_And_Translate/Bahdanau_et_al_(2015).png" alt="Bahdanau_et_al_(2015)" style="zoom:120%;" />
-<figcaption style="font-size: 80%;"> Source: Bahdanau et al., (2015). </figcaption>
+<img src="https://hyunyoung2.github.io/img/Image/NaturalLanguageProcessing/NLPLabs/Paper_Investigation/Translation/2019-01-01-Neural_Machine_Translation_by_Jointly_Learning_to_Align_And_Translate/Bahdanau_et_al_(2015).png" alt="Bahdanau_et_al_(2015)" style="zoom:110%;" />
+<figcaption style="font-size: 80%;">(Source: Bahdanau et al., 2015)</figcaption>
 </div>
+
 
 The hidden state updating of decoder can be expressed as 
 
@@ -124,6 +126,15 @@ We obtain an annotation for each word $$ x_{j} $$ by concatenating the forward h
 ### Attention Weight Matrix ($$\alpha_{tj}$$'s) 
 
 A nice subproduct of attention mechanism is the weight matrix. 
+
+<div align='center'>
+<figure>
+<img src="../pictures/attention_weight_matrix_exmaple_1.png" alt="attention_weight_matrix_exmaple_1.png" style="zoom:66%;" />
+<img src="../pictures/attention_weight_matrix_exmaple_2.png" alt="attention_weight_matrix_exmaple_2.png" style="zoom:74%;" />
+<figcaption style="font-size:80%;"> Fig: Attention weight matrix examples for translation from Chinese to English. (Source: <a href="https://arxiv.org/abs/1601.04811">Tu et al., 2016</a>) </figcaption>
+</figure>
+</div>
+
 
 [To be continued]
 

@@ -3,6 +3,7 @@ layout: post
 title:  "Basic Clustering: K-Means, EM and GMM"
 date: 2020-04-26
 categories: ML Stat
+tags: [Unsupervised learning]
 comments: true
 ---
 

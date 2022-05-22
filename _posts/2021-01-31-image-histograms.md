@@ -3,7 +3,7 @@ layout: post
 title:  "Image Histograms"
 date: 2021-01-31
 categories: CV
-tags: [traditional CV,]
+tags: [Traditional CV,]
 comments: true
 published: true
 hidden: false

@@ -3,7 +3,7 @@ layout: post
 title: "Object Detection: Faster R-CNN"
 date: 2022-02-05
 categories: CV DL
-tags: [object detection, CNN]
+tags: [Object detection, CNN]
 published: true
 comments: true
 ---

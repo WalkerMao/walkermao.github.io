@@ -3,7 +3,7 @@ layout: post
 title: "Basic HTML and CSS"
 date: 2020-02-25
 categories: CS
-tags: [programming]
+tags: [Programming]
 published: true
 comments: true
 ---

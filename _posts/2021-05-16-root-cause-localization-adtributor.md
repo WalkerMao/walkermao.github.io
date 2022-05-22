@@ -3,7 +3,7 @@ layout: post
 title: "Root Cause Localization: Adtributor"
 date: 2021-05-16
 categories: ML
-tags: [root cause localization]
+tags: [Root cause localization]
 comments: true
 published: true
 hidden: False
