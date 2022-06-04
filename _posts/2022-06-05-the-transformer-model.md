@@ -3,7 +3,7 @@ layout: post
 title: "The Transformer Model"
 date: 2022-06-05
 categories: NLP DL
-tags: [Encoder-Decoder]
+tags: [Encoder-decoder]
 published: true
 hidden: false
 comments: true

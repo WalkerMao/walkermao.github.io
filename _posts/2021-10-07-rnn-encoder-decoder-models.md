@@ -3,7 +3,7 @@ layout: post
 title: "RNN Encoder-Decoder Models"
 date: 2021-10-07
 categories: NLP DL
-tags: [RNN]
+tags: [RNN, Encoder-decoder]
 published: true
 comments: true
 ---
