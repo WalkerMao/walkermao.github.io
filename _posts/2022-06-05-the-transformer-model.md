@@ -22,7 +22,6 @@ Transformer is a model architecture eschewing recurrence and convolution, and in
 </figure>
 </div>
 
-
 ## 2. Background
 
 In the Transformer, the number of operations required to relate signals from two arbitrary input or output positions is reduced to a constant.
@@ -63,7 +62,7 @@ The encoder is composed of a stack of $$ N = 6 $$ identical layers. Each layer h
 <div align='center'>
 <figure>
 <img src="https://jalammar.github.io/images/t/encoder_with_tensors_2.png" alt="img" style="zoom:60%;" />
-<figcaption style="font-size:80%;"> Figure: The word at each position passes through a self-attention process. Then, they each pass through a feed-forward neural network -- the exact same network with each vector flowing through it separately. (<a href="https://jalammar.github.io/illustrated-transformer/">Source</a>) </figcaption>
+<figcaption style="font-size:80%;"> Figure: The word at each position passes through a self-attention process. Then, they each pass through a feed-forward neural network -- the exact same network with each vector flowing through it separately. (<a href="https://jalammar.github.io/illustrated-transformer/#now-were-encoding">Source</a>) </figcaption>
 </figure>
 </div>
 
@@ -79,6 +78,7 @@ The word in each position flows through its own path in the encoder. There are d
 <figcaption style="font-size:80%;"> Figure: The Transformer's decoder. (<a href="https://lilianweng.github.io/posts/2018-06-24-attention/#decoder">Source</a>) </figcaption>
 </figure>
 </div>
+
 The decoder is also composed of a stack of $$ N = 6 $$​ identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer (the middle one), which performs multi-head attention over the output of the encoder stack. We also modify the self-attention sub-layer in the decoder stack to preserve the auto-regressive property (predicting future by past), that is, to prevent positions from using the future information by masking the future positions.
 
 <div align='center'>
@@ -93,7 +93,7 @@ The encoder start by processing the input sequence. The output of the top encode
 <div align='center'>
 <figure>
 <img src="https://jalammar.github.io/images/t/transformer_decoding_2.gif" alt="img" style="zoom:70%;" />
-<figcaption style="font-size:80%;"> Figure: An illustration for the decoding procedures. (<a href="https://jalammar.github.io/illustrated-transformer/">Source</a>) </figcaption>
+<figcaption style="font-size:80%;"> Figure: An illustration for the decoding procedures. (<a href="https://jalammar.github.io/illustrated-transformer/#the-decoder-side">Source</a>) </figcaption>
 </figure>
 </div>
 
@@ -174,7 +174,7 @@ In the paper the authors employ $$ h=8 $$ parallel attention layers, or heads. F
 <div align='center'>
 <figure>
 <img src="https://jalammar.github.io/images/t/transformer_multi-headed_self-attention-recap.png" alt="img" style="zoom:75%;" />
-<figcaption style="font-size:80%;"> Figure: An illustration for the multi-head attention procedures. (<a href="https://jalammar.github.io/illustrated-transformer/">Source</a>) </figcaption>
+<figcaption style="font-size:80%;"> Figure: An illustration for the multi-head attention procedures. (<a href="https://jalammar.github.io/illustrated-transformer/#the-beast-with-many-heads">Source</a>) </figcaption>
 </figure>
 </div>
 
@@ -205,7 +205,7 @@ We use embedding layers to convert the input tokens (words) and output tokens (w
 <div align='center'>
 <figure>
 <img src="https://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="img" style="zoom:70%;" />
-<figcaption style="font-size:80%;"> Figure: An illustration for the procedures from the output of the decoder stack to an output word. (<a href="https://jalammar.github.io/illustrated-transformer/">Source</a>) </figcaption>
+<figcaption style="font-size:80%;"> Figure: An illustration for the procedures from the output of the decoder stack to an output word. (<a href="https://jalammar.github.io/illustrated-transformer/#the-final-linear-and-softmax-layer">Source</a>) </figcaption>
 </figure>
 </div>
 
@@ -220,8 +220,8 @@ The positional encodings can be learned, but the authors found that having fixed
 $$
 \text{PE}(i,j) = 
 \begin{cases}
-\sin(\frac{i}{10000^{2j'/d}}) & \text{if } j = 2j'\\
-\cos(\frac{i}{10000^{2j'/d}}) & \text{if } j = 2j' + 1\\
+\sin\left(\frac{i}{10000^{2j'/d}}\right) & \text{if } j = 2j'\\
+\cos\left(\frac{i}{10000^{2j'/d}}\right) & \text{if } j = 2j' + 1\\
 \end{cases}
 $$
 
@@ -230,9 +230,10 @@ where $$ i = 1, \cdots, L$$ is the position index of the input sequence, and $$ 
 <div align='center'>
 <figure>
 <img src="https://jalammar.github.io/images/t/attention-is-all-you-need-positional-encoding.png" alt="img" style="zoom:80%;" />
-<figcaption style="font-size:80%;"> Figure: An example for positional encoding PE with L = 10 and d_{model} = 64. (<a href="https://jalammar.github.io/illustrated-transformer/">Source</a>) </figcaption>
+<figcaption style="font-size:80%;"> Figure: An example for positional encoding PE with L = 10 and d_{model} = 64. (<a href="https://jalammar.github.io/illustrated-transformer/#representing-the-order-of-the-sequence-using-positional-encoding">Source</a>) </figcaption>
 </figure>
 </div>
+
 TODO: understand the positional encoding.
 
 ## 4. Why Self-Attention
@@ -249,7 +250,7 @@ The third is the path length between long-range dependencies in the network. Lea
 
 <div align='center'>
 <figure>
-<img src="https://lenngro.github.io/assets/images/2020-11-07-Attention-Is-All-You-Need/comparison.png" alt="comparison" style="zoom:80%;" />
+<img src="https://lenngro.github.io/assets/images/2020-11-07-Attention-Is-All-You-Need/comparison.png" alt="comparison" style="zoom:82%;" />
 </figure>
 </div>
 
@@ -267,7 +268,7 @@ For example,
 
 <div align='center'>
 <figure>
-<img src="https://i.stack.imgur.com/QzaaI.png" alt="Figure 3" style="zoom:80%;" />
+<img src="https://i.stack.imgur.com/QzaaI.png" alt="Figure 3" style="zoom:85%;" />
 </figure>
 </div>
 
