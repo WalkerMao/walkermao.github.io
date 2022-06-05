@@ -1,4 +1,24 @@
 {% if paginator.total_pages > 1 %}
+
+{% assign start = paginator.page | minus: 2 %}
+{% assign end = paginator.page | plus: 2 %}
+
+{% if start < 1 %}
+  {% assign start = 1 %}
+  {% assign end = start | plus: 4 %}
+{% elsif end > paginator.total_pages %}
+  {% assign start = paginator.total_pages | minus: 4 %}
+  {% assign end = paginator.total_pages %}
+{% endif %}
+
+{% if start < 1 %}
+  {% assign start = 1 %}
+{% endif %}
+
+{% if end > paginator.total_pages %}
+  {% assign end = paginator.total_pages %}
+{% endif %}
+
 <div class="pagination">
   {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Prev </a>
@@ -6,10 +26,15 @@
     <span> &laquo; Prev </span>
   {% endif %}
   &nbsp; 
+  
+  {% if start > 1 %}
+    <a href="/">{{ 1 }}</a>
+    <span class="pagination-dots">&middot;&middot;&middot;</span>
+  {% endif %}
 
-  {% for page in (1..paginator.total_pages) %}
+  {% for page in (start..end) %}
     {% if page == paginator.page %}
-      <span style="font-size: 150%; color:#303030"> {{ page }} </span>
+      <span class="pagination-current"> {{ page }} </span>
     {% elsif page == 1 %}
       <a href="/">{{ page }}</a>
     {% else %}
@@ -17,6 +42,11 @@
     {% endif %}
   {% endfor %}
   
+  {% if end < paginator.total_pages %}
+    <span class="pagination-dots">&middot;&middot;&middot;</span>
+    <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}">{{ paginator.total_pages }}</a>
+  {% endif %}
+
   &nbsp; 
   {% if paginator.next_page %}
     <a href="{{ paginator.next_page_path | relative_url }}"> Next &raquo; </a>
@@ -24,4 +54,5 @@
     <span> Next &raquo;</span>
   {% endif %}
 </div>
+
 {% endif %}

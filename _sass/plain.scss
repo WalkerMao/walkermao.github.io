@@ -242,7 +242,7 @@ main {
 
 .post-container {
   list-style-type: none;
-  margin: 40px 200px 0px 40px;
+  margin: 40px 200px 40px 40px;
   @media screen and (max-width: $smallMobileW) {
     margin-left: 20px;
     margin-right: 20px;
@@ -306,30 +306,37 @@ td{
 
 .pagination {
   display: block;
-  font-size: 17px;
-  word-spacing: 0px;
-  margin-bottom: 60px;
-  overflow: visible;
+  font-size: 16px;
+  margin: 40px 0 60px 0;
+  overflow: show;
   font-family: Arial;
-  color: lightgray;
   text-align: center;
-
+  color: silver;
   a {
     text-decoration: none; 
     color: dimgray;
-    padding: 5px 11px;
-    }
+    padding: 5px 9px;
+  }
   span {
-    padding: 5px 11px;
-    }
+    padding: 5px 9px;
+  }
 }
 
 .pagination a.active {
-  color: white;
   border-radius: 5px;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd; border-radius: 5px;}
+.pagination a:hover:not(.active) {background-color: gainsboro; border-radius: 5px;}
+
+.pagination-dots {
+  color: dimgray;
+}
+
+.pagination-current {
+  color: black;
+  font-weight: bold;
+}
+
 
 /*  Back Top Button  */
 #back-top {
