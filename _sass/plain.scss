@@ -17,7 +17,7 @@ $leftWidth: 225px;
 body {
   font-family: "Raleway", sans-serif;
   font-size: 16px;
-  line-height: 1.2em;
+  line-height: 1em;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -156,7 +156,6 @@ main {
       padding: 1rem 0;
       text-decoration: none;
       border-bottom: 1px solid Gainsboro;
-
       @media screen and (max-width: $mobileW) {
         padding: 2rem 0;
       }
@@ -181,9 +180,6 @@ main {
     background-color: Gainsboro;
     padding: 5px 20px;
     border-radius: 2px;
-    // @media screen and (max-width: $mobileW) {
-    //   margin-top: 9px;
-    // }
     margin-right: 6px;
     margin-bottom: 9px;
   }
@@ -200,9 +196,6 @@ main {
     background-color: WhiteSmoke;
     padding: 3px 12px;
     border-radius: 1px;
-    // @media screen and (max-width: $mobileW) {
-    //   margin-top: 3px;
-    // }
     margin-right: 3px;
     margin-bottom: 3px;
   }
@@ -244,12 +237,10 @@ main {
   list-style-type: none;
   margin: 40px 200px 40px 40px;
   @media screen and (max-width: $smallMobileW) {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 0 10px;
   }
   @media screen and (max-width: $mobileW) {
-    padding: 0 !important;
-    margin-top: 0;
+    margin: 0 20px;
   }
 }
 
@@ -258,7 +249,6 @@ main {
   font-weight: 300;
   color: #222222;
   line-height: 1.9em;
-  margin-top: 3%;
   a {
     color: $linkColor;
     text-decoration: none;
@@ -290,8 +280,6 @@ main {
 
 table{
 	td,th{ padding: 3px 13px;}
-    /* border-collapse: collapse; 
-    border-spacing: 10px 5px; */
     border:2px solid gray;
 	margin:0 auto; 
 }
@@ -367,9 +355,16 @@ td{
 
 
 .sidebar {
+  @media screen and (max-width: $smallMobileW) {
+    display:none;
+  }
+  @media screen and (min-width: $mobileW) {
+    display:none;
+  }
   position:fixed;
   margin-top:3%;
   margin-left:68%;
+  padding-right:0.7%;
   font-size:85%;
   background-color:WhiteSmoke;
   word-break:break-word;
