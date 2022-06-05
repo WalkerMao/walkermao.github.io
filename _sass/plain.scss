@@ -46,7 +46,7 @@ h2 {
 .iconlink {color: darkgray;}
 
 main {
-  margin: 0 90px;
+  margin: 0 40px;
   display: flex;
   height: 100%;
 
@@ -242,7 +242,7 @@ main {
 
 .post-container {
   list-style-type: none;
-  margin: 35px 30px;
+  margin: 40px 200px 0px 40px;
   @media screen and (max-width: $smallMobileW) {
     margin-left: 20px;
     margin-right: 20px;
@@ -251,10 +251,6 @@ main {
     padding: 0 !important;
     margin-top: 0;
   }
-}
-
-.post-container {
-  padding-left: 30px;
 }
 
 .post {
@@ -339,7 +335,7 @@ td{
 #back-top {
   position: fixed;
   bottom: 10%;
-  margin-left: 93%;
+  margin-left: 90%;
 }
 #back-top a {
   width: 40px;
@@ -353,4 +349,36 @@ td{
 }
 #back-top a:hover {
   background-color: dimgray;
+}
+
+.toc{
+  font-size:95%;
+  background-color:WhiteSmoke;
+}
+
+.sidebar {
+  position:fixed;
+  margin-top:3%;
+  margin-left:68%;
+  font-size:85%;
+  background-color:WhiteSmoke;
+  word-break:break-word;
+  line-height:150%;
+  max-height:100vh;
+  overflow:auto;
+  ul ul{
+    padding-left:10px;
+  };
+  ul ul ul{
+    padding-left:20px;
+  };
+  ul ul ul ul{
+    padding-left:30px;
+  };
+  ul ul ul ul ul{
+    padding-left:40px;
+  };
+  ul ul ul ul ul ul{
+    display:none;
+  };
 }
