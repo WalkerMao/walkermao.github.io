@@ -60,13 +60,13 @@ main {
   @media screen and (max-width: 1024px) {
     margin: 0 35px;
   }
-
   @media screen and (max-width: $mobileW) {
     margin: 0 10px;
     flex-direction: column;
   }
   @media screen and (max-width: $smallMobileW) {
     margin: 0;
+    flex-direction: column;
   }
 
   .content {
@@ -231,16 +231,24 @@ main {
   font-size: 27px;
 }
 
-.posts,
+.posts {
+  list-style-type: none;
+  margin: 50px 100px 40px 0px;
+  @media screen and (max-width: $mobileW) {
+    margin: 10px 20px;
+  }
+  @media screen and (max-width: $smallMobileW) {
+    margin: 5px 10px;
+  }
+}
 
 .post-container {
-  list-style-type: none;
   margin: 40px 200px 40px 40px;
-  @media screen and (max-width: $smallMobileW) {
-    margin: 0 10px;
-  }
   @media screen and (max-width: $mobileW) {
-    margin: 0 20px;
+    margin: 10px 20px;
+  }
+  @media screen and (max-width: $smallMobileW) {
+    margin: 5px 10px;
   }
 }
 
@@ -355,10 +363,7 @@ td{
 
 
 .sidebar {
-  @media screen and (max-width: $smallMobileW) {
-    display:none;
-  }
-  @media screen and (min-width: $mobileW) {
+  @media screen and (max-width: $mobileW) {
     display:none;
   }
   position:fixed;
