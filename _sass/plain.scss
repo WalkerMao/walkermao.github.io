@@ -3,8 +3,8 @@
 @import "syntax";
 
 $linkColor: #0a59b0;
-$mobileW: 768px;
-$smallMobileW: 480px;
+$mobileW: 1024px;
+$smallMobileW: 640px;
 $bigScreenW: 1600px;
 $leftWidth: 225px;
 
@@ -52,13 +52,6 @@ main {
 
   @media screen and (min-width: $bigScreenW) {
     margin: 0 auto;
-    max-width: 1440px;
-  }
-  @media screen and (max-width: 1280px) {
-    margin: 0 75px;
-  }
-  @media screen and (max-width: 1024px) {
-    margin: 0 35px;
   }
   @media screen and (max-width: $mobileW) {
     margin: 0 10px;
@@ -283,7 +276,8 @@ main {
   padding-top: 15px;
   padding-bottom: 15px;
   font-weight: normal;
-  word-wrap:break-word;
+  word-wrap: break-word;
+  line-height: normal;
 }
 
 table{
@@ -316,6 +310,24 @@ td{
   }
   span {
     padding: 5px 9px;
+  }
+  @media screen and (max-width: $mobileW) {
+    font-size: 16px;
+    a {
+      padding: 5px 7px;
+    }
+    span {
+      padding: 5px 7px;
+    }
+  }
+  @media screen and (max-width: $smallMobileW) {
+    font-size: 14px;
+    a {
+      padding: 5px 5px;
+    }
+    span {
+      padding: 5px 5px;
+    }
   }
 }
 
