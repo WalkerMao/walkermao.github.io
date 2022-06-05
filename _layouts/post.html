@@ -28,8 +28,10 @@ layout: default
   </div>
   <div class="post">
     {%- if page.toc != false -%}
-      {% include toc.html html=content %}
-      <br>
+      <div style="font-size:90%">
+        {% include toc.html html=content %}
+        <br>
+      </div>
     {%- endif -%}
     {{ content }}
   </div>
