@@ -235,20 +235,20 @@ main {
   list-style-type: none;
   margin: 50px 100px 40px 0px;
   @media screen and (max-width: $mobileW) {
-    margin: 10px 20px;
+    margin: 0px 30px 10px 0px;
   }
   @media screen and (max-width: $smallMobileW) {
-    margin: 5px 10px;
+    margin: 0px 20px 5px 0px;
   }
 }
 
 .post-container {
   margin: 40px 200px 40px 40px;
   @media screen and (max-width: $mobileW) {
-    margin: 10px 20px;
+    margin: 10px 30px;
   }
   @media screen and (max-width: $smallMobileW) {
-    margin: 5px 10px;
+    margin: 5px 20px;
   }
 }
 
