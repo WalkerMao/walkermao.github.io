@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Transformer Model"
-date: 2022-06-05
+date: 2022-06-13
 categories: NLP DL
 tags: [Encoder-decoder]
 toc: false
@@ -138,6 +138,7 @@ The attention weight determines how much each positions were attended by the cur
 <figcaption style="font-size:80%;"> Figure: Step flow of calculating calculating outputs of self-attention layer (<a href="https://medium.com/lsc-psd/introduction-of-self-attention-layer-in-transformer-fc7bff63f3bc">Source</a>) </figcaption>
 </figure>
 </div>
+
 Why dot-product attention: The two most commonly used attention functions are additive attention, and dot-product (multiplicative) attention, and they are similar in theoretical complexity. Here we use the dot-product attention, which is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
 
 Why scaling: For large values of $$ d_k $$, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients. To counteract this effect, we scale the dot products by $$ \frac{1}{\sqrt{d_{k}}} $$. To illustrate why the dot products get large, assume that the components of $$ q $$ and $$ k $$ are independent random variables with mean 0 and variance 1. Then their dot product, $$ q \cdot k = \sum_{i=1}^{d_k} q_i k_i $$, has mean 0 and variance $$ d_k $$. 
@@ -227,7 +228,8 @@ Ideally, the following criteria should be satisfied [^7]:
 
 #### 3.5.2 Sinusoidal Encoding
 
-The encoding proposed by the authors is a simple yet genius technique which satisfies all of those criteria. That is:
+The encoding proposed by the authors is a simple yet genius technique which satisfies all of those criteria. That is
+
 $$
 \mathrm{PE}(i,j) = 
 \begin{cases}
@@ -246,9 +248,11 @@ The positional encoding matrix $$ \mathrm{PE} \in \mathbb{R}^{L \times d_{\mathr
 <figcaption style="font-size:80%;"> Figure: An example for positional encoding PE with L = 10 and d_{model} = 64. (<a href="https://jalammar.github.io/illustrated-transformer/#representing-the-order-of-the-sequence-using-positional-encoding">Source</a>) </figcaption>
 </figure>
 </div>
+
 #### 3.5.3 Linear Relationships
 
 This encoding allows the model to easily learn to attend by relative positions, since for any fixed offset $$ k $$, the encoding vector $$ \mathrm{PE}(i+k, \cdot) $$ can be represented as a linear transformation from $$ \mathrm{PE}(i, \cdot) $$, i.e. 
+
 $$
 \mathrm{PE}(i+k, \cdot) = T_k \times \mathrm{PE}(i, \cdot),
 $$
