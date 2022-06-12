@@ -4,6 +4,7 @@ title: "The Transformer Model"
 date: 2022-06-05
 categories: NLP DL
 tags: [Encoder-decoder]
+toc: false
 published: true
 hidden: false
 comments: true
@@ -167,7 +168,7 @@ K = X W_{g}^{K}, \\
 V = X W_{g}^{V}.
 $$
 
-Here the queries matrix $$ Q \in \mathbb{R}^{L \times d_k} $$, the keys matrix $$ K \in \mathbb{R}^{L \times d_k} $$ and the values matrix $$ V \in \mathbb{R}^{L \times d_v} $$, and the input $$ X \in \mathbb{R}^{L \times d_{\mathrm{model}}} $$, and the projections are parameter matrices $$ W_{g}^{Q} \in \mathbb{R}^{d_{\mathrm{model}} \times d_{k}} $$, $$ W_{g}^{K} \in \mathbb{R}^{d_{\mathrm{model}} \times d_{k}} $$, $$ W_{g}^{V} \in \mathbb{R}^{d_{\mathrm{model}} \times d_{v}} $$ and $$ W^{O} \in \mathbb{R}^{h d_{v} \times d_{\mathrm{model}}} $$, and the attention head $$ \mathrm{head}_{g} \in \mathbb{R}^{L\times d_{v}}$$.
+Here the queries matrix $$ Q \in \mathbb{R}^{L \times d_k} $$, the keys matrix $$ K \in \mathbb{R}^{L \times d_k} $$ and the values matrix $$ V \in \mathbb{R}^{L \times d_v} $$, and the input $$ X \in \mathbb{R}^{L \times d_{\mathrm{model}}} $$, and the projections are parameter matrices $$ W_{g}^{Q} \in \mathbb{R}^{d_{\mathrm{model}} \times d_{k}} $$, $$ W_{g}^{K} \in \mathbb{R}^{d_{\mathrm{model}} \times d_{k}} $$, $$ W_{g}^{V} \in \mathbb{R}^{d_{\mathrm{model}} \times d_{v}} $$ and $$ W^{O} \in \mathbb{R}^{h d_{v} \times d_{\mathrm{model}}} $$, and the attention head $$ \mathrm{head}_{g} \in \mathbb{R}^{L\times d_{v}}$$. [^5]
 
 In the paper the authors employ $$ h=8 $$ parallel attention layers, or heads. For each of these the authors use $$ d_{k}=d_{v}=d_{\text {model }} / h=64 $$.
 
@@ -186,7 +187,7 @@ The Transformer uses multi-head attention in different ways:
 * The encoder/decoder contains self-attention layers, which allow each position in the encoder/decoder to attend to all positions in the encoder/decoder up to and including that position. 
 * In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax.
 
-In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^5]
+In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^6]
 
 ### 3.3 Position-wise Feed-Forward Networks
 
@@ -213,20 +214,31 @@ The pre-softmax linear transformation is a simple fully connected neural network
 
 ### 3.5 Positional Encoding
 
-Unlike recurrence and convolution, self-attention operation is permutation invariant. In order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add "positional encodings" to the input embeddings at the bottoms of the encoder and decoder stacks. The positional encodings have the same dimension dmodel as the embeddings, so that the two can be summed. There are many choices of positional encodings, learned and fixed. ([Gehring et al., 2017](https://arxiv.org/abs/1705.03122))
+Unlike recurrence and convolution, self-attention operation is permutation invariant. In order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add "positional encodings" to the input embeddings at the bottoms of the encoder and decoder stacks. The positional encodings have the same dimension $$ d_{\mathrm{model}} $$ as the embeddings, so that the two can be summed. There are many choices of positional encodings, learned and fixed ([Gehring et al., 2017](https://arxiv.org/abs/1705.03122)). The authors found that having fixed ones does not hurt the quality.
 
-Ideally
+#### 3.5.1 Criterias
 
-The positional encodings can be learned, but the authors found that having fixed ones does not hurt the quality. The fixed positional encodings used in the Transformer are:
+Ideally, the following criteria should be satisfied [^7]:
+
+- It should output a unique encoding for each position.
+- The encoding value at a given position should be consistent irrespective of the sequence lengh $$ L $$ or any other factor. The encoding like $$ (\frac{1}{L}, \frac{2}{L}, \cdots, 1) $$ doesn't satisfy this criteria.
+- Our model should generalize to longer sequences without any efforts. Its values should be bounded. The encoding like $$ (1, 2, \cdots, L) $$ doesn't satisfy this criteria.
+- It must be deterministic.
+
+#### 3.5.2 Sinusoidal Encoding
+
+The encoding proposed by the authors is a simple yet genius technique which satisfies all of those criteria. That is:
 $$
-\text{PE}(i,j) = 
+\mathrm{PE}(i,j) = 
 \begin{cases}
 \sin\left(\frac{i}{10000^{2j'/d}}\right) & \text{if } j = 2j'\\
 \cos\left(\frac{i}{10000^{2j'/d}}\right) & \text{if } j = 2j' + 1\\
 \end{cases}
 $$
 
-where $$ i = 1, \cdots, L$$ is the position index of the input sequence, and $$ j = 1, \cdots, d_{\mathrm{model}}$$ is the dimension index. The positional encoding $$ PE \in \mathbb{R}^{L \times d_{\mathrm{model}}} $$ has the same dimension as the input embedding, so it can be added on the input directly. 
+where $$ i = 1, \cdots, L$$ is the position index of the input sequence, and $$ j = 1, \cdots, d_{\mathrm{model}}$$ is the dimension index. Both $$ i $$ and $$ j $$ can inform us the token's order.
+
+The positional encoding matrix $$ \mathrm{PE} \in \mathbb{R}^{L \times d_{\mathrm{model}}} $$ has the same dimension as the input embedding, so it can be added on the input directly. 
 
 <div align='center'>
 <figure>
@@ -234,8 +246,36 @@ where $$ i = 1, \cdots, L$$ is the position index of the input sequence, and $$ 
 <figcaption style="font-size:80%;"> Figure: An example for positional encoding PE with L = 10 and d_{model} = 64. (<a href="https://jalammar.github.io/illustrated-transformer/#representing-the-order-of-the-sequence-using-positional-encoding">Source</a>) </figcaption>
 </figure>
 </div>
+#### 3.5.3 Linear Relationships
 
-TODO: understand the positional encoding.
+This encoding allows the model to easily learn to attend by relative positions, since for any fixed offset $$ k $$, the encoding vector $$ \mathrm{PE}(i+k, \cdot) $$ can be represented as a linear transformation from $$ \mathrm{PE}(i, \cdot) $$, i.e. 
+$$
+\mathrm{PE}(i+k, \cdot) = T_k \times \mathrm{PE}(i, \cdot),
+$$
+
+where $$ \mathrm{PE}(i, \cdot) \in \mathbb{R}^{d_{\mathrm{model}}}, \forall i=1,\cdots,L-k $$ is an encoding vector at position $$ i $$. Note that the linear transformation $$ T_k $$ depends on $$ k, d_{\mathrm{model}}, j $$, but doesn't on $$ i $$. Refer to [^8] for the detailed proof of this transformation.
+
+#### 3.5.4 Other Tips
+
+There are some insightful thoughts from [^7] about this position encoding.
+
+##### Encoding Differences
+
+In addition the linear relationships, another property of sinusoidal position encoding is that the encoding differences between neighboring positions are symmetrical and decays nicely with position gap. 
+
+##### Summation Instead of Concatenation
+
+We sum the word embedding and positional encoding instead of concatenating them. It is natural for us to worry that they may interfere with each other. 
+
+We will find out from the figure that only the first few dimensions of the whole encoding are used to store the positional information. Since the embeddings in the Transformer are trained from scratch, the parameters are probably set in a way that the semantic of words does not get stored in the first few dimensions to avoid interfering with the positional encoding. The final trained Transformer can probably separate the semantic of words from their positional information.
+
+##### Positional Information Doesn't Vanish through Upper Layers
+
+Thanks to the residual connections.
+
+##### Using Both Sine and Cosine
+
+To get the [linear relationships](#353-linear-relationships).
 
 ## 4. Why Self-Attention
 
@@ -285,7 +325,7 @@ Vaswani, et al. (2017) employed Residual [Dropout](https://www.jmlr.org/papers/v
 
 <br>
 
-**References**: 
+**References:**
 
 [^1]: Vaswani, Ashish, et al. "Attention is all you need." *Advances in neural information processing systems* 30 (2017).
 
@@ -295,6 +335,10 @@ Vaswani, et al. (2017) employed Residual [Dropout](https://www.jmlr.org/papers/v
 
 [^4]: Weng, Lilian. "Attention? Attention!" *Lil'Log*. June 24, 2018. Retrieved from https://lilianweng.github.io/posts/2018-06-24-attention/#transformer
 
-[^5]: Viota, Lena. "Sequence to Sequence (seq2seq) and Attention." *lena-voita.github.io*. April 30, 2022. Retrieved from https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#transformer
+[^5]: Thickstun, John. "The Transformer Model in Equations." Retrieved from https://johnthickstun.com/docs/transformers.pdf
 
-[^6]: Thickstun, John. "The Transformer Model in Equations." Retrieved from https://johnthickstun.com/docs/transformers.pdf
+[^6]: Viota, Lena. "Sequence to Sequence (seq2seq) and Attention." *lena-voita.github.io*. April 30, 2022. Retrieved from https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#transformer
+
+[^7]: Kazemnejad, Amirhossein. "Transformer Architecture: The Positional Encoding." *kazemnejad.com*. 2019. Retrieved from https://kazemnejad.com/blog/transformer_architecture_positional_encoding/
+
+[^8]: Denk, Timo. "Linear Relationships in the Transformer's Positional Encoding." *Timo Denk's Blog*. 2019. Retrieved from https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/
