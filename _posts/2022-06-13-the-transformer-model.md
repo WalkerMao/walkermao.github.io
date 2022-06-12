@@ -333,16 +333,16 @@ Vaswani, et al. (2017) employed Residual [Dropout](https://www.jmlr.org/papers/v
 
 [^1]: Vaswani, Ashish, et al. "Attention is all you need." *Advances in neural information processing systems* 30 (2017).
 
-[^2]: Alammar, Jay. "The Illustrated Transformer." *jalammar.github.io*. June 27, 2018. Retrieved from https://jalammar.github.io/illustrated-transformer/
+[^2]: Alammar, Jay. "[The Illustrated Transformer.](https://jalammar.github.io/illustrated-transformer/)" *jalammar.github.io*. June 27, 2018.
 
-[^3]: Dontloo. "Answer for the question 'What exactly are keys, queries, and values in attention mechanisms?'." *StackExchange*, Aug 29, 2019. Retrieved from https://stats.stackexchange.com/a/424127
+[^3]: Dontloo. "[Answer for the question 'What exactly are keys, queries, and values in attention mechanisms?'.](https://stats.stackexchange.com/a/424127)" *StackExchange*, Aug 29, 2019.
 
-[^4]: Weng, Lilian. "Attention? Attention!" *Lil'Log*. June 24, 2018. Retrieved from https://lilianweng.github.io/posts/2018-06-24-attention/#transformer
+[^4]: Weng, Lilian. "[Attention? Attention!](https://lilianweng.github.io/posts/2018-06-24-attention/#transformer)" *Lil'Log*. June 24, 2018.
 
-[^5]: Thickstun, John. "The Transformer Model in Equations." Retrieved from https://johnthickstun.com/docs/transformers.pdf
+[^5]: Thickstun, John. "[The Transformer Model in Equations.](https://johnthickstun.com/docs/transformers.pdf)"
 
-[^6]: Viota, Lena. "Sequence to Sequence (seq2seq) and Attention." *lena-voita.github.io*. April 30, 2022. Retrieved from https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#transformer
+[^6]: Viota, Lena. "[Sequence to Sequence (seq2seq) and Attention.](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#transformer)" *lena-voita.github.io*. April 30, 2022.
 
-[^7]: Kazemnejad, Amirhossein. "Transformer Architecture: The Positional Encoding." *kazemnejad.com*. 2019. Retrieved from https://kazemnejad.com/blog/transformer_architecture_positional_encoding/
+[^7]: Kazemnejad, Amirhossein. "[Transformer Architecture: The Positional Encoding.](https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)" *kazemnejad.com*. 2019.
 
-[^8]: Denk, Timo. "Linear Relationships in the Transformer's Positional Encoding." *Timo Denk's Blog*. 2019. Retrieved from https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/
+[^8]: Denk, Timo. "[Linear Relationships in the Transformer's Positional Encoding.](https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/)" *Timo Denk's Blog*. 2019.
