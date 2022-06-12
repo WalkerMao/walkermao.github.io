@@ -185,7 +185,7 @@ The picture above shows the activations of an example ConvNet architecture. The 
 
 <br>
 
-**References**:
+**References:**
 
 Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. [*Deep learning*](http://www.deeplearningbook.org/). MIT press, 2016.
 

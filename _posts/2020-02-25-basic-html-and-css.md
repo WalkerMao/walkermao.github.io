@@ -357,9 +357,9 @@ p {
 }
 ```
 
----
+<br>
 
-**References**:
+**References:**
 
 https://www.w3schools.com/html.
 

@@ -105,6 +105,6 @@ In this paper, we adopt a 4-step alternating training. We initialize RPN and Fas
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 [^1]: Ren, Shaoqing, et al. "Faster r-cnn: Towards real-time object detection with region proposal networks." *Advances in neural information processing systems* 28 (2015).

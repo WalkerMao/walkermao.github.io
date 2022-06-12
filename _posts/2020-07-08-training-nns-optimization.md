@@ -217,7 +217,7 @@ However, SGD and MBGD are more sensitive to learning rate and initialization. A 
 
 <br>
 
-**References**:
+**References:**
 
 Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.
 

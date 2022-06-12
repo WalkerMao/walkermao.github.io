@@ -78,6 +78,6 @@ The variance $$\text{Var}(\theta \mid X)$$ that we can calculate for $$\theta$$ 
 
 <br>
 
-**Reference**: 
+**References:**
 
 [ML, MAP, and Bayesian --- The Holy Trinity of Parameter Estimation and Data Prediction](https://engineering.purdue.edu/kak/Tutorials/Trinity.pdf).

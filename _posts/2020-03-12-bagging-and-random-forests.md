@@ -142,6 +142,6 @@ For regression, we usually set $m$ as $⌊p/3⌋$, and the minimum leaf node siz
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. *The elements of statistical learning*. Vol. 1. No. 10. New York: Springer series in statistics, 2001.

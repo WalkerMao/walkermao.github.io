@@ -147,6 +147,6 @@ For each closed itemset $$p_i$$ returned by the BFS (Breadth First Search) based
 
 <br>
 
-**References:**
+**Reference:**
 
 [^1]: Lin, Qingwei, et al. "iDice: problem identification for emerging issues." *Proceedings of the 38th International Conference on Software Engineering.* 2016.

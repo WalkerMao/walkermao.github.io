@@ -152,7 +152,7 @@ Although LSTM unit and GRU are much more complex than basic recurrent unit, we c
 </div>
 <br>
 
-**References**: 
+**References:**
 
 [^1]: Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft.
 

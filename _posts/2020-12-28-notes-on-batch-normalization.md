@@ -159,6 +159,6 @@ When training with Batch Normalization, a training example is seen in conjunctio
 
 <br>
 
-**Reference**:
+**Reference:**
 
 Ioffe, Sergey, and Christian Szegedy. ["Batch normalization: Accelerating deep network training by reducing internal covariate shift."]((https://arxiv.org/abs/1502.03167)) *arXiv preprint arXiv:1502.03167* (2015).

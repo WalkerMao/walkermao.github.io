@@ -246,6 +246,6 @@ comments: true
 
 <br>
 
-**Reference**:
+**Reference:**
 
 Shotts, William. *The Linux command line: a complete introduction*. No Starch Press, 2019.

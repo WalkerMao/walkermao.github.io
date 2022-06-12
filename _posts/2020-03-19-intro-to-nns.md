@@ -165,7 +165,7 @@ GPUs are used heavily in deep learning, because GPUs are well suited for paralle
 
 <br>
 
-**References**:
+**References:**
 
 Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. [*Deep learning*](http://www.deeplearningbook.org/). MIT press, 2016.
 

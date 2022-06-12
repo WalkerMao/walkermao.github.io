@@ -116,7 +116,7 @@ EasyEnsemble and BalanceCascade are introduced by XuYing Liu, et al. to deal wit
 
 <br>
 
-**References**: 
+**References:**
 
 Kuhn, M., & Johnson, K. (2013). Remedies for severe class imbalance. In *Applied predictive modeling* (pp. 419-443). Springer, New York, NY.
 

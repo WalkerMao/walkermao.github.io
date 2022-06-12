@@ -101,6 +101,6 @@ Cosine similarity works better with TF-IDF values than with original frequencies
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.

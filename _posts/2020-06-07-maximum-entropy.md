@@ -201,7 +201,7 @@ This is exact the softmax function (or multi-category version of the sigmoid fun
 
 <br>
 
-**References**:
+**References:**
 
 Xie, Yao. (2010, Dec 9). *Chain rules and inequalities*. Retrieved June 4, 2020, from https://www2.isye.gatech.edu/~yxie77/ece587/Lecture2.pdf. 
 
@@ -210,4 +210,3 @@ Xie, Yao. (2010, Dec 9). *Maximum entropy*. Retrieved June 6, 2020, from https:/
 Paul Penfield, Jr. (2004, Apr 2). *Principle of Maximum Entropy*. Retrieved June 7, 2020, from http://www-mtl.mit.edu/Courses/6.050/notes/chapter9.pdf.
 
 Mount, John. (2011, Sep 23). *The equivalence of logistic regression and maximum entropy models*. Retrieved June 7, 2020, from https://pdfs.semanticscholar.org/19cc/c9e2937b3260ac2c93020174c09c2891672e.pdf.
-

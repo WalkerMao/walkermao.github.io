@@ -246,7 +246,7 @@ I(X,Y) &= H(X) - H(X\mid Y) \\ &= H(Y) - H(Y \mid X) \\ &= H(X) + H(Y) - H(X,Y) 
 
 <div style="text-align: center"> <img src="../pictures/Mutual_Info_2.png" alt="Mutual_Info_2" style="zoom:40%;"/> </div>
 
----
+<br>
 
 **References:**
 

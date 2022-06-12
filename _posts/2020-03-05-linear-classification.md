@@ -226,7 +226,7 @@ The LR model is more robust and more general, in that it makes less assumptions.
 
 <br>
 
-**References**:
+**References:**
 
 Friedman, J., Hastie, T., & Tibshirani, R. (2001). *The elements of statistical learning* (Vol. 1, No. 10). New York: Springer series in statistics.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Implementation of Basic Algorithms"
+title:  "Implementation of Basic Algorithms in Python"
 date: 2020-02-20
 categories: CS
 tags: [Algorithms in CS, Programming]

@@ -158,7 +158,7 @@ Bidirectional RNNs have proven to be quite effective for sequence classification
 
 <br>
 
-**References**: 
+**References:**
 
 Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
 

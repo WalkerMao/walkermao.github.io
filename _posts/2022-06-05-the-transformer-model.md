@@ -101,7 +101,7 @@ The encoder start by processing the input sequence. The output of the top encode
 
 An attention function can be described as mapping a query and a set of key value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
 
-Note: The key, value and query concepts come from retrieval systems. For exmaple, the search engine maps your queries (e.g. text in the search bar) against a set of keys (e.g. title, contents, etc.) in their database, then present you the best matched values (e.g. articles, videos, etc.). [^6]
+Note: The key, value and query concepts come from retrieval systems. For exmaple, the search engine maps your queries (e.g. text in the search bar) against a set of keys (e.g. title, contents, etc.) in their database, then present you the best matched values (e.g. articles, videos, etc.). [^3]
 
 <div align='center'>
 <figure>
@@ -147,7 +147,7 @@ Instead of performing a single attention function with $$ d_{\mathrm{model}} $$-
 
 Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this. 
 
-Note: we can regard the multi-head mechanism as ensembling. [^3]
+Note: we can regard the multi-head mechanism as ensembling. [^4]
 
 $$
 \operatorname{MultiHead}(X)=\operatorname{Concat}\left(\mathrm{head}_{1}, \ldots, \mathrm{head}_{h} \right) W^{O},
@@ -186,7 +186,7 @@ The Transformer uses multi-head attention in different ways:
 * The encoder/decoder contains self-attention layers, which allow each position in the encoder/decoder to attend to all positions in the encoder/decoder up to and including that position. 
 * In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax.
 
-In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^4]
+In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^5]
 
 ### 3.3 Position-wise Feed-Forward Networks
 
@@ -215,8 +215,9 @@ The pre-softmax linear transformation is a simple fully connected neural network
 
 Unlike recurrence and convolution, self-attention operation is permutation invariant. In order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add "positional encodings" to the input embeddings at the bottoms of the encoder and decoder stacks. The positional encodings have the same dimension dmodel as the embeddings, so that the two can be summed. There are many choices of positional encodings, learned and fixed. ([Gehring et al., 2017](https://arxiv.org/abs/1705.03122))
 
-The positional encodings can be learned, but the authors found that having fixed ones does not hurt the quality. The fixed positional encodings used in the Transformer are:
+Ideally
 
+The positional encodings can be learned, but the authors found that having fixed ones does not hurt the quality. The fixed positional encodings used in the Transformer are:
 $$
 \text{PE}(i,j) = 
 \begin{cases}
@@ -238,7 +239,7 @@ TODO: understand the positional encoding.
 
 ## 4. Why Self-Attention
 
-As the model processes each word (each position in the input sequence), self-attention allows it to look at other positions in the input sequence for clues that can help lead to a better encoding for this word. [^2] Theoretically the self-attention can adopt any attention mechanism (e.g. additive, dot-product, etc.), but just replace the target sequence with the same input sequence. [^3]
+As the model processes each word (each position in the input sequence), self-attention allows it to look at other positions in the input sequence for clues that can help lead to a better encoding for this word. [^2] Theoretically the self-attention can adopt any attention mechanism (e.g. additive, dot-product, etc.), but just replace the target sequence with the same input sequence. [^4]
 
 ### 4.1 Three Aspects
 
@@ -290,10 +291,10 @@ Vaswani, et al. (2017) employed Residual [Dropout](https://www.jmlr.org/papers/v
 
 [^2]: Alammar, Jay. "The Illustrated Transformer." *jalammar.github.io*. June 27, 2018. Retrieved from https://jalammar.github.io/illustrated-transformer/
 
-[^3]: Weng, Lilian. "Attention? Attention!" *Lil'Log*. June 24, 2018. Retrieved from https://lilianweng.github.io/posts/2018-06-24-attention/#transformer
+[^3]: Dontloo. "Answer for the question 'What exactly are keys, queries, and values in attention mechanisms?'." *StackExchange*, Aug 29, 2019. Retrieved from https://stats.stackexchange.com/a/424127
 
-[^4]: Viota, Lena. "Sequence to Sequence (seq2seq) and Attention." *lena-voita.github.io*. April 30, 2022. Retrieved from https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#transformer
+[^4]: Weng, Lilian. "Attention? Attention!" *Lil'Log*. June 24, 2018. Retrieved from https://lilianweng.github.io/posts/2018-06-24-attention/#transformer
 
-[^5]: Thickstun, John. "The Transformer Model in Equations." Retrieved from https://johnthickstun.com/docs/transformers.pdf
+[^5]: Viota, Lena. "Sequence to Sequence (seq2seq) and Attention." *lena-voita.github.io*. April 30, 2022. Retrieved from https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#transformer
 
-[^6]: Dontloo. "Answer for the question 'What exactly are keys, queries, and values in attention mechanisms?'." *StackExchange*, Aug 29, 2019. Retrieved from https://stats.stackexchange.com/a/424127
+[^6]: Thickstun, John. "The Transformer Model in Equations." Retrieved from https://johnthickstun.com/docs/transformers.pdf

@@ -37,7 +37,7 @@ plt.show()
 
 In the following sections, we discuss the approaches to deal with the class imbalance problems. 
 
-## Model Selecting
+## Model Selection
 
 Some models like Logistic Regression with loss functions of the form $$\frac{1}{n}\sum_{i=1}^{n}\text{Loss}(\hat{y}_i, y_i)$$ are very sensitive to imbalanced dataset. However, models like Decision Tree, Ensemble Trees, and SVM are less sensitive. 
 
@@ -103,7 +103,7 @@ Note that changing cutoff does not influence the model parameters, and thus it d
 
 <br>
 
-**References**: 
+**References:**
 
 Kuhn, M., & Johnson, K. (2013). Remedies for severe class imbalance. In *Applied predictive modeling* (pp. 419-443). Springer, New York, NY.
 

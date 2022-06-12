@@ -154,7 +154,7 @@ Note that for a (non-periodic) signal defined on the whole real line we generall
 
 <br>
 
-**References**: 
+**References:**
 
 Osgood, Brad. (2007). *Lecture Notes for EE261: The Fourier Transform and its Applications*. Retrieved July 15, 2020, from https://see.stanford.edu/materials/lsoftaee261/book-fall-07.pdf.
 

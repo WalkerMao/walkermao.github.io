@@ -162,7 +162,7 @@ In summary, FMs model all possible interactions between values in the feature ve
 
 <br>
 
-**References**:
+**References:**
 
 Rendle, Steffen. "Factorization machines." *2010 IEEE International Conference on Data Mining*. IEEE, 2010.
 

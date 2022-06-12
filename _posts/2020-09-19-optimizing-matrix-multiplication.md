@@ -220,7 +220,7 @@ def strassen(x, y):
 <br>
 
 
-**References**:
+**References:**
 
 [GeeksforGeeks: Matrix Chain Multiplication](https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/).
 

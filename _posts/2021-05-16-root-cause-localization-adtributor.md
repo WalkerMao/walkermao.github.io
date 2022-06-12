@@ -145,7 +145,7 @@ As an approximation, we assume that measures are independent, and compute the su
 
 <br>
 
-**References:**
+**Reference:**
 
 [^1]: Bhagwan, Ranjita, et al. "Adtributor: Revenue debugging in advertising systems." *11th {USENIX} Symposium on Networked Systems Design and Implementation ({NSDI} 14)*. 2014.
 

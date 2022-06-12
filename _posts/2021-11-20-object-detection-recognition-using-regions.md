@@ -56,6 +56,6 @@ The segmentation task we consider is that of precisely extracting the support of
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 [^1]: Gu, Chunhui, Joseph J. Lim, Pablo Arbeláez, and Jitendra Malik. "Recognition using regions." In *2009 IEEE Conference on computer vision and pattern recognition*, pp. 1030-1037. IEEE, 2009.

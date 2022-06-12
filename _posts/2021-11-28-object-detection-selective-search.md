@@ -159,6 +159,6 @@ To generate class-independent object locations, "selective search" initialize re
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 [^1]: Uijlings, Jasper RR, Koen EA Van De Sande, Theo Gevers, and Arnold WM Smeulders. "Selective search for object recognition." *International journal of computer vision* 104, no. 2 (2013): 154-171.

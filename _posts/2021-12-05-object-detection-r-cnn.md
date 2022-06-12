@@ -79,6 +79,6 @@ Two subtle issues while implementing bounding-box regression:
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 [^1]: Girshick, Ross, et al. "Rich feature hierarchies for accurate object detection and semantic segmentation." *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2014.APA

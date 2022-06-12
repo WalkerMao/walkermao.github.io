@@ -106,7 +106,7 @@ We prefer random search to grid search. As argued by Bergstra and Bengio in [Ran
 
 <br>
 
-**References**:
+**References:**
 
 Srivastava, Nitish , et al. "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." *Journal of Machine Learning Research* 15.1(2014):1929-1958.
 

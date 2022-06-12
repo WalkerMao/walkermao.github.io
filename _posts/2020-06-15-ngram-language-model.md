@@ -244,7 +244,6 @@ This chapter introduced language modeling and the n-gram, one of the most widely
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 Jurafsky, D., Martin, J. H. (2009). *Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition*. Upper Saddle River, N.J.: Pearson Prentice Hall.
-

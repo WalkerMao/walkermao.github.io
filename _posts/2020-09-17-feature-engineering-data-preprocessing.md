@@ -59,6 +59,6 @@ $$
 
 <br>
 
-**References**: 
+**Reference:**
 
 Wikipedia: [Feature scaling](https://en.wikipedia.org/w/index.php?title=Feature_scaling).

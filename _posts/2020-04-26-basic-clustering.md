@@ -213,7 +213,7 @@ Similar to K-means, it is also susceptible to local optima, so reinitializing at
 
 <br>
 
-**References**: 
+**References:**
 
 Andrew Ng. "CS229 Lecture notes: 7a, 7b, 8.", http://cs229.stanford.edu/notes.
 

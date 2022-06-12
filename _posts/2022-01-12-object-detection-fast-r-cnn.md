@@ -105,6 +105,6 @@ For detection the number of RoIs to process is large and nearly half of the forw
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 [^1]: Girshick, Ross. "Fast r-cnn." *Proceedings of the IEEE international conference on computer vision*. 2015.

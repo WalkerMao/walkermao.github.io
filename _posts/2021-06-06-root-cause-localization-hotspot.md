@@ -222,6 +222,6 @@ HotSpot takes the PV values of elements, a potential threshold $$ PT $$ and a ma
 
 <br>
 
-**References:**
+**Reference:**
 
 [^1]: Sun, Yongqian, et al. "Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes." *IEEE Access* 6 (2018): 10909-10923.

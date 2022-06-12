@@ -159,7 +159,7 @@ A Markov process is uniquely defined by its transition probabilities $P(x'\mid x
 
 <br>
 
-**References**:
+**References:**
 
 [Wikipedia: Monte Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method).
 

@@ -146,7 +146,7 @@ The main idea of using B-Trees is to reduce the number of disk accesses. Most of
 
 <br>
 
-**References**:
+**References:**
 
 Allen, W. M. (2007). *Data structures and algorithm analysis in C++*. Pearson Education India.
 

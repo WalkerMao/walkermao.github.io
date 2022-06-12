@@ -76,6 +76,6 @@ SPP is a flexible solution for handling different scales, sizes, and aspect rati
 
 <br>
 
-**Reference**: 
+**Reference:**
 
 [^1]: He, Kaiming, et al. "Spatial pyramid pooling in deep convolutional networks for visual recognition." *IEEE transactions on pattern analysis and machine intelligence* 37.9 (2015): 1904-1916.

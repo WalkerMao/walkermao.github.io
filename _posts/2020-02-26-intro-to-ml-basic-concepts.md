@@ -120,9 +120,9 @@ Bias $\text{Bias}(\hat{f})$ refers to the error that is introduced by approximat
 
 Note: It is possible to have a model that has lower variance and lower bias simultaneously. For example, boosting method can reduce both variance and bias. 
 
----
+<br>
 
-**References**: 
+**References:** 
 
 James, Gareth, et al. "Statistical Learning." *An introduction to statistical learning*. Vol. 112. New York: springer, 2013.
 
