@@ -5,7 +5,6 @@
 $linkColor: #0a59b0;
 $mobileW: 1024px;
 $smallMobileW: 640px;
-$bigScreenW: 1600px;
 $leftWidth: 225px;
 
 *,
@@ -50,9 +49,6 @@ main {
   display: flex;
   height: 100%;
 
-  @media screen and (min-width: $bigScreenW) {
-    margin: 0 auto;
-  }
   @media screen and (max-width: $mobileW) {
     margin: 0 10px;
     flex-direction: column;
@@ -226,7 +222,7 @@ main {
 
 .posts {
   list-style-type: none;
-  margin: 40px 17% 40px 0px;
+  margin: 40px 19% 40px 0px;
   @media screen and (max-width: $mobileW) {
     margin: 0px 30px 10px -20px;
   }
@@ -236,9 +232,9 @@ main {
 }
 
 .post-container {
-  margin: 40px 17% 40px 40px;
+  margin: 40px 210px 40px 40px;
   @media screen and (max-width: $mobileW) {
-    margin: 10px 30px;
+    margin: 10px 210px 10px 30px;
   }
   @media screen and (max-width: $smallMobileW) {
     margin: 5px 20px;
@@ -375,18 +371,20 @@ td{
 
 
 .sidebar {
-  @media screen and (max-width: $mobileW) {
+  @media screen and (max-width: $smallMobileW) {
     display:none;
   }
+  top:0;
+  right:0;
   position:fixed;
   margin-top:3%;
-  margin-left:68%;
-  padding-right:0.7%;
+  padding-right:10px;
   font-size:85%;
   background-color:WhiteSmoke;
   word-break:break-word;
   line-height:150%;
-  max-height:90%;
+  max-height:94%;
+  max-width:220px;
   overflow:auto;
   border-radius:10px;
   ul ul{
