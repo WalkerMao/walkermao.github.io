@@ -380,9 +380,9 @@ td{
   top:0;
   right:0;
   position:fixed;
-  margin-top:3%;
-  padding-right:10px;
-  font-size:85%;
+  margin-top:40px;
+  padding: 10px 8px 10px 0;
+  font-size:88%;
   background-color:WhiteSmoke;
   word-break:break-word;
   line-height:150%;
@@ -390,11 +390,19 @@ td{
   max-width:220px;
   overflow:auto;
   border-radius:10px;
+  ul {
+    padding-left:27px;
+    margin: 8px 0;
+  };
   ul ul{
-    padding-left:10px;
+    padding-left:9px;
+    font-size:90%;
+    margin: 4px 0;
   };
   ul ul ul{
-    padding-left:20px;
+    padding-left:8px;
+    font-size:90%;
+    margin: 1px 0;
   };
   ul ul ul ul{
     display:none;
