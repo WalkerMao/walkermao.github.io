@@ -32,10 +32,13 @@ The size of—that is, the number of bits in—the arithmetic types varies acros
 
 <div align='center'>
 <figure>
-<img src="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/graphics/02tab01.jpg" alt="Table 2.1: C++: Arithmetic Types" style="zoom:120%;" />
+<img src="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/graphics/02tab01.jpg" alt="Table 2.1: C++: Arithmetic Types" style="zoom:100%;" />
 <figcaption style="font-size: 80%;"> Table 2.1: C++: Arithmetic Types (<a href="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/ch02lev2sec1.html">Source</a>) </figcaption>
 </figure>
 </div>
+
+Also refer to the [Microsoft C++ data type ranges](https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges).
+
 The `bool` type represents the truth values `true` and `false`.
 
 There are several character types, most of which exist to support internationalization. The basic character type is `char`. A `char` is guaranteed to be big enough to hold numeric values corresponding to the characters in the machine's basic character set. That is, a `char` is the same size as a single machine byte. The remaining character types—`wchar_t`, `char16_t`, and `char32_t`—are used for extended character sets.
@@ -185,10 +188,11 @@ We can override the default type of an integer, floating-point, or character lit
 
 <div align='center'>
 <figure>
-<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/2-2.png" alt="img" style="zoom: 60%;" />
+<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/2-2.png" alt="img" style="zoom: 58%;" />
 <figcaption style="font-size: 80%;"> Table 2.2: Specifying the Type of a Literal </figcaption>
 </figure>
 </div>
+
 
 ##### Boolean and Pointer Literals
 
@@ -220,10 +224,11 @@ int units_sold = {0};
 
 <div align='center'>
 <figure>
-<img src="http://1.bp.blogspot.com/-XgAWe68aefE/U_rzHhFhCaI/AAAAAAAAACY/8i_rFdj-yJs/s1600/inital.png" alt="img" style="zoom:50%;" />
+<img src="http://1.bp.blogspot.com/-XgAWe68aefE/U_rzHhFhCaI/AAAAAAAAACY/8i_rFdj-yJs/s1600/inital.png" alt="img" style="zoom:55%;" />
 <figcaption style="font-size: 80%;"> Figure: Declaration, initialization and assignment (<a href="http://programingsconcepts.blogspot.com/2014/08/as-you-know-that-c-is-computer-language.html">Source</a>) </figcaption>
 </figure>
 </div>
+
 ```c++
 int a = 10;
 int *ptr = &a;

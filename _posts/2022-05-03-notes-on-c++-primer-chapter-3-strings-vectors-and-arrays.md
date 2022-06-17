@@ -73,7 +73,11 @@ When we initialize a variable using `=`, we are asking the compiler to **copy in
 
 ##### The `string` `empty` and `size` Operations
 
-<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-2.png" alt="img" style="zoom:70%;" />
+<div align='center'>
+<figure>
+<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-2.png" alt="img" style="zoom:60%;" />
+</figure>
+</div>
 
 ##### The `string::size_type` Type
 
@@ -117,8 +121,6 @@ for (auto c : str) // for every char in str
 In this case `c` is of type `char`. On each iteration, the next character in `str` will be copied into `c`.
 
 We can declare references to the characters in `str` to avoid copying them: `for (auto &c : str)`. We can also declare constant references to the characters If we don't need to edit them: `for (auto &c : str)`.
-
-<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-2.png" alt="img" style="zoom:100%;" />
 
 ##### Using a Range `for` to Change the Characters in a `string`
 
@@ -367,7 +369,11 @@ In general, we do not know (or care about) the precise type that an iterator has
 
 As with pointers, we can dereference an iterator to obtain the element denoted by an iterator. Also, like pointers, we may dereference only a valid iterator that denotes an element (§ 2.3.2, p. 53). Dereferencing an invalid iterator or an off-the-end iterator has undefined behavior.
 
-<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-6.png" alt="img" style="zoom:100%;" />
+<div align='center'>
+<figure>
+<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-6.png" alt="img" style="zoom:60%;" />
+</figure>
+</div>
 
 As an example, we'll rewrite the program from § 3.2.3 (p. 94) that capitalized the first character of a `string` using an iterator instead of a subscript:
 
@@ -449,7 +455,11 @@ We cannot add elements to a `vector` inside a range `for` loop. We'll explore ho
 
 #### 3.4.2 Iterator Arithmetic
 
+<div align='center'>
+<figure>
 <img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/3-7.png" alt="img" style="zoom:60%;" />
+</figure>
+</div>
 
 ##### Arithmetic Operations on Iterators
 
