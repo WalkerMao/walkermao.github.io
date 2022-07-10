@@ -35,7 +35,7 @@ With a fixed number of training samples and an increasing number of dimensions, 
 
 In a high dimensional space, we need to cover a large range to capture just a few neighbors. Such neighbors are no longer "local", and this makes the nearest neighbors be meaningless.
 
-Consider $$ n $$ data points uniformly distributed in a $$ p $$-dimensional unit hypercube or ball. A hypercube or ball that captures a fraction $$ \alpha $$ of the data has side length or radius $$ \alpha^{\frac{1}{p}} $$. That means we must cover of $$ \alpha ^{\frac{1}{p}} $$ the range in each dimension. In ten dimensions, we need to cover 63% or 79% of the range of each input variable to capture only 1% or 10% or the data. [^3]
+Consider $$ n $$ data points uniformly distributed in a $$ p $$-dimensional unit hypercube or hypersphere. A hypercube or hypersphere that captures a fraction $$ \alpha $$ of the data has side length or radius $$ \alpha^{1/p} $$. That means we must cover of $$ \alpha^{1/p} $$ the range in each dimension. In ten dimensions, we need to cover 63% or 79% of the range of each input variable to capture only 1% or 10% or the data. [^3]
 
 <div align='center'>
 <figure>
@@ -44,19 +44,17 @@ Consider $$ n $$ data points uniformly distributed in a $$ p $$-dimensional unit
 for different dimensions p. (Source: [3]) </figcaption>
 </figure>
 </div>
+## Close to Borders
 
+n high dimensional space, data around the origin (the center of the hypercube) is much more sparse than data around the boundary/edge. [^4] Most data points (for both training and predicting) reside close to the borders (even corners) of the feature space [^7]. More surprisingly, data points are mostly closer to border than to any other data point [^3], for the reason showed in [previous section](#neighbors-are-not-local) that neighbors are usually very far. 
 
-## Close to Boundaries
-
-Data around the origin (the center of the hypercube) is much more sparse than data around the boundary/edge. [^4] Most data points (for both training and predicting) reside close to the boundaries (even corners) of the feature space [^7], and they are mostly closer to the boundary than to any other data point [^3], since the distances between boundaries are very large. 
-
-The reason that this presents a problem is that, for a prediction, we usually have to extrapolate from neighboring training data points rather than interpolate between them. [^3]
+The reason that this presents a problem is that prediction is much more difficult near the boundaries of the training samples. For a prediction, we usually have to extrapolate from neighboring training data points rather than interpolate between them. [^3]
 
 This property can be illustrated by following several aspects.
 
 ### Closest Distance to Origin
 
-Consider $$ n $$ data points uniformly distributed in a $$ p $$-dimensional unit ball centered at the origin. The expected median distance from the origin to the closest of $$ n $$ data point is
+Consider $$ n $$ data points uniformly distributed in a $$ p $$-dimensional unit ball centered at the origin. The expected median distance from the origin to the closest of $$ n $$ data points is
 
 $$
 d(p,n) = \left( 1 - 2^{-1/n} \right)^{1/p}. 
@@ -64,7 +62,7 @@ $$
 
 This is the Exercise 2.3 in [^3] and you can find a solution from [^8].
 
-For example, $$ d(10, 500) \approx 0.52 $$, which means we expect all data points reside closer to the boundaries than to the origin. 
+For example, $$ d(10, 500) \approx 0.52 $$, which means we expect all data points reside closer to the boundaries (farthest distance is 0.48) than to the origin (closest distance is 0.52). Note that a hypersphere that captures a fraction $$1/500$$ of the data has radius $$ (1/500)^{1/10} = 0.54$$. Hence most data points are closer to the border of the feature space than to any other data point.
 
 ### Surface Area to Volume Ratio
 
@@ -133,7 +131,7 @@ Gaussian distribution become flat and heavy tailed distributions in high dimensi
 [^6]: Aggarwal, Charu C., Alexander Hinneburg, and Daniel A. Keim. "[On the surprising behavior of distance metrics in high dimensional space](https://bib.dbvis.de/uploadedFiles/155.pdf)." *International conference on database theory*. Springer, Berlin, Heidelberg, 2001.
 [^7]: [z_ai](https://z-ai.medium.com/). "[The surprising behaviour of distance metrics in high dimensions.](https://towardsdatascience.com/the-surprising-behaviour-of-distance-metrics-in-high-dimensions-c2cb72779ea6)" *[Towards data science](https://towardsdatascience.com/)*, 2021.
 
-[^8]: Weatherwax, John L., and Epstein, David. "[A Solution Manual and Notes for: The Elements of Statistical Learning.](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf)" 2021.
+[^8]: Weatherwax, John L., and Epstein, David. "[A solution manual and notes for: The elements of statistical learning.](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf)" 2021.
 
 [^9]: Strohmer, Thomas. "[Surprises in high dimensions.](https://www.math.ucdavis.edu/~strohmer/courses/180BigData/180lecture1.pdf)", 2017.
 
