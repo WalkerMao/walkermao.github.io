@@ -66,7 +66,7 @@ Random forests (Breiman, 2001) is a substantial modification of bagging that bui
 
 ### 3.1 Reduce the Correlation
 
-Suppose there are $B$ i.i.d. random variables $t_1, \dots, t_B$, each with the variance $\sigma^2$. The average of has variance $\frac{σ^2}{B}$. If the variables $t_1, \cdots , t_B$ are simply i.d. (identically distributed, but not necessarily independent) with positive pairwise correlation $ρ$, the variance of the average is 
+Suppose there are $B$ i.i.d. random variables $t_1, \dots, t_B$, each with the variance $\sigma^2$. The average has variance $\frac{σ^2}{B}$. If the variables $t_1, \cdots , t_B$ are simply i.d. (identically distributed, but not necessarily independent) with positive pairwise correlation $ρ$, the variance of the average is 
 
 $$ \begin{align}
 \text{Var}(\frac{1}{B} \sum_{b=1}^{B} t_b) &= \frac{1}{B^2} \text{Var}( \sum_{b=1}^{B} t_b) \\
