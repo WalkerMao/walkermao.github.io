@@ -40,10 +40,11 @@ Consider $$ n $$ data points uniformly distributed in a $$ p $$-dimensional unit
 <div align='center'>
 <figure>
 <img src="https://d3i71xaburhd42.cloudfront.net/581e4c6316feb4c18657a325afcdfd5524a4ead1/5-Figure2.6-1.png" alt="Figure 2.6 in ESL 2nd edition" style="zoom:100%;" />
-<figcaption style="font-size:80%;"> Figure. The right figure shows the side-length of the subcube needed to capture a fraction r of the volume of the data,
+<figcaption style="font-size:80%;"> Figure: The right figure shows the side-length of the subcube needed to capture a fraction r of the volume of the data,
 for different dimensions p. (Source: [3]) </figcaption>
 </figure>
 </div>
+
 ## Close to Borders
 
 n high dimensional space, data around the origin (the center of the hypercube) is much more sparse than data around the boundary/edge. [^4] Most data points (for both training and predicting) reside close to the borders (even corners) of the feature space [^7]. More surprisingly, data points are mostly closer to border than to any other data point [^3], for the reason showed in [previous section](#neighbors-are-not-local) that neighbors are usually very far. 
@@ -62,7 +63,7 @@ $$
 
 This is the Exercise 2.3 in [^3] and you can find a solution from [^8].
 
-For example, $$ d(10, 500) \approx 0.52 $$, which means we expect all data points reside closer to the boundaries (farthest distance is 0.48) than to the origin (closest distance is 0.52). Note that a hypersphere that captures a fraction $$1/500$$ of the data has radius $$ (1/500)^{1/10} = 0.54$$. Hence most data points are closer to the border of the feature space than to any other data point.
+For example, $$ d(10, 500) \approx 0.52 $$, which means we expect all data points reside closer to the boundaries (farthest distance is 0.48) than to the origin (closest distance is 0.52). Note that a hypersphere that captures a fraction $$1/500$$ of the data has radius $$ (1/500)^{1/10} = 0.54 > 0.48 $$. Hence most data points are closer to the border of the feature space than to any other data point.
 
 ### Surface Area to Volume Ratio
 
@@ -76,17 +77,27 @@ $$
 
 Thus the ratio is $$ S_p/V_p = 2p/r$$.
 
-**hypersphere:**
+**Hypersphere:**
 
-For a $$ p $$-dimensional ball of radius $$ r $$, the surface area and volume are
+For a $$ p $$-dimensional sphere/ball of radius $$ r $$, the surface area and volume are
 
 $$
-S_p = \frac{p r^{p-1} \pi^{p/2}}{(p/2)!},\; V_p = \frac{r^p \pi^{p/2}}{(p/2)!}.
+S_p = \frac{p r^{p-1} \pi^{p/2}}{\Gamma(1+p/2)} = \frac{p r^{p-1} \pi^{p/2}}{(p/2)!},\; V_p = \frac{r^p \pi^{p/2}}{\Gamma(1+p/2)} = \frac{r^p \pi^{p/2}}{(p/2)!}.
 $$
 
 Thus the ratio is $$ S_p/V_p = p/r $$.
 
-That is, either for a hypercube or hypersphere, most of the volume is contained in an shell or annulus of width proportional to $$ r/p $$. This means that almost all of the high dimensional box/orange's mass is in the shell/peel. [^9]
+The surface area to volume ratio either for a hypercube or hypersphere illustrates that, most of the volume is contained in an shell or annulus of width proportional to $$ r/p $$. This means that almost all of the high dimensional box/orange's mass is in the shell/peel. [^9]
+
+By the way, another interesting surprise in high-dimensional spaces is that, the surface area and volume of the $$ p $$-dimensional sphere both go (very quickly) to 0 as the dimension $$ p $$ increases to infinity: By Stirling's formula, $$ (p/2)! \sim \sqrt{\pi p} (\frac{p}{2e})^p$$, then we have $$ S_p \to 0,\, V_p \to 0 $$ as $$ p \to \infty $$.
+
+<div align='center'>
+<figure>
+<img src="https://i.stack.imgur.com/wDUGr.png" alt="unit sphere surface area" style="zoom: 75%;" /> <img src="https://i.stack.imgur.com/ZI8xd.png" alt="unit ball volume" style="zoom:76.5%;" />
+<figcaption style="font-size:80%;"> Figure: Surface area and volume of a unit hypersphere go to 0 as dimension increases. (<a href="https://math.stackexchange.com/q/2601105">Source</a>) </figcaption>
+</figure>
+</div>
+
 
 ### Most in Corners [^9]
 
@@ -103,15 +114,18 @@ Since this probability converges to 0 as the dimension $$ p $$ goes to infinity,
 <div align='center'>
 <figure>
 <img src="https://www.visiondummy.com/wp-content/uploads/2014/04/sparseness.png" alt="Highly dimensional feature spaces are sparse around their origin" style="zoom:100%;" />
-<figcaption style="font-size:80%;"> Figure. As the dimensionality increases, a larger percentage of the data points reside in the corners of the feature space. (Source: [4]) </figcaption>
+<figcaption style="font-size:80%;"> Figure: As the dimensionality increases, a larger percentage of the data points reside in the corners of the feature space. (Source: [4]) </figcaption>
 </figure>
 </div>
+
 
 In addition, an interesting surprise in high-dimensional spaces is that hypercubes are both convex and "pointy". 
 
 ## Distances
 
-Under certain reasonable and broad assumptions on data distribution (much broader than independent and identically distributed dimensions), as dimensionality increases, given a sample set and an arbitrary query data point in that set, the distances from the query point to the nearest and farthest neighbors in the set tend to be equal. [^5] [^6] Thus, the distance measures lose their effectiveness to measure similarity. 
+Under certain reasonable and broad assumptions on data distribution (much broader than independent and identically distributed dimensions), as dimensionality increases, given a sample set and an arbitrary query data point in that set, the distances from the query point to the nearest and farthest neighbors in the set tend to be equal. [^5] [^6] Thus, the distance measures lose their effectiveness to measure similarity.
+
+TODO
 
 ## Others
 
@@ -124,11 +138,17 @@ Gaussian distribution become flat and heavy tailed distributions in high dimensi
 ## References
 
 [^1]: Bellman, Richard. "Dynamic programming." *Princeton University Press*, 1957. 
+
 [^2]: Wikipedia contributors. "[Curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)." *Wikipedia, The Free Encyclopedia*, 2022.
+
 [^3]: Hastie, Trevor, et al. Section 2.5: Local methods in high dimensions. "The elements of statistical learning: data mining, inference, and prediction." Vol. 2. *New York: springer*, 2009.
+
 [^4]: Spruyt, Vincent. "[The curse of dimensionality in classification](https://www.visiondummy.com/2014/04/curse-dimensionality-affect-classification/)." *[Computer vision for dummies](https://www.visiondummy.com/)*, 2014.
+
 [^5]: Beyer, Kevin, et al. "[When is “nearest neighbor” meaningful?](https://minds.wisconsin.edu/bitstream/handle/1793/60174/TR1377.pdf?sequence=1&ref=https://githubhelp.com)." *International conference on database theory*. Springer, Berlin, Heidelberg, 1999.
+
 [^6]: Aggarwal, Charu C., Alexander Hinneburg, and Daniel A. Keim. "[On the surprising behavior of distance metrics in high dimensional space](https://bib.dbvis.de/uploadedFiles/155.pdf)." *International conference on database theory*. Springer, Berlin, Heidelberg, 2001.
+
 [^7]: [z_ai](https://z-ai.medium.com/). "[The surprising behaviour of distance metrics in high dimensions.](https://towardsdatascience.com/the-surprising-behaviour-of-distance-metrics-in-high-dimensions-c2cb72779ea6)" *[Towards data science](https://towardsdatascience.com/)*, 2021.
 
 [^8]: Weatherwax, John L., and Epstein, David. "[A solution manual and notes for: The elements of statistical learning.](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf)" 2021.
