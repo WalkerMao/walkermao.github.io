@@ -155,13 +155,14 @@ By the way, another interesting surprise in high-dimensional spaces is that, the
 
 <div align='center'>
 <figure>
-<img src="https://i.stack.imgur.com/wDUGr.png" alt="unit sphere surface area" style="zoom: 75%;" /> <img src="https://i.stack.imgur.com/ZI8xd.png" alt="unit ball volume" style="zoom:76.5%;" />
+<img src="https://i.stack.imgur.com/wDUGr.png" alt="unit sphere surface area" style="zoom: 57%;" /> <img src="https://i.stack.imgur.com/ZI8xd.png" alt="unit ball volume" style="zoom:58.5%;" />
 <figcaption style="font-size:80%;"> Figure: Surface area and volume of a unit hypersphere go to 0 as dimension increases. (<a href="https://math.stackexchange.com/q/2601105">Source</a>) </figcaption>
 </figure>
 </div>
-### Most in Corners [^8]
 
-Most of the volume of a high-dimensional cube is located in its corners.
+### Most in Corners
+
+Most of the volume of a high-dimensional cube is located in its corners. [^8]
 
 We assume that data points are uniformaly distributed in a hypercube given by $$ [−r, r]^d $$. By Chernoff's Inequality, The probability that a data point $$ x = (x^{(1)}, \cdots, x^{(d)})^T \in \mathbb{R}^d $$ reside in the inscribed hypersphere of raidus $$ r $$ is
 
@@ -178,7 +179,7 @@ Since this probability converges to 0 as the dimension $$ d $$ goes to infinity,
 </figure>
 </div>
 
-In addition, an interesting surprise in high-dimensional spaces is that hypercubes are both convex and "pointy". 
+In addition, an interesting surprise in high-dimensional spaces is that hypercubes are both convex and "pointy". [^8]
 
 ## Others
 
