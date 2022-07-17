@@ -117,7 +117,7 @@ This property can be illustrated by following several aspects.
 Consider $$ n $$ data points uniformly distributed in a $$ d $$-dimensional unit ball centered at the origin. The expected median distance from the origin to the closest of $$ n $$ data points is
 
 $$
-\mathrm{dist}(d,n) = \left( 1 - 2^{-1/n} \right)^{1/d}. 
+\mathrm{dist}(d,n) = \left( 1 - 1/2^n \right)^{1/d}.
 $$
 
 This is the Exercise 2.3 in [^3] and you can find a solution from [^7].
@@ -136,7 +136,7 @@ $$
 S_d = 2dr^{d-1},\; V_d = r^d.
 $$
 
-Thus the ratio is $$ S_d/V_d = 2d/r$$.
+So the ratio for a hypercube is $$ S_d/V_d = 2d/r$$.
 
 **Hypersphere:**
 
@@ -147,11 +147,19 @@ S_d = \frac{d r^{d-1} \pi^{d/2}}{\Gamma(1+d/2)} = \frac{d r^{d-1} \pi^{d/2}}{(d/
 V_d = \frac{r^d \pi^{d/2}}{\Gamma(1+d/2)} = \frac{r^d \pi^{d/2}}{(d/2)!}.
 $$
 
-Thus the ratio is $$ S_d/V_d = d/r $$.
+So the ratio for a hypersphere is $$ S_d/V_d = d/r $$.
 
-The surface area to volume ratio either for a hypercube or hypersphere illustrates that, most of the volume is contained in an shell or annulus of width proportional to $$ r/d $$. This means that almost all of the high dimensional box/orange's mass is in the shell/peel. [^8]
+Thus the surface area to volume ratio either for a hypercube or hypersphere goes to infinity as dimension increases:
+$$
+S_d/V_d \propto d/r \to \infty, \; \text{as} \; d \to \infty.
+$$
+This conclusion illustrates that most of the volume is contained in an shell or annulus of width proportional to $$ r/d $$. This means that almost all of the high dimensional box/orange's mass is in the shell/peel. [^8]
 
-By the way, another interesting surprise in high-dimensional spaces is that, the surface area and volume of a $$ d $$-dimensional sphere of given radius both go (very quickly) to 0 as the dimension $$ d $$ increases to infinity. Here is a simple derivation: By Stirling's formula, $$ (d/2)! \sim \sqrt{\pi d} (\frac{d}{2e})^d$$, then we have $$ S_d \to 0,\, V_d \to 0 $$ as $$ d \to \infty $$.
+By the way, another interesting surprise in high-dimensional spaces is that, the surface area and volume of a $$ d $$-dimensional sphere of given radius both go (very quickly) to 0 as the dimension $$ d $$ increases to infinity. Here is a simple derivation: By Stirling's formula, $$ (d/2)! \sim \sqrt{\pi d} (\frac{d}{2e})^d$$, then we have 
+
+$$
+S_d \to 0,\, V_d \to 0, \; \text{as} \; d \to \infty.
+$$
 
 <div align='center'>
 <figure>
