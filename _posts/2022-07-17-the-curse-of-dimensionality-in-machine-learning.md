@@ -16,10 +16,11 @@ In machine learning, the curse of dimensionality is used interchangeably with th
 
 <div align='center'>
 <figure>
-<img src="https://miro.medium.com/max/1400/1*pcJdd2y924Xk61SXa7uYpw.jpeg" alt="img" style="zoom:70%; margin-bottom:-120px; overflow:hidden;" />
+<img src="https://miro.medium.com/max/1400/1*pcJdd2y924Xk61SXa7uYpw.jpeg" alt="img" style="zoom:60%; margin-bottom:-120px; overflow:hidden;" />
 <figcaption style="font-size:80%;"> Figure: Hughes phenomenon. (<a href="https://towardsdatascience.com/curse-of-dimensionality-a-curse-to-machine-learning-c122ee33bfeb">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 ## Model Estimation
 
