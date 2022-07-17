@@ -150,9 +150,11 @@ $$
 So the ratio for a hypersphere is $$ S_d/V_d = d/r $$.
 
 Thus the surface area to volume ratio either for a hypercube or hypersphere goes to infinity as dimension increases:
+
 $$
 S_d/V_d \propto d/r \to \infty, \; \text{as} \; d \to \infty.
 $$
+
 This conclusion illustrates that most of the volume is contained in an shell or annulus of width proportional to $$ r/d $$. This means that almost all of the high dimensional box/orange's mass is in the shell/peel. [^8]
 
 By the way, another interesting surprise in high-dimensional spaces is that, the surface area and volume of a $$ d $$-dimensional sphere of given radius both go (very quickly) to 0 as the dimension $$ d $$ increases to infinity. Here is a simple derivation: By Stirling's formula, $$ (d/2)! \sim \sqrt{\pi d} (\frac{d}{2e})^d$$, then we have 
