@@ -8,7 +8,6 @@ toc: true
 published: true
 hidden: false
 comments: true
-
 ---
 
 ## Chapter 1. Data Structures and Algorithms
@@ -568,5 +567,116 @@ Pair('hello', 123) # __repr__() output
 (hello, 123) # __str__() output
 ```
 
-### 8.2. Customizing String Formatting
+### 8.4. Saving Memory When Creating a Large Number of Instances
+
+For classes that primarily serve as simple data structures, you can often greatly reduce the memory footprint of instances by adding the `__slots__` attribute to the class definition. For example:
+
+```python
+class Date:
+    __slots__ = ['year', 'month', 'day']
+    def __init__(self, year, month, day):
+        self.year = year
+        self.month = month
+        self.day = day
+```
+
+When you define `__slots__`, Python uses a much more compact internal representation for instances. Instead of each instance consisting of a dictionary, instances are built around a small fixed-sized array, much like a tuple or list. Attribute names listed in the `__slots__` specifier are internally mapped to specific indices within this array. A side effect of using slots is that it is no longer possible to add new attributes to instances—you are restricted to only those attribute names listed in the `__slots__` specifier.
+
+For the most part, you should only use slots on classes that are going to serve as frequently used data structures in your program (e.g., if your program created millions of instances of a particular class).
+
+### 8.5. Encapsulating Names in a Class
+
+Attributes (e.g. `self.__private`) or methods (e.g. `__private_method()`) with double leading underscores are hidden from subclasses cannot be overridden via inheritance.
+
+Use a single trailing underscore to define a variable to avoid clash with  a reserved word. For example,
+
+```python
+lambda_ = 2.0 # Trailing _ to avoid clash with lambda keyword
+```
+
+### 8.6. Creating Managed Attributes
+
+Use the `property` to add extra processing (e.g., type checking or validation) to the getting or setting of an instance attribute.
+
+### 8.7. Calling a Method on a Parent Class
+
+Use the `super()` function.
+
+### 8.8. Extending a Property in a Subclass
+
+### 8.9. Creating a New Kind of Class or Instance Attribute
+
+A descriptor is a class that implements the three core attribute access operations (get, set, and delete) in the form of `__get__()`, `__set__()`, and `__delete__()` special methods. 
+
+By defining a descriptor, you can capture the core instance operations (get, set, delete) at a very low level and completely customize what they do (e.g., add type checking or validation). This gives you great power, and is one of the most important tools employed by the writers of advanced libraries and frameworks.
+
+Finally, it should be stressed that you would probably not write a descriptor if you simply want to customize the access of a single attribute of a specific class. For that, it’s easier to use a property instead, as described in Recipe 8.6. Descriptors are more useful in situations where there will be a lot of code reuse (i.e., you want to use the functionality provided by the descriptor in hundreds of places in your code or provide it as a library feature).
+
+### 8.10. Using Lazily Computed Properties
+
+### 8.11. Simplifying the Initialization of Data Structures
+
+You are writing a lot of classes that serve as data structures, but you are getting tired of writing highly repetitive and boilerplate `__init__()` functions.
+
+You can often generalize the initialization of data structures into a single `__init__()` function defined in a common base class. For example:
+
+```python
+class Structure2:
+    _fields = []
+
+    def __init__(self, *args, **kwargs):
+        if len(args) > len(self._fields):
+            raise TypeError('Expected {} arguments'.format(len(self._fields)))
+
+        # Set all of the positional arguments
+        for name, value in zip(self._fields, args):
+            setattr(self, name, value)
+
+        # Set the remaining keyword arguments
+        for name in self._fields[len(args):]:
+            setattr(self, name, kwargs.pop(name))
+
+        # Check for any remaining unknown arguments
+        if kwargs:
+            raise TypeError('Invalid argument(s): {}'.format(','.join(kwargs)))
+
+# Example use
+if __name__ == '__main__':
+    class Stock(Structure2):
+        _fields = ['name', 'shares', 'price']
+
+    s1 = Stock('ACME', 50, 91.1)
+    s2 = Stock('ACME', 50, price=91.1)
+    s3 = Stock('ACME', shares=50, price=91.1)
+```
+
+### 8.12. Defining an Interface or Abstract Base Class
+
+Predefined abstract base classes are found in various places in the standard library. The collections module defines a variety of ABCs related to containers and iterators (se‐quences, mappings, sets, etc.), the numbers library defines ABCs related to numeric objects (integers, floats, rationals, etc.), and the io library defines ABCs related to I/O handling.
+
+You can use the predefined ABCs to perform more generalized kinds of type checking. Here are some examples:
+
+```python
+isinstance(x, collections.abc.Sequence)
+isinstance(x, collections.abc.Iterable)
+isinstance(x, collections.abc.Sized)
+isinstance(x, collections.abc.Mapping)
+```
+
+### 8.13. Implementing a Data Model or Type System
+
+You can use descriptors, mixin classes, `super()`, class decorators, and metaclasses to enforce constraints on the values that are allowed to be assigned to certain attributes.
+
+### 8.14. Implementing Custom Containers
+
+The collections library defines a variety of abstract base classes that are extremely useful when implementing custom container classes. To illustrate, suppose you want your class to support iteration. To do that, simply start by having it inherit from `collections.abc.Iterable`, as follows:
+
+```python
+import collections
+
+class A(collections.abc.Iterable):
+    ...
+```
+
+### 8.15. Delegating Attribute Access
 
