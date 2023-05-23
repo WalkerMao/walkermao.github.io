@@ -125,7 +125,7 @@ Using the `+` operator to join a lot of strings together is grossly inefficient 
 
 ```python
 >>> s = '{name} has {n} messages.'
->>> s.format(name='Guido',n=37)
+>>> s.format(name='Guido', n=37)
 'Guido has 37 messages.'
 ```
 

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Extreme Gradient Boosting (XGBoost)</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Extreme Gradient Boosting (XGBoost) | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Extreme Gradient Boosting (XGBoost)" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="XGBoost stands for eXtreme Gradient Boosting. Compared to traditional gradient boosting, it has some significant improvements." />
+<meta property="og:description" content="XGBoost stands for eXtreme Gradient Boosting. Compared to traditional gradient boosting, it has some significant improvements." />
+<link rel="canonical" href="http://localhost:4000/xgboost.html" />
+<meta property="og:url" content="http://localhost:4000/xgboost.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Extreme Gradient Boosting (XGBoost)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-09-20T00:00:00+08:00","datePublished":"2020-09-20T00:00:00+08:00","description":"XGBoost stands for eXtreme Gradient Boosting. Compared to traditional gradient boosting, it has some significant improvements.","headline":"Extreme Gradient Boosting (XGBoost)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/xgboost.html"},"url":"http://localhost:4000/xgboost.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#newton-boosting">Newton Boosting</a></li><li><a href="#boosting-with-trees">Boosting with Trees</a><ul><li><a href="#model-complexity">Model Complexity</a></li><li><a href="#the-structure-score">The Structure Score</a></li><li><a href="#node-splitting-criteria">Node Splitting Criteria</a></li></ul></li><li><a href="#summary">Summary</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/xgboost.html">
+    <h2 class="post-title">Extreme Gradient Boosting (XGBoost)</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/ensemble learning"> <li>Ensemble learning</li> </a><a class="post-link" href="/tags/ml models"> <li>ML models</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Sep 20, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>XGBoost stands for eXtreme Gradient Boosting. Compared to traditional gradient boosting, it has some significant improvements.</p>
+
+<h2 id="newton-boosting">Newton Boosting</h2>
+
+<p>At $t$-th step, we want to minimize the objective</p>
+
+\[\text{Obj}^{(t)} = \sum_{i=1}^{n} L(y_i, f^{(t-1)}(x_i)+f_t(x_i)) + \Omega(f^{(t-1)}+f_t).\]
+
+<p>In the formula above, \(f^{(t-1)}(x)\) is the sum of the first \(t-1\) weak learners, i.e. \(f^{(t-1)}(x) =  f^{(0)}(x) + \sum_{s=1}^{t-1} f_s(x)\), and \(\Omega(f_t)\) is the regularization term which measures the complexity of \(f_t\).</p>
+
+<p>Then we find a regression tree \(f_t\) that minimizes the objective function, as</p>
+
+\[f_t = \operatorname*{argmin}_{f_t} \text{Obj}^{(t)}.\]
+
+<p>XGBoost use Newton’s method to minimize the objective function iteratively. As shown in my <a href="intro-to-ml-training-models.html#82-newtons-method">earlier post</a>, we use Taylor expansion of second order to get the approximation of objective function. Recall Taylor expansion: \(f(x+\Delta x) \approx f(x)+f'(x)\Delta x + \frac{1}{2} f''(x)\Delta x^2\). We do that for \(L(y_i, f_{t-1}(x)+h_t(x_i))\), and we have</p>
+
+\[\begin{align*}
+\text{Obj}^{(t)} &amp;= \sum_{i=1}^{n} L\big(y_i, f^{(t-1)}(x_i) + f_t(x_i)\big) + \Omega(f^{(t-1)}) + \Omega(f_{t}) \\ 
+&amp; \approx \sum_{i=1}^{n} \left[L(y_i, f^{(t-1)}(x)) + g_{i} f_t(x_i) + \frac{1}{2}h_{it}f_t^2(x_i)\right] + \Omega(f^{(t-1)}) + \Omega(f_{t}),
+\end{align*}\]
+
+<p>where</p>
+
+\[g_{it} = \frac{∂L(y_i,f^{(t-1)}(x_i))}{∂f^{(t-1)}(x_i)},\ h_{it} = \frac{∂^2L(y_i,f^{(t-1)}(x_i))}{∂{f^{(t-1)}}^2(x_i)}.\]
+
+<p>We can remove the constant terms to obtain the following simplified objective at step \(t\).</p>
+
+\[\tilde{\text{Obj}}^{(t)} := \sum_{i=1}^{n} \left[g_{it} f_t(x_i) + \frac{1}{2}h_{it}f_t^2(x_i)\right] + \Omega(f_{t}).\]
+
+<p>In the following we omit the subscript \(t\) of \(g_{it}\) and \(h_{it}\), as \(g_i\) and \(h_i\), for simplicity.</p>
+
+<p>Here is a brief description of <strong>XGBoost algorithm</strong>:</p>
+
+<p>[1] Initialize \(\hat{f}^{(0)} = \operatorname{argmin}_{f} \sum_{i=1}^{n} L(y_i, f(x_i)) + \Omega(f)\).</p>
+
+<p>[2] For $t = 1,…,M$, execute (a) and (b):</p>
+
+<p>(a) \(f_t = \operatorname*{argmin}_{f_t} \tilde{\text{Obj}}^{(t)} .\)</p>
+
+<p>(b) \(f^{(t)}(x) = f^{(t−1)}(x) + \eta f_t(x)\).</p>
+
+<p>[3] Output $\hat{f}(x) = f^{(M)}(x)$.</p>
+
+<p>where $\eta$ is called step-size or learning rate, usually set around $0.1$.</p>
+
+<p>If there is no regularization term, by Newton’s method,  we have \(f^{(t)}(x) = f^{(t-1)}(x) - \eta\frac{g_{it}}{h_{it}}\), then we can simply fit a regression tree \(f_t\) to the targets \(-\frac{g_{it}}{h_{it}}\) at each step \(t\).</p>
+
+<p>In the following we omit the subscript \(t\) of \(g_{it}\) and \(h_{it}\), as \(g_i\) and \(h_i\), for simplicity.</p>
+
+<h2 id="boosting-with-trees">Boosting with Trees</h2>
+
+<h3 id="model-complexity">Model Complexity</h3>
+
+<p>We <strong>refine the definition</strong> of a tree</p>
+
+\[f_t(x)=w_{q_t(x)} \in \mathbb{R}^{T_t}.\]
+
+<p>Here \(w\) is the vector of scores on leaves, and \(q_t(x): \mathbb{R}^p \to \{1,2,\cdots, T_t\}\) is a function assigning each data point to the corresponding leaf, and $T_t$ is the number of leaves in \(f_t(x)\).</p>
+
+<p>In the following we omit the subscript \(t\) of \(q_t(x)\) and \(T_t\), as \(q(x)\) and \(T\), for simplicity.</p>
+
+<p>In terms of objective function, XGBoost adds a <strong>regularization</strong> term, which is defined as</p>
+
+\[\Omega(f_t) = \gamma T + \frac{1}{2}\lambda \sum_{j=1}^{T} w_j^2,\]
+
+<p>where $w_j$ is the prediction score of leaf $j$, and $\sum_{j=1}^{T} w_j^2$ is the L2 norm of leaf scores.</p>
+
+<p><a href="https://stats.stackexchange.com/questions/178012/definition-of-complexity-of-a-tree-in-xgboost">Why penalize $\sum_{j=1}^{T} w_j^2$ to control the complexity?</a> In this case, a large value of $w_j$ would correspond to a terminal (leaf) node giving a very large and significant update to the prior model. However, the idea of a gradient booster is to carefully and slowly reduce the bias of the model by adding these trees one by one.</p>
+
+<h3 id="the-structure-score">The Structure Score</h3>
+
+<p>Here is the magical part of the derivation.</p>
+
+<p>Denote  \(I_j = \{i \mid q(x_i)=j\}\) as the set of indices of data points assigned to the \(j\)-th leaf.</p>
+
+<p>After re-formulating the tree model, since all the data points on the same leaf get the same score, we can rewrite</p>
+
+\[\sum_{i=1}^n  g_{i}w_{q(x_i)} = \sum_{j=1}^T \sum_{i \in I_j} g_{i}w_{q(x_i)} = \sum_{j=1}^T \left(\sum_{i \in I_j} g_{i}\right) w_j, \\
+\sum_{i=1}^n  h_{i}w^2_{q(x_i)} = \sum_{j=1}^T \sum_{i \in I_j} h_{i}w^2_{q(x_i)} = \sum_{j=1}^T \left(\sum_{i \in I_j} h_{i}\right) w^2_j.\]
+
+<p>Then we can write the objective value with the \(t\)-th tree as</p>
+
+\[\begin{align*}
+\tilde{\text{Obj}}^{(t)} &amp;= \sum_{i=1}^{n} \left[ g_{i} w_{q(x_i)} + \frac{1}{2} h_{i} w^2_{q(x_i)} \right] + \gamma T + \frac{1}{2}\lambda \sum_{j=1}^{T} w_j^2 \\
+&amp;= \sum_{j=1}^T \left[ \left(\sum_{i \in I_j} g_{i}\right) w_j + \frac{1}{2} \left(\sum_{i \in I_j} h_{i} + \lambda\right) w^2_j \right] + \gamma T.
+\end{align*}\]
+
+<p>We can further compress the expression by defining \(G_j = \sum_{i\in I_j} g_{i}\) and \(H_j = \sum_{i\in I_j} h_{i}\):</p>
+
+\[\tilde{\text{Obj}}^{(t)} = \sum_{j=1}^T \left[ G_j w_j + \frac{1}{2} \left(H_j + \lambda\right) w^2_j \right] + \gamma T.\]
+
+<p>In this equation, \(w_j\)’s are independent with respect to each other. We can get the best \(w_j\) by taking derivative of  \(\tilde{\text{Obj}}^{(t)}\) with respect to \(w_j\) and set to $0$, i.e. \(\frac{\partial \tilde{\text{Obj}}^{(t)}}{\partial w_j} = 0\), then we have</p>
+
+\[w_j^\ast = -\frac{G_j}{H_j+\lambda},\\ \text{Obj}^{(t)\ast} = -\frac{1}{2} \sum_{j=1}^T \frac{G_j^2}{H_j+\lambda} + \gamma T.\]
+
+<p>Here \(\text{Obj}^{(t)\ast}\) is called the <strong>structure score</strong>, which measures how good a tree structure \(q(x)\) is. The smaller the score is, the better the structure is. This score \(\text{Obj}^{(t)\ast}\) is like the impurity measure in a decision tree, except that it also takes the model complexity into account.</p>
+
+<h3 id="node-splitting-criteria">Node Splitting Criteria</h3>
+
+<p>The score after spiting is  \(-\frac{1}{2} \left( \frac{G_L^2}{H_L+\lambda} + \frac{G_R^2}{H_R+\lambda} \right) + 2\gamma\), where subscript $L$ refers to the left node and \(R\) refers to the right node. The score before spiting is  \(-\frac{1}{2} \frac{(G_L+G_R)^2}{H_L+H_R+\lambda} + \gamma\). We use the score gain as the node splitting criteria:</p>
+
+\[\text{Gain} = \frac{1}{2} \left[ \frac{G_L^2}{H_L+\lambda} + \frac{G_R^2}{H_R+\lambda}  - \frac{(G_L+G_R)^2}{H_L+H_R+\lambda} \right] - \gamma.\]
+
+<p>We select the splitting point that maximize the score gain. We can see an important fact here: if the gain is smaller than \(\gamma\), we would do better not to add that branch. This is exactly the <strong>pruning</strong> techniques in tree based models.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p><strong>XGBoost algorithm</strong>:</p>
+
+<p>[1] Set hyper-parameters step-size \(\eta\), and regularization strength \(\gamma,\lambda\).</p>
+
+<p>[2] Initialize a tree \(f^{(0)}(x)\) that fits the original data, i.e. \(f^{(0)} = \operatorname*{argmin}_{f^{(0)}} \sum_{i=1}^n L(y_i,f^{(0)}(x_i)) + \Omega(f^{(0)})\).</p>
+
+<p>[3] For $t = 1,…,M$, execute following steps to find \(f_t = \operatorname*{argmin}_{f_t} \tilde{\text{Obj}}^{(t)}\) and update \(f^{(t)}(x)\):</p>
+
+<p>(a) Calculate the derivatives \(g_{i} = \frac{∂L(y_i,f^{(t-1)}(x_i))}{∂f^{(t-1)}(x_i)},\ h_{i} = \frac{∂^2L(y_i,f^{(t-1)}(x_i))}{∂{f^{(t-1)}}^2(x_i)}\) for \(i=1,2,\cdots,n\).</p>
+
+<p>(b) Build a regression tree with the node splitting criteria \(\text{Gain} = \frac{1}{2} \left[ \frac{G_L^2}{H_L+\lambda} + \frac{G_R^2}{H_R+\lambda}  - \frac{(G_L+G_R)^2}{H_L+H_R+\lambda} \right] - \gamma\), where \(G_j = \sum_{i\in I_j} g_{i}\) and \(H_j = \sum_{i\in I_j} h_{i}\).</p>
+
+<p>(c) Set leaf node prediction score as \(w_j^\ast = -\frac{G_j}{H_j+\lambda}\)</p>
+
+<p>(d) Update \(f^{(t)}(x) = f^{(t−1)}(x) + \eta f_t(x)\).</p>
+
+<p>[4] Output $\hat{f}(x) = f^{(M)}(x)$.</p>
+
+<p><br /></p>
+
+<p>Besides the regularization term and learning rate, XGBoost also applies column (feature) subsampling to prevent overfitting like that in random forest, since column subsampling reduces the correlation between weak learners and thus reduces the variance of the whole model.</p>
+
+<p>XGBoost has some <strong>advantages</strong> over GBDT:</p>
+
+<ul>
+  <li>Regularization term to reduce overfitting;</li>
+  <li>Second order Taylor expansion of objective function but not the first order;</li>
+  <li>We can define the loss function, but note that it should be second order differentiable;</li>
+  <li>We can define the form of weak learner $f_t(\cdot)$, such as tree or linear classifier.</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>Chen, T., &amp; Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. In <em>Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining</em> (pp. 785-794).</p>
+
+<p>“Introduction to Boosted Trees.” <em>Introduction to Boosted Trees - Xgboost 1.1.0-SNAPSHOT Documentation</em>, https://xgboost.readthedocs.io/en/latest/tutorials/model.html.</p>
+
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

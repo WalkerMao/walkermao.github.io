@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Basic Clustering: K-Means, EM and GMM</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Basic Clustering: K-Means, EM and GMM | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Basic Clustering: K-Means, EM and GMM" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="K-Means" />
+<meta property="og:description" content="K-Means" />
+<link rel="canonical" href="http://localhost:4000/basic-clustering.html" />
+<meta property="og:url" content="http://localhost:4000/basic-clustering.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-26T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Basic Clustering: K-Means, EM and GMM" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-04-26T00:00:00+08:00","datePublished":"2020-04-26T00:00:00+08:00","description":"K-Means","headline":"Basic Clustering: K-Means, EM and GMM","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/basic-clustering.html"},"url":"http://localhost:4000/basic-clustering.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#k-means">K-Means</a></li><li><a href="#em-algorithm">EM Algorithm</a><ul><li><a href="#jensens-inequality">Jensen’s Inequality</a></li><li><a href="#derivation-of-em-algorithm">Derivation of EM Algorithm</a></li></ul></li><li><a href="#gaussian-mixture-model">Gaussian Mixture Model</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/basic-clustering.html">
+    <h2 class="post-title">Basic Clustering: K-Means, EM and GMM</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/ml"> <li>ML</li> </a><a class="post-link" href="/categories/stat"> <li>Stat</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/unsupervised learning"> <li>Unsupervised learning</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Apr 26, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="k-means">K-Means</h2>
+
+<p>The aim of clustering is to divide observations into several non-overlap clusters, such that observations in the same cluster are similar to each other, while observations in different clusters are dissimilar to each other. The clustering problem is an unsupervised learning problem. We are given the training data set \(X = (x_1, x_2, \cdots, x_n)^T \in \mathbb{R}^{n \times p}\), where each observation $x_i \in \mathbb{R}^{p}$ as usual, and we want to group the data into a few cohesive “clusters”.</p>
+
+<p>The K-means clustering algorithm is an iterative algorithm. In each step, we assign each data point (observation) to the closest cluster (centroid), then recompute the centroids for the clusters by taking the average of the all data points that belong to each cluster.</p>
+
+<p>Given the hyperparameter \(K\), the objective of K-Means clustering is to minimize total intra-cluster variance, or, the sum of Euclidean distances of samples to their closest cluster:
+\(D = \sum_{i=1}^n \sum_{k=1}^K \mathbf{1}\{ c_i = k\} \| x_i - \mu_k \|_2^2,\)
+where \(K\) is the number of clusters, \(c_i\) is the cluster index of \(x_i\), and \(\mu_k\) is the centroid of the cluster \(k\).</p>
+
+<p><strong>Algorithm. K-Means:</strong></p>
+
+<p>[1] Initialize cluster centroids \(\mu_1, \cdots, \mu_K \in \mathbb{R}^p\) randomly.</p>
+
+<p>[2] Repeat until \(\mu_1, \cdots, \mu_K\) do not change:</p>
+
+<p>(a) For every \(i=1, \cdots, n\), set the cluster label for the data point \(i\) as \(c_i := \underset{k}{\text{argmin}} \| x_i - \mu_k \|_2^2\);</p>
+
+<p>(b) For each \(k = 1, \cdots, K\), recompute the the centroid for the cluster \(k\) as \(\mu_k := \frac{\sum_{i=1}^{n} \mathbf{1}\{ c_i = k\} \cdot x_i }{\sum_{i=1}^{n} \mathbf{1}\{ c_i = k\}}\).</p>
+
+<p>Here is a visualization of K-means algorithm:</p>
+
+<div style="text-align: center"> <img src="../../../pictures/kmeansViz.png" alt="K-means visualization" style="zoom:100%;" />  </div>
+
+<p>We can select the hyperparameter \(K\) by the knee point (or elbow point) of the \(D \text{ v.s. } K\) plot, as shown below.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.datanovia.com/en/wp-content/uploads/dn-tutorials/002-partitional-clustering/figures/006b-kmeans-clustering-k-means-optimal-clusters-wss-1.png" alt="img" style="zoom: 55%;" />
+<figcaption style="font-size: 80%;"> Figure. Elbow method for optimal K. (<a href="https://www.datanovia.com/en/lessons/k-means-clustering-in-r-algorith-and-practical-examples/">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>The knee point can also be selected automatically by <a href="https://www1.icsi.berkeley.edu/~barath/papers/kneedle-simplex11.pdf">Kneedle algorithm</a>, or we can identity the suggedted \(K\) by the <a href="https://statweb.stanford.edu/~gwalther/gap">gap statistic</a>.</p>
+
+<p>K-means algorithm is susceptible to local optima, so we usually reinitialize \(\mu_1, \cdots, \mu_K\) at several different initial parameters.</p>
+
+<h2 id="em-algorithm">EM Algorithm</h2>
+
+<h3 id="jensens-inequality">Jensen’s Inequality</h3>
+
+<p>Let $f$ be a function whose domain is the set of real numbers (i.e. \(f(x) \in \mathbb{R}\)). Recall that
+$f$ is a <strong>convex</strong> function if \(f''(x) ≥ 0\) for all $x ∈ \mathbb{R}$. In the case of $f$ taking vector-valued inputs, this is generalized to the condition that its hessian $H$ is positive semi-definite (\(H ≥ 0\)). We say $f$ is strictly convex if \(f''(x) &gt; 0\) or $H &gt; 0$ for all $x$.</p>
+
+<p>Let $X$ be a random variable, and let $f$ be a convex function, then <strong>Jensen’s inequality</strong> can then be stated as:</p>
+
+\[E[f(X)] ≥ f(EX).\]
+
+<p>Moreover, if $f$ is strictly convex, then $E[f(X)] = f(EX)$ holds true if and only if $X = E(X)$ with probability $1$ (i.e., if $X$ is a constant).</p>
+
+<p>Note that $f$ is (strictly) concave when $-f$ is (strictly) convex, thus we have \(E[-f(X)] ≥ -f(EX) \implies E[f(X)] \leq f(EX)\) for concave functions $f$.</p>
+
+<p>The figure below is an interpretation of the theorem.</p>
+
+<div style="text-align: center"> <img src="../../../pictures/Jensen-inequality.png" alt="Representation of Jensen's Inequality" style="zoom: 80%;" />  </div>
+
+<p>Here, $f$ is a convex function shown by the solid line. Also, $X$ is a random variable that has a $0.5$ chance of taking the value $a$, and a $0.5$ chance of taking the value $b$ (indicated on the $x$-axis). Thus, the value $E(X)$ is given by the midpoint between $a$ and $b$.  The value $E[f(X)]$ is now the midpoint on the $y$-axis between $f(a)$ and $f(b)$. We see that because $f$ is convex, it must be the case that $E[f(X)] ≥ f(EX)$.</p>
+
+<h3 id="derivation-of-em-algorithm">Derivation of EM Algorithm</h3>
+
+<p>The expectation-maximization (EM) algorithm is a very general iterative algorithm for parameter estimation (model fitting) by maximum likelihood, when some of data (random variables) involved are not observed, i.e. missing or incomplete. These unobservable variables are usually called as <strong>latent variables</strong>.</p>
+
+<p>Suppose there are latent variables $z_i$’s ($z_i$ can be a scalar or vector). For each $i$, let $q_i(\cdot)$ be the probability distribution function of the random variable $z_i$. Denote \(X:= (x_1, \cdots, x_n)^T, Z := (z_1, \cdots, z_n)^T\), where $X$ is observable data and $Z$ is unobservable (hidden, missing) data.</p>
+
+<p>We wish to fit the parameters $\theta$ of a model $p(x;\theta)$ to the observable data $x$. We estimate the parameters $\theta$ by maximizing the log likelihood.</p>
+
+<p>Note: There are two different approaches to derive the EM algorithm. The following is the approach that was introduced by Andrew Ng in his lecture notes.</p>
+
+<p>If $z_i$ is a continuous random variable. The log likelihood for the observable data $x_i$’s is</p>
+
+\[\begin{align*}
+\ell(X; \theta) &amp;= \log L(X; \theta) \\
+&amp;= \sum_{i=1}^n \log p(x_i;\theta) \\
+&amp;= \sum_{i=1}^n \log \sum_{z_i} p(x_i, z_i; \theta)  \\
+&amp;= \sum_{i=1}^n \log \sum_{z_i} q_i(z_i) \frac{p(x_i, z_i; \theta)}{q_i(z_i)}  \\
+&amp;= \sum_{i=1}^n \log E_{z_i \sim q_i} \Big[\frac{p(x_i, z_i; \theta)}{q_i(z_i)} \Big] \\
+&amp; \geq \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] \\
+&amp;= \sum_{i=1}^n \sum_{z_i} q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)}. \tag{1}
+\end{align*}\]
+
+<p>where the “\(z_i \sim q_i\)” subscripts above indicate that the expectations are with respect to $z_i$ drawn from $q_i$.</p>
+
+<p>The last second step of the derivation above used Jensen’s inequality. Since $f(\cdot) = \log(\cdot)$ is a concave function, by Jensen’s inequality, we have</p>
+
+\[f \bigg( E_{z_i \sim q_i} \Big[\frac{p(x_i, z_i; \theta)}{q_i(z_i)} \Big] \bigg) \geq E_{z_i \sim q_i} \bigg[ f \Big( \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \Big) \bigg]. \tag{2}\]
+
+<p>Define</p>
+
+\[J(\mathbf{q},\theta) = J(q_1,\cdots,q_n, \theta) := \sum_{i=1}^n E_{z_i \sim q_i} \bigg[ \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)} \bigg] = \sum_{i=1}^n \sum_{z_i} q_i(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i(z_i)}.\]
+
+<p>Now, for any set of distributions $\mathbf{q}$, the formula (1) gives a lower-bound \(J(\mathbf{q},\theta)\) on the log likelihood $\ell(\theta)$.</p>
+
+<p>To increase the lower bound of $\ell(\theta)$ as much as possible, it seems natural to select $\mathbf{q}$ ($q_i$’s) that makes the lower-bound tight at that value of $\theta$. I.e., we’ll make the inequality hold with equality at our particular value of $\theta$. To do that, we need to make the Jensen’s inequality in equitation (2) to hold with equality, which means \(\frac{p(x_i, z_i; \theta)}{q_i(z_i)}\) need to be a constant-valued random variable.</p>
+
+<p>Thus, to get the tight lower bound on $\ell(\theta)$, we require that \(\frac{p(x_i, z_i; \theta)}{q_i(z_i)} = c\) for some constant $c$ that does not depend on $z_i$. Since \(1 = \sum_{z_i} q_i(z_i) = \sum_{z_i} \frac{1}{c} p(x_i, z_i; \theta)  = \frac{1}{c} \sum_{z_i}  p(x_i, z_i; \theta)\), we have \(c =  \sum_{z_i}  p(x_i, z_i; \theta)\). It follows that</p>
+
+\[q_i(z_i) = \frac{ p(x_i, z_i; \theta)} {\sum_{z_i}  p(x_i, z_i; \theta) } = \frac{ p(x_i, z_i; \theta)} {p(x_i; \theta)} = p(z_i | x_i; \theta).\]
+
+<p>Therefore, we simply set the $q_i$ to be the posterior distribution of the $z_i$ given $x_i$ and the setting of the parameters $\theta$, which is denoted as $\theta^{(t)}$ at $t$-th iteration.</p>
+
+<p>At $t$-th step, $\mathbf{q}^{(t)}$ and \(\theta^{(t)}\) are known. By the equation (1), we have</p>
+
+\[\ell(\theta^{(t+1)}) \geq J(\mathbf{q}^{(t)}, \theta^{(t)}). \tag{3}\]
+
+<p>At $t$-th iteration of the EM algorithm, for the choice of the $q_i^{(t+1)}$’s, the equation (3) gives a lower bound on the loglikelihood that we’re trying to maximize. We select \(q_i^{(t+1)}(z_i) = p(z_i \mid x_i; \theta^{(t)})\) to make the lower bound tight, then we have $\ell(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)})$. This is the E-step.</p>
+
+<p>In the M-step of the algorithm, we then maximize the tight lower bound</p>
+
+\[J(\mathbf{q}^{(t+1)}, \theta^{(t)}) = \sum_{i=1}^n \sum_{z_i} q_i^{(t+1)}(z_i) \log \frac{p(x_i, z_i; \theta)}{q_i^{(t+1)}(z_i)} = \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log \frac{p(x_i, z_i; \theta)}{p(z_i \mid x_i; \theta^{(t)})}\]
+
+<p>with respect to the parameters $\theta$ to obtain a new setting of the parameters, which is $\theta^{(t+1)}$.</p>
+
+<p><strong>Algorithm. EM algorithm:</strong></p>
+
+<p>[1] Initialize the value of $\theta$ as $\theta^{(0)}$.</p>
+
+<p>[2] Repeat these two steps until convergence:</p>
+
+<p>(a) E-step. For each \(i\), set \(q_i^{(t+1)}(z_i) := p(z_i \mid x_i; \theta^{(t)})\);</p>
+
+<p>(b) M-step. Update  \(\theta^{(t+1)} := \underset{\theta}{\text{argmax }} J(\mathbf{q}^{(t+1)}, \theta^{(t)}) = \underset{\theta}{\text{argmax }} \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log \frac{p(x_i, z_i; \theta)}{p(z_i \mid x_i; \theta^{(t)})}\).</p>
+
+<p><strong>Remark.</strong> The EM algorithm can also be viewed a coordinate ascent on $J(\mathbf{q}, \theta)$, in which the E-step maximizes it with respect to $\mathbf{q}$, and the M-step maximizes it with respect to $\theta$.</p>
+
+<p>Summary:</p>
+
+\[\newcommand{\vc}[3]{\overset{#2}{\underset{#3}{#1}}}
+\ell(\theta^{(t+1)}) \geq J(\mathbf{q}^{(t)}, \theta^{(t)}) \vc{\implies}{\text{E-step}}{\text{Update } \mathbf{q}} \ell(\theta^{(t+1)}) = J(\mathbf{q}^{(t+1)}, \theta^{(t)}) \vc{\implies}{\text{M-step}}{\text{Update } \theta} \ell(\theta^{(t+2)}) \geq J(\mathbf{q}^{(t+1)}, \theta^{(t+1)}) \vc{\implies}{\text{E-step}}{\text{Update } \mathbf{q}} \cdots\]
+
+<p>Denote \(Q(\theta;\theta^{(t)}) := \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta)\).</p>
+
+<p>We have \(\underset{\theta}{\text{argmax }} \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log \frac{p(x_i, z_i; \theta)}{p(z_i \mid x_i; \theta^{(t)})} = \underset{\theta}{\text{argmax }} Q(\theta;\theta^{(t)})\). To derive the other form of the algorithm, note that</p>
+
+\[\begin{align*}
+Q(\theta;\theta^{(t)}) &amp;= \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) \\
+&amp;= \sum_{i=1}^n E_{z_i \mid x_i;\theta^{(t)}} \Big[\log p(x_i,z_i;\theta) \mid x_i \Big] \\
+&amp;= E_{Z \mid X;\theta^{(t)}} \Big[ \sum_{i=1}^{n} \log p(x_i,z_i;\theta) \mid X  \Big] \\
+&amp;= E_{Z \mid X; \theta^{(t)}} \Big[ \ell(X, Z ; \theta)  \mid X \Big].
+\end{align*}\]
+
+<p><strong>Remark.</strong> The algorithm can also be written as</p>
+
+<p>(a) E-step. Set \(Q(\theta;\theta^{(t)}) := \sum_{i=1}^n \sum_{z_i} p(z_i \mid x_i; \theta^{(t)}) \log p(x_i, z_i; \theta) = E_{Z \mid X;\theta^{(t)}} \Big[ \ell(X,Z ; \theta)  \mid X  \Big]\).</p>
+
+<p>(b) M-step. Update  \(\theta^{(t+1)} := \underset{\theta}{\text{argmax }} Q(\theta;\theta^{(t)})\).</p>
+
+<h2 id="gaussian-mixture-model">Gaussian Mixture Model</h2>
+
+<p>The mixture models can be used for clustering problems. We assume observations in the same cluster follow the same distribution, while observations in different clusters follow different distributions. For Gaussian mixture model, we assume the observations follow the Gaussian distributions.</p>
+
+<p>These assumptions can be written as \(x_i \mid z_{ik}=1 \sim N(\mu_k, \Sigma_k)\) for every \(i\), where \(z_{ik} = 1\) if \(x_i\) is from $k$-th cluster and \(z_{ik} = 0\) otherwise. Here, \(z_i\text{'s} \overset{\text{i.i.d.}}{\sim} \text{Multinoulli}(\pi)\), where \(\mathbf{\pi} = (\pi_1, \cdots, \pi_K)^T \in \mathbb{R}^K\) and \(\sum_{k=1}^K \pi_k = 1\). Note that $z_i$’s are latent random variables, which are hidden and unobservable.</p>
+
+<p>We want to estimate the parameters \(\mathbf{\pi}\), \(\mathbf{\mu}\) and \(\mathbf{\Sigma}\) (i.e. \(\pi_1,\cdots,\pi_K,\mu_1,\cdots,\mu_K,\Sigma_1,\cdots,\Sigma_K\)). To estimate them, we first written down the loglikelihood of the observable data $x_i$’s:</p>
+
+\[\begin{align*}
+\ell(\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) &amp;= \log L(\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) \\
+&amp;= \sum_{i=1}^n \log p(x_i;\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) \\
+&amp;= \sum_{i=1}^n \log \sum_{z_i} p(x_i, z_i; \theta).
+\end{align*}\]
+
+<p>Since there are latent variables $z_i$’s, let’s apply EM algorithm.</p>
+
+<p>E-step: For each $i,k$, set $w_{ik} := q_i(z_{ik}=1) = P(z_{ik}=1 \mid x_i; \mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma})$;</p>
+
+<p>M-step: For each $k$, update the parameters</p>
+
+\[\pi_k := \frac{1}{n} \sum_{i=1}^{n} w_{ik}, \\
+\mu_k := \frac{\sum_{i=1}^{n} w_{ik} x_i}{\sum_{i=1}^{n} w_{ik}}, \\
+\Sigma_k := \frac{\sum_{i=1}^{n} w_{ik} (x_i-\mu_k)(x_i-\mu_k)^T}{\sum_{i=1}^{n} w_{ik}}.\]
+
+<p>In the E-step, \(q_i(z_{ik}=1)\) denotes the probability of $z_{ik}=1$ under the distribution $q_i$, which is \(\text{Multinoulli}(\pi)\). We calculate \(P(z_{ik}=1 \mid x_i; \pi_k, \mu_k, \Sigma_k)\) by using Bayes rule:</p>
+
+\[\begin{align*}
+P(z_{ik}=1 \mid x_i; \mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) &amp;= \frac{p(z_{ik}=1,x_i; \mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma})}{p(x_i; \mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma})} \\ 
+&amp;= \frac{p(x_i \mid z_{ik}=1; \mathbf{\mu}, \mathbf{\Sigma}) P(z_{ik}=1; \mathbf{\pi})} { \sum_{l=1}^{K} p(x_i \mid z_{il}=1 ; \mathbf{\mu}, \mathbf{\Sigma}) P(z_{il}=1; \mathbf{\pi})}.
+\end{align*}\]
+
+<p>Here, \(p(x_i \mid z_{ik}=1; \mathbf{\mu}, \mathbf{\Sigma})\) is given by evaluating the density of a Gaussian with mean $\mu_k$ and covariance \(Σ_k\) at \(x_i\); \(P(z_{ik}=1; \mathbf{\pi})\) is given by \(\pi_k\). The values \(w_{ik}\) calculated in the E-step represent our “soft” guesses for the probability of \(z_{ik}=1\), which is also the probability of observation \(x_i\) is from $k$-th cluster.</p>
+
+<p>The term “<strong>soft</strong>” refers to our guesses being probabilities and taking values in \([0,1]\); in
+contrast, a “<strong>hard</strong>” guess is one that represents a single best guess (such as taking values in \(\{0,1\}\) or \(\{1,\cdots,k\}\)). EM algorithm makes the “soft” guesses $w_i$ for each observation $i$, while K-means makes the hard guesses \(c_i\).</p>
+
+<p>Similar to K-means, it is also susceptible to local optima, so reinitializing at several different initial parameters may be a good idea.</p>
+
+<div style="text-align: center"> <img src="../../../pictures/GMM-example.png" alt="GMM example" style="zoom: 70%;" /> </div>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>Andrew Ng. “CS229 Lecture notes: 7a, 7b, 8.”, http://cs229.stanford.edu/notes.</p>
+
+<p>Victor Lavrenko. “Expectation Maximization: how it works”, https://youtu.be/iQoXFmbXRJA.</p>
+
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

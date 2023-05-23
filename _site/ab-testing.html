@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>A/B Testing</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>A/B Testing | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="A/B Testing" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Assume $X_{Ai}$’s and $X_{Bj}$’s are iid (independent and identically distributed) random variables with mean $\mu_A$, $\mu_B$ and variance $\sigma^2_A$, $\sigma^2_B$." />
+<meta property="og:description" content="Assume $X_{Ai}$’s and $X_{Bj}$’s are iid (independent and identically distributed) random variables with mean $\mu_A$, $\mu_B$ and variance $\sigma^2_A$, $\sigma^2_B$." />
+<link rel="canonical" href="http://localhost:4000/ab-testing.html" />
+<meta property="og:url" content="http://localhost:4000/ab-testing.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-24T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="A/B Testing" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-02-24T00:00:00+08:00","datePublished":"2020-02-24T00:00:00+08:00","description":"Assume $X_{Ai}$’s and $X_{Bj}$’s are iid (independent and identically distributed) random variables with mean $\\mu_A$, $\\mu_B$ and variance $\\sigma^2_A$, $\\sigma^2_B$.","headline":"A/B Testing","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ab-testing.html"},"url":"http://localhost:4000/ab-testing.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/ab-testing.html">
+    <h2 class="post-title">A/B Testing</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/stat"> <li>Stat</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Feb 24, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>Assume $X_{Ai}$’s and $X_{Bj}$’s are iid (independent and identically distributed) random variables with mean $\mu_A$, $\mu_B$ and variance $\sigma^2_A$, $\sigma^2_B$.</p>
+
+<p>By the CLT (central limit theorem),</p>
+
+\[\bar{X}_A = \frac{1}{n_A} \sum_{i=1}^{n_A} X_{Ai} \xrightarrow{d} N(\mu_A, \frac{\sigma_A^2}{n_A}), \\
+\bar{X}_B = \frac{1}{n_B} \sum_{j=1}^{n_B} X_{Bj} \xrightarrow{d} N(\mu_B, \frac{\sigma_B^2}{n_B}).\]
+
+<p>By the additivity of normal distribution,</p>
+
+\[\bar{X}_A - \bar{X}_B \xrightarrow{d} N(\mu_A - \mu_B, \frac{\sigma_A^2}{n_A} + \frac{\sigma_B^2}{n_B}).\]
+
+<p>If the population variances \(\sigma_A\) and \(\sigma_B\) are known, we can simply use $Z$-test. However, we usually do not know them and we use the sample variances \(s_A^2\) and \(s_B^2\) to estimate them, then we construct a test statistic \(T\) which follows the student’s \(t\) distribution with the degrees of freedom \(\upsilon\).</p>
+
+<p><strong>Hypothesis:</strong> $H_0: \mu_A=\mu_B \text{  v.s. } H_1: \mu_A \neq \mu_B$.</p>
+
+<p><strong>Test statistic:</strong></p>
+
+\[T= \frac{\bar{X}_A - \bar{X}_B}{\sqrt{s^2_A/n_A + s^2_B/n_B}} \sim t_{(\upsilon)},\]
+
+<p>which is the $t$ distribution with degrees of freedom</p>
+
+\[\upsilon = \frac{(s^{2}_{A}/n_{A} + s^{2}_{B}/n_{B})^{2}} {(s^2_{A}/n_{A})^2/(n_{A}-1) + (s^2_{B}/n_{B})^2/(n_{B}-1) }.\]
+
+<p><strong>Significance level:</strong> $\alpha$.</p>
+
+<p><strong>Critical region:</strong> Reject the \(H_0\) if \(\ \mid\ T\mid \ &gt;\ t_{1- \alpha/2, \upsilon}\), where $t_{1- \alpha/2, \upsilon}$ is the critical value of the $t$ distribution with $ \upsilon$ degrees of freedom.</p>
+
+<p>Note:</p>
+
+<p>As the number of degrees of freedom grows, the <em>t</em> distribution approaches the standard normal distribution, which means if the sample size is large enough (usually $&gt;30$), then $T \sim N(0,1)$ approximately and we can use the $Z$ test instead of the $t$ test.</p>
+
+<p>If we assume $\sigma^2_A = \sigma^2_B$, then \(T = \frac{\bar{X}_{A} - \bar{X}_{B}} {s \sqrt{1/n_A + 1/n_B}} \sim t_{(\upsilon)}\), where \(s^{2} = \frac{(n_{A}-1){s^{2}_{A}} + (n_{B}-1){s^{2}_{B}}} {n_{A} + n_{B} - 2}, \upsilon=n_A+n_B-2\).</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong> <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm">Two-Sample <em>t</em>-Test for Equal Means</a>.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

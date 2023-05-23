@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Feature Engineering: Data Preprocessing</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Feature Engineering: Data Preprocessing | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Feature Engineering: Data Preprocessing" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Feature Scaling and Zero-Centering" />
+<meta property="og:description" content="Feature Scaling and Zero-Centering" />
+<link rel="canonical" href="http://localhost:4000/feature-engineering-data-preprocessing.html" />
+<meta property="og:url" content="http://localhost:4000/feature-engineering-data-preprocessing.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-17T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Feature Engineering: Data Preprocessing" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-09-17T00:00:00+08:00","datePublished":"2020-09-17T00:00:00+08:00","description":"Feature Scaling and Zero-Centering","headline":"Feature Engineering: Data Preprocessing","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/feature-engineering-data-preprocessing.html"},"url":"http://localhost:4000/feature-engineering-data-preprocessing.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#feature-scaling-and-zero-centering">Feature Scaling and Zero-Centering</a><ul><li><a href="#why-feature-scaling">Why Feature Scaling</a></li><li><a href="#why-zero-centering">Why Zero-Centering</a></li><li><a href="#common-methods">Common Methods</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/feature-engineering-data-preprocessing.html">
+    <h2 class="post-title">Feature Engineering: Data Preprocessing</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/fe"> <li>FE</li> </a><a class="post-link" href="/categories/stat"> <li>Stat</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Sep 17, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="feature-scaling-and-zero-centering">Feature Scaling and Zero-Centering</h2>
+
+<h3 id="why-feature-scaling">Why Feature Scaling</h3>
+
+<p>Since the range of values of different features varies widely, in some machine learning algorithms, objective functions will not work properly. Feature scaling makes the values of different features approximately in the same scale.</p>
+
+<p>There are several reasons why we need feature scaling.</p>
+
+<p>Firstly, many algorithms (such as K-means, KNN) calculate the distance between two points by the Euclidean distance. If one of the features has a broad range of values, the distance will be governed by this particular feature.</p>
+
+<p>Secondly, L1 or L2 regularization penalize the weights. If a feature has a small scale, the weight corresponding to this feature tends to be large, and the penalization for the weight of this feature will be heavier and that is unfair.</p>
+
+<p>Thirdly, feature scaling helps gradient descent converges faster. Suppose the scale of feature \(x^{[1]}\) is large and that of \(x^{[2]}\) is small, that leads to the range of weight \(w_1\) is smaller than the range of \(w_2\). The problem is that these gradients usually share the same learning rate. If the learning rate is large, then \(w_1\) cannot converge. Otherwise, if the learning rate is small, then \(w_2\) converges very slow.</p>
+
+<div style="text-align: center">
+<figure>
+<img src="../../../pictures/feature-scaling-and-gradient-descent.png" alt="feature-scaling-and-gradient-descent.png" style="zoom: 50%;" />
+<figcaption style="font-size: 80%;"> <a href="https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35">Figure source</a> </figcaption>
+</figure>
+</div>
+
+<h3 id="why-zero-centering">Why Zero-Centering</h3>
+
+<p>We also expect the features are zero-centered, otherwise it could introduce undesirable zig-zagging dynamics in the gradient updates for the weights.</p>
+
+<p>Say a model has inputs \(x = (x^{[1]}, x^{[2]}, \cdots)^T\), weights \(w=(w_1,w_2,\cdots)^T\), and output \(\hat{y}=\sigma(w^Tx+b)\). Denote a intermediate variable \(z:=w^Tx+b\). The gradients of the weight \(w_j\) is</p>
+
+\[\frac{\partial \text{Loss}}{\partial w_j} = \frac{\partial \text{Loss}}{\partial z} \frac{\partial z}{\partial w_j} = \frac{\partial \text{Loss}}{\partial z} x^{[j]}.\]
+
+<p>If all \(x^{[j]}&gt;0\) or \(&lt;0\) for \(j=1,2,\cdots\), the gradients \(\frac{\partial \text{Loss}}{\partial w_j}\) for all $j$ have the same sign (positive or negative) as \(\frac{\partial \text{Loss}}{\partial z}\).</p>
+
+<p>Now let’s show why the same sign of gradients may leads to zig-zagging. Say there are two parameters \(w_1,w_2\), and the gradients of them are always of the same sign. That means \(w_1\) and \(w_2\) increase or decrease simultaneously in the gradient updates, and it also means that we can only move roughly in the direction of northeast or southwest in the parameter space. If our goal happens to be in the northwest or southeast side of our current position, then it will cost a lot to move to our target position, as shown below.</p>
+
+<div style="text-align: center"> <img src="../../../pictures/zig-zagging-parameter-updates.png" alt="zig-zagging-parameter-updates" style="zoom: 30%;" />  </div>
+
+<h3 id="common-methods">Common Methods</h3>
+
+<p>Standardization:</p>
+
+\[x^* = \frac{x-\bar{x}}{\text{std}(x)}.\]
+
+<p>Mean normalization:</p>
+
+\[x^* = \frac{x-\bar{x}}{\text{max}(x) - \text{min}(x)}.\]
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<p>Wikipedia: <a href="https://en.wikipedia.org/w/index.php?title=Feature_scaling">Feature scaling</a>.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

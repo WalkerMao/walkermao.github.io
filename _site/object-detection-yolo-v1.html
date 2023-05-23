@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Object Detection: YOLO v1</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Object Detection: YOLO v1 | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Object Detection: YOLO v1" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The contents in this post are excerpted from the paper “You Only Look Once: Unified, Real-Time Object Detection” 1, with a little bit modification, as my notes for this paper. Redmon, Joseph, et al. “You only look once: Unified, real-time object detection.” Proceedings of the IEEE conference on computer vision and pattern recognition. 2016. &#8617;" />
+<meta property="og:description" content="The contents in this post are excerpted from the paper “You Only Look Once: Unified, Real-Time Object Detection” 1, with a little bit modification, as my notes for this paper. Redmon, Joseph, et al. “You only look once: Unified, real-time object detection.” Proceedings of the IEEE conference on computer vision and pattern recognition. 2016. &#8617;" />
+<link rel="canonical" href="http://localhost:4000/object-detection-yolo-v1.html" />
+<meta property="og:url" content="http://localhost:4000/object-detection-yolo-v1.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Object Detection: YOLO v1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2022-02-20T00:00:00+08:00","datePublished":"2022-02-20T00:00:00+08:00","description":"The contents in this post are excerpted from the paper “You Only Look Once: Unified, Real-Time Object Detection” 1, with a little bit modification, as my notes for this paper. Redmon, Joseph, et al. “You only look once: Unified, real-time object detection.” Proceedings of the IEEE conference on computer vision and pattern recognition. 2016. &#8617;","headline":"Object Detection: YOLO v1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/object-detection-yolo-v1.html"},"url":"http://localhost:4000/object-detection-yolo-v1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#abstract">Abstract</a></li><li><a href="#1-introduction">1. Introduction</a></li><li><a href="#2-unified-detection">2. Unified Detection</a><ul><li><a href="#21-network-design">2.1 Network Design</a></li><li><a href="#22-training">2.2 Training</a></li><li><a href="#23-inference">2.3 Inference</a></li><li><a href="#24-limitations-of-yolo">2.4 Limitations of YOLO</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/object-detection-yolo-v1.html">
+    <h2 class="post-title">Object Detection: YOLO v1</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cv"> <li>CV</li> </a><a class="post-link" href="/categories/dl"> <li>DL</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/object detection"> <li>Object detection</li> </a><a class="post-link" href="/tags/cnn"> <li>CNN</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Feb 20, 2022
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The contents in this post are excerpted from the paper “You Only Look Once: Unified, Real-Time Object Detection” <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>, with a little bit modification, as my notes for this paper.</p>
+
+<h2 id="abstract">Abstract</h2>
+
+<p>YOLO is a single neural network predicts bounding boxes and class probabilities directly from full images in one evaluation (you only look once). It can be optimized end-to-end directly on detection performance.</p>
+
+<p>Compared to state-of-the-art detection systems, YOLO is extremely fast. Furthermore, it makes more localization errors but is less likely to predict false positives on background.</p>
+
+<p>YOLO learns very general representations of objects.</p>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>More recent approaches like R-CNN use region proposal methods to first generate potential bounding boxes in an image and then run a classifier on these proposed boxes. After
+classification, post-processing is used to refine the bound-
+ing boxes, eliminate duplicate detections, and rescore the
+boxes based on other objects in the scene. These complex pipelines are slow and hard to optimize because each
+individual component must be trained separately.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.researchgate.net/profile/Rumin-Zhang/publication/330591711/figure/fig4/AS:999014401069061@1615195002164/The-YOLO-Detection-System-Processing-images-with-YOLO-is-simple-and-straightforward.jpg" alt="Figure 1: The YOLO Detection System." style="zoom:80%;" />
+<figcaption style="font-size:80%;"> Figure 1: The YOLO Detection System. Processing images with YOLO is simple and straightforward. Our system (1) resizes the input image to 448 × 448, (2) runs a single convolutional network on the image, and (3) thresholds the resulting detections by the model's confidence. (<a href="https://www.researchgate.net/figure/The-YOLO-Detection-System-Processing-images-with-YOLO-is-simple-and-straightforward_fig4_330591711">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>YOLO is refreshingly simple: see Figure 1. A single convolutional network simultaneously predicts multiple bounding boxes and class probabilities for those boxes. YOLO trains on full images and directly optimizes detection performance. This unified model has several benefits over traditional methods of object detection:</p>
+
+<p>First, YOLO is extremely fast.</p>
+
+<p>Second, YOLO reasons globally about the image when making predictions. Unlike sliding window and region proposal-based techniques, YOLO sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance. Fast R-CNN, a top detection method, mistakes background patches in an image for objects because it can’t see the larger context. YOLO makes less than half the number of background errors compared to Fast R-CNN.</p>
+
+<p>Third, YOLO learns generalizable representations of objects. It is less likely to break down when applied to new domains or unexpected inputs (e.g. trained on natural images and tested on artwork).</p>
+
+<p>As for the drawbacks, YOLO struggles to precisely localize some objects, especially small ones.</p>
+
+<h2 id="2-unified-detection">2. Unified Detection</h2>
+
+<p>Our system divides the input image into an \(S \times S\) grid. Each grid cell predicts \(B\) bounding boxes and confidence scores for those boxes.</p>
+
+<p>Each grid cell predicts \(B\) bounding boxes (\(x, y, w, h\)) and confidence scores for those boxes. These confidence scores reflect how confident the model is that the box contains an object and also how accurate it thinks the box is that it predicts. Formally we define confidence as \(\mathrm{Pr}(\mathrm{Object}) \times \mathrm{IOU}_{\mathrm{pred}}^{\mathrm{truth}}\). If no object exists in that cell, the confidence scores should be zero. Otherwise we want the confidence score to equal the intersection over union (IOU) between the predicted box and the ground truth.</p>
+
+<p>Each grid cell also predicts \(C\) conditional class probabilities, \(\mathrm{Pr}(\mathrm{Class}_i \mid \mathrm{Object})\). These probabilities are conditioned on the grid cell containing an object. We only predict one set of class probabilities per grid cell, regardless of the number of boxes \(B\).</p>
+
+<p>At test time we multiply the conditional class probabilities and the individual box confidence predictions,</p>
+
+\[\mathrm{Pr}(\mathrm{Class}_i \mid \mathrm{Object}) \times \mathrm{Pr}(\mathrm{Object}) \times \mathrm{IOU}_{\mathrm{pred}}^{\mathrm{truth}} = \mathrm{Pr}(\mathrm{Class}_i) \times \mathrm{IOU}_{\mathrm{pred}}^{\mathrm{truth}}\]
+
+<p>which gives us class-specific confidence scores for each box. hese scores encode both the probability of that class appearing in the box and how well the predicted box fits the object.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.researchgate.net/publication/347650835/figure/fig3/AS:1022069898768390@1620691861580/The-You-Only-Look-Once-YOLO-8-model.ppm" alt="Figure 2: The Model." style="zoom:90%;" />
+<figcaption style="font-size:80%;"> Figure 2: The Model. (<a href="https://www.researchgate.net/figure/The-You-Only-Look-Once-YOLO-8-model_fig3_347650835">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>Our system models detection as a regression problem. It divides the image into an \(S \times S\) grid and for each grid cell predicts \(B\) bounding boxes, confidence for those boxes, and \(C\) class probabilities. These predictions are encoded as an \(S \times S \times (5B + C)\) tensor.</p>
+
+<p>For evaluating YOLO on PASCAL VOC, we use \(S = 7, B = 2\).</p>
+
+<h3 id="21-network-design">2.1 Network Design</h3>
+
+<p>We implement this model as a convolutional neural network. The initial convolutional layers of the network extract features from the image while the fully connected layers predict the output probabilities and coordinates.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.researchgate.net/publication/329564805/figure/fig3/AS:702649875845129@1544536193578/Architecture-of-YOLO-CNN.ppm" alt="Architecture of YOLO CNN." style="zoom:110%;" />
+<figcaption style="font-size:80%;"> Figure 3: The Architecture. Our detection network has 24 convolutional layers followed by 2 fully connected layers. Alternating 1 × 1 convolutional layers reduce the features space from preceding layers. The final output of our network is the 7 × 7 × 30 tensor of predictions. We pretrain the convolutional layers on the ImageNet classification task at half the resolution (224 × 224 input image) and then double the resolution for detection. (<a href="https://www.researchgate.net/figure/Architecture-of-YOLO-CNN_fig3_329564805">Source</a>) </figcaption>
+</figure>
+</div>
+
+<h3 id="22-training">2.2 Training</h3>
+
+<p>Our final layer predicts both class probabilities and bounding box coordinates.</p>
+
+<p>We increase the loss from bounding box coordinate predictions and decrease the loss from confidence predictions for boxes that don’t contain objects. We use two parameters, \(\lambda_{\mathrm{coord}}\) and \(\lambda_{\mathrm{noobj}}\) to accomplish this. We set \(\lambda_{\mathrm{coord}} = 5\) and \(\lambda_{\mathrm{noobj}} = 0.5\).</p>
+
+<p>Our error metric should reflect that small deviations in large boxes matter less than in small boxes. To partially address this we predict the square root of the bounding box width and height instead of the width and height directly.</p>
+
+<p>YOLO predicts multiple bounding boxes per grid cell. At training time we only want one bounding box predictor to be responsible for each object. We assign one predictor to be “responsible” for predicting an object based on which prediction has the highest current IOU with the ground truth. This leads to specialization between the bounding box predictors. Each predictor gets better at predicting certain sizes, aspect ratios, or classes of object, improving overall recall.</p>
+
+<p>During training we optimize the following, multi-part loss function:</p>
+
+\[\begin{aligned}
+&amp; \lambda_{\text {coord }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\text {obj }}\left[\left(x_{i}-\hat{x}_{i}\right)^{2}+\left(y_{i}-\hat{y}_{i}\right)^{2}\right] \\
+&amp;+\lambda_{\text {coord }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\text {obj }}\left[\left(\sqrt{w_{i}}-\sqrt{\hat{w}_{i}}\right)^{2}+\left(\sqrt{h_{i}}-\sqrt{\hat{h}_{i}}\right)^{2}\right] \\
+&amp;+\sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\text {obj }}\left(C_{i}-\hat{C}_{i}\right)^{2} \\
+&amp;+\lambda_{\text {noobj }} \sum_{i=0}^{S^{2}} \sum_{j=0}^{B} \mathbb{1}_{i j}^{\text {noobj }}\left(C_{i}-\hat{C}_{i}\right)^{2} \\
+&amp;+\sum_{i=0}^{S^{2}} \mathbb{1}_{i}^{\text {obj }} \sum_{c \in \text { classes }}\left(p_{i}(c)-\hat{p}_{i}(c)\right)^{2}.
+\end{aligned}\]
+
+<p>where \(\mathbb{1}_{i}^{\text {obj }}\) denotes if object appears in cell \(i\) and \(\mathbb{1}_{i j}^{\text {obj }}\) denotes that the \(j\) th bounding box predictor in cell \(i\) is “responsible” for that prediction.</p>
+
+<p>Note that the loss function only penalizes classification error if an object is present in that grid cell (hence the conditional class probability discussed earlier). It also only penalizes bounding box coordinate error if that predictor is “responsible” for the ground truth box (i.e. has the highest IOU of any predictor in that grid cell).</p>
+
+<h3 id="23-inference">2.3 Inference</h3>
+
+<p>The grid design enforces spatial diversity in the bounding box predictions. Often it is clear which grid cell an object falls in to and the network only predicts one box for each object. However, some large objects or objects near the border of multiple cells can be well localized by multiple cells. Non-maximal suppression can be used to fix these multiple detections.</p>
+
+<h3 id="24-limitations-of-yolo">2.4 Limitations of YOLO</h3>
+
+<p>YOLO imposes strong spatial constraints on bounding box predictions since each grid cell only predicts two boxes and can only have one class. This spatial constraint limits the number of nearby objects that our model can predict. Our model struggles with small objects that appear in groups, such as flocks of birds. Faster R-CNN does better than YOLO in detecting small objects since it generates more anchors (roughly 2000 in total), but it is still not good enough since the height and width of the last feature map are small after pooling layers.</p>
+
+<p>Since our model learns to predict bounding boxes from data, it struggles to generalize to objects in new or unusual aspect ratios or configurations.</p>
+
+<p>Finally, while we train on a loss function that approximates detection performance, our loss function treats errors the same in small bounding boxes versus large bounding boxes. A small error in a large box is generally benign but a small error in a small box has a much greater effect on IOU. Our main source of error is incorrect localizations.</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Redmon, Joseph, et al. “You only look once: Unified, real-time object detection.” <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>. 2016. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Neural Language Models and RNNs</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Neural Language Models and RNNs | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Neural Language Models and RNNs" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Neural Language Models" />
+<meta property="og:description" content="Neural Language Models" />
+<link rel="canonical" href="http://localhost:4000/neural-lms-rnns.html" />
+<meta property="og:url" content="http://localhost:4000/neural-lms-rnns.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-25T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Neural Language Models and RNNs" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-06-25T00:00:00+08:00","datePublished":"2020-06-25T00:00:00+08:00","description":"Neural Language Models","headline":"Neural Language Models and RNNs","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/neural-lms-rnns.html"},"url":"http://localhost:4000/neural-lms-rnns.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#neural-language-models">Neural Language Models</a><ul><li><a href="#embeddings">Embeddings</a></li></ul></li><li><a href="#sequence-processing-with-rnns">Sequence Processing with RNNs</a><ul><li><a href="#simple-rnns">Simple RNNs</a><ul><li><a href="#forward-inference-in-simple-rnns">Forward Inference in Simple RNNs</a></li><li><a href="#training-simple-rnns">Training Simple RNNs</a></li></ul></li><li><a href="#stacked-rnns">Stacked RNNs</a></li><li><a href="#bidirectional-rnns">Bidirectional RNNs</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/neural-lms-rnns.html">
+    <h2 class="post-title">Neural Language Models and RNNs</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/nlp"> <li>NLP</li> </a><a class="post-link" href="/categories/dl"> <li>DL</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/rnn"> <li>RNN</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jun 25, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="neural-language-models">Neural Language Models</h2>
+
+<p>A neural LM (language model) usually has much higher predictive accuracy than an n-gram language model. Furthermore, neural language models underlie many of the models for tasks like machine translation, dialog, and language generation.</p>
+
+<p>Compared to n-gram LMs, <strong>neural LMs don’t need smoothing, and they can handle much longer histories, and can generalize over contexts of similar words by using word embeddings.</strong></p>
+
+<p>However, neural net language models are strikingly slower to train than traditional language models, and so for many tasks an n-gram language model is still the right tool.</p>
+
+<h3 id="embeddings">Embeddings</h3>
+
+<p>In neural language models, the prior context is represented by embeddings of the previous words. Representing the prior context as embeddings, rather than by exact words as used in n-gram language models, allows neural language models to <strong>generalize to unseen data</strong> much better than n-gram language models.</p>
+
+<p>For example, suppose we’ve seen this sentence in training: “I have to make sure when I get home to feed the cat”, but we’ve never seen the word “dog” after the words “feed the”. In our test set we are trying to predict what comes after the prefix “I forgot when I got home to feed the”. An n-gram LM will predict “cat”, but not “dog”. But a neural LM, which can make use of the fact that “cat” and “dog” have similar embeddings, will be able to assign a reasonably high probability to “dog” as well as “cat”.</p>
+
+<p>We can use the pre-trained word embeddings. As shown in the Figure 7.12, a <strong>feedforward neural LM</strong> with pre-trained embeddings as the inputs, and each embedding is of dimension \(d \times 1\).</p>
+
+<p><img src="../../../pictures/feedforward-neural-LM-1.png" alt="feedforward-neural-LM-1" style="zoom:80%;" /></p>
+
+<p>However, often <strong>we’d like to learn the embeddings simultaneously with training the network.</strong> This is true when whatever task the network is designed for (sentiment classification, or translation, or parsing) places strong constraints on what makes a good representation.</p>
+
+<p>To do this, we’ll add an extra layer to the network, and propagate the error all the way back to the embedding vectors. For this to work at the input layer, instead of pre-trained embeddings, we’re going to represent each of the previous context words as a one-hot vector of length $\mid \mathcal{V} \mid$.</p>
+
+<p><img src="../../../pictures/feedforward-neural-LM-2.png" alt="feedforward-neural-LM-2" style="zoom:80%;" /></p>
+
+<h2 id="sequence-processing-with-rnns">Sequence Processing with RNNs</h2>
+
+<p>The feedforward neural LMs operate by accepting fixed-sized windows of tokens as input; sequences longer than the window size are processed by sliding windows over the input making predictions as they go, with the end result being a sequence of predictions spanning the input. As shown in the Figure 7.12 and 7.13, we are predicting which word will come next given the window <em>the ground there</em>. Importantly, <strong>the decision made for one window has no impact on later decisions</strong>.</p>
+
+<p>The <strong>sliding window approach</strong> is problematic for a number of reasons. One reason is that, it shares the primary weakness of Markov approaches in that it limits the context from which information can be extracted; anything outside the context window has no impact on the decision being made. This is an issue since there are many language tasks that require access to information that can be arbitrarily distant from the point at which processing is happening.</p>
+
+<p>In a word, <strong>the feedforward neural LMs use the sliding window, which causes some problems</strong>. <strong>Recurrent neural networks</strong> (<strong>RNNs</strong>) are designed to overcome the weaknesses of sliding window approach, and RNNs allow us to handle variable length inputs without the use of fixed-sized windows.</p>
+
+<h3 id="simple-rnns">Simple RNNs</h3>
+
+<p>A recurrent neural network (RNN) is any network that contains a cycle within its network connections. That is, <strong>any network where the value of a unit is directly, or indirectly, dependent on earlier outputs as an input</strong>.</p>
+
+<p>We first consider a class of recurrent networks referred to as <strong>Elman Networks</strong> or <strong>simple RNNs</strong>.</p>
+
+<p>In a simple RNN, the hidden layer from the previous time-step provides a form of memory, or past context, that encodes earlier processing and informs the decisions to be made at later points in time.</p>
+
+<p>Compared to non-recurrent architectures, we need another set of weights that connect the hidden layer from the previous time-step to the current hidden layer. These weights determine how the network should make use of memory (or past context) in calculating the output for the current input. As with the other weights in the network, these weights are trained via backpropagation.</p>
+
+<p>The following figures illustrate the structure of a simple RNN with one hidden layer.</p>
+
+<p><img src="../../../pictures/Simple-RNN-1.png" alt="Simple-RNN-1" style="zoom:50%;" /></p>
+
+<p><img src="../../../pictures/Simple-RNN-2.png" alt="Simple-RNN-2" style="zoom:80%;" /></p>
+
+<h4 id="forward-inference-in-simple-rnns">Forward Inference in Simple RNNs</h4>
+
+<p><strong>Forward inference</strong> in a RNN maps a sequence of inputs to a sequence of outputs. To compute an output $y_t$ for an input $x_t$, we need the activation value for the hidden layer $h_t$. To calculate this, we multiply the input $x_t$ with the weight matrix $W$, and the hidden layer from the previous time-step $h_{t-1}$ with the weight matrix $U$. We add these values together and pass them through a suitable activation function, $g(\cdot)$, to arrive at the activation value for the current hidden layer, $h_t$:</p>
+
+\[h_t = g(Uh_{t-1} + Wx_t).\]
+
+<p>Once we have the values for the hidden layer, we proceed with the usual computation to generate the output vector \(y_t\):</p>
+
+\[y_t = f(Vh_t).\]
+
+<p>In the commonly encountered case of soft classification, computing $y_t$ consists of a softmax computation that provides a normalized probability distribution over the possible output classes:</p>
+
+\[y_t = \text{Softmax}(Vh_t).\]
+
+<p>Suppose the parameters $U,V,W$ are known, with an input sequence $x=(x_1,x_3,\cdots,x_N)$, the <strong>forward inference</strong>, that gives us an output sequence \(y=(y_1,y_2,\cdots,y_N)\), in a simple RNN, can be expressed as</p>
+
+<pre><code class="language-pseudocode">function FORWARD_RNN(x, network) returns output sequence y:
+    h0 = 0 
+    for t = 1 to LENGTH(x) do:
+        ht = g(U * ht + W * xt) 
+        yt = f(V * ht) 
+    return y
+</code></pre>
+
+<h4 id="training-simple-rnns">Training Simple RNNs</h4>
+
+<p>As with other neural networks, we use a training set, a loss function, and backpropagation to obtain the gradients needed to adjust the weights in RNNs. We now have $3$ sets of weights to update: $W$, the weights from the input layer to the hidden layer, $U$, the weights from the previous hidden layer to the current hidden layer, and finally $V$, the weights from the hidden layer to the output layer.</p>
+
+<p>Given an input sequence $x=(x_1,x_3,\cdots,x_N)$, the total loss (error) $L$ of an RNN is the sum of the loss at each time-step: \(L = \sum_{t=1}^N L_t = \sum_{t=1}^N \text{Loss}(\hat{y}_t, y_t)\).</p>
+
+<p>Then the gradient of $W$ is</p>
+
+\[\frac{\partial L}{\partial W} = \frac{\partial \sum_{t=1}^N L_t}{\partial W} = \sum_{t=1}^N \frac{\partial L_t}{\partial W}.\]
+
+<p>The error for each time-step is computed through applying the chain rule differentiation:</p>
+
+\[\frac{\partial L_t}{\partial W} = \sum_{s=1}^t \frac{\partial L_t}{\partial y_t} \frac{\partial y_t}{\partial h_t} \frac{\partial h_t}{\partial h_s} \frac{\partial h_s}{\partial W}.\]
+
+<p>Also by the chain rule, each \(\frac{\partial h_t}{\partial h_s}\) is computed as</p>
+
+\[\frac{\partial h_t}{\partial h_s} = \frac{\partial h_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial h_{t-2}} \cdots \frac{\partial h_{s+1}}{\partial h_s} = \prod_{r={s+1}}^{t} \frac{\partial h_r}{\partial h_{r-1}}.\]
+
+<p>Put these equations together and we have</p>
+
+\[\frac{\partial L}{\partial W} = \sum_{t=1}^N \sum_{s=1}^t \frac{\partial L_t}{\partial y_t} \frac{\partial y_t}{\partial h_t} \left( \prod_{r={s+1}}^{t} \frac{\partial h_r}{\partial h_{r-1}} \right) \frac{\partial h_s}{\partial W}.\]
+
+<p>The product form of these derivatives may lead to <strong>gradient explosion</strong> or <strong>gradient vanishing</strong> problem. Due to vanishing gradients, we don’t know whether there is dependency between different time steps in the data, or we just cannot capture the true dependency due to this issue.</p>
+
+<p>To solve the problem of exploding gradients, Thomas Mikolov first introduced a simple heuristic solution that clips gradients to a small number whenever they reach a certain threshold, as shown below:</p>
+
+\[\begin{equation}
+\text{gradient} = 
+\begin{cases} 
+\frac{\partial L}{\partial W} &amp; \text{ if } \| \frac{\partial L}{\partial W} \| \leq \text{threshold}, \\
+\text{threshold} \cdot \frac{\frac{\partial L}{\partial W}}{\| \frac{\partial L}{\partial W} \|} &amp; \text{ otherwise.}
+\end{cases}
+\end{equation}\]
+
+<p>To solve the problem of vanishing gradients, we introduce two techniques. The first technique is that instead of initializing $U$ randomly, start off from an identity matrix initialization. The second is to use the ReLU instead of the sigmoid function.</p>
+
+<h3 id="stacked-rnns">Stacked RNNs</h3>
+
+<p>In stacked RNNs, we use the entire sequence of outputs from one RNN as an input sequence to another one. Stacked RNNs consist of multiple networks, where The output of one RNN serves as the input to a subsequent RNN, as shown in Figure 9.10.</p>
+
+<p><img src="../../../pictures/Stacked-RNN.png" alt="Stacked-RNN" style="zoom:65%;" /></p>
+
+<p>Stacked RNNs can usually outperform single-layer networks.</p>
+
+<h3 id="bidirectional-rnns">Bidirectional RNNs</h3>
+
+<p>We can train an backward RNN on an input sequence in reverse, using exactly the same kind of networks. Combining the forward and backward networks results in a <strong>bidirectional RNN</strong>.</p>
+
+<p>A bidirectional RNN consists of two independent RNNs, one where the input is processed from the start to the end, and the other from the end to the start. We can use concatenation or simply element-wise addition or multiplication to combine the results of the two RNNs. The output at
+each step in time thus captures information to the left and to the right of the current input.</p>
+
+<p>The bidirectional RNN for sequence labeling:</p>
+
+<p><img src="/pictures/Bidirectional-RNN.png" alt="Bidirectional-RNN" style="zoom:65%;" /></p>
+
+<p>Bidirectional RNNs have proven to be quite effective for sequence classification, as shown in the Figure 9.12.</p>
+
+<p><img src="/pictures/Bidirectional-RNN-for-Sequence-Classification.png" alt="Bidirectional-RNN-for-Sequence-Classification" style="zoom:65%;" /></p>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>Jurafsky, D., Martin, J. H. (2009). <em>Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition</em>. Upper Saddle River, N.J.: Pearson Prentice Hall.</p>
+
+<p>Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). <em>CS224n: Natural Language Processing with Deep
+Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM</em>. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

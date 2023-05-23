@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Notes on "C++ Primer": Chapter 7. Classes</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Notes on “C++ Primer”: Chapter 7. Classes | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Notes on “C++ Primer”: Chapter 7. Classes" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chapter 7. Classes" />
+<meta property="og:description" content="Chapter 7. Classes" />
+<link rel="canonical" href="http://localhost:4000/notes-on-c++-primer-chapter-7-classes.html" />
+<meta property="og:url" content="http://localhost:4000/notes-on-c++-primer-chapter-7-classes.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-07T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Notes on “C++ Primer”: Chapter 7. Classes" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2022-05-07T00:00:00+08:00","datePublished":"2022-05-07T00:00:00+08:00","description":"Chapter 7. Classes","headline":"Notes on “C++ Primer”: Chapter 7. Classes","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/notes-on-c++-primer-chapter-7-classes.html"},"url":"http://localhost:4000/notes-on-c++-primer-chapter-7-classes.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#chapter-7-classes">Chapter 7. Classes</a><ul><li><a href="#71-defining-abstract-data-types">7.1 Defining Abstract Data Types</a><ul><li><a href="#711-designing-the-sales_data-class">7.1.1 Designing the <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a><ul><li><a href="#using-the-revised-sales_data-class">Using the Revised <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a></li></ul></li><li><a href="#712-defining-the-revised-sales_data-class">7.1.2 Defining the Revised <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a><ul><li><a href="#defining-member-functions">Defining Member Functions</a></li><li><a href="#introducing-this">Introducing <code class="language-plaintext highlighter-rouge">this</code></a></li><li><a href="#introducing-const-member-functions">Introducing <code class="language-plaintext highlighter-rouge">const</code> Member Functions</a></li><li><a href="#class-scope-and-member-functions">Class Scope and Member Functions</a></li><li><a href="#defining-a-member-function-outside-the-class">Defining a Member Function outside the Class</a></li><li><a href="#defining-a-function-to-return-this-object">Defining a Function to Return “This” Object</a></li></ul></li><li><a href="#713-defining-nonmember-class-related-functions">7.1.3 Defining Nonmember Class-Related Functions</a><ul><li><a href="#defining-the-read-and-print-functions">Defining the <code class="language-plaintext highlighter-rouge">read</code> and <code class="language-plaintext highlighter-rouge">print</code> Functions</a></li><li><a href="#defining-the-add-function">Defining the <code class="language-plaintext highlighter-rouge">add</code> Function</a></li></ul></li><li><a href="#714-constructors">7.1.4 Constructors</a><ul><li><a href="#the-synthesized-default-constructor">The Synthesized Default Constructor</a></li><li><a href="#some-classes-cannot-rely-on-the-synthesized-default-constructor">Some Classes Cannot Rely on the Synthesized Default Constructor</a></li><li><a href="#defining-the-sales_data-constructors">Defining the <code class="language-plaintext highlighter-rouge">Sales_data</code> Constructors</a></li><li><a href="#what--default-means">What <code class="language-plaintext highlighter-rouge">=</code> default Means</a></li><li><a href="#constructor-initializer-list">Constructor Initializer List</a></li><li><a href="#defining-a-constructor-outside-the-class-body">Defining a Constructor outside the Class Body</a></li></ul></li><li><a href="#715-copy-assignment-and-destruction">7.1.5 Copy, Assignment, and Destruction</a><ul><li><a href="#some-classes-cannot-rely-on-the-synthesized-versions">Some Classes Cannot Rely on the Synthesized Versions</a></li></ul></li></ul></li><li><a href="#72-access-control-and-encapsulation">7.2 Access Control and Encapsulation</a><ul><li><a href="#using-the-class-or-struct-keyword">Using the <code class="language-plaintext highlighter-rouge">class</code> or <code class="language-plaintext highlighter-rouge">struct</code> Keyword</a></li></ul></li><li><a href="#721-friends">7.2.1 Friends</a><ul><li><a href="#declarations-for-friends">Declarations for Friends</a></li></ul></li></ul></li><li><a href="#73-additional-class-features">7.3 Additional Class Features</a><ul><li><a href="#731-class-members-revisited">7.3.1 Class Members Revisited</a><ul><li><a href="#defining-a-type-member">Defining a Type Member</a></li><li><a href="#member-functions-of-class-screen">Member Functions of class <code class="language-plaintext highlighter-rouge">Screen</code></a></li><li><a href="#making-members-inline">Making Members <code class="language-plaintext highlighter-rouge">inline</code></a></li><li><a href="#overloading-member-functions">Overloading Member Functions</a></li><li><a href="#mutable-data-members"><code class="language-plaintext highlighter-rouge">mutable</code> Data Members</a></li><li><a href="#initializers-for-data-members-of-class-type">Initializers for Data Members of Class Type</a></li></ul></li><li><a href="#732-functions-that-return-this">7.3.2 Functions That Return <code class="language-plaintext highlighter-rouge">*this</code></a><ul><li><a href="#returning-this-from-a-const-member-function">Returning <code class="language-plaintext highlighter-rouge">*this</code> from a <code class="language-plaintext highlighter-rouge">const</code> Member Function</a></li><li><a href="#overloading-based-on-const">Overloading Based on <code class="language-plaintext highlighter-rouge">const</code></a></li></ul></li><li><a href="#733-class-types">7.3.3 Class Types</a><ul><li><a href="#class-declarations">Class Declarations</a></li></ul></li><li><a href="#734-friendship-revisited">7.3.4 Friendship Revisited</a><ul><li><a href="#friendship-between-classes">Friendship between Classes</a></li><li><a href="#making-a-member-function-a-friend">Making A Member Function a Friend</a></li><li><a href="#overloaded-functions-and-friendship">Overloaded Functions and Friendship</a></li><li><a href="#friend-declarations-and-scope">Friend Declarations and Scope</a></li></ul></li></ul></li><li><a href="#74-class-scope">7.4 Class Scope</a><ul><li><a href="#scope-and-members-defined-outside-the-class">Scope and Members Defined outside the Class</a></li></ul></li><li><a href="#741-name-lookup-and-class-scope">7.4.1 Name Lookup and Class Scope</a><ul><li><a href="#name-lookup-for-class-member-declarations">Name Lookup for Class Member Declarations</a></li><li><a href="#type-names-are-special">Type Names Are Special</a></li><li><a href="#normal-block-scope-name-lookup-inside-member-definitions">Normal Block-Scope Name Lookup inside Member Definitions</a></li><li><a href="#after-class-scope-look-in-the-surrounding-scope">After Class Scope, Look in the Surrounding Scope</a></li><li><a href="#names-are-resolved-where-they-appear-within-a-file">Names Are Resolved Where They Appear within a File</a></li></ul></li></ul></li><li><a href="#75-constructors-revisited">7.5 Constructors Revisited</a><ul><li><a href="#751-constructor-initializer-list">7.5.1 Constructor Initializer List</a><ul><li><a href="#constructor-initializers-are-sometimes-required">Constructor Initializers Are Sometimes Required</a></li><li><a href="#order-of-member-initialization">Order of Member Initialization</a></li><li><a href="#default-arguments-and-constructors">Default Arguments and Constructors</a></li></ul></li><li><a href="#752-delegating-constructors">7.5.2 Delegating Constructors</a></li><li><a href="#753-the-role-of-the-default-constructor">7.5.3 The Role of the Default Constructor</a><ul><li><a href="#using-the-default-constructor">Using the Default Constructor</a></li></ul></li><li><a href="#754-implicit-class-type-conversions">7.5.4 Implicit Class-Type Conversions</a><ul><li><a href="#only-one-class-type-conversion-is-allowed">Only One Class-Type Conversion Is Allowed</a></li><li><a href="#class-type-conversions-are-not-always-useful">Class-Type Conversions Are Not Always Useful</a></li><li><a href="#suppressing-implicit-conversions-defined-by-constructors">Suppressing Implicit Conversions Defined by Constructors</a></li><li><a href="#explicit-constructors-can-be-used-only-for-direct-initialization"><code class="language-plaintext highlighter-rouge">explicit</code> Constructors Can Be Used Only for Direct Initialization</a></li><li><a href="#explicitly-using-constructors-for-conversions">Explicitly Using Constructors for Conversions</a></li><li><a href="#library-classes-with-explicit-constructors">Library Classes with <code class="language-plaintext highlighter-rouge">explicit</code> Constructors</a></li></ul></li><li><a href="#755-aggregate-classes">7.5.5 Aggregate Classes</a></li><li><a href="#756-literal-classes">7.5.6 Literal Classes</a><ul><li><a href="#constexpr-constructors"><code class="language-plaintext highlighter-rouge">constexpr</code> Constructors</a></li></ul></li></ul></li><li><a href="#76-static-class-members">7.6 <code class="language-plaintext highlighter-rouge">static</code> Class Members</a><ul><li><a href="#declaring-static-members">Declaring <code class="language-plaintext highlighter-rouge">static</code> Members</a></li><li><a href="#using-a-class-static-member">Using a Class <code class="language-plaintext highlighter-rouge">static</code> Member</a></li><li><a href="#defining-static-members">Defining <code class="language-plaintext highlighter-rouge">static</code> Members</a></li><li><a href="#in-class-initialization-of-static-data-members">In-Class Initialization of <code class="language-plaintext highlighter-rouge">static</code> Data Members</a></li><li><a href="#static-members-can-be-used-in-ways-ordinary-members-cant"><code class="language-plaintext highlighter-rouge">static</code> Members Can Be Used in Ways Ordinary Members Can’t</a></li></ul></li></ul></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/notes-on-c++-primer-chapter-7-classes.html">
+    <h2 class="post-title">Notes on &quot;C++ Primer&quot;: Chapter 7. Classes</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/c++"> <li>C++</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      May 7, 2022
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><div class="toc">
+        <ul><li><a href="#chapter-7-classes">Chapter 7. Classes</a><ul><li><a href="#71-defining-abstract-data-types">7.1 Defining Abstract Data Types</a><ul><li><a href="#711-designing-the-sales_data-class">7.1.1 Designing the <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a><ul><li><a href="#using-the-revised-sales_data-class">Using the Revised <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a></li></ul></li><li><a href="#712-defining-the-revised-sales_data-class">7.1.2 Defining the Revised <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a><ul><li><a href="#defining-member-functions">Defining Member Functions</a></li><li><a href="#introducing-this">Introducing <code class="language-plaintext highlighter-rouge">this</code></a></li><li><a href="#introducing-const-member-functions">Introducing <code class="language-plaintext highlighter-rouge">const</code> Member Functions</a></li><li><a href="#class-scope-and-member-functions">Class Scope and Member Functions</a></li><li><a href="#defining-a-member-function-outside-the-class">Defining a Member Function outside the Class</a></li><li><a href="#defining-a-function-to-return-this-object">Defining a Function to Return “This” Object</a></li></ul></li><li><a href="#713-defining-nonmember-class-related-functions">7.1.3 Defining Nonmember Class-Related Functions</a><ul><li><a href="#defining-the-read-and-print-functions">Defining the <code class="language-plaintext highlighter-rouge">read</code> and <code class="language-plaintext highlighter-rouge">print</code> Functions</a></li><li><a href="#defining-the-add-function">Defining the <code class="language-plaintext highlighter-rouge">add</code> Function</a></li></ul></li><li><a href="#714-constructors">7.1.4 Constructors</a><ul><li><a href="#the-synthesized-default-constructor">The Synthesized Default Constructor</a></li><li><a href="#some-classes-cannot-rely-on-the-synthesized-default-constructor">Some Classes Cannot Rely on the Synthesized Default Constructor</a></li><li><a href="#defining-the-sales_data-constructors">Defining the <code class="language-plaintext highlighter-rouge">Sales_data</code> Constructors</a></li><li><a href="#what--default-means">What <code class="language-plaintext highlighter-rouge">=</code> default Means</a></li><li><a href="#constructor-initializer-list">Constructor Initializer List</a></li><li><a href="#defining-a-constructor-outside-the-class-body">Defining a Constructor outside the Class Body</a></li></ul></li><li><a href="#715-copy-assignment-and-destruction">7.1.5 Copy, Assignment, and Destruction</a><ul><li><a href="#some-classes-cannot-rely-on-the-synthesized-versions">Some Classes Cannot Rely on the Synthesized Versions</a></li></ul></li></ul></li><li><a href="#72-access-control-and-encapsulation">7.2 Access Control and Encapsulation</a><ul><li><a href="#using-the-class-or-struct-keyword">Using the <code class="language-plaintext highlighter-rouge">class</code> or <code class="language-plaintext highlighter-rouge">struct</code> Keyword</a></li></ul></li><li><a href="#721-friends">7.2.1 Friends</a><ul><li><a href="#declarations-for-friends">Declarations for Friends</a></li></ul></li></ul></li><li><a href="#73-additional-class-features">7.3 Additional Class Features</a><ul><li><a href="#731-class-members-revisited">7.3.1 Class Members Revisited</a><ul><li><a href="#defining-a-type-member">Defining a Type Member</a></li><li><a href="#member-functions-of-class-screen">Member Functions of class <code class="language-plaintext highlighter-rouge">Screen</code></a></li><li><a href="#making-members-inline">Making Members <code class="language-plaintext highlighter-rouge">inline</code></a></li><li><a href="#overloading-member-functions">Overloading Member Functions</a></li><li><a href="#mutable-data-members"><code class="language-plaintext highlighter-rouge">mutable</code> Data Members</a></li><li><a href="#initializers-for-data-members-of-class-type">Initializers for Data Members of Class Type</a></li></ul></li><li><a href="#732-functions-that-return-this">7.3.2 Functions That Return <code class="language-plaintext highlighter-rouge">*this</code></a><ul><li><a href="#returning-this-from-a-const-member-function">Returning <code class="language-plaintext highlighter-rouge">*this</code> from a <code class="language-plaintext highlighter-rouge">const</code> Member Function</a></li><li><a href="#overloading-based-on-const">Overloading Based on <code class="language-plaintext highlighter-rouge">const</code></a></li></ul></li><li><a href="#733-class-types">7.3.3 Class Types</a><ul><li><a href="#class-declarations">Class Declarations</a></li></ul></li><li><a href="#734-friendship-revisited">7.3.4 Friendship Revisited</a><ul><li><a href="#friendship-between-classes">Friendship between Classes</a></li><li><a href="#making-a-member-function-a-friend">Making A Member Function a Friend</a></li><li><a href="#overloaded-functions-and-friendship">Overloaded Functions and Friendship</a></li><li><a href="#friend-declarations-and-scope">Friend Declarations and Scope</a></li></ul></li></ul></li><li><a href="#74-class-scope">7.4 Class Scope</a><ul><li><a href="#scope-and-members-defined-outside-the-class">Scope and Members Defined outside the Class</a></li></ul></li><li><a href="#741-name-lookup-and-class-scope">7.4.1 Name Lookup and Class Scope</a><ul><li><a href="#name-lookup-for-class-member-declarations">Name Lookup for Class Member Declarations</a></li><li><a href="#type-names-are-special">Type Names Are Special</a></li><li><a href="#normal-block-scope-name-lookup-inside-member-definitions">Normal Block-Scope Name Lookup inside Member Definitions</a></li><li><a href="#after-class-scope-look-in-the-surrounding-scope">After Class Scope, Look in the Surrounding Scope</a></li><li><a href="#names-are-resolved-where-they-appear-within-a-file">Names Are Resolved Where They Appear within a File</a></li></ul></li></ul></li><li><a href="#75-constructors-revisited">7.5 Constructors Revisited</a><ul><li><a href="#751-constructor-initializer-list">7.5.1 Constructor Initializer List</a><ul><li><a href="#constructor-initializers-are-sometimes-required">Constructor Initializers Are Sometimes Required</a></li><li><a href="#order-of-member-initialization">Order of Member Initialization</a></li><li><a href="#default-arguments-and-constructors">Default Arguments and Constructors</a></li></ul></li><li><a href="#752-delegating-constructors">7.5.2 Delegating Constructors</a></li><li><a href="#753-the-role-of-the-default-constructor">7.5.3 The Role of the Default Constructor</a><ul><li><a href="#using-the-default-constructor">Using the Default Constructor</a></li></ul></li><li><a href="#754-implicit-class-type-conversions">7.5.4 Implicit Class-Type Conversions</a><ul><li><a href="#only-one-class-type-conversion-is-allowed">Only One Class-Type Conversion Is Allowed</a></li><li><a href="#class-type-conversions-are-not-always-useful">Class-Type Conversions Are Not Always Useful</a></li><li><a href="#suppressing-implicit-conversions-defined-by-constructors">Suppressing Implicit Conversions Defined by Constructors</a></li><li><a href="#explicit-constructors-can-be-used-only-for-direct-initialization"><code class="language-plaintext highlighter-rouge">explicit</code> Constructors Can Be Used Only for Direct Initialization</a></li><li><a href="#explicitly-using-constructors-for-conversions">Explicitly Using Constructors for Conversions</a></li><li><a href="#library-classes-with-explicit-constructors">Library Classes with <code class="language-plaintext highlighter-rouge">explicit</code> Constructors</a></li></ul></li><li><a href="#755-aggregate-classes">7.5.5 Aggregate Classes</a></li><li><a href="#756-literal-classes">7.5.6 Literal Classes</a><ul><li><a href="#constexpr-constructors"><code class="language-plaintext highlighter-rouge">constexpr</code> Constructors</a></li></ul></li></ul></li><li><a href="#76-static-class-members">7.6 <code class="language-plaintext highlighter-rouge">static</code> Class Members</a><ul><li><a href="#declaring-static-members">Declaring <code class="language-plaintext highlighter-rouge">static</code> Members</a></li><li><a href="#using-a-class-static-member">Using a Class <code class="language-plaintext highlighter-rouge">static</code> Member</a></li><li><a href="#defining-static-members">Defining <code class="language-plaintext highlighter-rouge">static</code> Members</a></li><li><a href="#in-class-initialization-of-static-data-members">In-Class Initialization of <code class="language-plaintext highlighter-rouge">static</code> Data Members</a></li><li><a href="#static-members-can-be-used-in-ways-ordinary-members-cant"><code class="language-plaintext highlighter-rouge">static</code> Members Can Be Used in Ways Ordinary Members Can’t</a></li></ul></li></ul></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+      </div>
+      </br><h2 id="chapter-7-classes">Chapter 7. Classes</h2>
+
+<p>In C++ we use classes to define our own data types.</p>
+
+<p>The fundamental ideas behind classes are <strong>data abstraction</strong> and <strong>encapsulation</strong>. Data abstraction is a programming (and design) technique that relies on the separation of <strong>interface</strong> and <strong>implementation</strong>.  The interface of a class consists of the operations that users of the class can execute.</p>
+
+<p>Encapsulation enforces the separation of a class’ interface and implementation. A class that is encapsulated hides its implementation—users of the class can use the interface but have no access to the implementation.</p>
+
+<p>A class that uses data abstraction and encapsulation defines an <strong>abstract data type</strong>. Programmers who use the class need not know how the type works. They can instead think abstractly about what the type does.</p>
+
+<h3 id="71-defining-abstract-data-types">7.1 Defining Abstract Data Types</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Sales_item</code> class that we used in Chapter 1 is an abstract data type. We have no access to the data members stored in a <code class="language-plaintext highlighter-rouge">Sales_item</code> object.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">Sales_data</code> class (§ 2.6.1, p. 72) is not an abstract data type. It lets users of the class access its data members and forces users to write their own operations. To make <code class="language-plaintext highlighter-rouge">Sales_data</code> an abstract type, we need to define operations for users of <code class="language-plaintext highlighter-rouge">Sales_data</code> to use. Once <code class="language-plaintext highlighter-rouge">Sales_data</code> defines its own operations, we can encapsulate (that is, hide) its data members.</p>
+
+<h4 id="711-designing-the-sales_data-class">7.1.1 Designing the <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</h4>
+
+<h5 id="using-the-revised-sales_data-class">Using the Revised <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</h5>
+
+<h4 id="712-defining-the-revised-sales_data-class">7.1.2 Defining the Revised <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</h4>
+
+<p>Member functions must be declared inside the class. Member functions may be defined inside the class itself or outside the class body. Nonmember functions that are part of the interface, such as add, read, and print, are declared and defined outside the class.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="c1">// new members: operations on Sales_data objects</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// defined inside the class</span>
+    <span class="c1">// declared but not defined; will be defined elsewhere</span>
+    <span class="n">Sales_data</span><span class="o">&amp;</span> <span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    
+    <span class="c1">// data members are unchanged from § 2.6.1 (p. 72)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">revenue</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// nonmember Sales_data interface functions</span>
+<span class="n">Sales_data</span> <span class="n">add</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">read</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Note: Functions defined in the class are implicitly inline (§ 6.5.2, p. 238).</p>
+
+<h5 id="defining-member-functions">Defining Member Functions</h5>
+
+<p>Although every member must be declared inside its class, we can define a member function’s body either inside or outside of the class body.</p>
+
+<h5 id="introducing-this">Introducing <code class="language-plaintext highlighter-rouge">this</code></h5>
+
+<p>A call to the <code class="language-plaintext highlighter-rouge">isbn</code> member function:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Here we use the dot operator (§ 4.6, p. 150) to fetch the <code class="language-plaintext highlighter-rouge">isbn</code> member of the object named <code class="language-plaintext highlighter-rouge">total</code>, which we then call by the call operator <code class="language-plaintext highlighter-rouge">()</code>.</p>
+
+<p>Member functions access the object on which they were called through an extra, implicit parameter named <code class="language-plaintext highlighter-rouge">this</code>. When we call a member function, <code class="language-plaintext highlighter-rouge">this</code> is initialized with the address of the object on which the function was invoked.</p>
+
+<p>In the above example, the compiler passes the address of <code class="language-plaintext highlighter-rouge">total</code> to the implicit <code class="language-plaintext highlighter-rouge">this</code> parameter in <code class="language-plaintext highlighter-rouge">isbn</code>. It is as if the compiler rewrites this call as</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// pseudo-code illustration of how a call to a member function is translated</span>
+<span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>which calls the <code class="language-plaintext highlighter-rouge">isbn</code> member of <code class="language-plaintext highlighter-rouge">Sales_data</code> passing the address of <code class="language-plaintext highlighter-rouge">total</code>.</p>
+
+<p>Inside a member function, any direct use of a member of the class is assumed to be an implicit reference through <code class="language-plaintext highlighter-rouge">this</code>. That is, when
+<code class="language-plaintext highlighter-rouge">isbn</code> uses <code class="language-plaintext highlighter-rouge">bookNo</code>, it is implicitly using the member to which this points. It is as if we had written <code class="language-plaintext highlighter-rouge">this-&gt;bookNo</code>, where <code class="language-plaintext highlighter-rouge">-&gt;</code> is the member access operator.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">this</code> parameter is defined for us implicitly. It would be legal, although unnecessary, to define <code class="language-plaintext highlighter-rouge">isbn</code> as</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Because <code class="language-plaintext highlighter-rouge">this</code> is intended to always refer to “this” object, <code class="language-plaintext highlighter-rouge">this</code> is a <code class="language-plaintext highlighter-rouge">const</code> pointer (§ 2.4.2, p. 62). We cannot change the address that <code class="language-plaintext highlighter-rouge">this</code> holds.</p>
+
+<h5 id="introducing-const-member-functions">Introducing <code class="language-plaintext highlighter-rouge">const</code> Member Functions</h5>
+
+<p>The purpose of the keyword <code class="language-plaintext highlighter-rouge">const</code> that follows the parameter list is to modify the type of the implicit <code class="language-plaintext highlighter-rouge">this</code> pointer.</p>
+
+<p>By default, the type of <code class="language-plaintext highlighter-rouge">this</code> is a <code class="language-plaintext highlighter-rouge">const</code> pointer to the non<code class="language-plaintext highlighter-rouge">const</code> version of the class type. We cannot call an ordinary member function on a <code class="language-plaintext highlighter-rouge">const</code> object.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">const</code> following the parameter list indicates that this is a pointer to <code class="language-plaintext highlighter-rouge">const</code>. Member functions that use <code class="language-plaintext highlighter-rouge">const</code> in this way are <code class="language-plaintext highlighter-rouge">const</code> member functions.</p>
+
+<p>We can think of the body of <code class="language-plaintext highlighter-rouge">isbn</code> as if it were written as</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// note that `this` is a pointer to const because isbn is a const member</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">*</span><span class="k">const</span> <span class="k">this</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">isbn</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The fact that <code class="language-plaintext highlighter-rouge">this</code> is a pointer to <code class="language-plaintext highlighter-rouge">const</code> means that <strong><code class="language-plaintext highlighter-rouge">const</code> member functions can read but not write to the data members</strong> of the object on which they are called.</p>
+
+<p>Note: Objects that are <code class="language-plaintext highlighter-rouge">const</code>, and references or pointers to <code class="language-plaintext highlighter-rouge">const</code> objects, may call only <code class="language-plaintext highlighter-rouge">const</code> member functions.</p>
+
+<h5 id="class-scope-and-member-functions">Class Scope and Member Functions</h5>
+
+<p>Recall that a class is itself a scope (§ 2.6.1, p. 72). The definitions of the member functions of a class are nested inside the scope of the class itself.</p>
+
+<p>It is worth noting that <code class="language-plaintext highlighter-rouge">isbn</code> can use <code class="language-plaintext highlighter-rouge">bookNo</code> even though <code class="language-plaintext highlighter-rouge">bookNo</code> is defined after <code class="language-plaintext highlighter-rouge">isbn</code>. As we’ll see in § 7.4.1 (p. 283), the compiler processes classes in two steps—the member declarations are compiled first, after which the member function bodies, if any, are processed. Thus, member function bodies may use other members of their class regardless of where in the class those members appear.</p>
+
+<h5 id="defining-a-member-function-outside-the-class">Defining a Member Function outside the Class</h5>
+
+<p>As with any other function, when we define a member function outside the class body, the member’s definition must match its declaration in the class body. The name of a member defined outside the class must include the name of the class of which it is a member by using the scope operator <code class="language-plaintext highlighter-rouge">::</code> (§ 1.2, p. 8):</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">units_sold</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">revenue</span><span class="o">/</span><span class="n">units_sold</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="defining-a-function-to-return-this-object">Defining a Function to Return “This” Object</h5>
+
+<p>The <code class="language-plaintext highlighter-rouge">combine</code> function is intended to act like the compound assignment operator, <code class="language-plaintext highlighter-rouge">+=</code>.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span><span class="o">&amp;</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// add the members of rhs into the members of `this` object</span>
+    <span class="n">units_sold</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span><span class="p">;</span>
+    <span class="n">revenue</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="c1">// return the object on which the function was called</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>When our program calls</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">trans</span><span class="p">);</span> <span class="c1">// update the running total</span>
+</code></pre></div></div>
+
+<p>the address of <code class="language-plaintext highlighter-rouge">total</code> is bound to the implicit <code class="language-plaintext highlighter-rouge">this</code> parameter and <code class="language-plaintext highlighter-rouge">rhs</code> is bound to <code class="language-plaintext highlighter-rouge">trans</code>. Thus, <code class="language-plaintext highlighter-rouge">units_sold += rhs.units_sold;</code> adds <code class="language-plaintext highlighter-rouge">trans.units_sold</code> to <code class="language-plaintext highlighter-rouge">total.units_sold</code>.</p>
+
+<h4 id="713-defining-nonmember-class-related-functions">7.1.3 Defining Nonmember Class-Related Functions</h4>
+
+<p>Class authors often define auxiliary functions, such as our <code class="language-plaintext highlighter-rouge">add</code>, <code class="language-plaintext highlighter-rouge">read</code>, and <code class="language-plaintext highlighter-rouge">print</code> functions.</p>
+
+<p>As with any other function, we normally separate the declaration of the function from its definition (§ 6.1.2, p. 206).</p>
+
+<p>Note: Ordinarily, nonmember functions that are part of the interface of a class should be declared in the same header as the class itself. That way users need to include only one file to use any part of the interface.</p>
+
+<h5 id="defining-the-read-and-print-functions">Defining the <code class="language-plaintext highlighter-rouge">read</code> and <code class="language-plaintext highlighter-rouge">print</code> Functions</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// input transactions contain ISBN, number of copies sold, and sales price</span>
+<span class="n">istream</span> <span class="o">&amp;</span><span class="n">read</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">,</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">price</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">is</span> <span class="o">&gt;&gt;</span> <span class="n">item</span><span class="p">.</span><span class="n">bookNo</span> <span class="o">&gt;&gt;</span> <span class="n">item</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&gt;&gt;</span> <span class="n">price</span><span class="p">;</span>
+    <span class="n">item</span><span class="p">.</span><span class="n">revenue</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">item</span><span class="p">.</span><span class="n">units_sold</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">is</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="n">item</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">item</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span>
+    <span class="o">&lt;&lt;</span> <span class="n">item</span><span class="p">.</span><span class="n">revenue</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">item</span><span class="p">.</span><span class="n">avg_price</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that the IO classes are types that cannot be copied, so we may only pass them by reference (§ 6.2.2, p. 210).</p>
+
+<h5 id="defining-the-add-function">Defining the <code class="language-plaintext highlighter-rouge">add</code> Function</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// takes two Sales_data objects and returns a new Sales_data representing their sum</span>
+<span class="n">Sales_data</span> <span class="nf">add</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Sales_data</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">lhs</span><span class="p">;</span> <span class="c1">// copy data members from lhs into sum</span>
+    <span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span> <span class="c1">// add data members from rhs into sum</span>
+    <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="714-constructors">7.1.4 Constructors</h4>
+
+<p>Classes control object initialization by defining one or more special member functions known as <strong>constructors</strong>. The job of a constructor is to initialize the data members of a class object. A constructor is run whenever an object of a class type is created.</p>
+
+<p>Constructors are a surprisingly complex topic. Indeed, we’ll have more to say about constructors in § 7.5 (p. 288), § 15.7 (p. 622), and § 18.1.3 (p. 777), and in Chapter 13.</p>
+
+<p>Constructors have the same name as the class. Unlike other functions, constructors have no return type. A class can have multiple constructors. Like any other overloaded function (§ 6.4, p. 230), the constructors must differ from each other in the number or types of their parameters.</p>
+
+<p>Unlike other member functions, constructors may not be declared as <code class="language-plaintext highlighter-rouge">const</code> (§ 7.1.2, p. 258). When we create a <code class="language-plaintext highlighter-rouge">const</code> object of a class type, the object does not assume its “constness” until after the constructor completes the object’s initialization. Thus, constructors can write to <code class="language-plaintext highlighter-rouge">const</code> objects during their construction.</p>
+
+<h5 id="the-synthesized-default-constructor">The Synthesized Default Constructor</h5>
+
+<p>If our class does not explicitly define any constructors, the compiler will implicitly define the default constructor for us. The default constructor takes no arguments.</p>
+
+<p>The compiler-generated constructor is known as the <strong>synthesized default constructor</strong>. It default initializes the data member <code class="language-plaintext highlighter-rouge">bookNo</code> in <code class="language-plaintext highlighter-rouge">Sales_data</code> to the empty string.</p>
+
+<h5 id="some-classes-cannot-rely-on-the-synthesized-default-constructor">Some Classes Cannot Rely on the Synthesized Default Constructor</h5>
+
+<p>Reasons to define the default constructor:</p>
+
+<p>Remember that objects of built-in or compound type (such as arrays and pointers) that are defined inside a block have undefined value when they are default initialized (§ 2.2.1, p. 43). Therefore, classes that have members of built-in or compound type should ordinarily either initialize those members inside the class or define their own version of the default constructor.</p>
+
+<p>Also, if a class has a member that has a class type, and that class doesn’t have a default constructor, then the compiler can’t initialize that member. For such classes, we must define our own version of the default constructor.</p>
+
+<h5 id="defining-the-sales_data-constructors">Defining the <code class="language-plaintext highlighter-rouge">Sales_data</code> Constructors</h5>
+
+<p>For our <code class="language-plaintext highlighter-rouge">Sales_data</code> class define four constructors with different parameters:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="c1">// constructors added</span>
+    <span class="n">Sales_data</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="c1">// other members as before</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">Sales_data</span><span class="o">&amp;</span> <span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">revenue</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="what--default-means">What <code class="language-plaintext highlighter-rouge">=</code> default Means</h5>
+
+<p>The following defines the default constructor because it takes no arguments.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>We are defining this constructor only because we want to provide other constructors as well as the default constructor. We want this constructor to do exactly the same work as the synthesized version we had been using.</p>
+
+<h5 id="constructor-initializer-list">Constructor Initializer List</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">bookNo(s)</code> is the constructor initializer list for the first constructor, and <code class="language-plaintext highlighter-rouge">bookNo(s), units_sold(n), revenue(p*n)</code> is that for the second.</p>
+
+<p>When a member is omitted from the constructor initializer list, it is implicitly initialized using the same process as is used by the synthesized default constructor. Thus, the constructor that takes a <code class="language-plaintext highlighter-rouge">string</code> is equivalent to</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The only work these constructors need to do is give the data members their values. If there is no further work, then the function body is empty.</p>
+
+<h5 id="defining-a-constructor-outside-the-class-body">Defining a Constructor outside the Class Body</h5>
+
+<p>Unlike our other constructors, inside the function body of the constructor that takes an <code class="language-plaintext highlighter-rouge">istream</code>, this constructor calls <code class="language-plaintext highlighter-rouge">read</code> to give the data members new values:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span><span class="o">::</span><span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">read</span><span class="p">(</span><span class="n">is</span><span class="p">,</span> <span class="o">*</span><span class="k">this</span><span class="p">);</span> <span class="c1">// read will read a transaction from is into this object</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Constructors have no return type, so this definition starts with the name of the function we are defining. This member is a constructor because it has the same name as its class.</p>
+
+<h4 id="715-copy-assignment-and-destruction">7.1.5 Copy, Assignment, and Destruction</h4>
+
+<p>In addition to defining how objects of the class type are initialized, classes also control what happens when we copy, assign, or destroy objects of the class type. Objects are copied in several contexts, such as when we initialize a variable or when we pass or return an object by value (§ 6.2.1, p. 209, and § 6.3.2, p. 224). Objects are assigned when we use the assignment operator (§ 4.4, p. 144). Objects are destroyed when they cease to exist, such as when a local object is destroyed on exit from the block in which it was created (§ 6.1.1, p. 204). Objects stored in a vector (or an array) are destroyed when that vector (or array) is destroyed.</p>
+
+<p>If we do not define these operations, the compiler will synthesize them for us.</p>
+
+<h5 id="some-classes-cannot-rely-on-the-synthesized-versions">Some Classes Cannot Rely on the Synthesized Versions</h5>
+
+<h3 id="72-access-control-and-encapsulation">7.2 Access Control and Encapsulation</h3>
+
+<p>At this point, our class is not yet encapsulated—users can reach inside a <code class="language-plaintext highlighter-rouge">Sales_data</code> object and meddle with its implementation. In C++ we use <strong>access specifiers</strong> to enforce encapsulation:</p>
+
+<ul>
+  <li>Members defined after a <code class="language-plaintext highlighter-rouge">public</code> specifier are accessible to all parts of the program. The <code class="language-plaintext highlighter-rouge">public</code> members define the interface to the class.</li>
+  <li>Members defined after a <code class="language-plaintext highlighter-rouge">private</code> specifier are accessible to the member functions of the class but are not accessible to code that uses the class. The <code class="language-plaintext highlighter-rouge">private</code> sections encapsulate (i.e., hide) the implementation.</li>
+</ul>
+
+<p>Redefining <code class="language-plaintext highlighter-rouge">Sales_data</code> once again, we now have</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="nl">public:</span> <span class="c1">// access specifier added</span>
+        <span class="n">Sales_data</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+
+    <span class="nl">private:</span> <span class="c1">// access specifier added</span>
+        <span class="kt">double</span> <span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span>
+        <span class="p">{</span> <span class="k">return</span> <span class="n">units_sold</span> <span class="o">?</span> <span class="n">revenue</span><span class="o">/</span><span class="n">units_sold</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span>
+        <span class="kt">unsigned</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">revenue</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="using-the-class-or-struct-keyword">Using the <code class="language-plaintext highlighter-rouge">class</code> or <code class="language-plaintext highlighter-rouge">struct</code> Keyword</h5>
+
+<p>We can define a class type using either keyword. The only difference between <code class="language-plaintext highlighter-rouge">struct</code> and <code class="language-plaintext highlighter-rouge">class</code> is the default access level.</p>
+
+<p>If we use the <code class="language-plaintext highlighter-rouge">struct</code> keyword, the members defined before the first access specifier are <code class="language-plaintext highlighter-rouge">public</code>; if we use <code class="language-plaintext highlighter-rouge">class</code>, then the members are <code class="language-plaintext highlighter-rouge">private</code>.</p>
+
+<p>As a matter of programming style, when we define a class intending for all of its members to be <code class="language-plaintext highlighter-rouge">public</code>, we use <code class="language-plaintext highlighter-rouge">struct</code>. If we intend to have <code class="language-plaintext highlighter-rouge">private</code> members, then we use <code class="language-plaintext highlighter-rouge">class</code>.</p>
+
+<h4 id="721-friends">7.2.1 Friends</h4>
+
+<p>Now that the data members of <code class="language-plaintext highlighter-rouge">Sales_data</code> are <code class="language-plaintext highlighter-rouge">private</code>, our <code class="language-plaintext highlighter-rouge">read</code>, <code class="language-plaintext highlighter-rouge">print</code>, and <code class="language-plaintext highlighter-rouge">add</code> functions will no longer compile. The problem is that although these functions are part of the <code class="language-plaintext highlighter-rouge">Sales_data</code> interface, they are not members of the class.</p>
+
+<p>A class can allow another class or function to access its nonpublic members by making that class or function a <strong>friend</strong>.  A class makes a function its friend by including a declaration for that function preceded by the keyword <code class="language-plaintext highlighter-rouge">friend</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="c1">// friend declarations for nonmember Sales_data operations added</span>
+    <span class="k">friend</span> <span class="n">Sales_data</span> <span class="n">add</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">read</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+    
+    <span class="c1">// other members and access specifiers as before</span>
+    <span class="nl">public:</span>
+        <span class="n">Sales_data</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+    
+    <span class="nl">private:</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span>
+        <span class="kt">unsigned</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">revenue</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// declarations for nonmember parts of the Sales_data interface</span>
+<span class="n">Sales_data</span> <span class="n">add</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">read</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span><span class="o">&amp;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Friend declarations may appear only inside a class definition. Friends are not members of the class.</p>
+
+<p>KEY CONCEPT: BENEFITS OF ENCAPSULATION</p>
+
+<p>Encapsulation provides two important advantages:</p>
+
+<ul>
+  <li>
+    <p>User code cannot inadvertently corrupt the state of an encapsulated object.</p>
+  </li>
+  <li>
+    <p>The implementation of an encapsulated class can change over time without requiring changes in user-level code.</p>
+  </li>
+</ul>
+
+<h5 id="declarations-for-friends">Declarations for Friends</h5>
+
+<p>A friend declaration only specifies access. It is not a general declaration of the function. If we want users of the class to be able to call a friend function, then we must also declare the function separately from the friend declaration. We usually declare each friend (outside the class) in the same header as the class itself.</p>
+
+<h3 id="73-additional-class-features">7.3 Additional Class Features</h3>
+
+<h4 id="731-class-members-revisited">7.3.1 Class Members Revisited</h4>
+
+<h5 id="defining-a-type-member">Defining a Type Member</h5>
+
+<p>In addition to defining data and function members, a class can define its own local names for types. Type member can be either <code class="language-plaintext highlighter-rouge">public</code> or <code class="language-plaintext highlighter-rouge">private</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">pos</span><span class="p">;</span>
+    <span class="nl">private:</span>
+        <span class="n">pos</span> <span class="n">cursor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">pos</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">contents</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Users of <code class="language-plaintext highlighter-rouge">Screen</code> shouldn’t know that <code class="language-plaintext highlighter-rouge">Screen</code> uses a <code class="language-plaintext highlighter-rouge">string</code> to hold its data. We can equivalently use a type alias (§ 2.5.1, p. 68):</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span> <span class="p">{</span>
+	<span class="nl">public:</span>
+        <span class="k">using</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">size_type</span><span class="p">;</span>
+        <span class="c1">// other members as before</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Unlike ordinary members, members that define types must appear before they are used. As a result, type members usually appear at the beginning of the class.</p>
+
+<h5 id="member-functions-of-class-screen">Member Functions of class <code class="language-plaintext highlighter-rouge">Screen</code></h5>
+
+<p>Here we add a constructor that will let users define the size and contents of the screen, along with members to move the cursor and to get the character at a given location:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">pos</span><span class="p">;</span>
+        <span class="n">Screen</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// needed because Screen has another constructor</span>
+        <span class="c1">// cursor initialized to 0 by its in-class initializer</span>
+        <span class="n">Screen</span><span class="p">(</span><span class="n">pos</span> <span class="n">ht</span><span class="p">,</span> <span class="n">pos</span> <span class="n">wd</span><span class="p">,</span> <span class="kt">char</span> <span class="n">c</span><span class="p">)</span><span class="o">:</span> <span class="n">height</span><span class="p">(</span><span class="n">ht</span><span class="p">),</span> <span class="n">width</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">contents</span><span class="p">(</span><span class="n">ht</span> <span class="o">*</span> <span class="n">wd</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="kt">char</span> <span class="n">get</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="n">cursor</span><span class="p">];</span> <span class="p">}</span> <span class="c1">// get the character at the cursor; implicitly inline</span>
+        <span class="kr">inline</span> <span class="kt">char</span> <span class="n">get</span><span class="p">(</span><span class="n">pos</span> <span class="n">ht</span><span class="p">,</span> <span class="n">pos</span> <span class="n">wd</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// explicitly inline</span>
+        <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">move</span><span class="p">(</span><span class="n">pos</span> <span class="n">r</span><span class="p">,</span> <span class="n">pos</span> <span class="n">c</span><span class="p">);</span> <span class="c1">// can be made inline later</span>
+    <span class="nl">private:</span>
+        <span class="n">pos</span> <span class="n">cursor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">pos</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">contents</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Because we have provided a constructor that takes three arguments, the compiler will not automatically generate a default constructor for us. If our class is to have a default constructor, we must say so explicitly. In this case, we use <code class="language-plaintext highlighter-rouge">= default</code> to ask the compiler to synthesize the default constructor’s definition for us (§ 7.1.4, p. 264).</p>
+
+<h5 id="making-members-inline">Making Members <code class="language-plaintext highlighter-rouge">inline</code></h5>
+
+<p>Classes often have small functions that can benefit from being inlined. As we’ve seen, member functions defined inside the class are automatically <code class="language-plaintext highlighter-rouge">inline</code> (§ 6.5.2, p. 238).</p>
+
+<p>We can explicitly declare a member function as <code class="language-plaintext highlighter-rouge">inline</code> as part of its declaration inside the class body. Alternatively, we can specify <code class="language-plaintext highlighter-rouge">inline</code> on the function definition that appears outside the class body.</p>
+
+<h5 id="overloading-member-functions">Overloading Member Functions</h5>
+
+<p>As with nonmember functions, member functions may be overloaded (§ 6.4, p. 230) so long as the functions differ by the number and/or types of parameters.</p>
+
+<h5 id="mutable-data-members"><code class="language-plaintext highlighter-rouge">mutable</code> Data Members</h5>
+
+<p>It sometimes (but not very often) happens that a class has a data member that we want to be able to modify, even inside a <code class="language-plaintext highlighter-rouge">const</code> member function. We indicate such members by including the <code class="language-plaintext highlighter-rouge">mutable</code> keyword in their declaration.</p>
+
+<p>A mutable data member is never <code class="language-plaintext highlighter-rouge">const</code>, even when it is a member of a <code class="language-plaintext highlighter-rouge">const</code> object. Any member functions, including <code class="language-plaintext highlighter-rouge">const</code> member functions, can change a <code class="language-plaintext highlighter-rouge">mutable</code> member.</p>
+
+<p>As an example, we give <code class="language-plaintext highlighter-rouge">Screen</code> a mutable member named <code class="language-plaintext highlighter-rouge">access_ctr</code>, which we’ll use to track how often each <code class="language-plaintext highlighter-rouge">Screen</code> member function is called:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+    	<span class="kt">void</span> <span class="n">some_member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="nl">private:</span>
+        <span class="k">mutable</span> <span class="kt">size_t</span> <span class="n">access_ctr</span><span class="p">;</span> <span class="c1">// may change even in a const object</span>
+        <span class="c1">// other members as before</span>
+    <span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">Screen</span><span class="o">::</span><span class="n">some_member</span><span class="p">()</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="o">++</span><span class="n">access_ctr</span><span class="p">;</span> <span class="c1">// keep a count of the calls to any member function</span>
+        <span class="c1">// whatever other work this member needs to do</span>
+	<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="initializers-for-data-members-of-class-type">Initializers for Data Members of Class Type</h5>
+
+<p>Note: When we provide an in-class initializer, we must do so following an <code class="language-plaintext highlighter-rouge">=</code> sign or inside braces.</p>
+
+<h4 id="732-functions-that-return-this">7.3.2 Functions That Return <code class="language-plaintext highlighter-rouge">*this</code></h4>
+
+<p><code class="language-plaintext highlighter-rouge">return *this</code> means that the member function returns a reference of the object, not a copy of the object.</p>
+
+<h5 id="returning-this-from-a-const-member-function">Returning <code class="language-plaintext highlighter-rouge">*this</code> from a <code class="language-plaintext highlighter-rouge">const</code> Member Function</h5>
+
+<p>Note: A <code class="language-plaintext highlighter-rouge">const</code> member function that returns <code class="language-plaintext highlighter-rouge">*this</code> as a reference should have a return type that is a reference to <code class="language-plaintext highlighter-rouge">const</code>.</p>
+
+<h5 id="overloading-based-on-const">Overloading Based on <code class="language-plaintext highlighter-rouge">const</code></h5>
+
+<p>We can overload a member function based on whether it is <code class="language-plaintext highlighter-rouge">const</code> for the same reasons that we can overload a function based on whether a pointer parameter points to <code class="language-plaintext highlighter-rouge">const</code> (§ 6.4, p. 232).</p>
+
+<h4 id="733-class-types">7.3.3 Class Types</h4>
+
+<p>Every class defines a unique type. We can refer to a class type directly, by using the class name as a type name. Alternatively, we can use the class name following the keyword <code class="language-plaintext highlighter-rouge">class</code> or <code class="language-plaintext highlighter-rouge">struct</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span> <span class="n">item1</span><span class="p">;</span> <span class="c1">// default-initialized object of type Sales_data</span>
+<span class="k">class</span> <span class="nc">Sales_data</span> <span class="n">item1</span><span class="p">;</span> <span class="c1">// equivalent declaration</span>
+</code></pre></div></div>
+
+<p>The second method is inherited from C and is also valid in C++.</p>
+
+<h5 id="class-declarations">Class Declarations</h5>
+
+<p>Just as we can declare a function apart from its definition (§ 6.1.2, p. 206), we can also declare a class without defining it:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span><span class="p">;</span> <span class="c1">// declaration of the Screen class</span>
+</code></pre></div></div>
+
+<p>After a declaration and before a definition is seen, the type Screen is an incomplete type.</p>
+
+<h4 id="734-friendship-revisited">7.3.4 Friendship Revisited</h4>
+
+<p>Our Sales_data class defined three ordinary nonmember functions as friends (§ 7.2.1, p. 269). A class can also make another class its friend or it can declare specific member functions of another (previously defined) class as friends. In addition, a friend function can be defined inside the class body. Such functions are implicitly <code class="language-plaintext highlighter-rouge">inline</code>.</p>
+
+<h5 id="friendship-between-classes">Friendship between Classes</h5>
+
+<p>For example, our <code class="language-plaintext highlighter-rouge">Screen</code> class can designate <code class="language-plaintext highlighter-rouge">Window_mgr</code> class as its friend:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span> <span class="p">{</span>
+    <span class="c1">// Window_mgr members can access the private parts of class Screen</span>
+    <span class="k">friend</span> <span class="k">class</span> <span class="nc">Window_mgr</span><span class="p">;</span>
+    <span class="c1">// ... rest of the Screen class</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>The member functions of a friend class can access all the members, including the nonpublic members, of the class granting friendship.</p>
+
+<p>Friendship is not transitive. That is, if class <code class="language-plaintext highlighter-rouge">Window_mgr</code> has its own friends, those friends have no special access to <code class="language-plaintext highlighter-rouge">Screen</code>.</p>
+
+<p>Note: Each class controls which classes or functions are its friends.</p>
+
+<h5 id="making-a-member-function-a-friend">Making A Member Function a Friend</h5>
+
+<p>Rather than making the entire <code class="language-plaintext highlighter-rouge">Window_mgr</code> class a friend, <code class="language-plaintext highlighter-rouge">Screen</code> can instead specify that only some members in <code class="language-plaintext highlighter-rouge">Window_mgr</code> are allowed access.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Screen</span> <span class="p">{</span>
+    <span class="c1">// specifies Window_mgr::clear member as a friend; Window_mgr::clear must have been declared before class Screen</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">Window_mgr</span><span class="o">::</span><span class="n">clear</span><span class="p">(</span><span class="n">ScreenIndex</span><span class="p">);</span>
+    <span class="c1">// ... rest of the Screen class</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="overloaded-functions-and-friendship">Overloaded Functions and Friendship</h5>
+
+<p>Overloaded functions are different functions. Therefore, a class must declare as a friend each function in a set of overloaded functions that it wishes to make a friend.</p>
+
+<h5 id="friend-declarations-and-scope">Friend Declarations and Scope</h5>
+
+<p>A friend declaration affects access but is not a declaration in an ordinary sense.</p>
+
+<h3 id="74-class-scope">7.4 Class Scope</h3>
+
+<p>Every class defines its own new scope. Outside the class scope, ordinary data and function members may be accessed only through an object, a reference, or a pointer using a member access operator <code class="language-plaintext highlighter-rouge">-&gt;</code> (§ 4.6, p. 150). We access type members from the class using the scope operator <code class="language-plaintext highlighter-rouge">::</code>.</p>
+
+<h5 id="scope-and-members-defined-outside-the-class">Scope and Members Defined outside the Class</h5>
+
+<h4 id="741-name-lookup-and-class-scope">7.4.1 Name Lookup and Class Scope</h4>
+
+<p>Note: Member function definitions are processed after the compiler processes all of the declarations in the class.</p>
+
+<h5 id="name-lookup-for-class-member-declarations">Name Lookup for Class Member Declarations</h5>
+
+<h5 id="type-names-are-special">Type Names Are Special</h5>
+
+<p>Tip: Definitions of type names by using <code class="language-plaintext highlighter-rouge">typedef</code> or <code class="language-plaintext highlighter-rouge">using</code> usually should appear at the beginning of a class.</p>
+
+<h5 id="normal-block-scope-name-lookup-inside-member-definitions">Normal Block-Scope Name Lookup inside Member Definitions</h5>
+
+<p>A name used in the body of a member function is resolved as follows:</p>
+
+<ul>
+  <li>Look for a declaration of the name inside the member function.</li>
+  <li>Look for a declaration inside the class.</li>
+  <li>Look for a declaration that is in scope before the member function definition.</li>
+</ul>
+
+<p>Ordinarily, it is a bad idea to use the name of another member as the name for a parameter in a member function.</p>
+
+<h5 id="after-class-scope-look-in-the-surrounding-scope">After Class Scope, Look in the Surrounding Scope</h5>
+
+<p>If the compiler doesn’t find the name in function or class scope, it looks for the name in the surrounding scope.</p>
+
+<p>Note: Even though the outer object is hidden, it is still possible to access that object by using the scope operator <code class="language-plaintext highlighter-rouge">::</code>.</p>
+
+<h5 id="names-are-resolved-where-they-appear-within-a-file">Names Are Resolved Where They Appear within a File</h5>
+
+<h3 id="75-constructors-revisited">7.5 Constructors Revisited</h3>
+
+<p>Constructors are a crucial part of any C++ class.</p>
+
+<h4 id="751-constructor-initializer-list">7.5.1 Constructor Initializer List</h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>has the same effect as</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// legal but sloppier way to write the Sales_data constructor: no constructor initializers</span>
+<span class="n">Sales_data</span><span class="o">::</span><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span>
+<span class="kt">unsigned</span> <span class="n">cnt</span><span class="p">,</span> <span class="kt">double</span> <span class="n">price</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">bookNo</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">units_sold</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span>
+    <span class="n">revenue</span> <span class="o">=</span> <span class="n">cnt</span> <span class="o">*</span> <span class="n">price</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The difference is that the previous version initializes its data members, whereas this version assigns values to the data members. How significant this distinction is depends on the type of the data member.</p>
+
+<p>This distinction between initialization and assignment is exactly the same as the distinction between</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="p">;</span> <span class="c1">// define and initialize</span>
+</code></pre></div></div>
+
+<p>and</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">bar</span><span class="p">;</span> <span class="c1">// default initialized to the empty string</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="p">;</span> <span class="c1">// assign a new value to bar</span>
+</code></pre></div></div>
+
+<h5 id="constructor-initializers-are-sometimes-required">Constructor Initializers Are Sometimes Required</h5>
+
+<p>We can often, but not always, ignore the distinction between whether a member is initialized or assigned.</p>
+
+<p>Note: We must use the constructor initializer list to provide values for members that are <code class="language-plaintext highlighter-rouge">const</code>, reference, or of a class type that does not have a default constructor.</p>
+
+<p>ADVICE: USE CONSTRUCTOR INITIALIZERS</p>
+
+<p>In many classes, the distinction between initialization and assignment is strictly a matter of low-level efficiency: A data member is initialized and then assigned when it could have been initialized directly. More important than the efficiency issue is the fact that some data members must be initialized.</p>
+
+<h5 id="order-of-member-initialization">Order of Member Initialization</h5>
+
+<p>Members are initialized in the order in which they appear in the class definition.</p>
+
+<p>Best Practice: It is a good idea to write constructor initializers in the same order as the members are declared. Moreover, when possible, avoid using members to initialize other members.</p>
+
+<h5 id="default-arguments-and-constructors">Default Arguments and Constructors</h5>
+
+<p>We can rewrite these constructors as a single constructor with a default argument (§ 6.5.1, p. 236):</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="c1">// defines the default constructor as well as one that takes a string argument</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">""</span><span class="p">)</span><span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="c1">// remaining constructors unchanged</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">cnt</span><span class="p">,</span> <span class="kt">double</span> <span class="n">rev</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">rev</span><span class="o">*</span><span class="n">cnt</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span> <span class="p">{</span> <span class="n">read</span><span class="p">(</span><span class="n">is</span><span class="p">,</span> <span class="o">*</span><span class="k">this</span><span class="p">);</span> <span class="p">}</span>
+        <span class="c1">// remaining members as before</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Note: A constructor that supplies default arguments for all its parameters also defines the default constructor.</p>
+
+<h4 id="752-delegating-constructors">7.5.2 Delegating Constructors</h4>
+
+<p>As an example, we rewrite the <code class="language-plaintext highlighter-rouge">Sales_data</code> class to use delegating constructors as follows:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="c1">// nondelegating constructor initializes members from corresponding arguments</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">cnt</span><span class="p">,</span> <span class="kt">double</span> <span class="n">price</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">cnt</span><span class="o">*</span><span class="n">price</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="c1">// remaining constructors all delegate to another constructor</span>
+        <span class="n">Sales_data</span><span class="p">()</span><span class="o">:</span> <span class="n">Sales_data</span><span class="p">(</span><span class="s">""</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">Sales_data</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="n">Sales_data</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span><span class="o">:</span> <span class="n">Sales_data</span><span class="p">()</span> <span class="p">{</span> <span class="n">read</span><span class="p">(</span><span class="n">is</span><span class="p">,</span> <span class="o">*</span><span class="k">this</span><span class="p">);</span> <span class="p">}</span>
+        <span class="c1">// other members as before</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="753-the-role-of-the-default-constructor">7.5.3 The Role of the Default Constructor</h4>
+
+<p>The default constructor is used automatically whenever an object is default or value initialized.</p>
+
+<p>Best Practice: In practice, it is almost always right to provide a default constructor if other constructors are being defined.</p>
+
+<h5 id="using-the-default-constructor">Using the Default Constructor</h5>
+
+<p>WARNNING: It is a common mistake among programmers new to C++ to try to declare an object initialized with the default constructor as follows:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span> <span class="nf">obj</span><span class="p">();</span> <span class="c1">// oops! declares a function, not an object</span>
+<span class="n">Sales_data</span> <span class="n">obj2</span><span class="p">;</span> <span class="c1">// ok: obj2 is an object, not a function</span>
+</code></pre></div></div>
+
+<h4 id="754-implicit-class-type-conversions">7.5.4 Implicit Class-Type Conversions</h4>
+
+<p>Classes can define implicit conversions.</p>
+
+<h5 id="only-one-class-type-conversion-is-allowed">Only One Class-Type Conversion Is Allowed</h5>
+
+<p>In § 4.11.2 (p. 162) we noted that the compiler will automatically apply only one class-type conversion.</p>
+
+<h5 id="class-type-conversions-are-not-always-useful">Class-Type Conversions Are Not Always Useful</h5>
+
+<h5 id="suppressing-implicit-conversions-defined-by-constructors">Suppressing Implicit Conversions Defined by Constructors</h5>
+
+<h5 id="explicit-constructors-can-be-used-only-for-direct-initialization"><code class="language-plaintext highlighter-rouge">explicit</code> Constructors Can Be Used Only for Direct Initialization</h5>
+
+<h5 id="explicitly-using-constructors-for-conversions">Explicitly Using Constructors for Conversions</h5>
+
+<h5 id="library-classes-with-explicit-constructors">Library Classes with <code class="language-plaintext highlighter-rouge">explicit</code> Constructors</h5>
+
+<h4 id="755-aggregate-classes">7.5.5 Aggregate Classes</h4>
+
+<p>An aggregate class gives users direct access to its members and has special initialization syntax.</p>
+
+<p>For example, the following class is an aggregate:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">Data</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ival</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>We can initialize the data members of an aggregate class by providing a braced list of member initializers:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// val1.ival = 0; val1.s = string("Anna")</span>
+<span class="n">Data</span> <span class="n">val1</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Anna"</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<p>As with initialization of array elements (§ 3.5.1, p. 114), if the list of initializers has fewer elements than the class has members, the trailing members are value initialized (§ 3.5.1, p. 114).</p>
+
+<h4 id="756-literal-classes">7.5.6 Literal Classes</h4>
+
+<p>An aggregate class (§ 7.5.5, p. 298) whose data members are all of literal type is a literal class. A nonaggregate class, that meets the following restrictions, is also a literal class: …</p>
+
+<h5 id="constexpr-constructors"><code class="language-plaintext highlighter-rouge">constexpr</code> Constructors</h5>
+
+<h3 id="76-static-class-members">7.6 <code class="language-plaintext highlighter-rouge">static</code> Class Members</h3>
+
+<p>Classes sometimes need members that are associated with the class, rather than with individual objects of the class type. For example, a bank account class might need a data member to represent the current prime interest rate. In this case, we’d want to associate the rate with the class, not with each individual object. From an efficiency standpoint, there’d be no reason for each object to store the rate. Much more importantly, if the rate changes, we’d want each object to use the new value.</p>
+
+<h5 id="declaring-static-members">Declaring <code class="language-plaintext highlighter-rouge">static</code> Members</h5>
+
+<p>We say a member is associated with the class by adding the keyword <code class="language-plaintext highlighter-rouge">static</code> to its declaration.</p>
+
+<p>As an example, we’ll define a class to represent an account record at a bank:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Account</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="kt">void</span> <span class="n">calculate</span><span class="p">()</span> <span class="p">{</span> <span class="n">amount</span> <span class="o">+=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">interestRate</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">static</span> <span class="kt">double</span> <span class="n">rate</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">interestRate</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">static</span> <span class="kt">void</span> <span class="n">rate</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>
+    <span class="nl">private:</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">owner</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">amount</span><span class="p">;</span>
+        <span class="k">static</span> <span class="kt">double</span> <span class="n">interestRate</span><span class="p">;</span>
+        <span class="k">static</span> <span class="kt">double</span> <span class="n">initRate</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">static</code> members of a class exist outside any object. Objects do not contain data associated with <code class="language-plaintext highlighter-rouge">static</code> data members. Thus, each Account object will contain two data members—<code class="language-plaintext highlighter-rouge">owner</code> and <code class="language-plaintext highlighter-rouge">amount</code>. There is only one <code class="language-plaintext highlighter-rouge">interestRate</code> object that will be shared by all the <code class="language-plaintext highlighter-rouge">Account</code> objects.</p>
+
+<p>Similarly, static member functions are not bound to any object; they do not have a <code class="language-plaintext highlighter-rouge">this</code> pointer. As a result, <code class="language-plaintext highlighter-rouge">static</code> member functions may not be declared as <code class="language-plaintext highlighter-rouge">const</code>.</p>
+
+<h5 id="using-a-class-static-member">Using a Class <code class="language-plaintext highlighter-rouge">static</code> Member</h5>
+
+<p>We can access a <code class="language-plaintext highlighter-rouge">static</code> member directly through the scope operator <code class="language-plaintext highlighter-rouge">::</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">r</span><span class="p">;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">Account</span><span class="o">::</span><span class="n">rate</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Even though <code class="language-plaintext highlighter-rouge">static</code> members are not part of the objects of its class, we can use an object, reference, or pointer of the class type to access a <code class="language-plaintext highlighter-rouge">static</code> member:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Account</span> <span class="n">ac1</span><span class="p">;</span>
+<span class="n">Account</span> <span class="o">*</span><span class="n">ac2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ac1</span><span class="p">;</span>
+<span class="c1">// equivalent ways to call the static member rate function</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">ac1</span><span class="p">.</span><span class="n">rate</span><span class="p">();</span> <span class="c1">// through an Account object or reference</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">ac2</span><span class="o">-&gt;</span><span class="n">rate</span><span class="p">();</span> <span class="c1">// through a pointer to an Account object</span>
+</code></pre></div></div>
+
+<p>Member functions can use <code class="language-plaintext highlighter-rouge">static</code> members directly, without the scope operator:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Account</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+    	<span class="kt">void</span> <span class="n">calculate</span><span class="p">()</span> <span class="p">{</span> <span class="n">amount</span> <span class="o">+=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">interestRate</span><span class="p">;</span> <span class="p">}</span>
+    <span class="nl">private:</span>
+        <span class="k">static</span> <span class="kt">double</span> <span class="n">interestRate</span><span class="p">;</span>
+        <span class="c1">// remaining members as before</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="defining-static-members">Defining <code class="language-plaintext highlighter-rouge">static</code> Members</h5>
+
+<p>As with any other member function, we can define a <code class="language-plaintext highlighter-rouge">static</code> member function inside or outside of the class body. The <code class="language-plaintext highlighter-rouge">static</code> keyword, however, is used only on the declaration inside the class body.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">Account</span><span class="o">::</span><span class="n">rate</span><span class="p">(</span><span class="kt">double</span> <span class="n">newRate</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">interestRate</span> <span class="o">=</span> <span class="n">newRate</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Because <code class="language-plaintext highlighter-rouge">static</code> data members are not part of individual objects of the class type, they are not defined when we create objects of the class. As a result, they are not initialized by the class’ constructors. Moreover, in general, we may not initialize a <code class="language-plaintext highlighter-rouge">static</code> member inside the class. Instead, we must define and initialize each <code class="language-plaintext highlighter-rouge">static</code> data member outside the class body:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// define and initialize a static class member</span>
+<span class="kt">double</span> <span class="n">Account</span><span class="o">::</span><span class="n">interestRate</span> <span class="o">=</span> <span class="n">initRate</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Tip: The best way to ensure that the object is defined exactly once is to put the definition of <code class="language-plaintext highlighter-rouge">static</code> data members in the same file that contains the definitions of the class noninline member functions.</p>
+
+<h5 id="in-class-initialization-of-static-data-members">In-Class Initialization of <code class="language-plaintext highlighter-rouge">static</code> Data Members</h5>
+
+<h5 id="static-members-can-be-used-in-ways-ordinary-members-cant"><code class="language-plaintext highlighter-rouge">static</code> Members Can Be Used in Ways Ordinary Members Can’t</h5>
+
+<p>Two difference between <code class="language-plaintext highlighter-rouge">static</code> and ordinary members:</p>
+
+<ul>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">static</code> data member can have incomplete type (§ 7.3.3, p. 278).</p>
+  </li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">static</code> member can be used as a default argument.</p>
+  </li>
+</ul>
+
+<h3 id="chapter-summary">Chapter Summary</h3>
+
+<p>Classes are the most fundamental feature in C++. Classes let us define new types for our applications, making our programs shorter and easier to modify.</p>
+
+<p>Data abstraction—the ability to define both data and function members—and encapsulation—the ability to protect class members from general access—are fundamental to classes. We encapsulate a class by defining its implementation members as <code class="language-plaintext highlighter-rouge">private</code>. Classes may grant access to their non<code class="language-plaintext highlighter-rouge">public</code> member by designating another class or function as a friend.</p>
+
+<p>Classes may define constructors, which are special member functions that control how objects are initialized. Constructors may be overloaded. Constructors should use a constructor initializer list to initialize all the data members.</p>
+
+<p>Classes may also define <code class="language-plaintext highlighter-rouge">mutable</code> or <code class="language-plaintext highlighter-rouge">static</code> members. A <code class="language-plaintext highlighter-rouge">mutable</code> member is a data member that is never <code class="language-plaintext highlighter-rouge">const</code>; its value may be changed inside a <code class="language-plaintext highlighter-rouge">const</code> member function. A <code class="language-plaintext highlighter-rouge">static</code> member can be either function or data; <code class="language-plaintext highlighter-rouge">static</code> members exist independently of the objects of the class type.</p>
+
+<h3 id="defined-terms">Defined Terms</h3>
+
+<p><strong>abstract data type</strong> Data structure that encapsulates (hides) its implementation.</p>
+
+<p><strong>class</strong> C++ mechanism for defining our own abstract data types. Classes may have data, function, or type members. A class defines a new type and a new scope.</p>
+
+<p><strong>data abstraction</strong> Programming technique that focuses on the interface to a type. Data abstraction lets programmers ignore the details of how a type is represented and think instead about the operations that the type can perform. Data abstraction is fundamental to both object-oriented and generic programming.</p>
+
+<p><strong>encapsulation</strong> Separation of implementation from interface; encapsulation hides the implementation details of a type. In C++, encapsulation is enforced by putting the implementation in the <code class="language-plaintext highlighter-rouge">private</code> part of a class.</p>
+
+<p><strong>implementation</strong> The (usually <code class="language-plaintext highlighter-rouge">private</code>) members of a class that define the data and any operations that are not intended for use by code that uses the type.</p>
+
+<p><strong>interface</strong> The (<code class="language-plaintext highlighter-rouge">public</code>) operations supported by a type. Ordinarily, the interface does not include data members.</p>
+
+<p>The other terms are also important. Read p. 305~306 for detail.</p>
+
+<p><br /></p>
+
+<h2 id="references">References</h2>
+
+<p>Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. <em>C++ Primer</em>. Addison-Wesley Professional, 2012.</p>
+
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Naive Bayes Classifiers</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Naive Bayes Classifiers | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Naive Bayes Classifiers" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Naive Bayes" />
+<meta property="og:description" content="Naive Bayes" />
+<link rel="canonical" href="http://localhost:4000/naive-bayes.html" />
+<meta property="og:url" content="http://localhost:4000/naive-bayes.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-18T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Naive Bayes Classifiers" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-06-18T00:00:00+08:00","datePublished":"2020-06-18T00:00:00+08:00","description":"Naive Bayes","headline":"Naive Bayes Classifiers","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/naive-bayes.html"},"url":"http://localhost:4000/naive-bayes.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#naive-bayes">Naive Bayes</a></li><li><a href="#training-the-naive-bayes-classifier">Training the Naive Bayes Classifier</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/naive-bayes.html">
+    <h2 class="post-title">Naive Bayes Classifiers</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/stat"> <li>Stat</li> </a><a class="post-link" href="/categories/nlp"> <li>NLP</li> </a><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/ml models"> <li>ML models</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jun 18, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="naive-bayes">Naive Bayes</h2>
+
+<p>Naive Bayes is a probabilistic classifier, meaning that for a document $d$, out of all classes $ c \in C$ the classifier returns the class $\hat{c}$ which has the <strong>maximum posterior probability</strong> given the document.</p>
+
+\[\hat{c}(d) = \underset{c \in C}{\operatorname{argmax}} P(c \mid d) = \underset{c \in C}{\operatorname{argmax}} \frac{P(d \mid c)P(c)}{P(d)} = \underset{c \in C}{\operatorname{argmax}} P(d \mid c)P(c),\]
+
+<p>where $P(d \mid c)$ is the likelihood and $P(c)$ is the prior. We can represent a document $d$ as a set of words $w_1,w_2,…,w_n$, then $P(d \mid c)=P(w_1,w_2,…,w_n \mid c)$.</p>
+
+<p>Naive Bayes classifiers make two simplifying assumptions.</p>
+
+<p>The first is called the <strong>bag-of-words assumption</strong>: we assume the positions of words do not matter. We represent a text document as if it were a bag-of-words, that is, an unordered set of words with their position ignored, keeping only their frequency in the document.</p>
+
+<p>The second is commonly called the <strong>naive Bayes assumption</strong>: the <strong>conditional independence assumption</strong> that the probabilities $P(w_i\mid c)$ are independent given the class $c$ and hence can be ‘naively’ multiplied as follows:</p>
+
+\[P(d \mid c)=P(w_1,w_2,\cdots,w_n \mid c) = P(w_1 \mid c) P(w_1 \mid c) \cdots P(w_n \mid c).\]
+
+<p>Then the naive Bayes classifier can be expressed as</p>
+
+\[\hat{c}_{NB}(d) = \underset{c \in C}{\operatorname{argmax}} P(c) \prod_{w \in d} P(w \mid c).\]
+
+<p>The calculations are usually done in log space, to avoid underflow and increase speed. Thus the previous equation can be expressed as</p>
+
+\[\hat{c}_{NB}(d) = \underset{c \in C}{\operatorname{argmax}} \left[\log P(c) + \sum_{ w \in d} \log P(w \mid c)\right].\]
+
+<p>By considering features in log space, naive Bayes classifier computes the predicted class as a linear function of input features. Classifiers that use a linear combination of the input features to make a classification decision (like naive Bayes and also logistic regression) are called <strong>linear classifiers</strong>.</p>
+
+<h2 id="training-the-naive-bayes-classifier">Training the Naive Bayes Classifier</h2>
+
+<p>How can we learn the probabilities \(P(c)\) and \(P(w \mid c)\)?</p>
+
+<p>Let $N_c$ be the number of documents in our training data with class $c$, $N_{doc}$ be the total number of documents, the vocabulary $\mathcal{V}$ be the union of all different words in all classes, and \(\mid\mathcal{\mathcal{V}}\mid\) be the size of set \(\mathcal{\mathcal{V}}\) (that is, the number of different words). Then</p>
+
+\[\hat{P}(c) = \frac{N_c}{N_{doc}}, \\
+\hat{P}(w_i \mid c) = \frac{\text{Count}(w_i \mid c)} {\sum_{w \in \mathcal{V}} \text{Count}(w \mid c) },\]
+
+<p>where \(\text{Count}(w_i \mid c)\) counts the number of word \(w_i\) in the documents in training data with class $c$.</p>
+
+<p>There is a problem. Imagine that the word “walker” occurs in the class <em>positive</em> but not in the class <em>negative</em>, then \(\hat{P}(\text{"walker"} \mid \text{negative}) = 0\), and that is a problem since the logarithm will be \(-\infty\).  The simplest and commonly used solution is the add-one (Laplace) <strong>smoothing</strong>.</p>
+
+\[\hat{P}(w_i|c) = \frac{\text{Count}(w_i \mid c) + 1} {\sum_{w \in V} \left(\text{Count}(w\mid c)+1\right)} = \frac{\text{Count}(w_i\mid c) + 1} {\sum_{w \in V} \text{Count}(w\mid c) + |\mathcal{V}|}.\]
+
+<p>What do we do about words that occur in our test data but are not in our vocabulary at all because they did not occur in any training document in any class? The solution for such unknown words is to ignore them: remove them from the test document and not include any probability for them at all.</p>
+
+<p>In most text classification applications, using a stop word list does not improve performance, and so it is more common to make use of the entire vocabulary and not use a stop word list.</p>
+
+<p>The final algorithm can be expressed as</p>
+
+<div style="text-align: center">
+<figure>
+<img src="../../../pictures/Naive-Bayes.png" alt="Naive-Bayes" style="zoom:70%;" />
+</figure>
+</div>
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<p>Jurafsky, D., Martin, J. H. (2009). <em>Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition</em>. Upper Saddle River, N.J.: Pearson Prentice Hall.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

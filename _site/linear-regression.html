@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Linear Regression</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Linear Regression | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Linear Regression" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A linear regression model assumes that the regression function \(E(y_i \mid x_i)\) is linear in the inputs \(x_i^{(1)}, \cdots, x_i^{(p)}\). The linear regression model has the form \(\hat{y}_i = f(x_i) = \beta_0 + \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \beta_0 + \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)}\). If we set a \(1\) in the first position of the vector \(x_i\), then we can dismiss the intercept and the regression model can be written as \(\hat{y}_i = f(x_i) = \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)}\)." />
+<meta property="og:description" content="A linear regression model assumes that the regression function \(E(y_i \mid x_i)\) is linear in the inputs \(x_i^{(1)}, \cdots, x_i^{(p)}\). The linear regression model has the form \(\hat{y}_i = f(x_i) = \beta_0 + \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \beta_0 + \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)}\). If we set a \(1\) in the first position of the vector \(x_i\), then we can dismiss the intercept and the regression model can be written as \(\hat{y}_i = f(x_i) = \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)}\)." />
+<link rel="canonical" href="http://localhost:4000/linear-regression.html" />
+<meta property="og:url" content="http://localhost:4000/linear-regression.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linear Regression" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-03-01T00:00:00+08:00","datePublished":"2020-03-01T00:00:00+08:00","description":"A linear regression model assumes that the regression function \\(E(y_i \\mid x_i)\\) is linear in the inputs \\(x_i^{(1)}, \\cdots, x_i^{(p)}\\). The linear regression model has the form \\(\\hat{y}_i = f(x_i) = \\beta_0 + \\underset{1 \\times p}{\\beta^T} \\ \\underset{p \\times 1}{x_i} = \\beta_0 + \\sum_{j=1}^{p} \\beta^{(j)} x_i^{(j)}\\). If we set a \\(1\\) in the first position of the vector \\(x_i\\), then we can dismiss the intercept and the regression model can be written as \\(\\hat{y}_i = f(x_i) = \\underset{1 \\times p}{\\beta^T} \\ \\underset{p \\times 1}{x_i} = \\sum_{j=1}^{p} \\beta^{(j)} x_i^{(j)}\\).","headline":"Linear Regression","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/linear-regression.html"},"url":"http://localhost:4000/linear-regression.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#ordinary-least-squares">Ordinary Least Squares</a></li><li><a href="#subset-selection">Subset Selection</a></li><li><a href="#shrinkage-methods">Shrinkage Methods</a></li><li><a href="#time-complexity">Time Complexity</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/linear-regression.html">
+    <h2 class="post-title">Linear Regression</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/stat"> <li>Stat</li> </a><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/ml models"> <li>ML models</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Mar 1, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>A linear regression model assumes that the regression function \(E(y_i \mid x_i)\) is linear in the inputs \(x_i^{(1)}, \cdots, x_i^{(p)}\). The linear regression model has the form \(\hat{y}_i = f(x_i) =  \beta_0 + \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \beta_0 + \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)}\). If we set a \(1\) in the first position of the vector \(x_i\), then we can dismiss the intercept and the regression model can be written as \(\hat{y}_i = f(x_i) = \underset{1 \times p}{\beta^T} \ \underset{p \times 1}{x_i} = \sum_{j=1}^{p} \beta^{(j)} x_i^{(j)}\).</p>
+
+<p>Let’s first suppose \(X\in\mathbb{R}^{n\times p}\) and \(y\in\mathbb{R}^n\), which means we have \(n\) observations and \(p\) features.</p>
+
+<h3 id="ordinary-least-squares">Ordinary Least Squares</h3>
+
+<p>The residual sum of squares:</p>
+
+\[\text{RSS}(\beta) = (y-X \beta)^T (y-X \beta) = \|y - X\beta \|^2_2 = \sum_{i=1}^{n}(y_i - \beta^T x_i)^2.\]
+
+<p>Closed-form solution for OLS (ordinary least squares) estimator</p>
+
+\[\hat{\beta} = \underset{\beta \in \mathbb{R}^p}{\text{argmin}} \ \text{RSS}(\beta) = (X^T X)^{-1} X^T y.\]
+
+<p>Hat matrix \(H = X (X^T X)^{-1} X^T\), which is positive semi-definite.</p>
+
+<p>Assume \(\epsilon \sim N(0, \sigma^2)\), then \(\hat{\beta} \sim N(\beta, (X^TX)^{-1} \sigma^2)\).</p>
+
+<p>More on <em>The elements of Statistical Learning</em> Page 47-49.</p>
+
+<p>The Gauss-Markov Theorem: Least squares estimates of the parameter $\beta $ has the smallest variance among all linear unbiased estimates. This theorem means that the OLS estimator is BLUE (best linear unbiased estimator).</p>
+
+<p>Derivation of OLS estimator: The first and second partial derivatives are</p>
+
+\[\frac{\partial \text{RSS}(\beta)}{\partial \beta} = -2 X^T (y-X \beta),\ \frac{\partial^2 \text{RSS}(\beta)}{\partial \beta \partial \beta^T} = 2 X^T X.\]
+
+<p>Assuming that \(X\) has full column rank, and hence \(X^TX\) is positive definite, we set the first derivative to zero and then we get the solution \(\hat{\beta} = (X^T X)^{-1} X^T y\).</p>
+
+<p>We can also use gradient descent to find \(\hat{\beta}\). The gradient at \((t+1)\)-th iteration is \(\frac{\partial \text{RSS}(\beta_t)}{\partial \beta_t} = -2 X^T (y-X \beta_t)\).</p>
+
+<h3 id="subset-selection">Subset Selection</h3>
+
+<p>There are two reasons why we do variable subset selection:</p>
+
+<ul>
+  <li>The first is <strong>prediction accuracy</strong>: the least squares estimates often have low bias but large variance. Prediction accuracy can sometimes be improved by shrinking or setting some coefficients to zero. By doing so we sacrifice a little bit of bias to reduce the variance of the predicted values, and hence may improve the overall prediction accuracy.</li>
+  <li>The second reason is <strong>interpretation</strong>. With a large number of predictors, we often would like to determine a smaller subset that exhibit the strongest effects.</li>
+</ul>
+
+<p><strong>Forward-stepwise selection</strong></p>
+
+<p>Forward-stepwise starts with the intercept \(\bar{y}=\frac{1}{n}\sum_{i=1}^ny_i\), and then sequentially adds into the model the predictor that most improves the fit. It is a greedy algorithm, producing a nested sequence of models $M_0,M_1,…,M_P$, then we can select a single best model from among using cross-validated prediction error, $C_p$ (AIC), BIC or adjusted $R^2$.</p>
+
+<p>The computation is $p(p-1)/2$. Advantages: computationally efficient, smaller variance as compared to best subset selection, but perhaps more bias; it can be used even when $p&gt;n$.  Disadvantages: errors made at the beginning cannot be corrected later.</p>
+
+<p><strong>Backward-stepwise selection</strong></p>
+
+<p>Backward-stepwise starts with the full model, and sequentially deletes the predictor that has the least impact on the fit.</p>
+
+<p>Advantages: can throw out the “right” predictor by looking at the full model. Disadvantages: computationally inefficient (start with the full model), cannot work if $p&gt;n$ .</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Optimality</th>
+      <th>Computation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Best subset</td>
+      <td>Best model guaranteed</td>
+      <td>\(2^p\)</td>
+    </tr>
+    <tr>
+      <td>Forward stepwise</td>
+      <td>No guarantee</td>
+      <td>\(p(p-1)/2\)</td>
+    </tr>
+    <tr>
+      <td>Backward stepwise</td>
+      <td>No guarantee</td>
+      <td>\(p(p-1)/2\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>There are several selection criteria like: \(C_p\), AIC, BIC, Adjusted \(R^2\).</p>
+
+<h3 id="shrinkage-methods">Shrinkage Methods</h3>
+
+<p>Linear regression with L1-norm is LASSO and L2-norm is ridge regression.</p>
+
+<p><strong>Ridge regression</strong>:</p>
+
+\[\hat{\beta} = \underset{\beta \in \mathbb{R}^p}{\text{argmin}} \Big(\| y - X\beta \| ^2_2 + \lambda \| \beta \|^2_2 \Big) = (X^T X + \lambda I)^{-1} X^T y.\]
+
+<p><strong>LASSO</strong>:</p>
+
+\[\hat{\beta} = \underset{\beta \in \mathbb{R}^p}{\text{argmin}} \Big( \|Y - X\beta \|^2_2 + \lambda \| \beta \|_1 \Big).\]
+
+<div style="text-align: center">
+<img src="../../../pictures/LASSO-and-Ridge.png" alt="LASSO-and-Ridge" style="zoom:100%;" />
+</div>
+
+<p>L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more computationally efficient when doing prediction. L2-norm is differentiable so it has an analytical solution and can be calculated efficiently when training model.</p>
+
+<h3 id="time-complexity">Time Complexity</h3>
+
+<p>Suppose \(X\in\mathbb{R}^{n\times p}\) and \(y\in\mathbb{R}^n\), then the computational complexity of computing closed-form solution \((X^T X)^{-1} X^T y\) is \(O(pnp + p^3 + pn + p^2) = O(np^2+p^3)\). Here are the analyses:</p>
+
+<ol>
+  <li>The product \(X^TX\) takes \(O(pnp)\) time;</li>
+  <li>The inversion of \(X^TX\) takes \(O(p^3)\) time;</li>
+  <li>The product \(X^T y\) takes \(O(p n)\) time;</li>
+  <li>Finally, the multiplication of \((X^T X)^{-1}\) and \(X^T y\) takes \(O(p^2)\).</li>
+</ol>
+
+<p>If we use gradient descent, at the \((t+1)\)-th iteration, computing the gradient \(\frac{\partial \text{RSS}(\beta_t)}{\partial \beta_t} = -2 X^T (y-X \beta_t)\) takes \(O(np+n+pn)=O(np)\) time. If we iterate \(M\) times, the time is \(O(Mnp)\). Here are the time complexity analyses for a iteration:</p>
+
+<ol>
+  <li>The product \(X\beta_t\) takes \(O(np)\) time;</li>
+  <li>The subtraction \(y-X \beta_t\) takes \(O(n)\) times;</li>
+  <li>The multiplication of \(-2X^T\) and  \((y-X \beta_t)\) takes \(O(pn)\) time.</li>
+</ol>
+
+<p>We may prefer gradient descent than computing the closed-form solution when \(p\) is very large.</p>
+
+<p>We can also use the mini-batch gradient descent with batch size \(b\) (\(b &lt; n\)), then the time of computing the gradient will be \(O(bp)\). However, in this case, we usually need more iterations than ordinary gradient descent, since the gradient is not that accurate. Note that if we set \(b=1\), it is stochastic gradient descent.</p>
+
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Notes on "C++ Primer": Chapter 2. Variables and Basic Types</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Notes on “C++ Primer”: Chapter 2. Variables and Basic Types | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Notes on “C++ Primer”: Chapter 2. Variables and Basic Types" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chapter 2. Variables and Basic Types" />
+<meta property="og:description" content="Chapter 2. Variables and Basic Types" />
+<link rel="canonical" href="http://localhost:4000/notes-on-c++-primer-chapter-2-variables-and-basic-types.html" />
+<meta property="og:url" content="http://localhost:4000/notes-on-c++-primer-chapter-2-variables-and-basic-types.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-02T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Notes on “C++ Primer”: Chapter 2. Variables and Basic Types" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2022-05-02T00:00:00+08:00","datePublished":"2022-05-02T00:00:00+08:00","description":"Chapter 2. Variables and Basic Types","headline":"Notes on “C++ Primer”: Chapter 2. Variables and Basic Types","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/notes-on-c++-primer-chapter-2-variables-and-basic-types.html"},"url":"http://localhost:4000/notes-on-c++-primer-chapter-2-variables-and-basic-types.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#chapter-2-variables-and-basic-types">Chapter 2. Variables and Basic Types</a><ul><li><a href="#21-primitive-built-in-types">2.1 Primitive Built-in Types</a><ul><li><a href="#211-arithmetic-types">2.1.1 Arithmetic Types</a><ul><li><a href="#signed-and-unsigned-types">Signed and Unsigned Types</a></li></ul></li><li><a href="#212-type-conversions">2.1.2 Type Conversions</a><ul><li><a href="#expressions-involving-unsigned-types">Expressions Involving Unsigned Types</a></li></ul></li><li><a href="#213-literals">2.1.3 Literals</a><ul><li><a href="#integer-and-floating-point-literals">Integer and Floating-Point Literals</a></li><li><a href="#character-and-character-string-literals">Character and Character String Literals</a></li><li><a href="#escape-sequences">Escape Sequences</a></li><li><a href="#specifying-the-type-of-a-literal">Specifying the Type of a Literal</a></li><li><a href="#boolean-and-pointer-literals">Boolean and Pointer Literals</a></li></ul></li></ul></li><li><a href="#22-variables">2.2 Variables</a><ul><li><a href="#221-variable-definitions">2.2.1 Variable Definitions</a><ul><li><a href="#initializers">Initializers</a></li><li><a href="#list-initialization">List Initialization</a></li><li><a href="#default-initialization">Default Initialization</a></li></ul></li><li><a href="#222-variable-declarations-and-definitions">2.2.2 Variable Declarations and Definitions</a></li><li><a href="#223-identifiers">2.2.3 Identifiers</a><ul><li><a href="#conventions-for-variable-names">Conventions for Variable Names</a></li></ul></li><li><a href="#224-scope-of-a-name">2.2.4 Scope of a Name</a><ul><li><a href="#nested-scopes">Nested Scopes</a></li></ul></li></ul></li><li><a href="#23-compound-types">2.3 Compound Types</a><ul><li><a href="#231-references">2.3.1 References</a><ul><li><a href="#a-reference-is-an-alias">A Reference Is an Alias</a></li><li><a href="#reference-definitions">Reference Definitions</a></li></ul></li><li><a href="#232-pointers">2.3.2 Pointers</a><ul><li><a href="#taking-the-address-of-an-object">Taking the Address of an Object</a></li><li><a href="#pointer-value">Pointer Value</a></li><li><a href="#using-a-pointer-to-access-an-object">Using a Pointer to Access an Object</a></li><li><a href="#null-pointers">Null Pointers</a></li><li><a href="#assignment-and-pointers">Assignment and Pointers</a></li><li><a href="#other-pointer-operations">Other Pointer Operations</a></li><li><a href="#void-pointers"><code class="language-plaintext highlighter-rouge">void*</code> Pointers</a></li></ul></li><li><a href="#233-understanding-compound-type-declarations">2.3.3 Understanding Compound Type Declarations</a><ul><li><a href="#defining-multiple-variables">Defining Multiple Variables</a></li><li><a href="#pointers-to-pointers">Pointers to Pointers</a></li><li><a href="#references-to-pointers">References to Pointers</a></li></ul></li></ul></li><li><a href="#24-const-qualifier">2.4 <code class="language-plaintext highlighter-rouge">const</code> Qualifier</a><ul><li><a href="#initialization-and-const">Initialization and <code class="language-plaintext highlighter-rouge">const</code></a></li><li><a href="#by-default-const-objects-are-local-to-a-file">By Default, <code class="language-plaintext highlighter-rouge">const</code> Objects Are Local to a File</a></li></ul></li><li><a href="#241-references-to-const">2.4.1 References to <code class="language-plaintext highlighter-rouge">const</code></a><ul><li><a href="#initialization-and-references-to-const">Initialization and References to <code class="language-plaintext highlighter-rouge">const</code></a></li><li><a href="#a-reference-to-const-may-refer-to-an-object-that-is-not-const">A Reference to <code class="language-plaintext highlighter-rouge">const</code> May Refer to an Object That Is Not <code class="language-plaintext highlighter-rouge">const</code></a></li></ul></li><li><a href="#242--pointers-and-const">2.4.2  Pointers and <code class="language-plaintext highlighter-rouge">const</code></a><ul><li><a href="#const-pointers"><code class="language-plaintext highlighter-rouge">const</code> Pointers</a></li></ul></li><li><a href="#243-top-level-const">2.4.3 Top-Level <code class="language-plaintext highlighter-rouge">const</code></a></li><li><a href="#244-constexpr-and-constant-expressions">2.4.4 <code class="language-plaintext highlighter-rouge">constexpr</code> and Constant Expressions</a><ul><li><a href="#constexpr-variables"><code class="language-plaintext highlighter-rouge">constexpr</code> Variables</a></li><li><a href="#literal-types">Literal Types</a></li><li><a href="#pointers-and-constexpr">Pointers and <code class="language-plaintext highlighter-rouge">constexpr</code></a></li></ul></li></ul></li><li><a href="#25-dealing-with-types">2.5 Dealing with Types</a><ul><li><a href="#251-type-aliases">2.5.1 Type Aliases</a><ul><li><a href="#pointers-const-and-type-aliases">Pointers, <code class="language-plaintext highlighter-rouge">const</code>, and Type Aliases</a></li></ul></li><li><a href="#252-the-auto-type-specifier">2.5.2 The auto Type Specifier</a><ul><li><a href="#compound-types-const-and-auto">Compound Types, <code class="language-plaintext highlighter-rouge">const</code>, and <code class="language-plaintext highlighter-rouge">auto</code></a></li></ul></li><li><a href="#253-the-decltype-type-specifier">2.5.3 The <code class="language-plaintext highlighter-rouge">decltype</code> Type Specifier</a></li></ul></li><li><a href="#26-defining-our-own-data-structures">2.6 Defining Our Own Data Structures</a><ul><li><a href="#261-defining-the-sales_data-type">2.6.1 Defining the <code class="language-plaintext highlighter-rouge">Sales_data</code> Type</a><ul><li><a href="#class-data-members">Class Data Members</a></li></ul></li><li><a href="#262-using-the-sales_data-class">2.6.2 Using the <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a><ul><li><a href="#adding-two-sales_data-objects">Adding Two <code class="language-plaintext highlighter-rouge">Sales_data</code> Objects</a></li><li><a href="#reading-data-into-a-sales_data-object">Reading Data into a <code class="language-plaintext highlighter-rouge">Sales_data</code> Object</a></li><li><a href="#printing-the-sum-of-two-sales_data-objects">Printing the Sum of Two <code class="language-plaintext highlighter-rouge">Sales_data</code> Objects</a></li></ul></li><li><a href="#263-writing-our-own-header-files">2.6.3 Writing Our Own Header Files</a><ul><li><a href="#a-brief-introduction-to-the-preprocessor">A Brief Introduction to the Preprocessor</a></li></ul></li></ul></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/notes-on-c++-primer-chapter-2-variables-and-basic-types.html">
+    <h2 class="post-title">Notes on &quot;C++ Primer&quot;: Chapter 2. Variables and Basic Types</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/c++"> <li>C++</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      May 2, 2022
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><div class="toc">
+        <ul><li><a href="#chapter-2-variables-and-basic-types">Chapter 2. Variables and Basic Types</a><ul><li><a href="#21-primitive-built-in-types">2.1 Primitive Built-in Types</a><ul><li><a href="#211-arithmetic-types">2.1.1 Arithmetic Types</a><ul><li><a href="#signed-and-unsigned-types">Signed and Unsigned Types</a></li></ul></li><li><a href="#212-type-conversions">2.1.2 Type Conversions</a><ul><li><a href="#expressions-involving-unsigned-types">Expressions Involving Unsigned Types</a></li></ul></li><li><a href="#213-literals">2.1.3 Literals</a><ul><li><a href="#integer-and-floating-point-literals">Integer and Floating-Point Literals</a></li><li><a href="#character-and-character-string-literals">Character and Character String Literals</a></li><li><a href="#escape-sequences">Escape Sequences</a></li><li><a href="#specifying-the-type-of-a-literal">Specifying the Type of a Literal</a></li><li><a href="#boolean-and-pointer-literals">Boolean and Pointer Literals</a></li></ul></li></ul></li><li><a href="#22-variables">2.2 Variables</a><ul><li><a href="#221-variable-definitions">2.2.1 Variable Definitions</a><ul><li><a href="#initializers">Initializers</a></li><li><a href="#list-initialization">List Initialization</a></li><li><a href="#default-initialization">Default Initialization</a></li></ul></li><li><a href="#222-variable-declarations-and-definitions">2.2.2 Variable Declarations and Definitions</a></li><li><a href="#223-identifiers">2.2.3 Identifiers</a><ul><li><a href="#conventions-for-variable-names">Conventions for Variable Names</a></li></ul></li><li><a href="#224-scope-of-a-name">2.2.4 Scope of a Name</a><ul><li><a href="#nested-scopes">Nested Scopes</a></li></ul></li></ul></li><li><a href="#23-compound-types">2.3 Compound Types</a><ul><li><a href="#231-references">2.3.1 References</a><ul><li><a href="#a-reference-is-an-alias">A Reference Is an Alias</a></li><li><a href="#reference-definitions">Reference Definitions</a></li></ul></li><li><a href="#232-pointers">2.3.2 Pointers</a><ul><li><a href="#taking-the-address-of-an-object">Taking the Address of an Object</a></li><li><a href="#pointer-value">Pointer Value</a></li><li><a href="#using-a-pointer-to-access-an-object">Using a Pointer to Access an Object</a></li><li><a href="#null-pointers">Null Pointers</a></li><li><a href="#assignment-and-pointers">Assignment and Pointers</a></li><li><a href="#other-pointer-operations">Other Pointer Operations</a></li><li><a href="#void-pointers"><code class="language-plaintext highlighter-rouge">void*</code> Pointers</a></li></ul></li><li><a href="#233-understanding-compound-type-declarations">2.3.3 Understanding Compound Type Declarations</a><ul><li><a href="#defining-multiple-variables">Defining Multiple Variables</a></li><li><a href="#pointers-to-pointers">Pointers to Pointers</a></li><li><a href="#references-to-pointers">References to Pointers</a></li></ul></li></ul></li><li><a href="#24-const-qualifier">2.4 <code class="language-plaintext highlighter-rouge">const</code> Qualifier</a><ul><li><a href="#initialization-and-const">Initialization and <code class="language-plaintext highlighter-rouge">const</code></a></li><li><a href="#by-default-const-objects-are-local-to-a-file">By Default, <code class="language-plaintext highlighter-rouge">const</code> Objects Are Local to a File</a></li></ul></li><li><a href="#241-references-to-const">2.4.1 References to <code class="language-plaintext highlighter-rouge">const</code></a><ul><li><a href="#initialization-and-references-to-const">Initialization and References to <code class="language-plaintext highlighter-rouge">const</code></a></li><li><a href="#a-reference-to-const-may-refer-to-an-object-that-is-not-const">A Reference to <code class="language-plaintext highlighter-rouge">const</code> May Refer to an Object That Is Not <code class="language-plaintext highlighter-rouge">const</code></a></li></ul></li><li><a href="#242--pointers-and-const">2.4.2  Pointers and <code class="language-plaintext highlighter-rouge">const</code></a><ul><li><a href="#const-pointers"><code class="language-plaintext highlighter-rouge">const</code> Pointers</a></li></ul></li><li><a href="#243-top-level-const">2.4.3 Top-Level <code class="language-plaintext highlighter-rouge">const</code></a></li><li><a href="#244-constexpr-and-constant-expressions">2.4.4 <code class="language-plaintext highlighter-rouge">constexpr</code> and Constant Expressions</a><ul><li><a href="#constexpr-variables"><code class="language-plaintext highlighter-rouge">constexpr</code> Variables</a></li><li><a href="#literal-types">Literal Types</a></li><li><a href="#pointers-and-constexpr">Pointers and <code class="language-plaintext highlighter-rouge">constexpr</code></a></li></ul></li></ul></li><li><a href="#25-dealing-with-types">2.5 Dealing with Types</a><ul><li><a href="#251-type-aliases">2.5.1 Type Aliases</a><ul><li><a href="#pointers-const-and-type-aliases">Pointers, <code class="language-plaintext highlighter-rouge">const</code>, and Type Aliases</a></li></ul></li><li><a href="#252-the-auto-type-specifier">2.5.2 The auto Type Specifier</a><ul><li><a href="#compound-types-const-and-auto">Compound Types, <code class="language-plaintext highlighter-rouge">const</code>, and <code class="language-plaintext highlighter-rouge">auto</code></a></li></ul></li><li><a href="#253-the-decltype-type-specifier">2.5.3 The <code class="language-plaintext highlighter-rouge">decltype</code> Type Specifier</a></li></ul></li><li><a href="#26-defining-our-own-data-structures">2.6 Defining Our Own Data Structures</a><ul><li><a href="#261-defining-the-sales_data-type">2.6.1 Defining the <code class="language-plaintext highlighter-rouge">Sales_data</code> Type</a><ul><li><a href="#class-data-members">Class Data Members</a></li></ul></li><li><a href="#262-using-the-sales_data-class">2.6.2 Using the <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</a><ul><li><a href="#adding-two-sales_data-objects">Adding Two <code class="language-plaintext highlighter-rouge">Sales_data</code> Objects</a></li><li><a href="#reading-data-into-a-sales_data-object">Reading Data into a <code class="language-plaintext highlighter-rouge">Sales_data</code> Object</a></li><li><a href="#printing-the-sum-of-two-sales_data-objects">Printing the Sum of Two <code class="language-plaintext highlighter-rouge">Sales_data</code> Objects</a></li></ul></li><li><a href="#263-writing-our-own-header-files">2.6.3 Writing Our Own Header Files</a><ul><li><a href="#a-brief-introduction-to-the-preprocessor">A Brief Introduction to the Preprocessor</a></li></ul></li></ul></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+      </div>
+      </br><h2 id="chapter-2-variables-and-basic-types">Chapter 2. Variables and Basic Types</h2>
+
+<p>Some languages, such as Smalltalk and Python, check types at run time. In contrast, <strong>C++ is a statically typed language; type checking is done at compile time.</strong> As a consequence, the compiler must know the type of every name used in the program.</p>
+
+<p><strong>Types are fundamental to any program: They tell us what our data mean and what operations we can perform on those data.</strong></p>
+
+<p>C++ defines several primitive types (characters, integers, floating-point numbers, etc.) and provides mechanisms that let us define our own data types. The library uses these mechanisms to define more complicated types such as variable-length character strings, vectors, and so on.</p>
+
+<h3 id="21-primitive-built-in-types">2.1 Primitive Built-in Types</h3>
+
+<p><strong>C++ defines a set of primitive types that include the arithmetic types and a special type named <code class="language-plaintext highlighter-rouge">void</code>.</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">void</code> type has no associated values and can be used in only a few circumstances, most commonly as the return type for functions that do not return a value.</p>
+
+<h4 id="211-arithmetic-types">2.1.1 Arithmetic Types</h4>
+
+<p><strong>The arithmetic types are divided into two categories: integral types (which include character and boolean types) and floating-point types.</strong></p>
+
+<p>The size of—that is, the number of bits in—the arithmetic types varies across machines. The standard guarantees minimum sizes as listed in Table 2.1. However, compilers are allowed to use larger sizes for these types.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/graphics/02tab01.jpg" alt="Table 2.1: C++: Arithmetic Types" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Table 2.1: C++: Arithmetic Types (<a href="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/ch02lev2sec1.html">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>Also refer to the <a href="https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges">Microsoft C++ data type ranges</a>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">bool</code> type represents the truth values <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p>There are several character types, most of which exist to support internationalization. The basic character type is <code class="language-plaintext highlighter-rouge">char</code>. A <code class="language-plaintext highlighter-rouge">char</code> is guaranteed to be big enough to hold numeric values corresponding to the characters in the machine’s basic character set. That is, a <code class="language-plaintext highlighter-rouge">char</code> is the same size as a single machine byte. The remaining character types—<code class="language-plaintext highlighter-rouge">wchar_t</code>, <code class="language-plaintext highlighter-rouge">char16_t</code>, and <code class="language-plaintext highlighter-rouge">char32_t</code>—are used for extended character sets.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">char</code> data type is used to store a single character. The character must be surrounded by single quotes, like ‘A’ or ‘c’: <code class="language-plaintext highlighter-rouge">char my_grade = 'A'</code>.  Alternatively, you can use ASCII values to display certain characters: <code class="language-plaintext highlighter-rouge">char my_grade = 65</code>.</p>
+
+<p>There are different integer types represent integer values of (potentially) different sizes. The language guarantees that an <code class="language-plaintext highlighter-rouge">int</code> will be at least as large as <code class="language-plaintext highlighter-rouge">short</code>, a <code class="language-plaintext highlighter-rouge">long</code> at least as large as an <code class="language-plaintext highlighter-rouge">int</code>, and <code class="language-plaintext highlighter-rouge">long long</code> at least as large as <code class="language-plaintext highlighter-rouge">long</code>. The type <code class="language-plaintext highlighter-rouge">long long</code> was introduced by the new standard.</p>
+
+<p>The floating-point types represent single-, double-, and extended-precision values. The standard specifies a minimum number of significant digits. Most compilers provide more precision than the specified minimum. Typically, <strong><code class="language-plaintext highlighter-rouge">float</code>s are represented in one word (32 bits), <code class="language-plaintext highlighter-rouge">double</code>s in two words (64 bits), and <code class="language-plaintext highlighter-rouge">long double</code>s in either three or four words (96 or 128 bits).</strong> The <code class="language-plaintext highlighter-rouge">float</code> and <code class="language-plaintext highlighter-rouge">double</code> types typically yield about 7 and 16 significant digits, respectively. The type <code class="language-plaintext highlighter-rouge">long double</code> is often used as a way to accommodate special-purpose floating-point hardware; its precision is more likely to vary from one implementation to another.</p>
+
+<p>MACHINE-LEVEL REPRESENTATION OF THE BUILT-IN TYPES</p>
+
+<p>Computers store data as a sequence of bits, each holding a 0 or 1, such as 000110110111000101… Most computers deal with memory as chunks of bits of sizes that are powers of 2. <strong>The smallest chunk of addressable memory is referred to as a “byte”.</strong> The basic unit of storage, usually a small number of bytes, is referred to as a “word”. In C++ a byte has at least as many bits as are needed to hold a character in the machine’s basic character set. <strong>On most machines a byte contains 8 bits</strong> and a word is either 32 or 64 bits, that is, 4 or 8 bytes.</p>
+
+<p><strong>Most computers associate a number (called an “address”) with each byte in memory.</strong> To give meaning to memory at a given address, we must know the type of the value stored there. The type determines how many bits are used and how to interpret those bits.</p>
+
+<h5 id="signed-and-unsigned-types">Signed and Unsigned Types</h5>
+
+<p>Except for <code class="language-plaintext highlighter-rouge">bool</code> and the extended character types, the integral types may be <strong>signed</strong> or <strong>unsigned</strong>. A signed type represents negative or positive numbers (including zero); an unsigned type represents only values greater than or equal to zero.</p>
+
+<p>The types <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">short</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <code class="language-plaintext highlighter-rouge">long long</code> are all signed. We obtain the corresponding unsigned type by adding <code class="language-plaintext highlighter-rouge">unsigned</code> to the type, such as <code class="language-plaintext highlighter-rouge">unsigned long</code>. The type <code class="language-plaintext highlighter-rouge">unsigned int</code> may be abbreviated as <code class="language-plaintext highlighter-rouge">unsigned</code>.</p>
+
+<p>Unlike the other integer types, there are three distinct basic character types: <code class="language-plaintext highlighter-rouge">char</code>, <code class="language-plaintext highlighter-rouge">signed char</code>, and <code class="language-plaintext highlighter-rouge">unsigned char</code>. In particular, <code class="language-plaintext highlighter-rouge">char</code> is not the same type as <code class="language-plaintext highlighter-rouge">signed char</code>. Although there are three character types, there are only two representations: signed and unsigned. The (plain) char type uses one of these representations. Which of the other two character representations is equivalent to char depends on the compiler.</p>
+
+<p>In an unsigned type, all the bits represent the value. For example, an 8-bit <code class="language-plaintext highlighter-rouge">unsigned char</code> can hold the values from 0 through 255 inclusive.</p>
+
+<p>The standard does not define how signed types are represented, but does specify that the range should be evenly divided between positive and negative values. Hence, an 8-bit <code class="language-plaintext highlighter-rouge">signed char</code> is guaranteed to be able to hold values from –127 through 127; most modern machines use representations that allow values from –128 through 127.</p>
+
+<p><strong>ADVICE: DECIDING WHICH TYPE TO USE</strong></p>
+
+<p>A few rules of thumb can be useful in deciding which type to use:</p>
+
+<ul>
+  <li>Use an unsigned type when you know that the values cannot be negative.</li>
+  <li><strong>Use <code class="language-plaintext highlighter-rouge">int</code> for integer arithmetic.</strong> short is usually too small and, in practice, <code class="language-plaintext highlighter-rouge">long</code> often has the same size as <code class="language-plaintext highlighter-rouge">int</code>. If your data values are larger than the minimum guaranteed size of an <code class="language-plaintext highlighter-rouge">int</code>, then use <code class="language-plaintext highlighter-rouge">long long</code>.</li>
+  <li>Do not use plain <code class="language-plaintext highlighter-rouge">char</code> or <code class="language-plaintext highlighter-rouge">bool</code> in arithmetic expressions. Use them only to hold characters or truth values. Computations using <code class="language-plaintext highlighter-rouge">char</code> are especially problematic because <code class="language-plaintext highlighter-rouge">char</code> is signed on some machines and unsigned on others. If you need a tiny integer, explicitly specify either <code class="language-plaintext highlighter-rouge">signed char</code> or <code class="language-plaintext highlighter-rouge">unsigned char</code>.</li>
+  <li><strong>Use <code class="language-plaintext highlighter-rouge">double</code> for floating-point computations;</strong> <code class="language-plaintext highlighter-rouge">float</code> usually does not have enough precision, and the cost of double precision calculations versus single-precision is negligible. In fact, on some machines, double-precision operations are faster than <code class="language-plaintext highlighter-rouge">single</code>. The precision offered by  <code class="language-plaintext highlighter-rouge">long double</code> usually is unnecessary and often entails considerable run-time cost.</li>
+</ul>
+
+<p>Types in C++:</p>
+
+<ul>
+  <li>Primitive built-in types
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">void</code> type</li>
+      <li>Arithmetic types
+        <ul>
+          <li>
+            <p><code class="language-plaintext highlighter-rouge">bool</code> type</p>
+          </li>
+          <li>Character types
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">char</code> type</li>
+              <li><code class="language-plaintext highlighter-rouge">wchar_t</code> type</li>
+              <li><code class="language-plaintext highlighter-rouge">char16_t</code> type</li>
+              <li><code class="language-plaintext highlighter-rouge">char32_t</code> type</li>
+            </ul>
+          </li>
+          <li>
+            <p>Integer types</p>
+
+            <ul>
+              <li>
+                <p><code class="language-plaintext highlighter-rouge">short</code> type</p>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">int</code> type (recommended)</li>
+              <li><code class="language-plaintext highlighter-rouge">long</code> type</li>
+              <li><code class="language-plaintext highlighter-rouge">long long</code> type (recommended)</li>
+            </ul>
+          </li>
+          <li>
+            <p>Floating-point types</p>
+
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">float</code> type</li>
+              <li><code class="language-plaintext highlighter-rouge">double</code> type (recommended)</li>
+              <li><code class="language-plaintext highlighter-rouge">long double</code> type</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="212-type-conversions">2.1.2 Type Conversions</h4>
+
+<p><strong>The type of an object defines the data that an object might contain and what operations that object can perform.</strong> Among the operations that many types support is the ability to convert objects of the given type to other, related types.</p>
+
+<p>When we assign one arithmetic type to another:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// b is true</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// i has value 1</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span> <span class="c1">// i has value 3</span>
+<span class="kt">double</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// pi has value 3.0</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// assuming 8-bit char s, c has value 255</span>
+<span class="kt">signed</span> <span class="kt">char</span> <span class="n">c2</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span> <span class="c1">// assuming 8-bit char s, the value of c2 is undefined</span>
+</code></pre></div></div>
+
+<p>what happens depends on the range of the values that the types permit:</p>
+
+<ul>
+  <li>When we assign one of the non<code class="language-plaintext highlighter-rouge">bool</code> arithmetic types to a <code class="language-plaintext highlighter-rouge">bool</code> object, the result is <code class="language-plaintext highlighter-rouge">false</code> if the value is <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">true</code> otherwise.</li>
+  <li>When we assign a <code class="language-plaintext highlighter-rouge">bool</code> to one of the other arithmetic types, the resulting value is <code class="language-plaintext highlighter-rouge">1</code> if the <code class="language-plaintext highlighter-rouge">bool</code> is <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">0</code> if the <code class="language-plaintext highlighter-rouge">bool</code> is <code class="language-plaintext highlighter-rouge">false</code>.</li>
+  <li>When we assign a floating-point value to an object of integral type, the value is truncated. The value that is stored is the part before the decimal point.</li>
+  <li>When we assign an integral value to an object of floating-point type, the fractional part is zero. Precision may be lost if the integer has more bits than the floating-point object can accommodate.</li>
+  <li><strong>If we assign an out-of-range value to an object of unsigned type, the result is the remainder of the value modulo the number of values the target type can hold.</strong> For example, an 8-bit <code class="language-plaintext highlighter-rouge">unsigned char</code> can hold values from 0 through 255, inclusive. If we assign a value outside this range, the compiler assigns the remainder of that value modulo 256. Therefore, assigning –1 to an 8-bit unsigned char gives that object the value 255.</li>
+  <li><strong>If we assign an out-of-range value to an object of signed type, the result is undefined.</strong> The program might appear to work, it might crash, or it might produce garbage values.</li>
+</ul>
+
+<p>ADVICE: AVOID UNDEFINED BEHAVIOR</p>
+
+<p>Undefined behavior results from errors that the compiler is not required (and sometimes is not able) to detect. Even if the code compiles, a program that executes an undefined expression is in error.</p>
+
+<p>Unfortunately, programs that contain undefined behavior can appear to execute correctly in some circumstances and/or on some compilers. There is no guarantee that the same program, compiled under a different compiler or even a subsequent release of the same compiler, will continue to run correctly. Nor is there any guarantee that what works with one set of inputs will work with another.</p>
+
+<h5 id="expressions-involving-unsigned-types">Expressions Involving Unsigned Types</h5>
+
+<p>If we use both <code class="language-plaintext highlighter-rouge">unsigned</code> and <code class="language-plaintext highlighter-rouge">int</code> values in an arithmetic expression, the <code class="language-plaintext highlighter-rouge">int</code> value ordinarily is converted to <code class="language-plaintext highlighter-rouge">unsigned</code>.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">42</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// prints -84</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">u</span> <span class="o">+</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// if 32-bit int s, prints 4294967264</span>
+</code></pre></div></div>
+
+<p>In the second expression, the <code class="language-plaintext highlighter-rouge">int</code> value -42 is converted to <code class="language-plaintext highlighter-rouge">unsigned</code> before the addition is done.</p>
+
+<p>CAUTION: DON’T MIX SIGNED AND UNSIGNED TYPES</p>
+
+<p>Expressions that mix signed and unsigned values can yield surprising results when the signed value is negative. It is essential to remember that <strong>signed values are automatically converted to unsigned</strong>. For example, in an expression like <code class="language-plaintext highlighter-rouge">a * b</code>, if <code class="language-plaintext highlighter-rouge">a</code> is <code class="language-plaintext highlighter-rouge">-1</code> and <code class="language-plaintext highlighter-rouge">b</code> is <code class="language-plaintext highlighter-rouge">1</code>, then if both <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are <code class="language-plaintext highlighter-rouge">int</code>s, the value is, as expected <code class="language-plaintext highlighter-rouge">-1</code>. However, if <code class="language-plaintext highlighter-rouge">a</code> is <code class="language-plaintext highlighter-rouge">int</code> and <code class="language-plaintext highlighter-rouge">b</code> is an <code class="language-plaintext highlighter-rouge">unsigned</code>, then the value of this expression depends on how many bits an int has on the particular machine. On our machine, this expression yields <code class="language-plaintext highlighter-rouge">4294967295</code>.</p>
+
+<h4 id="213-literals">2.1.3 Literals</h4>
+
+<p>A value, such as <code class="language-plaintext highlighter-rouge">42</code>, is known as a literal because its value self-evident. Every literal has a type. The form and value of a literal determine its type.</p>
+
+<h5 id="integer-and-floating-point-literals">Integer and Floating-Point Literals</h5>
+
+<p>A decimal literal has the smallest type of <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, or <code class="language-plaintext highlighter-rouge">long long</code> (i.e., the first type in this list) in which the literal’s value fits. It is an error to use a literal that is too large to fit in the largest related type. There are no literals of type <code class="language-plaintext highlighter-rouge">short</code>.</p>
+
+<h5 id="character-and-character-string-literals">Character and Character String Literals</h5>
+
+<p>A character enclosed within single quotes is a literal of type char. Zero or more characters enclosed in double quotation marks is a string literal:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sc">'a'</span> <span class="c1">// character literal</span>
+<span class="s">"Hello World!"</span> <span class="c1">// string literal</span>
+</code></pre></div></div>
+
+<p>The type of a string literal is array of constant <code class="language-plaintext highlighter-rouge">char</code>s.</p>
+
+<h5 id="escape-sequences">Escape Sequences</h5>
+
+<p>Some characters, such as backspace or control characters, have no visible image. Such characters are <strong>nonprintable</strong>. Other characters (single and double quotation marks, question mark, and backslash) have special meaning in the language. Our programs cannot use any of these characters directly. Instead, we use an <strong>escape sequence</strong> to represent such characters. An escape sequence begins with a backslash. The language defines several escape sequences:</p>
+
+<p>newline <code class="language-plaintext highlighter-rouge">\n</code>, vertical tab <code class="language-plaintext highlighter-rouge">\v</code>, backslash <code class="language-plaintext highlighter-rouge">\\</code>, carriage return <code class="language-plaintext highlighter-rouge">\r</code>, horizontal tab <code class="language-plaintext highlighter-rouge">\t</code>, backspace <code class="language-plaintext highlighter-rouge">\b</code>, question mark <code class="language-plaintext highlighter-rouge">\?</code>, formfeed <code class="language-plaintext highlighter-rouge">\f</code>, alert (bell) <code class="language-plaintext highlighter-rouge">\a</code>, double quote <code class="language-plaintext highlighter-rouge">\"</code>, single quote <code class="language-plaintext highlighter-rouge">\'</code></p>
+
+<p>We use an escape sequence as if it were a single character:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span> <span class="c1">// prints a newline</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\t</span><span class="s">Hi!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="c1">// prints a tab followd by "Hi!" and a newline</span>
+</code></pre></div></div>
+
+<h5 id="specifying-the-type-of-a-literal">Specifying the Type of a Literal</h5>
+
+<p>We can override the default type of an integer, floating-point, or character literal by supplying a suffix or prefix as listed in Table 2.2.</p>
+
+<div align="center">
+<figure>
+<img src="https://raw.githubusercontent.com/gaoxiangnumber1/NotesPhotos/master/Cpp/Cp/2-2.png" alt="img" style="zoom: 58%;" />
+<figcaption style="font-size: 80%;"> Table 2.2: Specifying the Type of a Literal </figcaption>
+</figure>
+</div>
+
+<h5 id="boolean-and-pointer-literals">Boolean and Pointer Literals</h5>
+
+<p>The words <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> are literals of type <code class="language-plaintext highlighter-rouge">bool</code>: <code class="language-plaintext highlighter-rouge">bool test = false;</code>. The word <code class="language-plaintext highlighter-rouge">nullptr</code> is a pointer literal.</p>
+
+<h3 id="22-variables">2.2 Variables</h3>
+
+<p>A variable provides us with named storage that our programs can manipulate. Each variable in C++ has a type. The type determines the size and layout of the variable’s memory, the range of values that can be stored within that memory, and the set of operations that can be applied to the variable. C++ programmers tend to refer to variables as “variables” or “objects” interchangeably.</p>
+
+<h4 id="221-variable-definitions">2.2.1 Variable Definitions</h4>
+<p>TERMINOLOGY: WHAT IS AN OBJECT?</p>
+
+<p><strong>Generally, an object is a region of memory that can contain data and has a type.</strong></p>
+
+<h5 id="initializers">Initializers</h5>
+
+<p>Initialization is not assignment. Initialization happens when a variable is given a value when it is created. Assignment obliterates an object’s current value and replaces that value with a new one.</p>
+
+<h5 id="list-initialization">List Initialization</h5>
+
+<p>We can use any of the following four different ways to define an <code class="language-plaintext highlighter-rouge">int</code> variable named <code class="language-plaintext highlighter-rouge">units_sold</code> and initialize it to <code class="language-plaintext highlighter-rouge">0</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">units_sold</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">units_sold</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</code></pre></div></div>
+
+<div align="center">
+<figure>
+<img src="http://1.bp.blogspot.com/-XgAWe68aefE/U_rzHhFhCaI/AAAAAAAAACY/8i_rFdj-yJs/s1600/inital.png" alt="img" style="zoom:55%;" />
+<figcaption style="font-size: 80%;"> Figure: Declaration, initialization and assignment (<a href="http://programingsconcepts.blogspot.com/2014/08/as-you-know-that-c-is-computer-language.html">Source</a>) </figcaption>
+</figure>
+</div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">int</code> is the type specifier; <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">*ptr</code> are declarators; <code class="language-plaintext highlighter-rouge">=10</code> and <code class="language-plaintext highlighter-rouge">=&amp;a</code> are initializers.</p>
+
+<p>The initialization with the use of curly braces is referred to as <strong>list initialization</strong>. When used with variables of built-in type, this form of initialization has one important property: The compiler will not let us list initialize variables of built-in type if the initializer might lead to the loss of information:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">double</span> <span class="n">ld</span> <span class="o">=</span> <span class="mf">3.1415926536</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">{</span><span class="n">ld</span><span class="p">},</span> <span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="n">ld</span><span class="p">};</span> <span class="c1">// error: narrowing conversion required</span>
+<span class="kt">int</span> <span class="n">c</span><span class="p">(</span><span class="n">ld</span><span class="p">),</span> <span class="n">d</span> <span class="o">=</span> <span class="n">ld</span><span class="p">;</span> <span class="c1">// ok: but value will be truncated</span>
+</code></pre></div></div>
+
+<p>The compiler rejects the initializations of <code class="language-plaintext highlighter-rouge">a</code>and <code class="language-plaintext highlighter-rouge">b</code> because using a <code class="language-plaintext highlighter-rouge">long double</code> to initialize an <code class="language-plaintext highlighter-rouge">int</code> is likely to lose data.</p>
+
+<h5 id="default-initialization">Default Initialization</h5>
+
+<p><strong>When we define a variable without an initializer, the variable is default initialized.</strong> Such variables are given the “default” value. What that default value is depends on the type of the variable and may also depend on where the variable is defined.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">b</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The value of an object of built-in type that is not explicitly initialized depends on where it is defined. <strong>Variables of built-in type defined outside any function body are initialized to zero. Variables of built-in type defined inside a function are uninitialized.</strong> The value of an uninitialized variable of built-in type is <strong>undefined</strong> (§ 2.1.2, p. 36). It is an error to copy or otherwise try to access the value of a variable whose value is undefined.</p>
+
+<p>Most classes let us define objects without explicit initializers. Such classes supply an appropriate default value for us. For example, as we’ve just seen, the library string class says that if we do not supply an initializer, then the resulting string is the empty string:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">empty</span><span class="p">;</span> <span class="c1">// empty implicitly initialized to the empty string</span>
+<span class="n">Sales_item</span> <span class="n">item</span><span class="p">;</span> <span class="c1">// default-initialized Sales_item object</span>
+</code></pre></div></div>
+
+<p>Some classes require that every object be explicitly initialized. The compiler will complain if we try to create an object of such a class with no initializer.</p>
+
+<p>Note: Uninitialized objects of built-in type defined inside a function body have undefined value. Objects of class type that we do not explicitly initialize have a value that is defined by the class.</p>
+
+<p>CAUTION: UNINITIALIZED VARIABLES CAUSE RUN-TIME PROBLEMS</p>
+
+<p>An uninitialized variable has an indeterminate value. Trying to use the value of an uninitialized variable is an error that is often hard to debug.</p>
+
+<h4 id="222-variable-declarations-and-definitions">2.2.2 Variable Declarations and Definitions</h4>
+
+<p><strong>Separate compilation</strong> lets us split our programs into several files and allow programs to be written in logical parts. Each of the files can be compiled independently.</p>
+
+<p>When we separate a program into multiple files, we need a way to share code across those files. For example, code defined in one file may need to use a variable defined in another file. As a concrete example, consider <code class="language-plaintext highlighter-rouge">std::cout</code> and <code class="language-plaintext highlighter-rouge">std::cin</code>. These are objects defined somewhere in the standard library, yet our programs can use these objects.</p>
+
+<p>To support separate compilation, C++ distinguishes between declarations and definitions. <strong>A declaration makes a name known to the program.</strong> A file that wants to use a name defined elsewhere includes a declaration for that name. <strong>A definition creates the associated entity.</strong> <strong>A variable</strong>
+<strong>definition is a declaration.</strong></p>
+
+<p>A variable declaration specifies the type and name of a variable. In addition, a definition also allocates storage and may provide the variable with an initial value.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">extern</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// declares but does not define i</span>
+<span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">// declares and defines j</span>
+<span class="k">extern</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// declares and defines k (the initializer overrides the extern)</span>
+</code></pre></div></div>
+
+<p><strong>To use the same variable in multiple files, we must define that variable in one and only one file. Other files that use that variable must declare but not define that variable.</strong></p>
+
+<p>KEY CONCEPT: STATIC TYPING</p>
+
+<p>C++ is a statically typed language, which means that types are checked at compile time. The process is referred to as <strong>type checking</strong>. In C++, the compiler checks whether the operations we write are supported by the types we use. A consequence is that we must declare the types of the variables before we compile the program.</p>
+
+<h4 id="223-identifiers">2.2.3 Identifiers</h4>
+
+<p>Identifiers in C++ can be composed of letters, digits, and the underscore character. Identifiers must begin with either a letter or an underscore. Identifiers defined outside a function may not begin with an underscore.</p>
+
+<h5 id="conventions-for-variable-names">Conventions for Variable Names</h5>
+
+<p>Variable names normally are lowercase, while classes we define usually begin with an uppercase letter.</p>
+
+<h4 id="224-scope-of-a-name">2.2.4 Scope of a Name</h4>
+
+<p>At any particular point in a program, each name that is in use refers to a specific entity—a variable, function, type, and so on.</p>
+
+<p>A <strong>scope</strong> is a part of the program in which a name has a particular meaning. Most scopes in C++ are delimited by curly braces.</p>
+
+<p>The same name can refer to different entities in different scopes. <strong>Names are visible from the point where they are declared until the end of the scope in which the declaration appears.</strong></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">val</span><span class="p">)</span>
+		<span class="n">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Sum is "</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the program above, the name <code class="language-plaintext highlighter-rouge">main</code>—like most names defined outside a function—has <strong>global scope</strong>. Once declared, names at the global scope are accessible throughout the program. The name <code class="language-plaintext highlighter-rouge">sum</code> is defined within the scope of the block that is the body of the <code class="language-plaintext highlighter-rouge">main</code> function. It is accessible from its point of declaration throughout the rest of the <code class="language-plaintext highlighter-rouge">main</code> function but not outside of it. The variable <code class="language-plaintext highlighter-rouge">sum</code> has <strong>block scope</strong>. The name <code class="language-plaintext highlighter-rouge">val</code> is defined in the scope of the <code class="language-plaintext highlighter-rouge">for</code> statement. It can be used in that statement but not elsewhere in <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<h5 id="nested-scopes">Nested Scopes</h5>
+
+<p>Scopes can contain other scopes. The contained (or nested) scope is referred to as an <strong>inner scope</strong>, the containing scope is the <strong>outer scope</strong>. Once a name has been declared in a scope, that name can be used and redefined by the inner scope, but not by the outer scope.</p>
+
+<h3 id="23-compound-types">2.3 Compound Types</h3>
+
+<p>A <strong>compound type</strong> is a type that is defined in terms of another type. C++ has several compound types, two of which—references and pointers.</p>
+
+<h4 id="231-references">2.3.1 References</h4>
+
+<p><strong>A reference defines an alternative name for an object. A reference type “refers to” another type.</strong> We define a reference type by writing a declarator of the form <code class="language-plaintext highlighter-rouge">&amp;d</code>, where <code class="language-plaintext highlighter-rouge">d</code> is the name being declared:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">refVal</span> <span class="o">=</span> <span class="n">ival</span><span class="p">;</span> <span class="c1">// refVal refers to (is another name for) ival</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">refVal2</span><span class="p">;</span> <span class="c1">// error: a reference must be initialized</span>
+</code></pre></div></div>
+
+<p>When we define a reference, we bind the reference to its initializer. Once initialized, a reference remains bound to its initial object. There is no way to rebind a reference to refer to a different object. References must be initialized.</p>
+
+<h5 id="a-reference-is-an-alias">A Reference Is an Alias</h5>
+
+<p>Note: <strong>A reference is not an object. Instead, a reference is just another name for an already existing object.</strong></p>
+
+<p>All operations on a reference are actually operations on the object to which the reference is bound:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">refVal</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// assigns 2 to the object to which refVal refers, i.e., to ival</span>
+<span class="c1">// refVal3 is bound to the object to which refVal is bound, i.e., to ival</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">refVal3</span> <span class="o">=</span> <span class="n">refVal</span><span class="p">;</span>
+<span class="c1">// initializes i from the value in the object to which refVal is bound</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">refVal</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Because references are not objects, we may not define a reference to a reference.</p>
+
+<h5 id="reference-definitions">Reference Definitions</h5>
+
+<p>The type of a reference and the object to which the reference refers must match exactly. A reference may be bound only to an object, not to a literal or to the result of a more general expression.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">dval</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">refVal5</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span> <span class="c1">// error: initializer must be an int object</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">refVal4</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// error: initializer must be an object</span>
+</code></pre></div></div>
+
+<h4 id="232-pointers">2.3.2 Pointers</h4>
+
+<p>A <strong>pointer</strong> is a compound type that “points to” another type. Like references, pointers are used for indirect access to other objects. Unlike a reference, <strong>a pointer is an object in its own right.</strong> Pointers can be assigned and copied; a single pointer can point to several different objects over its lifetime. Unlike a reference, a pointer need not be initialized at the time it is defined. Like other built-in types, pointers defined at block scope have undefined value if they are not initialized.</p>
+
+<p>Warning: Pointers are often hard to understand. Debugging problems due to pointer errors bedevil even experienced programmers.</p>
+
+<p>We define a pointer type by writing a declarator of the form <code class="language-plaintext highlighter-rouge">*d</code>, where <code class="language-plaintext highlighter-rouge">d</code> is the name being defined.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">ip1</span><span class="p">,</span> <span class="o">*</span><span class="n">ip2</span><span class="p">;</span> <span class="c1">// both ip1 and ip2 are pointers to int</span>
+<span class="kt">double</span> <span class="n">dp</span><span class="p">,</span> <span class="o">*</span><span class="n">dp2</span><span class="p">;</span> <span class="c1">// dp2 is a pointer to double; dp is a double</span>
+</code></pre></div></div>
+
+<h5 id="taking-the-address-of-an-object">Taking the Address of an Object</h5>
+
+<p><strong>A pointer holds the address of another object.</strong> We get the address of an object by using the address-of operator (the &amp; operator):</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span> <span class="c1">// p holds the address of ival; p is a pointer to ival</span>
+</code></pre></div></div>
+
+<p>The second statement defines <code class="language-plaintext highlighter-rouge">p</code> as a pointer to <code class="language-plaintext highlighter-rouge">int</code> and initializes <code class="language-plaintext highlighter-rouge">p</code> to point to the int object named <code class="language-plaintext highlighter-rouge">ival</code>. Because references are not objects, they don’t have addresses. Hence, we may not define a pointer to a reference.</p>
+
+<p>The types of the pointer and the object to which it points must match:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">dval</span><span class="p">;</span>
+<span class="kt">double</span> <span class="o">*</span><span class="n">pd</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">dval</span><span class="p">;</span> <span class="c1">// ok: initializer is the address of a double</span>
+<span class="kt">double</span> <span class="o">*</span><span class="n">pd2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">;</span> <span class="c1">// ok: initializer is a pointer to double</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="n">pd</span><span class="p">;</span> <span class="c1">// error: types of pi and pd differ</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">dval</span><span class="p">;</span> <span class="c1">// error: assigning the address of a double to a pointer to int</span>
+</code></pre></div></div>
+
+<p>The types must match because the type of the pointer is used to infer the type of the object to which the pointer points. If a pointer addressed an object of another type, operations performed on the underlying object would fail.</p>
+
+<h5 id="pointer-value">Pointer Value</h5>
+
+<p>The value (i.e., the address) stored in a pointer can be in one of four states:</p>
+<ol>
+  <li>It can point to an object.</li>
+  <li>It can point to the location just immediately past the end of an object.</li>
+  <li>It can be a null pointer, indicating that it is not bound to any object.</li>
+  <li>It can be invalid; values other than the preceding three are invalid.</li>
+</ol>
+
+<p>It is an error to copy or otherwise try to access the value of an invalid pointer. As when we use an uninitialized variable, this error is one that the compiler is unlikely to detect. The result of accessing an invalid pointer is undefined. Therefore, we must always know whether a given pointer is valid.</p>
+
+<p>Although pointers in cases 2 and 3 are valid, these pointers do not point to any object, and we may not use them to access the (supposed) object to which the pointer points. If we do attempt to access an object through such pointers, the behavior is undefined.</p>
+
+<h5 id="using-a-pointer-to-access-an-object">Using a Pointer to Access an Object</h5>
+
+<p>When a pointer points to an object, we can use the <strong>dereference operator</strong> (the <code class="language-plaintext highlighter-rouge">*</code> operator) to access that object:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span> <span class="c1">// p holds the address of ival; p is a pointer to ival </span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// * yields the object to which p points; prints 42</span>
+</code></pre></div></div>
+
+<p>Dereferencing a pointer yields the object to which the pointer points. We can assign to that object by assigning to the result of the dereference:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// * yields the object; we assign a new value to ival through p</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// prints 0</span>
+</code></pre></div></div>
+
+<p>When we assign to <code class="language-plaintext highlighter-rouge">*p</code>, we are assigning to the object to which <code class="language-plaintext highlighter-rouge">p</code> points.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> 
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// &amp; follows a type and is part of a declaration; r is a reference</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// * follows a type and is part of a declaration; p is a pointer</span>
+<span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// &amp; is used in an expression as the address-of operator</span>
+<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// * is used in an expression as the dereference operator</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// &amp; is part of the declaration; * is the dereference operator</span>
+</code></pre></div></div>
+
+<h5 id="null-pointers">Null Pointers</h5>
+
+<p>A <strong>null pointer</strong> does not point to any object. There are several ways to obtain a null pointer:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// equivalent to int *p1 = 0;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// directly initializes p2 from the literal constant 0 </span>
+<span class="c1">// must #include cstdlib</span>
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">nullptr</code> is a literal.</p>
+
+<p>It is illegal to assign an int variable to a pointer, even if the variable’s value happens to be <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">zero</span><span class="p">;</span> <span class="c1">// error: cannot assign an int to a pointer</span>
+</code></pre></div></div>
+
+<p>ADVICE: INITIALIZE ALL POINTERS</p>
+
+<p>Uninitialized pointers are a common source of run-time errors. As with any other uninitialized variable, what happens when we use an uninitialized pointer is undefined.</p>
+
+<p>Our recommendation to <strong>initialize all variables is particularly important for pointers.</strong> If possible, define a pointer only after the object to which it should point has been defined. <strong>If there is no object to bind to a pointer, then initialize the pointer to nullptr or zero. That way, the program can detect that the pointer does not point to an object.</strong></p>
+
+<h5 id="assignment-and-pointers">Assignment and Pointers</h5>
+
+<p>Both pointers and references give indirect access to other objects. However, there are important differences in how they do so. The most important is that a reference is not an object. Once we have defined a reference, there is no way to make that reference refer to a different object.</p>
+
+<p>As with any other (nonreference) variable, when we assign to a pointer, we give the pointer itself a new value. Assignment makes the pointer point to a different object:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// pi is initialized but addresses no object </span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// pi2 initialized to hold the address of i</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi3</span><span class="p">;</span> <span class="c1">// if pi3 is defined inside a block, pi3 is uninitialized</span>
+<span class="n">pi3</span> <span class="o">=</span> <span class="n">pi2</span><span class="p">;</span> <span class="c1">// pi3 and pi2 address the same object, e.g., i</span>
+<span class="n">pi2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// pi2 now addresses no object</span>
+</code></pre></div></div>
+
+<h5 id="other-pointer-operations">Other Pointer Operations</h5>
+
+<p>So long as the pointer has a valid value, we can use a pointer in a condition. If the pointer is <code class="language-plaintext highlighter-rouge">0</code> (<code class="language-plaintext highlighter-rouge">nullptr</code> is also zero pointer), then the condition is <code class="language-plaintext highlighter-rouge">false</code>. Any nonzero pointer evaluates as true.</p>
+
+<p>Given two valid pointers of the same type, we can compare them using the equality (<code class="language-plaintext highlighter-rouge">==</code>) or inequality (<code class="language-plaintext highlighter-rouge">!=</code>) operators. The result of these operators has type <code class="language-plaintext highlighter-rouge">bool</code>. Two pointers are equal if they hold the same address and unequal otherwise. Two pointers hold the same address (i.e., are equal) if they are both null, if they address the same object, or if they are both pointers one past the same object. Note that it is possible for a pointer to an object and a pointer one past the end of a different object to hold the same address. Such pointers will compare equal.</p>
+
+<h5 id="void-pointers"><code class="language-plaintext highlighter-rouge">void*</code> Pointers</h5>
+
+<p>The type <code class="language-plaintext highlighter-rouge">void*</code> is a special pointer type that can hold the address of any object. Like any other pointer, a <code class="language-plaintext highlighter-rouge">void*</code> pointer holds an address, but the type of the object at that address is unknown:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">obj</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">,</span> <span class="o">*</span><span class="n">pd</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">obj</span><span class="p">;</span>
+<span class="c1">// ok: void* can hold the address value of any data pointer type </span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">pv</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">obj</span><span class="p">;</span> <span class="c1">// obj can be an object of any type </span>
+<span class="n">pv</span> <span class="o">=</span> <span class="n">pd</span><span class="p">;</span> <span class="c1">// pv can hold a pointer to any type</span>
+</code></pre></div></div>
+
+<p>We cannot use a <code class="language-plaintext highlighter-rouge">void*</code> to operate on the object it addresses—we don’t know that object’s type, and the type determines what operations we can perform on the object.</p>
+
+<p>Generally, we use a <code class="language-plaintext highlighter-rouge">void*</code> pointer to deal with memory as memory, rather than using the pointer to access the object stored in that memory.</p>
+
+<h4 id="233-understanding-compound-type-declarations">2.3.3 Understanding Compound Type Declarations</h4>
+
+<p><code class="language-plaintext highlighter-rouge">*</code> or <code class="language-plaintext highlighter-rouge">&amp;</code> are called type modifiers.</p>
+
+<h5 id="defining-multiple-variables">Defining Multiple Variables</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// p is a pointer, this way is legal but might be misleading</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">;</span> <span class="c1">// p1 is a pointer to int; p2 is an int</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p1</span><span class="p">,</span> <span class="o">*</span><span class="n">p2</span><span class="p">;</span> <span class="c1">// both p1 and p2 are pointers to int</span>
+</code></pre></div></div>
+
+<h5 id="pointers-to-pointers">Pointers to Pointers</h5>
+
+<p><strong>A pointer is an object in memory, so like any object it has an address.</strong> Therefore, we can store the address of a pointer in another pointer.</p>
+
+<p>We indicate each pointer level by its own <code class="language-plaintext highlighter-rouge">*</code>. That is, we write <code class="language-plaintext highlighter-rouge">**</code> for a pointer to a pointer, <code class="language-plaintext highlighter-rouge">***</code> for a pointer to a pointer to a pointer, and so on:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span> <span class="c1">// pi points to an int</span>
+<span class="kt">int</span> <span class="o">**</span><span class="n">ppi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">;</span> <span class="c1">// ppi points to a pointer to an int</span>
+</code></pre></div></div>
+
+<h5 id="references-to-pointers">References to Pointers</h5>
+
+<p>A reference is not an object. Hence, we may not have a pointer to a reference. However, because a pointer is an object, we can define a reference to a pointer:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// p is a pointer to int</span>
+<span class="kt">int</span> <span class="o">*&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// r is a reference to the pointer p</span>
+<span class="n">r</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// r refers to a pointer; assigning &amp;i to r makes p point to i</span>
+<span class="o">*</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// dereferences r yields i, the object to which p points; changes i to 0</span>
+</code></pre></div></div>
+
+<h3 id="24-const-qualifier">2.4 <code class="language-plaintext highlighter-rouge">const</code> Qualifier</h3>
+
+<p>We can make a variable unchangeable by defining the variable’s type as <code class="language-plaintext highlighter-rouge">const</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">bufSize</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span> <span class="c1">// input buffer size</span>
+</code></pre></div></div>
+
+<p>defines <code class="language-plaintext highlighter-rouge">bufSize</code> as a constant. Any attempt to assign to <code class="language-plaintext highlighter-rouge">bufSize</code> is an error:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bufSize</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span> <span class="c1">// error: attempt to write to const object</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">const</code> object must be initialized:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">get_size</span><span class="p">();</span> <span class="c1">// ok: initialized at run time </span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// ok: initialized at compile time </span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// error: k is uninitialized const</span>
+</code></pre></div></div>
+
+<h5 id="initialization-and-const">Initialization and <code class="language-plaintext highlighter-rouge">const</code></h5>
+
+<p>We may use only those operations that cannot change the <code class="language-plaintext highlighter-rouge">const</code> object.</p>
+
+<h5 id="by-default-const-objects-are-local-to-a-file">By Default, <code class="language-plaintext highlighter-rouge">const</code> Objects Are Local to a File</h5>
+
+<p>When we define a <code class="language-plaintext highlighter-rouge">const</code> with the same name in multiple files, it is as if we had written definitions for separate variables in each file.</p>
+
+<p>Sometimes we have a <code class="language-plaintext highlighter-rouge">const</code> variable that we want to share across multiple files but whose initializer is not a constant expression. In this case, we define the <code class="language-plaintext highlighter-rouge">const</code> in one file, and declare it in the other files that use that object.</p>
+
+<p>To define a single instance of a <code class="language-plaintext highlighter-rouge">const</code> variable, we use the keyword <code class="language-plaintext highlighter-rouge">extern</code> on both its definition and declaration(s):</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// file_1.cc defines and initializes a const that is accessible to other files </span>
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">bufSize</span> <span class="o">=</span> <span class="n">fcn</span><span class="p">();</span>
+<span class="c1">// file_1.h</span>
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">bufSize</span><span class="p">;</span> <span class="c1">// same bufSize as defined in file_1.cc</span>
+</code></pre></div></div>
+
+<p>Note: To share a <code class="language-plaintext highlighter-rouge">const</code> object among multiple files, you must define the variable as <code class="language-plaintext highlighter-rouge">extern</code>.</p>
+
+<h4 id="241-references-to-const">2.4.1 References to <code class="language-plaintext highlighter-rouge">const</code></h4>
+
+<p>Unlike an ordinary reference, a reference to <code class="language-plaintext highlighter-rouge">const</code> cannot be used to change the object to which the reference is bound:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r1</span> <span class="o">=</span>  <span class="n">ci</span><span class="p">;</span> <span class="c1">// ok: both reference and underlying object are const</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// error: r1 is a reference to const</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// error: nonconst reference to a const object</span>
+</code></pre></div></div>
+
+<p>TERMINOLOGY: <code class="language-plaintext highlighter-rouge">const</code> REFERENCE IS A REFERENCE TO <code class="language-plaintext highlighter-rouge">const</code></p>
+
+<p>C++ programmers tend to abbreviate the phrase “reference to <code class="language-plaintext highlighter-rouge">const</code>” as “<code class="language-plaintext highlighter-rouge">const</code> reference”.</p>
+
+<h5 id="initialization-and-references-to-const">Initialization and References to <code class="language-plaintext highlighter-rouge">const</code></h5>
+
+<p>In § 2.3.1 (p. 51) we noted that there are two exceptions to the rule that the type of a reference must match the type of the object to which it refers. The first exception is that we can initialize a reference to const from any expression that can be converted (§ 2.1.2, p. 35) to the type of the reference. In particular, <strong>we can bind a reference to <code class="language-plaintext highlighter-rouge">const</code> to a non<code class="language-plaintext highlighter-rouge">const</code> object, a literal, or a more general expression:</strong></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r1</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// we can bind a const int&amp; to a plain int object</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// ok: r1 is a reference to const </span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r3</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// ok: r3 is a reference to const </span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r4</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// error: r4 is a plain, nonconst reference</span>
+</code></pre></div></div>
+
+<h5 id="a-reference-to-const-may-refer-to-an-object-that-is-not-const">A Reference to <code class="language-plaintext highlighter-rouge">const</code> May Refer to an Object That Is Not <code class="language-plaintext highlighter-rouge">const</code></h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r1</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// r1 bound to i</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// r2 also bound to i; but cannot be used to change i</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// r1 is not const; i is now 0</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// error: r2 is a reference to const</span>
+</code></pre></div></div>
+
+<h4 id="242--pointers-and-const">2.4.2  Pointers and <code class="language-plaintext highlighter-rouge">const</code></h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">double</span> <span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span> <span class="c1">// pi is const; its value may not be changed</span>
+<span class="kt">double</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">;</span> <span class="c1">// error: ptr is a plain pointer</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="o">*</span><span class="n">cptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">;</span> <span class="c1">// ok: cptr may point to a double that is const</span>
+<span class="o">*</span><span class="n">cptr</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// error: cannot assign to *cptr</span>
+</code></pre></div></div>
+
+<p>In § 2.3.2 (p. 52) we noted that there are two exceptions to the rule that the types of a pointer and the object to which it points must match. The first exception is that <strong>we can use a pointer to <code class="language-plaintext highlighter-rouge">const</code> to point to a non<code class="language-plaintext highlighter-rouge">const</code> object:</strong></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">dval</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span> <span class="c1">// dval is a double; its value can be changed </span>
+<span class="n">cptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">dval</span><span class="p">;</span> <span class="c1">// ok: but can't change dval through cptr</span>
+</code></pre></div></div>
+
+<h5 id="const-pointers"><code class="language-plaintext highlighter-rouge">const</code> Pointers</h5>
+
+<p>As with any other object type, we can have a pointer that is itself <code class="language-plaintext highlighter-rouge">const</code>. Like any other <code class="language-plaintext highlighter-rouge">const</code> object, a <code class="language-plaintext highlighter-rouge">const</code> pointer must be initialized, and once initialized, its value (i.e., the address that it holds) may not be changed.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="c1">// ok: ptr is a pointer to an const int object</span>
+<span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">ptr</span><span class="p">;</span> <span class="c1">// error: uninitialized const 'ptr'</span>
+</code></pre></div></div>
+
+<p>We indicate that the pointer is <code class="language-plaintext highlighter-rouge">const</code> by putting the <code class="language-plaintext highlighter-rouge">const</code> after the <code class="language-plaintext highlighter-rouge">*</code>. This placement indicates that it is the pointer, not the pointed-to type, that is const:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">errNumb</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">curErr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">errNumb</span><span class="p">;</span> <span class="c1">// curErr is a const pointer to an object of type int</span>
+<span class="o">*</span><span class="n">currErr</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// ok: now errNumb is 2</span>
+<span class="n">currErr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// error: currErr is a const pointer and its value cannot be changed</span>
+
+<span class="k">const</span> <span class="kt">double</span> <span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="o">*</span><span class="k">const</span> <span class="n">pip</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">;</span> <span class="c1">// pip is a const pointer to an object of type const double</span>
+<span class="o">*</span><span class="n">pip</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span> <span class="c1">// error: pip points to a const object</span>
+</code></pre></div></div>
+
+<h4 id="243-top-level-const">2.4.3 Top-Level <code class="language-plaintext highlighter-rouge">const</code></h4>
+
+<p>We can talk independently about whether a pointer is <code class="language-plaintext highlighter-rouge">const</code> and whether the objects to which it can point are <code class="language-plaintext highlighter-rouge">const</code>. We use the term top-level const to indicate that the pointer itself is a <code class="language-plaintext highlighter-rouge">const</code>. When a pointer can point to a <code class="language-plaintext highlighter-rouge">const</code> object, we refer to that <code class="language-plaintext highlighter-rouge">cons</code>t as a low-level <code class="language-plaintext highlighter-rouge">cons</code>t.</p>
+
+<p>More generally, top-level <code class="language-plaintext highlighter-rouge">const</code> indicates that an object itself is <code class="language-plaintext highlighter-rouge">const</code>. Top-level <code class="language-plaintext highlighter-rouge">const</code> can appear in any object type, i.e., one of the built-in arithmetic types, a class type, or a pointer type. Low-level <code class="language-plaintext highlighter-rouge">const</code> appears in the base type of compound types such as pointers or references. <strong>Note that pointer types, unlike most other types, can have both top-level and low-level <code class="language-plaintext highlighter-rouge">const</code> independently:</strong></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">p1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// we cannot change the value of p1; const is top-level</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// we cannot change ci; const is top-level</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ci</span><span class="p">;</span> <span class="c1">// we can change p2; const is low-level</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">p2</span><span class="p">;</span> <span class="c1">// right-most const is top-level, left-most is not</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// const in reference types is always low-level</span>
+</code></pre></div></div>
+
+<p>The distinction between top-level and low-level matters when we copy an object. When we copy an object, top-level <code class="language-plaintext highlighter-rouge">const</code>s are ignored:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// ok: copying the value o fci; top-level const in ci is ignored</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p3</span><span class="p">;</span> <span class="c1">// ok: pointed-to type matches; top-level const in p3 is ignored</span>
+</code></pre></div></div>
+
+<p>On the other hand, low-level <code class="language-plaintext highlighter-rouge">const</code> is never ignored. When we copy an object, both objects must have the same low-level <code class="language-plaintext highlighter-rouge">const</code> qualification or there must be a conversion between the types of the two objects. <strong>In general, we can convert a non<code class="language-plaintext highlighter-rouge">const</code> to <code class="language-plaintext highlighter-rouge">const</code> but not the other way round:</strong></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">p3</span><span class="p">;</span> <span class="c1">// error: p3 has a low-level const but p doesn't</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p3</span><span class="p">;</span> <span class="c1">// ok: p2 has the same low-level const qualification as p3</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// ok: we can convert int* to const int*</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// error: cannot bind an ordinary int&amp; to a const int object </span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// ok: can bind const int&amp; to plain int</span>
+</code></pre></div></div>
+
+<h4 id="244-constexpr-and-constant-expressions">2.4.4 <code class="language-plaintext highlighter-rouge">constexpr</code> and Constant Expressions</h4>
+
+<p><strong>A constant expression is an expression whose value cannot change and that can be evaluated at compile time.</strong> A literal is a constant expression. A const object that is initialized from a constant expression is also a constant expression.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">max_files</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">// 20 and max_files are constant expressions </span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">limit</span> <span class="o">=</span> <span class="n">max_files</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// max_files + 1 and limit are constant expressions </span>
+<span class="kt">int</span> <span class="n">staff_size</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span> <span class="c1">// staff_size is not a constant expression </span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">get_size</span><span class="p">();</span> <span class="c1">// sz is not a constant expression</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">sz</code> is a const, but the value of its initializer is not known until run time. Hence, <code class="language-plaintext highlighter-rouge">sz</code> is not a constant expression.</p>
+
+<h5 id="constexpr-variables"><code class="language-plaintext highlighter-rouge">constexpr</code> Variables</h5>
+
+<p>Under the new standard, we can ask the compiler to verify that a variable is a constant expression by declaring the variable in a <code class="language-plaintext highlighter-rouge">constexpr</code> declaration. Variables declared as <code class="language-plaintext highlighter-rouge">constexpr</code> are implicitly <code class="language-plaintext highlighter-rouge">const</code> and must be initialized by constant expressions:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">constexpr</span> <span class="kt">int</span> <span class="n">mf</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">// 20 is a constant expression</span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="n">limit</span> <span class="o">=</span> <span class="n">mf</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// mf + 1 is a constant expression </span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">size</span><span class="p">();</span> <span class="c1">// ok only if size is a constexpr function</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">constexpr</code> functions must be simple enough that the compiler can evaluate them at compile time. We can use <code class="language-plaintext highlighter-rouge">constexpr</code> functions in the initializer of a <code class="language-plaintext highlighter-rouge">constexpr</code> variable.</p>
+
+<p>Best Practices: Generally, it is a good idea to use <code class="language-plaintext highlighter-rouge">constexpr</code> for variables that you intend to use as constant expressions.</p>
+
+<h5 id="literal-types">Literal Types</h5>
+
+<p><strong>The types we can use in a <code class="language-plaintext highlighter-rouge">constexpr</code> declaration are known as “literal types” because they are simple enough to have literal values.</strong></p>
+
+<p>Of the types we have used so far, the <strong>arithmetic, reference, and pointer types are literal types</strong>. Our <code class="language-plaintext highlighter-rouge">Sales_item</code> class and the <strong>library IO and <code class="language-plaintext highlighter-rouge">string</code> types are not literal types</strong>. Hence, we cannot define variables of these types as <code class="language-plaintext highlighter-rouge">constexpr</code>s. We’ll see other kinds of literal types in § 7.5.6 (p. 299) and § 19.3 (p. 832).</p>
+
+<p>Although we can define both pointers and reference as <code class="language-plaintext highlighter-rouge">constexpr</code>s, the objects we use to initialize them are strictly limited. We can initialize a <code class="language-plaintext highlighter-rouge">constexpr</code> pointer from the <code class="language-plaintext highlighter-rouge">nullptr</code> literal or the literal (i.e., constant expression) <code class="language-plaintext highlighter-rouge">0</code>. We can also point to (or bind to) an object that remains at a fixed address.</p>
+
+<p>For reasons we’ll cover in § 6.1.1 (p. 204), <strong>variables defined inside a function ordinarily are not stored at a fixed address</strong>. Hence, we cannot use a <code class="language-plaintext highlighter-rouge">constexpr</code> pointer to point to such variables. On the other hand, the address of an object defined outside of any function is stored at a fixed address and is a constant expression, and so may be used to initialize a <code class="language-plaintext highlighter-rouge">constexpr</code> pointer. We’ll see in § 6.1.1 (p. 205), that functions may define variables that exist across calls to that function. Like an object defined outside any function, these special local objects also have fixed addresses. Therefore, a <code class="language-plaintext highlighter-rouge">constexpr</code> reference may be bound to, and a <code class="language-plaintext highlighter-rouge">constexpr</code> pointer may address, such variables.</p>
+
+<h5 id="pointers-and-constexpr">Pointers and <code class="language-plaintext highlighter-rouge">constexpr</code></h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// p is a pointer to a const int </span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span> <span class="c1">// q is a const pointer to int</span>
+<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// type of i is constint</span>
+<span class="c1">// i and j must be defined outside any function</span>
+<span class="k">constexpr</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// p is a constant pointer to the const int i </span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">j</span><span class="p">;</span> <span class="c1">// p1 is a constant pointer to the int j</span>
+</code></pre></div></div>
+
+<h3 id="25-dealing-with-types">2.5 Dealing with Types</h3>
+
+<h4 id="251-type-aliases">2.5.1 Type Aliases</h4>
+
+<p>A type alias is a name that is a synonym for another type. Type aliases let us simplify complicated type definitions, making those types easier to use. Type aliases also let us emphasize the purpose for which a type is used.</p>
+
+<p>We can define a type alias in one of two ways. Traditionally, we use a <code class="language-plaintext highlighter-rouge">typedef</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">double</span> <span class="n">wages</span><span class="p">;</span> <span class="c1">// wages is a synonym for double</span>
+<span class="k">typedef</span> <span class="n">wages</span> <span class="n">base</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// base is a synonym for double, p for double*</span>
+</code></pre></div></div>
+
+<p>Declarations that include typedef define type aliases rather than variables.</p>
+
+<p>The new standard introduced a second way to define a type alias, via an alias declaration:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="n">SI</span> <span class="o">=</span> <span class="n">Sales_item</span><span class="p">;</span> <span class="c1">// SI is a synonym for Sales_item</span>
+</code></pre></div></div>
+
+<p>A type alias is a type name and can appear wherever a type name can appear:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wages</span> <span class="n">hourly</span><span class="p">,</span> <span class="n">weekly</span><span class="p">;</span> <span class="c1">// same as double hourly, weekly; </span>
+<span class="n">SI</span> <span class="n">item</span><span class="p">;</span> <span class="c1">// same as Sales_item item</span>
+</code></pre></div></div>
+
+<h5 id="pointers-const-and-type-aliases">Pointers, <code class="language-plaintext highlighter-rouge">const</code>, and Type Aliases</h5>
+
+<p>Declarations that use type aliases that represent compound types and <code class="language-plaintext highlighter-rouge">const</code> can yield surprising results. For example, the following declarations use the type <code class="language-plaintext highlighter-rouge">pstring</code>, which is an alias for the the type <code class="language-plaintext highlighter-rouge">char*</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pstring</span><span class="p">;</span> <span class="c1">// pstring is a alias for the type char*</span>
+<span class="k">const</span> <span class="n">pstring</span> <span class="n">cstr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// cstr is a constant pointer to char</span>
+<span class="k">const</span> <span class="n">pstring</span> <span class="o">*</span><span class="n">ps</span><span class="p">;</span> <span class="c1">// ps is a pointer to a constant pointer to char</span>
+</code></pre></div></div>
+
+<p>The base type in these declarations is <code class="language-plaintext highlighter-rouge">const pstring</code>. As usual, a <code class="language-plaintext highlighter-rouge">const</code> that appears in the base type modifies the given type. The type of pstring is “pointer to <code class="language-plaintext highlighter-rouge">char</code>”. So, <code class="language-plaintext highlighter-rouge">const pstring</code> is a constant pointer to <code class="language-plaintext highlighter-rouge">char</code>—not a pointer to <code class="language-plaintext highlighter-rouge">const char</code>.</p>
+
+<p>It can be tempting, albeit incorrect, to interpret a declaration that uses a type alias by conceptually replacing the alias with its corresponding type:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cstr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// wrong interpretation of const pstring cstr</span>
+</code></pre></div></div>
+
+<p>However, this interpretation is wrong. When we use pstring in a declaration, the base type of the declaration is a pointer type. When we rewrite the declaration using <code class="language-plaintext highlighter-rouge">char*</code>, the base type is <code class="language-plaintext highlighter-rouge">char</code> and the <code class="language-plaintext highlighter-rouge">*</code> is part of the declarator. In this case, <code class="language-plaintext highlighter-rouge">const char</code> is the base type. This rewrite declares <code class="language-plaintext highlighter-rouge">cstr</code> as a pointer to <code class="language-plaintext highlighter-rouge">const char</code> rather than as a<code class="language-plaintext highlighter-rouge"> const</code> pointer to <code class="language-plaintext highlighter-rouge">char</code>.</p>
+
+<h4 id="252-the-auto-type-specifier">2.5.2 The auto Type Specifier</h4>
+
+<p>When we write a program, it can be surprisingly difficult—and sometimes even impossible—to determine the type of an expression. Under the new standard, we can use the <code class="language-plaintext highlighter-rouge">auto</code> type specifier to tell the compiler to deduce the type from the initializer. By implication, a variable that uses <code class="language-plaintext highlighter-rouge">auto</code> as its type specifier must have an initializer:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// the type of item is deduced from the type of the result of adding val1 and val2 </span>
+<span class="k">auto</span> <span class="n">item</span> <span class="o">=</span> <span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span><span class="p">;</span> <span class="c1">// item initialized to the result of val1 + val2</span>
+</code></pre></div></div>
+
+<p>As with any other type specifier, we can define multiple variables using <code class="language-plaintext highlighter-rouge">auto</code>. Because a declaration can involve only a single base type, the initializers for all the variables in the declaration must have types that are consistent with each other:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// ok: i is int and p is a pointer to int</span>
+<span class="k">auto</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span> <span class="c1">// error: inconsistent types for sz and pi</span>
+</code></pre></div></div>
+
+<h5 id="compound-types-const-and-auto">Compound Types, <code class="language-plaintext highlighter-rouge">const</code>, and <code class="language-plaintext highlighter-rouge">auto</code></h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// a is an int (r is an alias for i, which has type int)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">auto</code> ordinarily ignores top-level <code class="language-plaintext highlighter-rouge">const</code>s (§ 2.4.3, p. 63). As usual in initializations, low-level <code class="language-plaintext highlighter-rouge">const</code>s, such as when an initializer is a pointer to const, are kept:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cr</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">b</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// b is an int (top-level const in ci is dropped)</span>
+<span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cr</span><span class="p">;</span> <span class="c1">// c is an int (cr is an alias for ci whose const is top-level) </span>
+<span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// d is an int* (&amp;of anintobject isint*)</span>
+<span class="k">auto</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ci</span><span class="p">;</span> <span class="c1">// e is a const int*, i.e. a pointer to const int (&amp; of a const object is low-level const)</span>
+</code></pre></div></div>
+
+<p>If we want the deduced type to have a top-level <code class="language-plaintext highlighter-rouge">const</code>, we must say so explicitly:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// deduced type of ci is int; f has type const int</span>
+</code></pre></div></div>
+
+<p>We can also specify that we want a reference to the auto-deduced type.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">auto</span> <span class="o">&amp;</span><span class="n">g</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span> <span class="c1">// g is a const int&amp; (a reference to const int) that is bound to ci</span>
+<span class="k">auto</span> <span class="o">&amp;</span><span class="n">h</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// error: we can't bind a plain reference to a literal const </span>
+<span class="k">auto</span> <span class="o">&amp;</span><span class="n">j</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="c1">// ok: we can bind a const reference to a literal</span>
+</code></pre></div></div>
+
+<h4 id="253-the-decltype-type-specifier">2.5.3 The <code class="language-plaintext highlighter-rouge">decltype</code> Type Specifier</h4>
+
+<p>The new standard introduced a second type specifier, <code class="language-plaintext highlighter-rouge">decltype</code>, which returns the type of its operand. The compiler analyzes the expression to determine its type but does not evaluate the expression:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">decltype</span><span class="p">(</span><span class="n">f</span><span class="p">())</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// sum has whatever type f returns</span>
+</code></pre></div></div>
+
+<p>Here, the compiler does not call <code class="language-plaintext highlighter-rouge">f</code>, but it uses the type that would be returned if we were to call <code class="language-plaintext highlighter-rouge">f</code> as the type for <code class="language-plaintext highlighter-rouge">sum</code>.</p>
+
+<p>When the expression to which we apply <code class="language-plaintext highlighter-rouge">decltype</code> is a variable, <code class="language-plaintext highlighter-rouge">decltype</code> returns the type of that variable, including top-level <code class="language-plaintext highlighter-rouge">const</code> and references:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cj</span> <span class="o">=</span> <span class="n">ci</span><span class="p">;</span>
+<span class="k">decltype</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// x has type const int</span>
+<span class="k">decltype</span><span class="p">(</span><span class="n">cj</span><span class="p">)</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// y has type const int&amp; and is bound to x</span>
+<span class="k">decltype</span><span class="p">(</span><span class="n">cj</span><span class="p">)</span> <span class="n">z</span><span class="p">;</span> <span class="c1">// error: z is a reference and like any other reference, z must be initialized</span>
+</code></pre></div></div>
+
+<p>##### <code class="language-plaintext highlighter-rouge">decltype</code> and References</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// decltype of an expression can be a reference type</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="k">decltype</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">0</span><span class="p">)</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// ok: addition yields an int; b is an (uninitialized) int </span>
+<span class="k">decltype</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// error: c is int&amp; and must be initialized</span>
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">r</code> is a reference, so <code class="language-plaintext highlighter-rouge">decltype(r)</code> is a reference type. If we want the type to which <code class="language-plaintext highlighter-rouge">r</code> refers, we can use <code class="language-plaintext highlighter-rouge">r</code> in an expression, such as <code class="language-plaintext highlighter-rouge">r + 0</code>, which is an expression that yields a value that has a nonreference type.</p>
+
+<p>The type deduced by <code class="language-plaintext highlighter-rouge">decltype(*p)</code> is <code class="language-plaintext highlighter-rouge">int&amp;</code>, not plain <code class="language-plaintext highlighter-rouge">int</code>.</p>
+
+<p>Another important difference between <code class="language-plaintext highlighter-rouge">decltype</code> and <code class="language-plaintext highlighter-rouge">auto</code> is that the deduction done by <code class="language-plaintext highlighter-rouge">decltype</code> depends on the form of its given expression.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// decltype of a parenthesized variable is always a reference </span>
+<span class="k">decltype</span><span class="p">((</span><span class="n">i</span><span class="p">))</span> <span class="n">d</span><span class="p">;</span> <span class="c1">// error: d is int&amp; and must be initialized </span>
+<span class="k">decltype</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="n">e</span><span class="p">;</span> <span class="c1">// ok: e is an (uninitialized) int</span>
+</code></pre></div></div>
+
+<p>WARNING: Remember that <code class="language-plaintext highlighter-rouge">decltype((variable))</code> (note, double parentheses) is always a reference type, but <code class="language-plaintext highlighter-rouge">decltype(variable)</code> is a reference type only if variable is a reference.</p>
+
+<h3 id="26-defining-our-own-data-structures">2.6 Defining Our Own Data Structures</h3>
+
+<p>At the most basic level, <strong>a data structure is a way to group together related data elements and a strategy for using those data.</strong></p>
+
+<p><strong>In C++ we define our own data types by defining a class.</strong> The library types <code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">istream</code>, and <code class="language-plaintext highlighter-rouge">ostream</code> are all defined as classes, as is the <code class="language-plaintext highlighter-rouge">Sales_item</code> type we used in Chapter 1.</p>
+
+<h4 id="261-defining-the-sales_data-type">2.6.1 Defining the <code class="language-plaintext highlighter-rouge">Sales_data</code> Type</h4>
+
+<p>We first define a data structure <code class="language-plaintext highlighter-rouge">Sales_data</code> that does not support any operations. We define the class as follows:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">Sales_data</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="n">units_sold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">revenue</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Our class begins with the keyword <code class="language-plaintext highlighter-rouge">struct</code>, followed by the name of the class and a (possibly empty) class body. The class body is surrounded by curly braces and forms a new scope (§ 2.2.4, p. 48).</p>
+
+<p>The close curly that ends the class body must be followed by a semicolon.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">Sales_data</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span> <span class="n">accum</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="o">*</span><span class="n">salesptr</span><span class="p">;</span> 
+<span class="c1">// equivalent, but better way to define these objects</span>
+<span class="k">struct</span> <span class="nc">Sales_data</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">};</span>
+<span class="n">Sales_data</span> <span class="n">accum</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="o">*</span><span class="n">salesptr</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h5 id="class-data-members">Class Data Members</h5>
+
+<p><strong>The class body defines the members of the class.</strong> Our class <code class="language-plaintext highlighter-rouge">Sales_data</code> has only data members. The data members of a class define the contents of the objects of that class type.</p>
+
+<p>The key difference between a <code class="language-plaintext highlighter-rouge">struct</code> and <code class="language-plaintext highlighter-rouge">class</code> in C++ is the default accessibility of member variables and methods. In a <code class="language-plaintext highlighter-rouge">struct</code> they are public; in a class they are <code class="language-plaintext highlighter-rouge">private</code>.</p>
+
+<h4 id="262-using-the-sales_data-class">2.6.2 Using the <code class="language-plaintext highlighter-rouge">Sales_data</code> Class</h4>
+
+<h5 id="adding-two-sales_data-objects">Adding Two <code class="language-plaintext highlighter-rouge">Sales_data</code> Objects</h5>
+
+<h5 id="reading-data-into-a-sales_data-object">Reading Data into a <code class="language-plaintext highlighter-rouge">Sales_data</code> Object</h5>
+
+<h5 id="printing-the-sum-of-two-sales_data-objects">Printing the Sum of Two <code class="language-plaintext highlighter-rouge">Sales_data</code> Objects</h5>
+
+<h4 id="263-writing-our-own-header-files">2.6.3 Writing Our Own Header Files</h4>
+
+<p>As we’ll see in § 19.7 (p. 852), we can define a class inside a function, such classes have limited functionality. As a result, classes ordinarily are not defined inside functions.</p>
+
+<p>In order to ensure that the class definition is the same in each file, <strong>classes are usually defined in header files.</strong> For example, the <code class="language-plaintext highlighter-rouge">string</code> library type is defined in the <code class="language-plaintext highlighter-rouge">string</code> header. Similarly, as we have already seen, we will define our <code class="language-plaintext highlighter-rouge">Sales_data</code> class in a header file named <code class="language-plaintext highlighter-rouge">Sales_data.h</code>.</p>
+
+<p>Note:  Whenever a header is updated, the source files that use that header must be recompiled to get the new or changed declarations.</p>
+
+<h5 id="a-brief-introduction-to-the-preprocessor">A Brief Introduction to the Preprocessor</h5>
+
+<p>The most common technique for making it safe to include a header multiple times relies on the preprocessor. The preprocessor—which C++ inherits from C—is a program that runs before the compiler and changes the source text of our programs. Our programs already rely on one preprocessor facility, <code class="language-plaintext highlighter-rouge">#include</code>. When the preprocessor sees a <code class="language-plaintext highlighter-rouge">#include</code>, it replaces the <code class="language-plaintext highlighter-rouge">#include</code> with the contents of the specified header.</p>
+
+<p>C++ programs also use the preprocessor to define header guards.</p>
+
+<p>WARNING: Preprocessor variable names do not respect C++ scoping rules.</p>
+
+<p>Best Practices: Headers should have guards.</p>
+
+<h3 id="chapter-summary">Chapter Summary</h3>
+
+<p>Types are fundamental to all programming in C++.</p>
+
+<p>Each type defines the storage requirements and the operations that may be performed on objects of that type. The language provides a set of fundamental built-in types such as <code class="language-plaintext highlighter-rouge">int</code> and <code class="language-plaintext highlighter-rouge">char</code>, which are closely tied to their representation on the machine’s hardware. Types can be non<code class="language-plaintext highlighter-rouge">const</code> or <code class="language-plaintext highlighter-rouge">const</code>; a <code class="language-plaintext highlighter-rouge">const</code> object must be initialized and, once initialized, its value may not be changed. In addition, we can define compound types, such as pointers or references. A compound type is one that is defined in terms of another type.</p>
+
+<p>The language lets us define our own types by defining classes. The library uses the class facility to provide a set of higher-level abstractions such as the IO and string types.</p>
+
+<h3 id="defined-terms">Defined Terms</h3>
+
+<p>Almost all terms are important. Read p. 78-80 for detail.</p>
+
+<p><br /></p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. <em>C++ Primer</em>. Addison-Wesley Professional, 2012.</p>
+
+<p>[2] Prata, Stephen. <em>C++ primer plus</em>. Addison-Wesley Professional, 2011.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

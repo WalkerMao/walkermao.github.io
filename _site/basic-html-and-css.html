@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Basic HTML and CSS</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Basic HTML and CSS | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Basic HTML and CSS" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="HTML" />
+<meta property="og:description" content="HTML" />
+<link rel="canonical" href="http://localhost:4000/basic-html-and-css.html" />
+<meta property="og:url" content="http://localhost:4000/basic-html-and-css.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-25T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Basic HTML and CSS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-02-25T00:00:00+08:00","datePublished":"2020-02-25T00:00:00+08:00","description":"HTML","headline":"Basic HTML and CSS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/basic-html-and-css.html"},"url":"http://localhost:4000/basic-html-and-css.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#html">HTML</a><ul><li><a href="#what-is-html">What is HTML?</a></li><li><a href="#basic-html-elements">Basic HTML Elements</a><ul><li><a href="#doctype-tag"><code class="language-plaintext highlighter-rouge">&lt;!DOCTYPE&gt;</code> Tag</a></li><li><a href="#head-tag"><code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> Tag</a></li><li><a href="#body-tag"><code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> Tag</a></li><li><a href="#headings-tag">Headings Tag</a></li><li><a href="#p-tag"><code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> Tag</a></li><li><a href="#a-tag"><code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> Tag</a></li><li><a href="#img-tag"><code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> Tag</a></li><li><a href="#pre-tag"><code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> Tag</a></li><li><a href="#div-tag"><code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> Tag</a></li></ul></li><li><a href="#basic-html-attributes">Basic HTML Attributes</a></li><li><a href="#html-class-and-id-attribute">HTML <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">id</code> Attribute</a><ul><li><a href="#class-attribute"><code class="language-plaintext highlighter-rouge">class</code> Attribute</a></li><li><a href="#id-attribute"><code class="language-plaintext highlighter-rouge">id</code> Attribute</a></li><li><a href="#difference-between-class-and-id">Difference Between <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">id</code></a></li></ul></li></ul></li><li><a href="#css">CSS</a><ul><li><a href="#inline-css">Inline CSS</a></li><li><a href="#internal-css">Internal CSS</a></li><li><a href="#external-css">External CSS</a></li><li><a href="#css-properties">CSS Properties</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/basic-html-and-css.html">
+    <h2 class="post-title">Basic HTML and CSS</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/programming"> <li>Programming</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Feb 25, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="html">HTML</h2>
+
+<h3 id="what-is-html">What is HTML?</h3>
+
+<ul>
+  <li>HTML stands for Hyper Text Markup Language.</li>
+  <li>HTML is the standard markup language for creating Web pages.</li>
+  <li>HTML describes the structure of a Web page.</li>
+  <li>HTML consists of a series of elements.</li>
+  <li>HTML elements tell the browser how to display the content.</li>
+  <li>HTML elements label pieces of content such as “this is a heading”, “this is a paragraph”, “this is a link”, etc.</li>
+</ul>
+
+<h3 id="basic-html-elements">Basic HTML Elements</h3>
+
+<p>An <strong>HTML element</strong> is defined by a start tag, some content, and an end tag. The HTML element is everything from the start tag to the end tag.</p>
+
+<p>HTML elements with no content (like the <code class="language-plaintext highlighter-rouge">&lt;br&gt;</code> element defines a line break) are called empty elements. Empty elements do not have an end tag.</p>
+
+<h4 id="doctype-tag"><code class="language-plaintext highlighter-rouge">&lt;!DOCTYPE&gt;</code> Tag</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;!DOCTYPE&gt;</code> declaration represents the document type, and helps browsers to display web pages correctly.</p>
+
+<h4 id="head-tag"><code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> Tag</h4>
+
+<p>The HTML <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> element contains the metadata about the HTML document which is not displayed in web pages.</p>
+
+<h4 id="body-tag"><code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> Tag</h4>
+
+<p>Only the content inside the <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> section is displayed in a browser.</p>
+
+<h4 id="headings-tag">Headings Tag</h4>
+
+<p>HTML headings are defined with the <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> to <code class="language-plaintext highlighter-rouge">&lt;h6&gt;</code> tags. <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> defines the most important heading. <code class="language-plaintext highlighter-rouge">&lt;h6&gt;</code> defines the least important heading.</p>
+
+<h4 id="p-tag"><code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> Tag</h4>
+
+<p>HTML paragraphs are defined with the <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> tag.</p>
+
+<h4 id="a-tag"><code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> Tag</h4>
+
+<p>HTML links are defined with the <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> tag. The link’s destination is specified in the <code class="language-plaintext highlighter-rouge">href</code> (Hypertext REFerence) attribute.</p>
+
+<h4 id="img-tag"><code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> Tag</h4>
+
+<p>HTML images are defined with the <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> tag. The source file (<code class="language-plaintext highlighter-rouge">src</code>), alternative text (<code class="language-plaintext highlighter-rouge">alt</code>), <code class="language-plaintext highlighter-rouge">width</code>, and <code class="language-plaintext highlighter-rouge">height</code> are provided as attributes.</p>
+
+<h4 id="pre-tag"><code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> Tag</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> tag defines preformatted text. Text in a <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> element is displayed in a fixed-width font, and the text preserves both spaces and line breaks. The text will be displayed exactly as written in the HTML source code.</p>
+
+<h4 id="div-tag"><code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> Tag</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> tag defines a division or a section in an HTML document. The <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> tag is used as a container for HTML elements - which is then styled with CSS or manipulated with JavaScript. The <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> tag is easily styled by using the class or id attribute. Any sort of content can be put inside the <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> tag. Note: By default, browsers always place a line break before and after the <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> element.</p>
+
+<h3 id="basic-html-attributes">Basic HTML Attributes</h3>
+
+<p>HTML attributes:</p>
+
+<ul>
+  <li>
+    <p>All HTML elements can have <strong>attributes</strong>.</p>
+  </li>
+  <li>
+    <p>Attributes provide <strong>additional information</strong> about elements.</p>
+  </li>
+  <li>
+    <p>Attributes are always specified in <strong>the start tag</strong>.</p>
+  </li>
+  <li>
+    <p>Attributes usually come in name/value pairs like: <strong><code class="language-plaintext highlighter-rouge">name="value"</code></strong>.</p>
+  </li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">style</code> attribute is used to add styles to an element, such as color, font, size, and more.</p>
+
+<p>You should always include the <code class="language-plaintext highlighter-rouge">lang</code> attribute inside the <code class="language-plaintext highlighter-rouge">&lt;html&gt;</code> tag, to declare the language of the Web page. This is meant to assist search engines and browsers.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">title</code> attribute defines some extra information about an element. The value of the title attribute will be displayed as a tooltip when you mouse over the element.</p>
+
+<p>Attribute names are not case sensitive, but we usually use lowercase.</p>
+
+<p>We suggest always quoting attribute values.</p>
+
+<p>Here is an example:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- example of some basic HTML elements --&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en-US"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;title&gt;</span>Page Title<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    
+<span class="nt">&lt;h1</span> <span class="na">style=</span><span class="s">"font-size:20px;"</span><span class="nt">&gt;</span>My First Heading<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"my_image.jpg"</span> <span class="na">style=</span><span class="s">"width:50%;height:50%;"</span> <span class="na">alt=</span><span class="s">"Girl with a jacket"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;p</span> <span class="na">title=</span><span class="s">"I'm a tooltip"</span> <span class="na">style=</span><span class="s">"color:red; font-size:120%; font-family: Arial; text-align:center;"</span><span class="nt">&gt;</span>
+The <span class="nt">&lt;b&gt;</span>first<span class="nt">&lt;/b&gt;</span> line.<span class="nt">&lt;br&gt;</span>The second line.
+<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.w3schools.com"</span><span class="nt">&gt;</span>This is a link<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;pre&gt;</span>
+	The first line.
+	The second line.
+<span class="nt">&lt;/pre&gt;</span>
+    
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>And the display in browser:</p>
+
+<hr />
+<h1 style="font-size:20px;">My First Heading</h1>
+<p><img src="my_image.jpg" style="width:50%;height:50%;" alt="Girl with a jacket" /></p>
+
+<p title="I'm a tooltip" style="color:red; font-size:120%; font-family: Arial; text-align:center;">
+The <b>first</b> line.<br />The second line.
+</p>
+
+<p><a href="https://www.w3schools.com">This is a link</a></p>
+
+<pre>
+	The first line.
+	The second line.
+</pre>
+<hr />
+
+<h3 id="html-class-and-id-attribute">HTML <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">id</code> Attribute</h3>
+
+<h4 id="class-attribute"><code class="language-plaintext highlighter-rouge">class</code> Attribute</h4>
+
+<p>The HTML <code class="language-plaintext highlighter-rouge">class</code> attribute is used to specify a class for an HTML element. Multiple HTML elements can share the same class. The <code class="language-plaintext highlighter-rouge">class</code> attribute is often used to point to a class name in a style sheet. It can also be used by a JavaScript to access and manipulate elements with the specific class name.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">class</code> attribute can be used on <strong>any</strong> HTML element. To create a class, write a period (.) character, followed by a class name, then define the CSS properties within curly braces {}.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- example of HTML class attribute --&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+<span class="nc">.note</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">120%</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.city</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">tomato</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h2&gt;</span>My <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"note"</span><span class="nt">&gt;</span>Important<span class="nt">&lt;/span&gt;</span> Heading<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p&gt;</span>This is some <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"note"</span><span class="nt">&gt;</span>important<span class="nt">&lt;/span&gt;</span> text.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"city"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>London<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;p&gt;</span>London is the capital of England.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>The class name can also be used by JavaScript to perform certain tasks for specific elements. JavaScript can access elements with a specific class name with the <code class="language-plaintext highlighter-rouge">getElementsByClassName()</code> method.</p>
+
+<h4 id="id-attribute"><code class="language-plaintext highlighter-rouge">id</code> Attribute</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">id</code> attribute specifies a unique id for an HTML element. The value of the <code class="language-plaintext highlighter-rouge">id</code> attribute must be unique within the HTML document.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">id</code> attribute is used to point to a specific style declaration in a style sheet. It is also used by JavaScript to access and manipulate the element with the specific id. JavaScript can access an element with a specific id with the <code class="language-plaintext highlighter-rouge">getElementById()</code> method.</p>
+
+<p>The syntax for id is: write a hash character (#), followed by an id name. Then, define the CSS properties within curly braces {}.</p>
+
+<p>In the following example we have an <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> element that points to the id name “myHeader”. This <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> element will be styled according to the <code class="language-plaintext highlighter-rouge">#myHeader</code> style definition in the head section:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+<span class="nf">#myHeader</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">lightblue</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"myHeader"</span><span class="nt">&gt;</span>My Header<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>HTML bookmarks are used to allow readers to jump to specific parts of a webpage. Bookmarks can be useful if your page is very long. To use a bookmark, you must first create it. For example,</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"bookmark"</span> <span class="na">color=</span><span class="s">"grey"</span> <span class="na">style=</span><span class="s">"font-style: italic;"</span><span class="nt">&gt;</span>A bookmark<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<p id="bookmark" color="grey" style="font-style: italic;">A bookmark</p>
+
+<p>Then, add a link to the bookmark (“Link to the bookmark”), from within the same page:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#bookmark"</span><span class="nt">&gt;</span>Link to the bookmark<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p><a href="#bookmark">Link to the bookmark</a></p>
+
+<p>Or, add a link from another page:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"html_demo.html#bookmark"</span><span class="nt">&gt;</span>Link to the bookmark<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p>Then, when the link is clicked, the page will scroll to the location with the bookmark.</p>
+
+<h4 id="difference-between-class-and-id">Difference Between <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">id</code></h4>
+
+<p>A class name can be used by multiple HTML elements, while an id name must only be used by one HTML element within the page.</p>
+
+<h2 id="css">CSS</h2>
+
+<p><strong>CSS</strong> stands for <strong>C</strong>ascading <strong>S</strong>tyle <strong>S</strong>heets. CSS <strong>describes how HTML elements are to be displayed on</strong>. CSS saves a lot of work. It can control the layout of multiple web pages all at once.</p>
+
+<p>The word <strong>cascading</strong> means that a style applied to a parent element will also apply to all children elements within the parent. So, if you set the color of the body text to “blue”, all headings, paragraphs, and other text elements within the body will also get the same color (unless you specify something else).</p>
+
+<p>CSS can be added to HTML elements in 3 ways:</p>
+
+<ul>
+  <li>Inline - by using the <code class="language-plaintext highlighter-rouge">style</code> attribute in HTML elements;</li>
+  <li>Internal - by using a <code class="language-plaintext highlighter-rouge">&lt;style&gt;</code> element in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> section;</li>
+  <li>External - by using an external CSS file. (most common)</li>
+</ul>
+
+<h3 id="inline-css">Inline CSS</h3>
+
+<p>An <strong>inline CSS</strong> uses the <code class="language-plaintext highlighter-rouge">style</code> attribute to apply a unique style to a single HTML element. For example,</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Inline CSS example --&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">style=</span><span class="s">"color:blue;"</span><span class="nt">&gt;</span>A Blue Heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">"color:red;"</span><span class="nt">&gt;</span>A red paragraph.<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<h3 id="internal-css">Internal CSS</h3>
+
+<p>An <strong>internal CSS</strong> is used to define a style for a single HTML page, and it is defined in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> section of an HTML page, within a <code class="language-plaintext highlighter-rouge">&lt;style&gt;</code> element.</p>
+
+<p>The following example sets the text color of ALL the <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> elements (on that page) to blue, and the text color of ALL the <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> elements to red. In addition, the page will be displayed with a “powderblue” background color:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Internal CSS example --&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+<span class="nt">body</span> <span class="p">{</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">powderblue</span><span class="p">;}</span>
+<span class="nt">h1</span>   <span class="p">{</span><span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;}</span>
+<span class="nt">p</span>    <span class="p">{</span><span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>This is a heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>This is a paragraph.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="external-css">External CSS</h3>
+
+<p>An <strong>external CSS</strong> (external style sheet) is used to define the style for many HTML pages. To use that, add a link to it in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> section of each HTML page. For example,</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- External CSS example --&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/html/styles.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>This is a heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>This is a paragraph.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>The external style sheet can be written in any text editor. The file must not contain any HTML code, and must be saved with a <code class="language-plaintext highlighter-rouge">.css</code> extension. Here is how the “<code class="language-plaintext highlighter-rouge">styles.css</code>” file looks like:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* CSS file example */</span>
+
+<span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">powderblue</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With an external style sheet, you can change the look of an entire web site, by changing one file.</p>
+
+<p>External style sheets can be referenced with a full URL:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nt">link</span> <span class="nt">rel</span><span class="o">=</span><span class="s1">"stylesheet"</span> <span class="nt">href</span><span class="o">=</span><span class="s1">"https://www.w3schools.com/html/styles.css"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Or with a path relative to the current web page:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nt">link</span> <span class="nt">rel</span><span class="o">=</span><span class="s1">"stylesheet"</span> <span class="nt">href</span><span class="o">=</span><span class="s1">"/html/styles.css"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="css-properties">CSS Properties</h3>
+
+<p>We demonstrate some commonly used CSS properties.</p>
+
+<p>The CSS <code class="language-plaintext highlighter-rouge">border</code> property defines a border around an HTML element. (You can define a border for nearly all HTML elements.)</p>
+
+<p>The CSS <code class="language-plaintext highlighter-rouge">padding</code> property defines a padding (space) between the text and the border.</p>
+
+<p>The CSS <code class="language-plaintext highlighter-rouge">margin</code> property defines a margin (space) outside the border.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">courier</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">160%</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">powderblue</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>https://www.w3schools.com/html.</p>
+
+<p>https://www.w3schools.com/css.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

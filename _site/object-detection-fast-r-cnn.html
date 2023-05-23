@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Object Detection: Fast R-CNN</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Object Detection: Fast R-CNN | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Object Detection: Fast R-CNN" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The contents in this post are excerpted from the paper “Fast R-CNN” 1, with a little bit modification, as my notes for this paper. Girshick, Ross. “Fast r-cnn.” Proceedings of the IEEE international conference on computer vision. 2015. &#8617;" />
+<meta property="og:description" content="The contents in this post are excerpted from the paper “Fast R-CNN” 1, with a little bit modification, as my notes for this paper. Girshick, Ross. “Fast r-cnn.” Proceedings of the IEEE international conference on computer vision. 2015. &#8617;" />
+<link rel="canonical" href="http://localhost:4000/object-detection-fast-r-cnn.html" />
+<meta property="og:url" content="http://localhost:4000/object-detection-fast-r-cnn.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-12T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Object Detection: Fast R-CNN" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2022-01-12T00:00:00+08:00","datePublished":"2022-01-12T00:00:00+08:00","description":"The contents in this post are excerpted from the paper “Fast R-CNN” 1, with a little bit modification, as my notes for this paper. Girshick, Ross. “Fast r-cnn.” Proceedings of the IEEE international conference on computer vision. 2015. &#8617;","headline":"Object Detection: Fast R-CNN","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/object-detection-fast-r-cnn.html"},"url":"http://localhost:4000/object-detection-fast-r-cnn.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#1-introduction">1. Introduction</a><ul><li><a href="#11-r-cnn-and-spp-net">1.1 R-CNN and SPP-Net</a></li><li><a href="#12-contributions">1.2 Contributions</a></li></ul></li><li><a href="#2-fast-r-cnn-architecture-and-training">2. Fast R-CNN Architecture and Training</a><ul><li><a href="#21-the-roi-pooling-layer">2.1 The RoI Pooling Layer</a></li><li><a href="#23-fine-tuning-for-detection">2.3 Fine-Tuning for Detection</a><ul><li><a href="#training-all-layers">Training All Layers</a></li><li><a href="#multi-task-loss">Multi-Task Loss</a></li></ul></li></ul></li><li><a href="#3-fast-r-cnn-detection">3. Fast R-CNN Detection</a><ul><li><a href="#31-truncated-svd-for-faster-detection">3.1 Truncated SVD for Faster Detection</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/object-detection-fast-r-cnn.html">
+    <h2 class="post-title">Object Detection: Fast R-CNN</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cv"> <li>CV</li> </a><a class="post-link" href="/categories/dl"> <li>DL</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/object detection"> <li>Object detection</li> </a><a class="post-link" href="/tags/cnn"> <li>CNN</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jan 12, 2022
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The contents in this post are excerpted from the paper “Fast R-CNN” <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>, with a little bit modification, as my notes for this paper.</p>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Main contributions in brief: In this paper, the authors streamline the training process for R-CNN and SPP-net. The authors propose a single-stage training algorithm that jointly learns to classify object proposals and refine their spatial locations.</p>
+
+<h3 id="11-r-cnn-and-spp-net">1.1 R-CNN and SPP-Net</h3>
+
+<p>Drawbacks of R-CNN and SPP-net:</p>
+
+<ul>
+  <li>Training is a multi-stage pipeline that involves extracting features, fine-tuning a network with log loss, training SVMs, and finally fitting bounding-box regressors.</li>
+  <li>Training is expensive in space and time. For SVM and bounding-box regressor training, features are extracted from each object proposal in each image and written to disk.</li>
+  <li>As for R-CNN, it is slow because it performs a convolutional forward pass for each object proposal, without sharing computation.</li>
+  <li>As for SPP-net, it is almost unable to finetune the convolutional layers that precede the SPP layer.</li>
+</ul>
+
+<h3 id="12-contributions">1.2 Contributions</h3>
+
+<p>Advantages of the proposed Fast R-CNN method over R-CNN and SPP-net:</p>
+
+<ul>
+  <li>Faster to train and test;</li>
+  <li>Higher detection quality (mAP);</li>
+  <li>Training is single-stage, using a multi-task loss;</li>
+  <li>Training can update all network layers;</li>
+  <li>No disk storage is required for feature caching.</li>
+</ul>
+
+<h2 id="2-fast-r-cnn-architecture-and-training">2. Fast R-CNN Architecture and Training</h2>
+
+<p>Figure 1 illustrates the Fast R-CNN architecture. A Fast R-CNN network takes as input an entire image and a set of object region proposals.</p>
+
+<div align="center">
+<figure>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20200219160147/fast-RCNN1-1024x416.png" alt="img" style="zoom: 60%;" />
+<figcaption style="font-size:80%;"> Figure 1. Fast R-CNN architecture. (<a href="https://www.geeksforgeeks.org/fast-r-cnn-ml/">Source</a>) </figcaption>
+</figure>
+</div>
+
+<ol>
+  <li>The network first processes the whole image with several convolutional and max pooling layers (denoted as “Deep ConvNet” in figure 1) to produce a conv feature map.</li>
+  <li>For each object region proposal (denoted as a red box on original image in figure 1), a region of interest (it is abbreviated as RoI, and it is a rectangular window into a conv feature map, and in figure 1 it is denoted as a gray cube with red borders in conv feature map) projected by RoI projection is then pooled into a fixed-size feature map (in figure 1 it is denoted as a gray cube with red borders pointed by “RoI pooling layer”) by RoI pooling layer, and then mapped to a fixed-length RoI feature vector by fully connected layers (FCs).</li>
+  <li>Each RoI feature vector is fed into a sequence of fully connected (FC) layers that finally branch into two sibling output layers: one that produces softmax probability estimates over \(K\) object classes plus a catch-all “background” class (\(K+1\) in total) and another layer that outputs 4 real-valued numbers (bounding-box regression offsets) for each of the \(K\) object classes (\(4K\) in total).</li>
+</ol>
+
+<p>Fast R-CNN joint the (feature) extractor, classifier and regressor together in a unified framework.</p>
+
+<p>Aside: <a href="https://stats.stackexchange.com/a/457975">What is feature map?</a></p>
+
+<h3 id="21-the-roi-pooling-layer">2.1 The RoI Pooling Layer</h3>
+
+<p>Given a RoI of size \(h \times w\) (unfixed), the RoI pooling layer is simply max pooling with approximate window size \(\frac{h}{H} \times \frac{w}{W}\), and the output is the RoI feature map of size \(H \times W\) (unfixed). The RoI pooling layer is simply the special-case of the SPP layer in which there is only one pyramid level.</p>
+
+<h3 id="23-fine-tuning-for-detection">2.3 Fine-Tuning for Detection</h3>
+
+<h4 id="training-all-layers">Training All Layers</h4>
+
+<p>SPP-net is almost unable to finetune the convolutional layers that precede the SPP layer. The root cause is that back-propagation through the SPP layer is highly inefficient when each training sample (i.e. RoI) comes from a different image, which is exactly how R-CNN and SPP-net networks are trained. For each RoI, the forward pass must process the entire corresponding receptive field, which is often very large (often the entire image), and thus the training inputs are large.</p>
+
+<p>The authors propose a more efficient training method called hierarchical sampling that takes advantage of feature sharing during training. In Fast R-CNN training, stochastic gradient descent (SGD) mini-batches are sampled hierarchically, first by sampling \(N\) images and then by sampling \(\frac{R}{N}\) RoIs from each image. Critically, RoIs from the same image share computation and memory in the forward and backward passes. Making \(N\) small decreases mini-batch computation. For example, when using \(N = 2\) and \(R = 128\), the proposed training scheme is roughly \(64 \times\) faster than sampling one RoI from \(128\) different images (i.e., the R-CNN and SPPnet strategy). The experiment also shows that, with \(N = 2\) and \(R = 128\), the correlation between the RoIs in the same image does not leads to slow training convergence.</p>
+
+<p>In addition to hierarchical sampling, Fast R-CNN uses a streamlined training process with one fine-tuning stage that jointly optimizes a softmax classifier and bounding-box regressors, rather than training a softmax classifier, SVMs, and regressors in three separate stages, as how R-CNN and SPP-net are trained.</p>
+
+<h4 id="multi-task-loss">Multi-Task Loss</h4>
+
+<p>A Fast R-CNN network has two sibling output layers. The first outputs a discrete probability distribution (per RoI), \(p=\left(p_{0}, \ldots, p_{K}\right)\), over \(K+1\) categories. As usual, \(p\) is computed by a softmax over the \(K+1\) outputs of a fully connected layer. The second sibling layer outputs bounding-box regression offsets, \(t^{k}=\left(t_{\mathrm{x}}^{k}, t_{\mathrm{y}}^{k}, t_{\mathrm{w}}^{k}, t_{\mathrm{h}}^{k}\right)\), for each of the \(K\) object classes, indexed by \(k\). We use the parameterization for \(t^{k}\) given in R-CNN, in which \(t^{k}\) specifies a scale-invariant translation and log-space height/width shift relative to an object proposal.</p>
+
+<p>Each training RoI is labeled with a ground-truth class \(u\) and a ground-truth bounding-box regression target \(v\). We use a multi-task loss \(L\) on each labeled RoI to jointly train for classification and bounding-box regression:</p>
+
+\[L\left(p, u, t^{u}, v\right)=L_{\mathrm{cls}}(p, u)+\lambda\mathbb{1}_{\{u \geq 1\}} L_{\mathrm{loc}}\left(t^{u}, v\right),\]
+
+<p>in which \(L_{\mathrm{cls}}(p, u)=-\log p_{u}\) is log loss for true class \(u\).</p>
+
+<p>The second task loss, \(L_{\text {loc }}\), is defined over a tuple of true bounding-box regression targets for class \(u, v=\) \(\left(v_{\mathrm{x}}, v_{\mathrm{y}}, v_{\mathrm{w}}, v_{\mathrm{h}}\right)\), and a predicted tuple \(t^{u}=\left(t_{\mathrm{x}}^{u}, t_{\mathrm{y}}^{u}, t_{\mathrm{w}}^{u}, t_{\mathrm{h}}^{u}\right)\), again for class \(u\). By convention the catch-all background class is labeled \(u=0\). For background RoIs there is no notion of a ground-truth bounding box and hence \(L_{\text {loc }}\) is ignored. For bounding-box regression, we use the loss</p>
+
+<p>\(L_{\mathrm{loc}}\left(t^{u}, v\right)=\sum_{i \in\{\mathrm{x}, \mathrm{y}, \mathrm{w}, \mathrm{h}\}} \operatorname{smooth}_{L_{1}}\left(t_{i}^{u}-v_{i}\right),\)
+in which
+\(\operatorname{smooth}_{L_{1}}(x)=\left\{\begin{array}{ll}
+0.5 x^{2} &amp; \text { if }|x|&lt;1 \\
+|x|-0.5 &amp; \text { otherwise }
+\end{array}\right.\)</p>
+
+<p>is a robust \(L_{1}\) loss that is less sensitive to outliers than the \(L_{2}\) loss used in R-CNN and SPPnet. When the regression targets are unbounded, training with \(L_{2}\) loss can require careful tuning of learning rates in order to prevent exploding gradients. Eq. 3 eliminates this sensitivity.</p>
+
+<p>The hyper-parameter \(\lambda\) in Eq. 1 controls the balance between the two task losses. We normalize the ground-truth regression targets \(v_{i}\) to have zero mean and unit variance. All experiments use \(\lambda=1\).</p>
+
+<p>The experiments show that the single stage (multi-task) training used by Fast R-CNN performs better than multi stage training used by R-CNN and SPP-net.</p>
+
+<h2 id="3-fast-r-cnn-detection">3. Fast R-CNN Detection</h2>
+
+<h3 id="31-truncated-svd-for-faster-detection">3.1 Truncated SVD for Faster Detection</h3>
+
+<p>For detection the number of RoIs to process is large and nearly half of the forward pass time is spent computing the fully connected layers. Large fully connected layers are easily accelerated by compressing them with truncated SVD. This simple compression method gives good speedups when the number of RoIs is large.</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Girshick, Ross. “Fast r-cnn.” <em>Proceedings of the IEEE international conference on computer vision</em>. 2015. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

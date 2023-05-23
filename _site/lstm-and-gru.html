@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>LSTM and GRU</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>LSTM and GRU | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="LSTM and GRU" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The contents in this post are mainly excerpted from 1 (thanks Jurafsky and Martin for this excellent textbook), and also 2. Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft. &#8617; Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). CS224n: Natural Language Processing with Deep Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf. &#8617;" />
+<meta property="og:description" content="The contents in this post are mainly excerpted from 1 (thanks Jurafsky and Martin for this excellent textbook), and also 2. Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft. &#8617; Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). CS224n: Natural Language Processing with Deep Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf. &#8617;" />
+<link rel="canonical" href="http://localhost:4000/lstm-and-gru.html" />
+<meta property="og:url" content="http://localhost:4000/lstm-and-gru.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-30T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="LSTM and GRU" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-06-30T00:00:00+08:00","datePublished":"2020-06-30T00:00:00+08:00","description":"The contents in this post are mainly excerpted from 1 (thanks Jurafsky and Martin for this excellent textbook), and also 2. Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft. &#8617; Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). CS224n: Natural Language Processing with Deep Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf. &#8617;","headline":"LSTM and GRU","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/lstm-and-gru.html"},"url":"http://localhost:4000/lstm-and-gru.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#inability-of-rnns-to-maintain-critical-memory">Inability of RNNs to Maintain Critical Memory</a></li><li><a href="#long-short-term-memory-lstm">Long Short Term Memory (LSTM)</a><ul><li><a href="#forget-gate">Forget Gate</a></li><li><a href="#new-memory-generation">New Memory Generation</a></li><li><a href="#input-gate">Input Gate</a></li><li><a href="#final-memory-generation">Final Memory Generation</a></li><li><a href="#outputexposure-gate">Output/Exposure Gate</a></li><li><a href="#new-hidden-state-generation">New Hidden State Generation</a></li><li><a href="#summary-for-lstm">Summary for LSTM</a></li></ul></li><li><a href="#gated-recurrent-unit-gru">Gated Recurrent Unit (GRU)</a><ul><li><a href="#reset-gate">Reset Gate</a></li><li><a href="#new-memory-generation-1">New Memory Generation</a></li><li><a href="#update-gate">Update Gate</a></li><li><a href="#new-hidden-state-generation-1">New Hidden State Generation</a></li><li><a href="#summary-for-gru">Summary for GRU</a></li></ul></li><li><a href="#summary">Summary</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/lstm-and-gru.html">
+    <h2 class="post-title">LSTM and GRU</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/nlp"> <li>NLP</li> </a><a class="post-link" href="/categories/dl"> <li>DL</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/rnn"> <li>RNN</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jun 30, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The contents in this post are mainly excerpted from <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> (thanks Jurafsky and Martin for this excellent textbook), and also <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>.</p>
+
+<h2 id="inability-of-rnns-to-maintain-critical-memory">Inability of RNNs to Maintain Critical Memory</h2>
+
+<p>Although RNNs can theoretically capture long-term dependencies, however, in practice, it is quite difficult to train RNNs to do this. In other words, it is hard to train RNNs to be able to make use of information distant from the current point of processing.</p>
+
+<p>However, it is often that the distant information is critical to many language applications. To see this, consider the following example. Given a sentence “<em>The flights the airline was cancelling were full</em>”, it is straightforward to assign a high probability to “<em>was</em>” following “<em>airline</em>”, but assigning an appropriate probability to “<em>were</em>” is quite difficult, not only because the plural “<em>flights</em>” is quite distant, but also because the intervening context “<em>airline</em>” involves singular constituents.</p>
+
+<p>One reason for the inability of RNNs to carry forward critical information is that the weights \(U, W\) that determine the values in the hidden layer, are being asked to perform two tasks simultaneously: provide information useful for the current decision, and updating and carrying forward information required for future decisions. Second is that the simple RNNs may suffer from gradient vanishing problem.</p>
+
+<p>To address these issues, more complex network architectures have been designed to manage context over time. More specifically, the networks needs to learn to forget information that is no longer needed and to remember information required for decisions still to come.</p>
+
+<h2 id="long-short-term-memory-lstm">Long Short Term Memory (LSTM)</h2>
+
+<p><strong>Long short term memory</strong> (<strong>LSTM</strong>) <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup> network was introduced by Hochreiter and Schmidhuber in 1997. It divides the context management problem into two sub-problems: removing information no longer needed from the context, and adding information likely to be needed for later decision making.</p>
+
+<p>LSTMs accomplish this by first adding an explicit context layer to the architecture in addition to the usual recurrent hidden layer, and through the use of specialized neural units that make use of gates to control the flow of information into and out of the units that comprise the network layers.</p>
+
+<p>The <strong>gates</strong> in an LSTM share a common design pattern; each consists of a feedforward layer with input word and past hidden state as the inputs, followed by a sigmoid activation function, followed by a pointwise multiplication with the layer being gated. The choice of the sigmoid as the activation function arises from its tendency to push its outputs to either $0$ or $1$. Combining this with a pointwise multiplication has an effect similar to that of a binary mask. Values in the layer being gated that align with values near $1$ in the mask are passed through nearly unchanged; values corresponding to lower values are essentially erased.</p>
+
+<p>Now let’s introduce three gates and two generation cells in the context layer of LSTM networks, and see mathematically how an LSTM uses \(h_{t−1}\) and \(x_t\) to generate the next hidden state \(h_t\).</p>
+
+<h3 id="forget-gate">Forget Gate</h3>
+
+<p>The purpose of the forget gate is to delete information from the past memory (context) \(c_{t-1}\) that is no longer needed. The forget gate computes a weighted sum of the previous state’s hidden layer $h_{t-1}$ and the current input \(x_t\) and passes that through a sigmoid \(\sigma(\cdot)\) to produce the indicator $f_t$.</p>
+
+\[f_t = \sigma (W_{f}x_t + U_f h_{t-1}).\]
+
+<p>We then use $f_t$ as an indicator to gate the past memory (context) \(c_{t-1}\).</p>
+
+<h3 id="new-memory-generation">New Memory Generation</h3>
+
+<p>A new memory \(\tilde{c}_t\) is the consolidation of a new input word \(x_t\) with the past hidden state \(h_{t-1}\). The new memory is the actual information we need to extract from the previous hidden state and current inputs. Here we use the tanh function because it produces zero-centered outputs.</p>
+
+\[\tilde{c}_t = \text{tanh}(W_{c}x_t + U_{c}h_{t-1}).\]
+
+<h3 id="input-gate">Input Gate</h3>
+
+<p>The purpose of the input gate is to select information from new memory (context). The input gate uses the input word $x_t$ and the past hidden state \(h_{t-1}\) to produce the indicator \(i_t\).</p>
+
+\[i_t = \sigma (W_{i}x_t + U_{i}h_{t-1}).\]
+
+<p>We then use \(i_t\) as an indicator to gate the new memory \(\tilde{c}_t\).</p>
+
+<h3 id="final-memory-generation">Final Memory Generation</h3>
+
+<p>We use the forget gate to remove the information from past memory (context) \(c_{t-1}\) that is no longer required, and use the input gate \(i_t\) to select the information from new memory \(\tilde{c}_t\). Both removing and selecting are achieved through pointwise multiplication. It then sums these two results to produce the final memory \(c_t\).</p>
+
+\[c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t.\]
+
+<h3 id="outputexposure-gate">Output/Exposure Gate</h3>
+
+<p>The purpose of the output gate \(o_t\) is to select information from final memory $c_t$ to be the new hidden state \(h_t\). The final memory $c_t$ contains a lot of information that is not necessarily required to be saved in the new hidden state \(h_t\). The output gate still uses \(x_t\) and \(h_{t-1}\) to produce the indicator \(o_t\).</p>
+
+\[o_t = \sigma (W_o x_t + U_oh_{t-1}).\]
+
+<h3 id="new-hidden-state-generation">New Hidden State Generation</h3>
+
+<p>Finally, we use \(o_t\) as an indicator to gate the final memory \(c_t\) to produce the new hidden state \(h_t\).</p>
+
+\[h_t = o_t \odot \text{tanh}(c_t).\]
+
+<h3 id="summary-for-lstm">Summary for LSTM</h3>
+
+<p>Here is the architecture of an LSTM.</p>
+
+<div align="center">
+<img src="../../../pictures/The detailed internals of a LSTM.png" alt="The detailed internals of a LSTM" style="zoom:80%;" />
+<figcaption style="font-size: 80%;"> Figure source: [^2] </figcaption>
+</div>
+
+<p>An LSTM accepts as input the context layer \(c_{t-1}\), and hidden layer \(h_{t-1}\) from the previous time step, along with the current input vector \(x_t\). It then generates updated memory (context) \(c_t\) and hidden vectors \(h_t\) as output.</p>
+
+<p>In the context layer of an LSTM, the new memory generation cell generates new memory \(\tilde{c}_t\), and the forget gate and input gate produce indicators \(f_t\) and \(i_t\) to gate past memory \(c_{t-1}\) and new memory \(\tilde{c}_t\) respectively. After that, the final memory generation cell generates final memory \(c_t\) based on the indicators, past memory, and new memory. Finally, the output gate produces indicator \(o_t\) to gate final memory \(c_t\), and then we generate new hidden state \(h_t\).</p>
+
+<h2 id="gated-recurrent-unit-gru">Gated Recurrent Unit (GRU)</h2>
+
+<p>The Gated Recurrent Unit (GRU) <sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup> was introduced by Cho et al. in 2014. It is motivated by LSTM unit but is much simpler to compute and implement.</p>
+
+<p>We have 8 sets of weights to learn (i.e., the \(U\) and \(W\) for each of the 4 gates within each unit) in LSTM, whereas with simple recurrent units we only had 2. Training these additional parameters imposes a much significantly higher training cost. GRU eases this burden by <strong>dispensing with the use of a separate context vector</strong>, and by <strong>reducing the number of gates to 2 — a reset gate and an update gate</strong>.</p>
+
+<h3 id="reset-gate">Reset Gate</h3>
+
+<p>The purpose of the reset gate is to decide which aspects of the previous hidden state \(h_{t-1}\) are relevant to the current hidden state and what can be ignored.</p>
+
+\[r_t = \sigma (W_{r}x_t + U_r h_{t-1}).\]
+
+<h3 id="new-memory-generation-1">New Memory Generation</h3>
+
+<p>A new memory (or called an intermediate representation for the new hidden state \(h_t\)) \(\tilde{h}_t\) is the consolidation of a new input word \(x_t\) with the past hidden state \(h_{t−1}\).</p>
+
+\[\tilde{h}_t = \text{tanh}(Wx_t + U(r_t \odot h_{t-1})).\]
+
+<h3 id="update-gate">Update Gate</h3>
+
+<p>The purpose of the update gate is to determine which aspects of the new memory \(\tilde{h}_t\) will be used directly in the new hidden state \(h_t\) and which aspects of the previous state \(h_{t-1}\) need to be preserved for future use.</p>
+
+\[z_t = \sigma (W_z x_t + U_z h_{t-1}).\]
+
+<h3 id="new-hidden-state-generation-1">New Hidden State Generation</h3>
+
+<p>Finally, the new hidden state \(h_t\) is generated by using the indicator \(z_t\) to interpolate between the past hidden state \(h_{t-1}\) and the new memory \(\tilde{h}_t\).</p>
+
+\[h_t = z_t h_{t-1} + (1-z_t) \tilde{h}_t.\]
+
+<p>When \(z_t=1\), we have \(h_t = h_{t-1}\), which is similar to identity mapping by shortcut in ResNet.</p>
+
+<h3 id="summary-for-gru">Summary for GRU</h3>
+
+<div align="center">
+<img src="../../../pictures/The detailed internals of a GRU.png" alt="The detailed internals of a GRU" style="zoom:80%;" />
+<figcaption style="font-size: 80%;"> Figure source: [^2] </figcaption>
+</div>
+
+<h2 id="summary">Summary</h2>
+
+<p>Although LSTM unit and GRU are much more complex than basic recurrent unit, we can still maintain modularity of LSTM unit and GRU and to easily experiment with different architectures. To see this, the following figure illustrates the inputs and outputs associated with each kind of unit.</p>
+
+<div align="center">
+<img src="../../../pictures/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:80%;" />
+<figcaption style="font-size: 80%;"> Figure source: [^1] </figcaption>
+</div>
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Jurafsky, D., Martin, J. H. (2020). Speech and language processing: an introduction to natural language processing, computational linguistics, and speech recognition. 3rd edition draft. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Mohammadi, M., Mundra, R., Socher, R., Wang, L., Kamath, A. (2019). CS224n: Natural Language Processing with Deep Learning, Lecture Notes: Part V, Language Models, RNN, GRU and LSTM. http://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Hochreiter, S., &amp; Schmidhuber, J. (1997). Long short-term memory. <em>Neural computation</em>, <em>9</em>(8), 1735-1780. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Cho, K., Van Merriënboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H., &amp; Bengio, Y. (2014). Learning phrase representations using RNN encoder-decoder for statistical machine translation. <em>arXiv preprint arXiv:1406.1078</em>. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Optimizing Matrix Multiplication</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Optimizing Matrix Multiplication | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Optimizing Matrix Multiplication" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Matrix Chain Multiplication" />
+<meta property="og:description" content="1. Matrix Chain Multiplication" />
+<link rel="canonical" href="http://localhost:4000/optimizing-matrix-multiplication.html" />
+<meta property="og:url" content="http://localhost:4000/optimizing-matrix-multiplication.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-19T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Optimizing Matrix Multiplication" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-09-19T00:00:00+08:00","datePublished":"2020-09-19T00:00:00+08:00","description":"1. Matrix Chain Multiplication","headline":"Optimizing Matrix Multiplication","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/optimizing-matrix-multiplication.html"},"url":"http://localhost:4000/optimizing-matrix-multiplication.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#1-matrix-chain-multiplication">1. Matrix Chain Multiplication</a><ul><li><a href="#11-brute-force-approach">1.1 Brute-Force Approach</a></li><li><a href="#12-dynamic-programming-approach">1.2 Dynamic Programming Approach</a></li></ul></li><li><a href="#2-strassen-algorithm">2. Strassen Algorithm</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/optimizing-matrix-multiplication.html">
+    <h2 class="post-title">Optimizing Matrix Multiplication</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a><a class="post-link" href="/categories/math"> <li>Math</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/optimization"> <li>optimization</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Sep 19, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="1-matrix-chain-multiplication">1. Matrix Chain Multiplication</h2>
+
+<p>Matrix chain multiplication is an optimization problem that can be solved using dynamic programming. Given a sequence of matrices, the goal is to find the most efficient way to multiply these matrices. There are many options because matrix multiplication is associative.</p>
+
+<p>Given two matrices \(A\) with dimension \(a \times b\) and \(B\) with dimension \(b \times c\), then computing the multiplication \(AB\) needs \(a \times b \times c\) operations.</p>
+
+<p>Given three matrices, say \(A\) is a \(10 × 30\) matrix, \(B\) is a \(30 × 5\) matrix, and \(C\) is a \(5 × 60\) matrix, then we have two ways to computing the product \(ABC\):</p>
+
+<ul>
+  <li>
+    <p>computing \((AB)C\) needs \((10×30×5) + (10×5×60) = 1500 + 3000 = 4500\) operations, while</p>
+  </li>
+  <li>
+    <p>computing \(A(BC)\) needs \((30×5×60) + (10×30×60) = 9000 + 18000 = 27000\) operations.</p>
+  </li>
+</ul>
+
+<p>Apparently the first way is more efficient.</p>
+
+<p>How to decide the way to compute the product? In other word, how to decide the order in which we parenthesize the product?</p>
+
+<p>Now suppose we want to compute the multiplication of a sequence of matrices \(A_1A_2 \cdots A_n\), where \(A_i\) has dimension \(p_{i-1} \times p_i\).</p>
+
+<h3 id="11-brute-force-approach">1.1 Brute-Force Approach</h3>
+
+<p>First we show that exhaustively checking all possible parenthesizations leads to exponential growth of computation.</p>
+
+<p>A naive recursive approach in Python:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">matrixChain</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> 
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">"inf"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> 
+        <span class="n">ans</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">matrixChain</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">matrixChain</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ans</span>
+
+<span class="n">matrixChain</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The time complexity of the above naive recursive approach is exponential. It should be noted that the above function computes the same subproblems again and again. See the following recursion tree for a matrix chain of size 4. The function <code class="language-plaintext highlighter-rouge">matrixChain(p, 3, 4)</code> is called two times. We can see that there are many subproblems being called more than once.</p>
+
+<div style="text-align: center">
+<figure>
+<img src="../../../pictures/matrix-chain-multiplication-brute-force.png" alt="Brute-force approach for matrix chain multiplication" style="zoom: 60%;" />
+<figcaption style="font-size: 80%;"> <a href="https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/">Figure source</a> </figcaption>
+</figure>
+</div>
+
+<h3 id="12-dynamic-programming-approach">1.2 Dynamic Programming Approach</h3>
+
+<p>We can break this optimization problem into subproblems. If we know the optimal parenthesization of every subchain \(A_iA_{i+1}\cdots A_j\) (\(1 \leq i \leq j \leq n\)), then we can know the optimal  parenthesization of the whole chain.</p>
+
+<p><strong>Dynamic Programming</strong> is an algorithmic technique for solving an optimization problem by breaking it down into simpler subproblems, and utilizing the fact that the optimal solution to the overall problem depends upon the optimal solution to its subproblems.</p>
+
+<p>Let $M$ be a two dimensional array, where \(M[i][j]\) is the minimum number of scalar multiplications needed to compute the product of matrices \(A_iA_{i+1}\cdots A_j\).</p>
+
+<p>We have the following <strong>recursion formula</strong>:</p>
+
+\[M[i][j] = 
+\begin{cases}
+0 &amp; \text{if } i=j,\\
+\min_{i \leq k \leq j} \{ M[i][k] + p_{i-1} p_k p_j + M[k+1][j] \} &amp; \text{if } i&lt;j.
+\end{cases}\]
+
+<p>Dynamic programming Python implementation:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">matrixChain</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> 
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> 
+    <span class="c1"># L is subchain length. 
+</span>    <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> 
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">L</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span> 
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">L</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">"inf"</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> 
+                <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> 
+</code></pre></div></div>
+
+<p>The time complexity is \(O(n^3)\) and the space complexity is \(O(n^2)\).</p>
+
+<h2 id="2-strassen-algorithm">2. Strassen Algorithm</h2>
+
+<p>Let \(\mathbf{A},\mathbf{B}\) be two square matrices with dimension \(2^n \times 2^n\), and we want to calculate the matrix product as \(\mathbf{C} = \mathbf{A} \mathbf{B}\).</p>
+
+<p>If the matrices \(\mathbf{A},\mathbf{B}\) are not of \(2^n \times 2^n\), we fill the missing rows and columns with zeros.</p>
+
+<p>A Divide and Conquer approach is that, we partition \(\mathbf{A},\mathbf{B}\) and \(\mathbf{C}\) into equally sized block matrices as</p>
+
+\[\mathbf{A} =
+\begin{bmatrix}
+\mathbf{A}_{1,1} &amp; \mathbf{A}_{1,2} \\
+\mathbf{A}_{2,1} &amp; \mathbf{A}_{2,2}
+\end{bmatrix}
+\mbox { , }
+\mathbf{B} =
+\begin{bmatrix}
+\mathbf{B}_{1,1} &amp; \mathbf{B}_{1,2} \\
+\mathbf{B}_{2,1} &amp; \mathbf{B}_{2,2}
+\end{bmatrix}
+\mbox { , }
+\mathbf{C} =
+\begin{bmatrix}
+\mathbf{C}_{1,1} &amp; \mathbf{C}_{1,2} \\
+\mathbf{C}_{2,1} &amp; \mathbf{C}_{2,2}
+\end{bmatrix}.\]
+
+<p>with \(\mathbf{A}_{i,j}, \mathbf{B}_{i,j}, \mathbf{C}_{i,j}\) are of dimension \(2^{n-1} \times 2^{n-1}\).</p>
+
+<p>The basic algorithm would be:</p>
+
+\[\mathbf{C}_{1,1} = \mathbf{A}_{1,1} \mathbf{B}_{1,1} + \mathbf{A}_{1,2} \mathbf{B}_{2,1}, \\
+\mathbf{C}_{1,2} = \mathbf{A}_{1,1} \mathbf{B}_{1,2} + \mathbf{A}_{1,2} \mathbf{B}_{2,2}, \\
+\mathbf{C}_{2,1} = \mathbf{A}_{2,1} \mathbf{B}_{1,1} + \mathbf{A}_{2,2} \mathbf{B}_{2,1}, \\
+\mathbf{C}_{2,2} = \mathbf{A}_{2,1} \mathbf{B}_{1,2} + \mathbf{A}_{2,2} \mathbf{B}_{2,2}.\]
+
+<p>With this construction we have not reduced the number of multiplications. We still need $8$ multiplications to calculate the \(C_{i,j}\) matrices.</p>
+
+<p>Denote \(N = 2^n\), the time complexity of this basic algorithm is \(\text{Time}(N) = 8\text{Time}(N/2) + O(N^2)\), where \(O(N^2)\) is the time taken by the addition of two matrices. We can show that \(\text{Time}(N)=O(N^3)\), which is unfortunately same as the time we need when using standard matrix multiplication.</p>
+
+<p>The <strong>Strassen algorithm</strong> defines instead new matrices:</p>
+
+\[\begin{align*}
+&amp; \mathbf{M}_{1} := (\mathbf{A}_{1,1} + \mathbf{A}_{2,2}) (\mathbf{B}_{1,1} + \mathbf{B}_{2,2}), \\
+&amp; \mathbf{M}_{2} := (\mathbf{A}_{2,1} + \mathbf{A}_{2,2}) \mathbf{B}_{1,1}, \\
+&amp; \mathbf{M}_{3} := \mathbf{A}_{1,1} (\mathbf{B}_{1,2} - \mathbf{B}_{2,2}), \\
+&amp; \mathbf{M}_{4} := \mathbf{A}_{2,2} (\mathbf{B}_{2,1} - \mathbf{B}_{1,1}), \\
+&amp; \mathbf{M}_{5} := (\mathbf{A}_{1,1} + \mathbf{A}_{1,2}) \mathbf{B}_{2,2}, \\
+&amp; \mathbf{M}_{6} := (\mathbf{A}_{2,1} - \mathbf{A}_{1,1}) (\mathbf{B}_{1,1} + \mathbf{B}_{1,2}), \\
+&amp; \mathbf{M}_{7} := (\mathbf{A}_{1,2} - \mathbf{A}_{2,2}) (\mathbf{B}_{2,1} + \mathbf{B}_{2,2}).
+\end{align*}\]
+
+<p>only using \(7\) multiplications instead of \(8\). We may now express the \(C_{i,j}\) in terms of \(M_k\):</p>
+
+\[\begin{align*}
+&amp; \mathbf{C}_{1,1} = \mathbf{M}_{1} + \mathbf{M}_{4} - \mathbf{M}_{5} + \mathbf{M}_{7}, \\
+&amp; \mathbf{C}_{1,2} = \mathbf{M}_{3} + \mathbf{M}_{5}, \\
+&amp; \mathbf{C}_{2,1} = \mathbf{M}_{2} + \mathbf{M}_{4}, \\
+&amp; \mathbf{C}_{2,2} = \mathbf{M}_{1} - \mathbf{M}_{2} + \mathbf{M}_{3} + \mathbf{M}_{6}.
+\end{align*}\]
+
+<p>We iterate this division process \(n\) times <strong>recursively</strong> until the submatrices degenerate into numbers.</p>
+
+<p>The time complexity of this Strassen algorithm is \(\text{Time}(N) = 7\text{Time}(N/2) + O(N^2)\), and we can show that \(\text{Time}(N)=O(N^{\log7}) \approx O(N^{2.8074})\).</p>
+
+<p>The resulting product will be padded with zeroes just like \(A\) and \(B\), and should be stripped of the corresponding rows and columns.</p>
+
+<p>Here is a implementation of  Strassen algorithm in Python:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Python code from https://www.geeksforgeeks.org/strassens-matrix-multiplication/.
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span> 
+  
+<span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span> 
+    <span class="s">""" 
+    Splits a given matrix into quarters. 
+    Input: n x n matrix 
+    Output: tuple containing 4 n/2 x n/2 matrices corresponding to a, b, c, d 
+    """</span>
+    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">.</span><span class="n">shape</span> 
+    <span class="n">row2</span><span class="p">,</span> <span class="n">col2</span> <span class="o">=</span> <span class="n">row</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">//</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">[:</span><span class="n">row2</span><span class="p">,</span> <span class="p">:</span><span class="n">col2</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[:</span><span class="n">row2</span><span class="p">,</span> <span class="n">col2</span><span class="p">:],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">:,</span> <span class="p">:</span><span class="n">col2</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row2</span><span class="p">:,</span> <span class="n">col2</span><span class="p">:]</span> 
+  
+<span class="k">def</span> <span class="nf">strassen</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> 
+    <span class="s">""" 
+    Computes matrix product by divide and conquer approach, recursively. 
+    Input: n x n matrices x and y 
+    Output: n x n matrix, product of x and y 
+    """</span>
+  
+    <span class="c1"># Base case when size of matrices is 1 x 1 
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> 
+  
+    <span class="c1"># Splitting the matrices into quadrants. This will be done recursively 
+</span>    <span class="c1"># untill the base case is reached. 
+</span>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> 
+  
+    <span class="c1"># Computing the 7 products, recursively (p1, p2...p7) 
+</span>    <span class="n">p1</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">f</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span>   
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>         
+    <span class="n">p3</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>         
+    <span class="n">p4</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">g</span> <span class="o">-</span> <span class="n">e</span><span class="p">)</span>         
+    <span class="n">p5</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>         
+    <span class="n">p6</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="n">g</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>   
+    <span class="n">p7</span> <span class="o">=</span> <span class="n">strassen</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="n">e</span> <span class="o">+</span> <span class="n">f</span><span class="p">)</span>   
+  
+    <span class="c1"># Computing the values of the 4 quadrants of the final matrix c 
+</span>    <span class="n">c11</span> <span class="o">=</span> <span class="n">p5</span> <span class="o">+</span> <span class="n">p4</span> <span class="o">-</span> <span class="n">p2</span> <span class="o">+</span> <span class="n">p6</span>   
+    <span class="n">c12</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span>            
+    <span class="n">c21</span> <span class="o">=</span> <span class="n">p3</span> <span class="o">+</span> <span class="n">p4</span>             
+    <span class="n">c22</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p5</span> <span class="o">-</span> <span class="n">p3</span> <span class="o">-</span> <span class="n">p7</span>   
+  
+    <span class="c1"># Combining the 4 quadrants into a single matrix by stacking horizontally and vertically. 
+</span>    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="p">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">c11</span><span class="p">,</span> <span class="n">c12</span><span class="p">)),</span> <span class="n">np</span><span class="p">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">c21</span><span class="p">,</span> <span class="n">c22</span><span class="p">))))</span>  
+  
+    <span class="k">return</span> <span class="n">c</span> 
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p><a href="https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/">GeeksforGeeks: Matrix Chain Multiplication</a>.</p>
+
+<p><a href="https://www.dynamicprogramming.com/post/what-is-dynamic-programming">Learn Dynamic Programming</a>.</p>
+
+<p><a href="http://www.ccs.neu.edu/home/vip/teach/Algorithms/6_dyn_prog/notes/matrix_chain_multiplication/matrix_chain_multiplication.pdf">Dynamic Programming Solution to the Matrix-Chain Multiplication Problem</a>.</p>
+
+<p><a href="https://www.geeksforgeeks.org/strassens-matrix-multiplication/">GeeksforGeeks: Strassen’s Matrix Multiplication</a>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Strassen_algorithm">Wikipedia: Strassen algorithm</a>.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

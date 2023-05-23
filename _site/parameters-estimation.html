@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Parameters Estimation: MLE, MAP and Bayesian</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Parameters Estimation: MLE, MAP and Bayesian | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Parameters Estimation: MLE, MAP and Bayesian" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post, let’s introduce and compare three methods (MLE, MAP and Bayesian) for parameters estimation." />
+<meta property="og:description" content="In this post, let’s introduce and compare three methods (MLE, MAP and Bayesian) for parameters estimation." />
+<link rel="canonical" href="http://localhost:4000/parameters-estimation.html" />
+<meta property="og:url" content="http://localhost:4000/parameters-estimation.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Parameters Estimation: MLE, MAP and Bayesian" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-05-11T00:00:00+08:00","datePublished":"2020-05-11T00:00:00+08:00","description":"In this post, let’s introduce and compare three methods (MLE, MAP and Bayesian) for parameters estimation.","headline":"Parameters Estimation: MLE, MAP and Bayesian","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/parameters-estimation.html"},"url":"http://localhost:4000/parameters-estimation.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#mle">MLE</a></li><li><a href="#map">MAP</a></li><li><a href="#bayesian-estimation">Bayesian Estimation</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/parameters-estimation.html">
+    <h2 class="post-title">Parameters Estimation: MLE, MAP and Bayesian</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/stat"> <li>Stat</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      May 11, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>In this post, let’s introduce and compare three methods (MLE, MAP and Bayesian) for <strong>parameters estimation</strong>.</p>
+
+<p>Given the observed data \(X = \{ x_i \}_{i=1}^n\), we want to estimate the probabilistic model’s parameter \(\theta\). Denote \(f(*)\) as the probability density function of \(*\) if \(*\) is a continuous random variable, or the probability mass function if \(*\) is a discrete random variable.</p>
+
+<h2 id="mle">MLE</h2>
+
+<p>MLE (Maximum Likelihood Estimation) is a frequenist method, and it consider the parameters as fixed and unknown constants. Given the observed data \(X\), MLE seeks out the value for \(\theta\) that provides maximum support for the observed data \(X\). That is, MLE simply select \(\theta\) that maximize the likelihood:</p>
+
+\[\hat{\theta}_{\text{MLE}} = \underset{\theta}{\text{argmax }}  \mathcal{L}(\theta \mid X) = \underset{\theta}{\text{argmax }}  f(X \mid \theta),\]
+
+<p>where \(\mathcal{L}(\theta \mid X)\) is the likelihood function, and it is considered as a function of parameter \(\theta\).</p>
+
+<p>If we assume \(x_i\)’s are independent, then \(f(X \mid \theta) = \prod_{i=1}^n f(x_i \mid \theta)\).</p>
+
+<p>Since the logarithm is a monotonically increasing function of its argument, maximizing likelihood is equivalent to maximizing its logarithm (i.e. log-likelihood), which means:</p>
+
+\[\hat{\theta}_{\text{MLE}} = \underset{\theta}{\text{argmax }}  \mathcal{L}(\theta \mid X) = \underset{\theta}{\text{argmax }}  \log \mathcal{L}(\theta \mid X).\]
+
+<p>Note that the derivative of a sum is just the sum of the derivatives, but the derivative of a product requires the product rule. Maximizing log-likelihood is usually much easier than maximizing likelihood since logarithm transform the product to sum:</p>
+
+\[\log \mathcal{L}(\theta \mid X) = \log \prod_{i=1}^n f(x_i \mid \theta) = \sum_{i=1}^n \log f(x_i \mid \theta).\]
+
+<p>The MLE solution is usually obtained by setting the derivative of log-likelihood function \(\log \mathcal{L}(\theta \mid X)\) with respect to the parameter \(\theta\) to zero: \(\frac{\partial \log \mathcal{L}(\theta \mid X)}{\partial \theta} = 0\).</p>
+
+<h2 id="map">MAP</h2>
+
+<p>MAP (Maximum A Posterior) is a Bayesian method. MAP considers the parameter \(\theta\) as random, and assumes it can take values from a distribution \(f(\theta)\) that expresses our prior beliefs regarding \(\theta\). By Bayes rule, we have</p>
+
+\[f(\theta \mid X) = \frac{f(X \mid \theta)f(\theta)}{f(X)} \text{ i.e. } \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}.\]
+
+<p>MAP considers the prior of the parameter \(\theta\), and return a single specific value of \(\theta\) that maximize the posterior:</p>
+
+\[\hat{\theta}_{\text{MAP}} = \underset{\theta}{\text{argmax }} f(\theta \mid X) = \underset{\theta}{\text{argmax }} \frac{f(X \mid \theta)f(\theta)} {f(X)} = \underset{\theta}{\text{argmax }} f(X \mid \theta)f(\theta).\]
+
+<p>Note that if we assume the prior \(f(\theta)\) as a uniform distribution, then \(f(\theta)\) is a constant and we have \(\underset{\theta}{\text{argmax }} f(X \mid \theta)f(\theta) = \underset{\theta}{\text{argmax }} f(X \mid \theta)\), it follows that \(\hat{\theta}_{\text{MAP}} = \hat{\theta}_{\text{MLE}}\). We can conclude that MLE is a special case of MAP, when prior follows a uniform distribution.</p>
+
+<p>MLE and MAP both return a single and specific value as the estimation. Since that, the estimators of MLE or MAP are considered as <strong>point estimators</strong>.</p>
+
+<h2 id="bayesian-estimation">Bayesian Estimation</h2>
+
+<p>Bayesian estimation also considers the parameter \(\theta\) as a random variable. However, unlike MLE and MAP (and other point estimations), Bayesian estimation does not return a specific value, but returns fully the <strong>posterior distribution</strong> \(f(\theta \mid X)\):</p>
+
+\[f(\theta \mid X) = \frac{f(X \mid \theta)f(\theta)}{f(X)} = \frac{f(X \mid \theta)f(\theta)}{\int_\theta f(X \mid \theta) f(\theta) d\theta}.\]
+
+<p>Bayesian estimation is made complex by the fact that now the denominator in the formula above cannot be ignored.</p>
+
+<p>The integral is usually difficult to compute. Since we have a choice regarding the prior, we can use <strong>conjugate prior</strong> to simplify the computation of the integration. For a given algebraic form for the likelihood \(f(X \mid \theta)\), a prior \(f(\theta)\) is called a conjugate prior if the posterior \(f(\theta \mid X)\) has the same algebraic form as the prior.</p>
+
+<p>We can also use the Monte Carlo integration to estimate the integral in the denominator. (Read <a href="https://engineering.purdue.edu/kak/Tutorials/MonteCarloInBayesian.pdf">Monte Carlo Integration in Bayesian Estimation</a> for details.)</p>
+
+<p>Based on the posterior distribution of \(\theta\), we may want a specific value of \(\theta\) that we consider best in some sense. For example, the posterior expectation of \(\theta\):</p>
+
+\[E(\theta \mid X) = \int_\theta \theta f(\theta \mid X) d\theta.\]
+
+<p>The variance \(\text{Var}(\theta \mid X)\) that we can calculate for \(\theta\) from its posterior distribution allows us to express our confidence in any specific value we may use as an estimate. If the variance is too large, we may declare that there does not exist a good specific estimate for \(\theta\).</p>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p><a href="https://engineering.purdue.edu/kak/Tutorials/Trinity.pdf">ML, MAP, and Bayesian — The Holy Trinity of Parameter Estimation and Data Prediction</a>.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

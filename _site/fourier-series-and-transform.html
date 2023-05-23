@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Fourier Series and Transform</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Fourier Series and Transform | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Fourier Series and Transform" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Fourier Series" />
+<meta property="og:description" content="Fourier Series" />
+<link rel="canonical" href="http://localhost:4000/fourier-series-and-transform.html" />
+<meta property="og:url" content="http://localhost:4000/fourier-series-and-transform.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-17T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Fourier Series and Transform" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-07-17T00:00:00+08:00","datePublished":"2020-07-17T00:00:00+08:00","description":"Fourier Series","headline":"Fourier Series and Transform","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/fourier-series-and-transform.html"},"url":"http://localhost:4000/fourier-series-and-transform.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#fourier-series">Fourier Series</a><ul><li><a href="#definition">Definition</a></li><li><a href="#complex-form">Complex Form</a></li></ul></li><li><a href="#fourier-transform">Fourier Transform</a><ul><li><a href="#derivation">Derivation</a></li><li><a href="#definition-1">Definition</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/fourier-series-and-transform.html">
+    <h2 class="post-title">Fourier Series and Transform</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/math"> <li>Math</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jul 17, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="fourier-series">Fourier Series</h2>
+
+<p>We know that the sum of sinusoidal functions (cosine and sine) will still be a periodic function. However, the <strong>Fourier series</strong> do the inverse: it breaks down a periodic function into the sum of sinusoidal functions. The Fourier series is the Fourier transform for periodic functions.</p>
+
+<p>Here is an example from <a href="https://www.mathsisfun.com/calculus/fourier-series.html"><em>Math is fun</em></a> shows the plot of \(\sin(x)+\sin(2x)\).</p>
+
+<div style="text-align: center"> <img src="../../../pictures/waves.svg" alt="waves" style="zoom: 80%;" />  </div>
+
+<h3 id="definition">Definition</h3>
+
+<p>The Fourier series of a periodic function \(f(t)\) with fundamental period \(T\) is</p>
+
+\[\begin{align}
+f(t) &amp;= \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos \frac{2\pi nt}{T} + \sum_{n=1}^\infty b_n\sin \frac{2\pi nt}{T},
+\end{align}\]
+
+<p>where \(t\in\mathbb{R}\) and it is called the time.</p>
+
+<p>Note that it is an equal sign but not approximately equal sign in the formula above, and that means we can approximate $f(t)$ exactly by the Fourier series whenever $f(t)$ is continuous and smooth.</p>
+
+<p>The <strong>Fourier coefficients</strong> \(\{a_n\}_{n=0}^\infty\) and \(\{b_n\}_{n=1}^\infty\) are</p>
+
+\[a_n = \frac{2}{T} \int_0^T f(t) \cos \frac{2\pi nt}{T} dt, \ \ \ {n = 0,1,\cdots};\\ 
+b_n = \frac{2}{T} \int_0^T f(t) \sin \frac{2\pi nt}{T} dt, \ \ \ {n = 1,2,\cdots}.\]
+
+<p>Note that the constant term \(\frac{a_0}{2} = \frac{1}{T} \int_0^T f(t) dt\) is the average value of \(f(t)\) over a period. The intuitive explanation is, if we want to approximate \(f(t)\) by one term \(\frac{a_0}{2}\), the optimal value of \(\frac{a_0}{2}\) is given by the average value of \(f(t)\) over a period.</p>
+
+<h3 id="complex-form">Complex Form</h3>
+
+<p>The previous definition on Fourier series used only real numbers. In engineering, physics and many applied fields, using complex numbers makes things easier to understand and more mathematically elegant. Now let’s introduce the complex form of the Fourier series.</p>
+
+<p>Euler’s formula tells us the complex exponential can be written as a sum of sinusoidal functions. By Euler’s formula, we have</p>
+
+\[e^{ix}=\cos x + i\sin x \implies \cos x = \frac{e^{ix} + e^{-ix}}{2}, \sin x = \frac{e^{ix} - e^{-ix}}{2i},\]
+
+<p>where \(x\) is a arbitrary real number and \(i\) is the imaginary unit.</p>
+
+<p>Now let’s derive the complex form of the Fourier series. In this case, we use the complex exponential function as the basis.</p>
+
+\[\begin{align}
+f(t) &amp;= \frac{a_0}{2} + \sum_{n=1}^\infty \left(a_n \cos \frac{2\pi nt}{T} +  b_n\sin \frac{2\pi nt}{T} \right) \\
+&amp;= \frac{a_0}{2} + \sum_{n=1}^\infty \left( a_n \frac{e^{i\frac{2\pi nt}{T}} + e^{-i\frac{2\pi nt}{T}}}{2} + b_n \frac{e^{i\frac{2\pi nt}{T}} - e^{-i\frac{2\pi nt}{T}}}{2i} \right) \\
+&amp;= \frac{a_0}{2} + \sum_{n=1}^\infty \frac{a_n - ib_n}{2} e^{i\frac{2\pi nt}{T}} + \sum_{n=1}^\infty \frac{a_n + ib_n}{2} e^{-i\frac{2\pi nt}{T}} \\
+&amp;= \sum_{n=-\infty}^\infty c_n e^{i\frac{2\pi nt}{T}},
+\end{align}\]
+
+<p>Thus the complex form of Fourier series of a periodic function \(f(t)\) with period \(T\) is</p>
+
+\[f(t) = \sum_{n=-\infty}^\infty c_n e^{i\frac{2\pi nt}{T}}.\]
+
+<p>where</p>
+
+\[c_n = 
+\begin{cases}
+\frac{a_{-n} + ib_{-n}}{2}, &amp;\text{ if } n&lt;0; \\
+\frac{a_0}{2}, &amp;\text{ if } n=0;\\
+\frac{a_n - ib_n}{2}, &amp;\text{ if } n&gt;0.
+\end{cases}\]
+
+<p>The <strong>complex Fourier coefficients</strong> \(\{c_n\}_{n=-\infty}^{\infty}\) are computed as</p>
+
+\[\begin{align}
+{c_n} &amp;= \frac{1}{T} \int_{0}^T  {f\left( t \right){e^{-i\frac{2\pi nt}{T}}}dt}, \\ 
+&amp;= \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  {f\left( t \right){e^{-i\frac{2\pi nt}{T}}}dt},
+\ \ \ {n = 0, \pm 1, \pm 2, \cdots }.
+\end{align}\]
+
+<h2 id="fourier-transform">Fourier Transform</h2>
+
+<p>The <strong>Fourier transform</strong> is a mathematical technique that transforms a function of tim<em>e,</em> $f(t)$, to a function of frequency, \(\hat{f}(s)\). The Fourier series showed us how to rewrite any periodic function into a sum of sinusoids, while the Fourier transform of an arbitrary function can be derived as a special case of the Fourier series when the period \(T\to\infty\), since that a non-periodic function can be viewed as a limiting case of a periodic function with an infinitely long period.</p>
+
+<h3 id="derivation">Derivation</h3>
+
+<p>As the period \(T\to\infty\), the quantity \(\frac{2\pi}{T}\) becomes extremely small and the quantity \(\frac{2\pi n}{T}\) becomes a continuous quantity that can take on any value since \(n\) has a range of \((-\infty,+\infty)\). So we define a new variable called the frequency as</p>
+
+\[s := \frac{n}{T}.\]
+
+<p>Let</p>
+
+\[\hat{f}(s) := Tc_n = \int_{-\frac{T}{2}}^{\frac{T}{2}}  {f\left( t \right){e^{-i\frac{2\pi nt}{T}}}dt} = \int_{-\frac{T}{2}}^{\frac{T}{2}}  {f\left( t \right){e^{-2\pi ist}}dt}.\]
+
+<p>As \(T\to\infty\), we have the (forward) Fourier transform:</p>
+
+\[\hat{f}(s) = \int_{-\infty}^{\infty} f(t)e^{-2\pi ist}dt.\]
+
+<p>Likewise, we can derive the inverse Fourier transform that recover \(f(t)\) from \(\hat{f}(s)\). Start from the complex form of Fourier series, we have</p>
+
+\[f(t) = \sum_{n=-\infty}^\infty c_n e^{i\frac{2\pi nt}{T}} = \sum_{n=-\infty}^\infty Tc_n e^{i\frac{2\pi nt}{T}} \frac{1}{T} = \sum_{n=-\infty}^\infty \hat{f}(s) e^{2\pi ist} \frac{1}{T}.\]
+
+<p>The points \(s=\frac{n}{T}\) are spaced \(\frac{1}{T}\) apart, so we can think of \(\frac{1}{T}\) as, say \(\Delta s\), and the sum above as a Riemann sum approximating an integral</p>
+
+\[f(t) = \sum_{n=-\infty}^\infty \hat{f}(s) e^{2\pi ist} \frac{1}{T} = \sum_{n=-\infty}^\infty \hat{f}(s) e^{2\pi ist} \Delta s \approx \int_{-\infty}^{\infty} \hat{f}(s)e^{2\pi ist}ds.\]
+
+<p>Thus as \(T\to\infty\), we have the inverse Fourier transform:</p>
+
+\[f(t) = \int_{-\infty}^{\infty} \hat{f}(s)e^{2\pi ist}ds.\]
+
+<h3 id="definition-1">Definition</h3>
+
+<p>The Fourier transform of a function $f(t)$ is defined as</p>
+
+\[\hat{f}(s) = \int_{-\infty}^{\infty} f(t)e^{-2\pi ist}dt,\]
+
+<p>where \(s\in\mathbb{R}\) and it is called the <strong>frequency</strong>.</p>
+
+<p>The inverse Fourier transform is then defined as</p>
+
+\[f(t) = \int_{-\infty}^{\infty} \hat{f}(s)e^{2\pi ist}ds.\]
+
+<p>The original signal \(f(t)\) is defined on the <strong>time domain</strong> (or the spatial domain) and the \(\hat{f}(s)\) is defined on the <strong>frequency domain</strong>. The Fourier transform analyzes a signal into its frequency components. The set of all frequencies is the spectrum of $f(t)$. The value of \(f(t)\) or \(\hat{f}(s)\) is called the <strong>amplitude</strong>.</p>
+
+<div style="text-align: center"> <img src="../../../pictures/fourier_transform.jpg" alt="fourier_transform" style="zoom:100%;" /> </div>
+
+<p>Note that for a (non-periodic) signal defined on the whole real line we generally do not have a discrete set of frequencies, as in the periodic case, but rather a continuum of frequencies.</p>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>Osgood, Brad. (2007). <em>Lecture Notes for EE261: The Fourier Transform and its Applications</em>. Retrieved July 15, 2020, from https://see.stanford.edu/materials/lsoftaee261/book-fall-07.pdf.</p>
+
+<p>Bevel, Pete. (2010). <em>The Fourier Transform</em>. Retrieved July 17, 2020, from http://www.thefouriertransform.com.</p>
+
+<p>Svirin, Alex. (2020). <em>Complex Form of Fourier Series</em>. Retrieved July 17, 2020, from https://www.math24.net/complex-form-fourier-series.</p>
+
+<p>Cheever, Erik. (2005). <em>Introduction to the Fourier Transform</em>. Retrieved July 18, 2020, from https://lpsa.swarthmore.edu/Fourier/Xforms/FXformIntro.html.</p>
+
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>LIME: Explaining the Predictions of Any Classifier</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>LIME: Explaining the Predictions of Any Classifier | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="LIME: Explaining the Predictions of Any Classifier" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The following sections are excerpted from the paper “Why should I trust you? Explaining the predictions of any classifier.” 1. Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016, August). “Why should I trust you?” Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining (pp. 1135-1144). &#8617;" />
+<meta property="og:description" content="The following sections are excerpted from the paper “Why should I trust you? Explaining the predictions of any classifier.” 1. Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016, August). “Why should I trust you?” Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining (pp. 1135-1144). &#8617;" />
+<link rel="canonical" href="http://localhost:4000/LIME.html" />
+<meta property="og:url" content="http://localhost:4000/LIME.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-09T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="LIME: Explaining the Predictions of Any Classifier" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-11-09T00:00:00+08:00","datePublished":"2020-11-09T00:00:00+08:00","description":"The following sections are excerpted from the paper “Why should I trust you? Explaining the predictions of any classifier.” 1. Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016, August). “Why should I trust you?” Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining (pp. 1135-1144). &#8617;","headline":"LIME: Explaining the Predictions of Any Classifier","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/LIME.html"},"url":"http://localhost:4000/LIME.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#introduction">Introduction</a></li><li><a href="#local-interpretable-model-agnostic-explanations">Local Interpretable Model-Agnostic Explanations</a><ul><li><a href="#intuition">Intuition</a></li><li><a href="#interpretable-data-representations">Interpretable Data Representations</a></li><li><a href="#sampling-for-local-exploration">Sampling for Local Exploration</a></li><li><a href="#sparse-linear-explanations">Sparse Linear Explanations</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/LIME.html">
+    <h2 class="post-title">LIME: Explaining the Predictions of Any Classifier</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Nov 9, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The following sections are excerpted from the paper “Why should I trust you? Explaining the predictions of any classifier.” <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Despite widespread adoption, machine learning models remain mostly black boxes. Understanding the reasons behind predictions is, however, quite important in assessing trust. There are two dierent (but related) definitions of trust: (1) trusting a prediction, i.e. whether a user trusts an individual prediction sufficiently to take some action based on it, and (2) trusting a model, i.e. whether the user trusts a model to behave in reasonable ways if deployed. Both are directly impacted by how much the human understands a model’s behaviour, as opposed to seeing it as a black box.</p>
+
+<p><strong>Local Interpretable Model-Agnostic Explanations</strong> (<a href="https://github.com/marcotcr/lime/"><strong>LIME</strong></a>) is a technique to explain the predictions of any machine learning classifier. LIME treats the model as a black box so that it works for any model. <strong>We generate an explanation by approximating the underlying model <em>locally</em> by an interpretable one</strong> (such as a linear model with only a few non-zero coefficients), <strong>learned on perturbations of the original instance</strong> (e.g., removing words or hiding parts of the image).</p>
+
+<div style="text-align: center">
+<figure>
+<img src="../../../pictures/LIME-multiclass-example.png" alt="LIME-multiclass-example.png" style="zoom:90%;" />
+<figcaption style="font-size: 80%;"> Figure. LIME multiclass example. </figcaption>
+</figure>
+</div>
+
+<p>We can use LIME for several purposes: deciding if we should trust a prediction, choosing between models, improving an untrustworthy classifier, and identifying why a classifier should not be trusted.</p>
+
+<h2 id="local-interpretable-model-agnostic-explanations">Local Interpretable Model-Agnostic Explanations</h2>
+
+<h3 id="intuition">Intuition</h3>
+
+<p>The key intuition behind LIME is that it is much easier to approximate a black-box model by a simple model <em>locally</em> (in the neighborhood of the prediction we want to explain), as opposed to trying to approximate a model globally. This is done by weighting the perturbed instances by their similarity to the instance we want to explain.</p>
+
+<div style="text-align: center">
+<figure>
+<img src="../../../pictures/LIME-toy-example.png" alt="LIME-toy-example" style="zoom:60%;" />
+<figcaption style="font-size: 80%;"> Figure. Toy example to present intuition for LIME. The black-box model’s complex decision function f (unknown to LIME) is represented by the blue/pink background, which cannot be approximated well by a linear model. The bold red cross is the instance being explained. The other red crosses and blue circles are LIME samples instances, gets predictions using f, and weighs them by the proximity to the instance being explained (represented here by size). The dashed line is the learned explanation that is locally (but not globally) faithful. </figcaption>
+</figure>
+</div>
+
+<h3 id="interpretable-data-representations">Interpretable Data Representations</h3>
+
+<p>It is important to distinguish between features and interpretable data representations. Interpretable explanations need to use a representation that is understandable to humans, regardless of the actual features used by the model. For example, a possible interpretable representation for text classification is a binary vector indicating the presence or absence of a word. Likewise for image classification, an interpretable may be a binary vector indicating the “presence” or “absence” of a contiguous patch of similar pixels (a super-pixel).</p>
+
+<p>We denote \(x \in \mathbb{R}^d\) be the original representation of an instance being explained, and we use \(x' \in \{0, 1\}^{d'}\) to denote a binary vector for its interpretable representation.</p>
+
+<h3 id="sampling-for-local-exploration">Sampling for Local Exploration</h3>
+
+<p>We sample instances around \(x'\) by drawing nonzero elements of \(x'\) uniformly at random (where the number of such draws is also uniformly sampled). Given a perturbed sample \(z' \in \{0, 1\}^{d'}\) (which contains a fraction of the nonzero elements of \(x'\)), we recover the sample in the original representation \(z ' \in \mathbb{R}^d\) and obtain \(f(z)\), which is used as a label for the explanation model. Given this sampled dataset \(\mathcal{Z} = \{(z'_i,f(z_i))\}_{i=1}^m\) of \(m\) perturbed samples \(z_i\) with the associated labels \(f(z_i)\), we train an interpretable model (such as linear models, decision trees etc.).</p>
+
+<h3 id="sparse-linear-explanations">Sparse Linear Explanations</h3>
+
+<p>We use a similarity kernel to evaluate the similiarity between \(x\) and \(z\). We set the similarity kernel as \(π_x(z) = \exp(−D(x,z)^2/σ^2)\), which is an exponential kernel defined on some distance function \(D\) (e.g. cosine distance for text, L2 distance for images) with width \(σ\).</p>
+
+<p>Here, we use Lasso as the regularization version of the interpretiable model. We first select \(K\) features with Lasso and then learning the weights via least squares (a procedure we call K-Lasso in Algorithm 1).</p>
+
+<p><strong>Algorithm 1. Sparse Linear Explanations using LIME.</strong></p>
+
+<p>[1] Require: Classifier \(f\); Number of LIME samples \(m\); Instance \(x\), and its interpretable version \(x'\); Similarity kernel \(\pi_x(\cdot)\); Length of explanation \(K\).</p>
+
+<p>[2] Initialize \(\mathcal{Z} \gets \{\}\).</p>
+
+<p>[3] For \(i=1\) to \(m\) do (a) and (b):</p>
+
+<p>(a) \(z_i' \in \{0,1\}^{d'} \gets \text{SampleAround}(x')\);</p>
+
+<p>(b) \(\mathcal{Z} \gets \mathcal{Z} \cup (z'_i, f(z_i))\) with weight \(\pi_x(z_i)\).</p>
+
+<p>[4] Return \(K\) coefficients \(w \gets \text{K-Lasso}(\mathcal{Z})\), with \(z'_i\) as features, \(f(z_i)\) as target, and \(\pi_x(z_i)\) as weight.</p>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016, August). “Why should I trust you?” Explaining the predictions of any classifier. In <em>Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining</em> (pp. 1135-1144). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

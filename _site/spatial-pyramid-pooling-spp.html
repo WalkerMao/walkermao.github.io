@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Spatial Pyramid Pooling (SPP)</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Spatial Pyramid Pooling (SPP) | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Spatial Pyramid Pooling (SPP)" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The contents in this post are excerpted from the paper “Spatial pyramid pooling in deep convolutional networks for visual recognition” 1, with a little bit modification, as my notes for this paper. He, Kaiming, et al. “Spatial pyramid pooling in deep convolutional networks for visual recognition.” IEEE transactions on pattern analysis and machine intelligence 37.9 (2015): 1904-1916. &#8617;" />
+<meta property="og:description" content="The contents in this post are excerpted from the paper “Spatial pyramid pooling in deep convolutional networks for visual recognition” 1, with a little bit modification, as my notes for this paper. He, Kaiming, et al. “Spatial pyramid pooling in deep convolutional networks for visual recognition.” IEEE transactions on pattern analysis and machine intelligence 37.9 (2015): 1904-1916. &#8617;" />
+<link rel="canonical" href="http://localhost:4000/spatial-pyramid-pooling-spp.html" />
+<meta property="og:url" content="http://localhost:4000/spatial-pyramid-pooling-spp.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-19T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spatial Pyramid Pooling (SPP)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2021-12-19T00:00:00+08:00","datePublished":"2021-12-19T00:00:00+08:00","description":"The contents in this post are excerpted from the paper “Spatial pyramid pooling in deep convolutional networks for visual recognition” 1, with a little bit modification, as my notes for this paper. He, Kaiming, et al. “Spatial pyramid pooling in deep convolutional networks for visual recognition.” IEEE transactions on pattern analysis and machine intelligence 37.9 (2015): 1904-1916. &#8617;","headline":"Spatial Pyramid Pooling (SPP)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spatial-pyramid-pooling-spp.html"},"url":"http://localhost:4000/spatial-pyramid-pooling-spp.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#abstract">Abstract</a></li><li><a href="#1-introduction">1. Introduction</a></li><li><a href="#2-deep-networks-with-spatial-pyramid-pooling">2. Deep Networks with Spatial Pyramid Pooling</a><ul><li><a href="#22-the-pyramid-pooling-layer">2.2 The Pyramid Pooling Layer</a></li><li><a href="#23-training-the-network">2.3 Training the Network</a></li></ul></li><li><a href="#5-conclusion">5. Conclusion</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/spatial-pyramid-pooling-spp.html">
+    <h2 class="post-title">Spatial Pyramid Pooling (SPP)</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cv"> <li>CV</li> </a><a class="post-link" href="/categories/dl"> <li>DL</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/object detection"> <li>Object detection</li> </a><a class="post-link" href="/tags/cnn"> <li>CNN</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Dec 19, 2021
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The contents in this post are excerpted from the paper “Spatial pyramid pooling in deep convolutional networks for visual recognition” <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>, with a little bit modification, as my notes for this paper.</p>
+
+<h2 id="abstract">Abstract</h2>
+
+<p>CNN requires a fixed-size input. SPP generates a fixed-length representation regardless of input size.</p>
+
+<p>For object detection tasks, SPP-net is faster than R-CNN. Using SPP-net, we compute the feature maps from the entire image only once, and then pool features in arbitrary regions (sub-images) to generate fixed-length representations for training the detectors. This method avoids repeatedly computing the convolutional features.</p>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>A CNN mainly consists of two parts: convolutional layers, and fully-connected layers that follow. The fixed-size constraint comes only from the fully-connected layers,  while the convolutional layers accept inputs of arbitrary sizes.</p>
+
+<p>In this paper, the authors introduce a spatial pyramid pooling (SPP) layer to remove the fixed-size constraint of the network. Specifically, the authors add an SPP layer on top of the last convolutional layer. The SPP layer pools the features and generates fixed- length outputs, which are then fed into the fully-connected layers (or other classifiers). In other words, the authors perform some information “aggregation” at a deeper stage of the network hierarchy (between convolutional layers and fully-connected layers) to avoid the need for cropping or warping at the beginning.</p>
+
+<div align="center">
+<figure>
+<img src="https://production-media.paperswithcode.com/methods/new_teaser_dU3j8iq.jpg" alt="Figure 1" style="zoom: 20%;" />
+<figcaption style="font-size:80%;"> Figure 1: Top: cropping or warping to fit a fixed size. Middle: a conventional CNN. Bottom: SPP-net structure. (<a href="https://paperswithcode.com/method/spp-net">Source</a>) </figcaption>
+</figure>
+</div>
+
+<div align="center">
+<figure>
+<img src="https://www.pianshen.com/images/587/fc4c3af7c6bc0b52baaef92b745127e3.png" alt="img" style="zoom:100%;" />
+<figcaption style="font-size:80%;"> Figure. Traditional CNN and SPP-net. (<a href="https://www.pianshen.com/article/75161659567/">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>SPP has several remarkable properties for deep CNNs compared to the sliding window pooling:</p>
+
+<ol>
+  <li>SPP is able to generate a fixed-length output regardless of the input size, while the sliding window pooling cannot;</li>
+  <li>SPP uses multi-level spatial bins, while the sliding window pooling uses only a single window size. Multi-level pooling has been shown to be robust to object deformations;</li>
+  <li>SPP can pool features extracted at variable scales thanks to the flexibility of input scales.</li>
+</ol>
+
+<p>SPP-net not only makes it possible to generate representations from arbitrarily sized images/windows for testing, but also allows us to feed images with varying sizes or scales during training. Training with variable-size images increases scale-invariance and reduces over-fitting.</p>
+
+<div align="center">
+<figure>
+<img src="https://miro.medium.com/max/1400/1*n4LE9idyGJX_efOsS-FNvw.png" alt="Figure. R-CNN and SPP-net" style="zoom:60%;" />
+<figcaption style="font-size:80%;"> Figure. R-CNN and SPP-net. (<a href="https://medium.com/coinmonks/review-sppnet-1st-runner-up-object-detection-2nd-runner-up-image-classification-in-ilsvrc-906da3753679">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>As for object detection, the feature computation in R-CNN is time-consuming, because it repeatedly applies the deep convolutional networks to the raw pixels of thousands of warped regions per image. SPP-net run the convolutional layers only once on the entire image (regardless of the number of windows), and then extract features by SPP layer on the feature maps. This method yields a speedup of over one hundred times over R-CNN, while has better or comparable accuracy.</p>
+
+<h2 id="2-deep-networks-with-spatial-pyramid-pooling">2. Deep Networks with Spatial Pyramid Pooling</h2>
+
+<h3 id="22-the-pyramid-pooling-layer">2.2 The Pyramid Pooling Layer</h3>
+
+<p>As for the pooling layer, the ouput size is always proportional to the input size. In SPP-net, we make the pooling window size (spatial bin size in SPP-net) and stride proportional to the input size, then we get an output of fixed size (the number of bins in SPP-net) regardless of the input size.</p>
+
+<div align="center">
+<figure>
+<img src="https://miro.medium.com/max/1176/1*Af0rCJ67rVYdfIfhwnwi3A.png" alt="img" style="zoom:90%;" />
+<figcaption style="font-size:80%;"> Figure 3: A network structure with a SPP layer. Here 256 is the filter number (also the feature maps number) of the conv5 layer, and conv5 is the last convolutional layer. Here the number of bins are 16 (blue), 4 (green) and 1 (gray). (<a href="https://medium.com/coinmonks/review-sppnet-1st-runner-up-object-detection-2nd-runner-up-image-classification-in-ilsvrc-906da3753679">Source</a>) </figcaption>
+</figure>
+</div>
+
+<h3 id="23-training-the-network">2.3 Training the Network</h3>
+
+<p>Consider the feature maps after \(\mathrm{conv}_{5}\) that have a size of \(a \times a\) (e.g., \(13 \times 13\)). With a pyramid level of \(n \times n\) bins, we implement this pooling level as a sliding window pooling, where the window size \(\mathrm{win} = \lceil a / n \rceil\) and stride \(\mathrm{str} = \lfloor a / n\rfloor\) with \(\lceil\cdot\rceil\) and \(\lfloor\cdot\rfloor\) denoting ceiling and floor operations. With an \(l\)-level pyramid, we implement \(l\) such layers. The next fully-connected layer (\(\mathrm{fc}_{6}\)) will concatenate the \(l\) outputs.</p>
+
+<h2 id="5-conclusion">5. Conclusion</h2>
+
+<p>SPP is a flexible solution for handling different scales, sizes, and aspect ratios.</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>He, Kaiming, et al. “Spatial pyramid pooling in deep convolutional networks for visual recognition.” <em>IEEE transactions on pattern analysis and machine intelligence</em> 37.9 (2015): 1904-1916. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

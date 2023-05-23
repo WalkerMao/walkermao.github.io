@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Notes on Batch Normalization</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Notes on Batch Normalization | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Notes on Batch Normalization" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This post is the notes on the paper “Batch normalization: Accelerating deep network training by reducing internal covariate shift”." />
+<meta property="og:description" content="This post is the notes on the paper “Batch normalization: Accelerating deep network training by reducing internal covariate shift”." />
+<link rel="canonical" href="http://localhost:4000/notes-on-batch-normalization.html" />
+<meta property="og:url" content="http://localhost:4000/notes-on-batch-normalization.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-28T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Notes on Batch Normalization" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-12-28T00:00:00+08:00","datePublished":"2020-12-28T00:00:00+08:00","description":"This post is the notes on the paper “Batch normalization: Accelerating deep network training by reducing internal covariate shift”.","headline":"Notes on Batch Normalization","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/notes-on-batch-normalization.html"},"url":"http://localhost:4000/notes-on-batch-normalization.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#introduction">Introduction</a></li><li><a href="#towards-reducing-internal-covariate-shift">Towards Reducing Internal Covariate Shift</a></li><li><a href="#normalization-via-mini-batch-statistics">Normalization via Mini-Batch Statistics</a><ul><li><a href="#batch-normalizing-transform">Batch Normalizing Transform</a></li><li><a href="#training-batch-normalized-networks">Training Batch-Normalized Networks</a></li></ul></li><li><a href="#others">Others</a><ul><li><a href="#batch-normalization-enables-higher-learning-rates">Batch Normalization Enables Higher Learning Rates</a></li><li><a href="#batch-normalization-regularizes-the-model">Batch Normalization Regularizes the Model</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/notes-on-batch-normalization.html">
+    <h2 class="post-title">Notes on Batch Normalization</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/dl"> <li>DL</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Dec 28, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>This post is the notes on the paper <a href="https://arxiv.org/abs/1502.03167">“Batch normalization: Accelerating deep network training by reducing internal covariate shift”</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>For training a neural network, gradient descent (GD) optimizes the parameters \(\Theta\) of the network, so as to minimize the loss</p>
+
+\[\Theta=\arg \min _{\Theta} \frac{1}{N} \sum_{i=1}^{N} \ell\left(\mathrm{x}_{i}, \Theta\right),\]
+
+<p>where \(x_{1 \ldots N}\) is the training data set. With mini-batch gradient descent, the training proceeds in steps, and at each step we consider a mini-batch \(\mathrm{x}_{1 \ldots m}\) of size \(m .\) The mini-batch is used to approximate the gradient of the loss function with respect to the parameters, by computing</p>
+
+\[\frac{1}{m} \sum_{i=1}^{m} \frac{\partial \ell\left(\mathrm{x}_{i}, \Theta\right)}{\partial \Theta}.\]
+
+<p>Using mini-batches of examples, as opposed to one example at a time, is helpful in several ways. First, the gradient of the loss over a mini-batch is an estimate of the gradient over the training set, whose quality improves as the batch size increases. Second, computation over a batch can be much more efficient than \(m\) computations for individual examples, due to the parallelism afforded by the modern computing platforms.</p>
+
+<p>While the one example SGD and the mini-batch GD is simple and effective,  they  requires careful tuning of the learning rate used in optimization, as well as the initial values for the model parameters. The training is complicated by the fact that the inputs to each layer are affected by the parameters of all preceding layers so that small changes to the network parameters amplify as the network becomes deeper.</p>
+
+<p>The change in the distribution of a layer’s inputs presents a problem because the layer need to continuously adapt to the new distribution. We refer to the change in the distributions of internal layer inputs (activations) of a deep network, in the course of training, as <strong>internal covariate shift</strong>. Eliminating it offers a promise of faster training.</p>
+
+<p><strong>Batch normalization</strong>:</p>
+
+<ul>
+  <li>reduces internal covariate shift via a normalization step that fixes the means and variances of layer inputs.</li>
+  <li>has a beneficial effect on the gradient flow through the network, by reducing the dependence of gradients on the scale of the parameters or of their initial values. This allows us to use much higher learning rates without the risk of divergence.</li>
+  <li>regularizes the model and reduces the need for dropout.</li>
+  <li>makes it possible to use saturating nonlinearities by preventing the network from getting stuck in the saturated modes.</li>
+</ul>
+
+<h2 id="towards-reducing-internal-covariate-shift">Towards Reducing Internal Covariate Shift</h2>
+
+<p>We define <strong>internal covariate shift</strong> as the change in the distribution of network activations due to the change in network parameters (weights and biases) during training.</p>
+
+<p>It has been long known that the network training converges faster if its inputs are whitened i.e., linearly transformed to have <strong>zero means</strong> and <strong>unit variances</strong>, and <strong>decorrelated</strong>. By whitening the inputs to each layer, we would achieve the fixed distributions of inputs that would reduce the internal covariate shift.</p>
+
+<p>If the whitening normalization are interspersed with the optimization steps, then the gradient descent step may attempt to update the parameters in a way that requires the normalization to be updated. If the normalization is not updated during the gradient descent step, then the effect of the gradient step will be reduced by the normalization.</p>
+
+<h2 id="normalization-via-mini-batch-statistics">Normalization via Mini-Batch Statistics</h2>
+
+<h3 id="batch-normalizing-transform">Batch Normalizing Transform</h3>
+
+<p>Since the full whitening of each layer’s inputs is costly and not everywhere differentiable, we make two necessary simplifications.</p>
+
+<p>The first is that instead of whitening the features in layer inputs and outputs jointly, we will normalize each scalar feature independently, by making it have the mean of \(0\) and the variance of \(1 .\) For a layer with \(d\)-dimensional input \(\mathrm{x}=\left(x^{(1)} \ldots x^{(d)}\right)\), we will normalize each dimension</p>
+
+\[\widehat{x}^{(k)}=\frac{x^{(k)}-\mathrm{E}\left[x^{(k)}\right]}{\sqrt{\operatorname{Var}\left[x^{(k)}\right]}},\]
+
+<p>where the expectation and variance are computed by the training data set.</p>
+
+<p>The second simplification is that, since we use mini-batch GD, we produce the estimates of the mean and variance of each activation by each mini-batch, rather than that by entire training set.</p>
+
+<p>Note that simply normalizing each input of a layer may change what the layer can represent. For instance, normalizing the inputs of a sigmoid would constrain them to the linear regime of the nonlinearity. To address this, we introduce, for each activation \(x^{(k)}\), a pair of parameters \(\gamma^{(k)}, \beta^{(k)},\) which scale and shift the normalized value to get the linear transformation \(\widetilde{x}^{(k)}\) (denoted as \(y^{(k)}\) in the original paper):</p>
+
+\[\widetilde{x}^{(k)} = \gamma^{(k)} \widehat{x}^{(k)}+\beta^{(k)}.\]
+
+<p>These parameters are learned along with the original model parameters, and restore the representation power of the network. Indeed, by setting \(\gamma^{(k)}=\sqrt{\operatorname{Var}\left[x^{(k)}\right]}\) and \(\beta^{(k)}=\mathrm{E}\left[x^{(k)}\right]\), we could recover the original activations.</p>
+
+<p>Now let us introduce the first algorithm: batch normalizing transform. Consider a mini-batch \(\mathcal{B}\) of size \(m\). since the normalization is applied to each activation independently, let us focus on a particular activation \(x^{(k)}\) and omit the superscript \((k)\) for clarity. We have \(m\) values of this activation in the mini-batch,</p>
+
+\[\mathcal{B}=\left\{x_{1 \ldots m}\right\}.\]
+
+<p>Let the normalized values be \(\widehat{x}_{1 \ldots m}\), and their linear transformations be \(\widetilde{x}_{1 \ldots m}\). We refer to the transform</p>
+
+\[\mathrm{BN}_{\gamma, \beta}: x_{1 \ldots m} \rightarrow \widetilde{x}_{1 \ldots m},\]
+
+<p>as the <strong>batch normalizing transform</strong>. As presented in the algorithm below. In the below algorithm, \(\epsilon\) is a constant added to the mini-batch variance for numerical stability.</p>
+
+<p>Below is the algorithm of batch normalizing transform. As mentioned before, we omit the superscript \((k)\) for clarity.</p>
+
+<p><strong>Algorithm. Batch Normalizing Transform.</strong> Applied to activation \(x\) over a mini-batch.</p>
+
+<p>[1] Input: Values of \(x\) over a mini-batch: \(\mathcal{B}=\left\{x_{1 \ldots m}\right\}\); Parameters to be learned: \(\gamma, \beta\).</p>
+
+<p>[2] \(\mu_{\mathcal{B}} \leftarrow \frac{1}{m} \sum_{i=1}^{m} x_{i}\), \(\sigma_{\mathcal{B}}^{2} \leftarrow \frac{1}{m} \sum_{i=1}^{m}\left(x_{i}-\mu_{\mathcal{B}}\right)^{2}\) // mini-batch mean and variance</p>
+
+<p>[3] for \(i=1,\cdots,m\), do:</p>
+
+<p>  \(\widehat{x}_{i} \leftarrow \frac{x_{i}-\mu_{\mathcal{B}}}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}}\) // normalize</p>
+
+<p>  \(\widetilde{x}_{i} \leftarrow \gamma \widehat{x}_{i}+\beta \equiv \mathrm{B} \mathrm{N}_{\gamma, \beta}\left(x_{i}\right)\) // scale and shift</p>
+
+<p>[4] Output: \(\left\{\widetilde{x}_{i}=\mathrm{B} \mathrm{N}_{\gamma, \beta}\left(x_{i}\right)\right\}\).</p>
+
+<h3 id="training-batch-normalized-networks">Training Batch-Normalized Networks</h3>
+
+<p>During training we need to backpropagate the gradient of loss \(\ell\) through this transformation. For clarity, \(x \equiv x^{(k)}, \gamma \equiv \gamma^{(k)}, \beta \equiv \beta^{(k)}, \mu_{\mathcal{B}} \equiv \mu_{\mathcal{B}}^{(k)}, \sigma_{\mathcal{B}} \equiv \sigma_{\mathcal{B}}^{(k)}\) etc.. The gradients:</p>
+
+\[\begin{aligned} 
+\frac{\partial \ell}{\partial \widehat{x}_{i}} &amp;=\frac{\partial \ell}{\partial \widetilde{x}_{i}} \cdot \gamma, \\ \frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} &amp;=\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot\left(x_{i}-\mu_{\mathcal{B}}\right) \cdot \frac{-1}{2}\left(\sigma_{\mathcal{B}}^{2}+\epsilon\right)^{-3 / 2}, \\ \frac{\partial \ell}{\partial \mu_{\mathcal{B}}} &amp;=\left(\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot \frac{-1}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}}\right)+\frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} \cdot \frac{\sum_{i=1}^{m}-2\left(x_{i}-\mu_{\mathcal{B}}\right)}{m}, \\ \frac{\partial \ell}{\partial x_{i}} &amp;=\frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot \frac{1}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}}+\frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} \cdot \frac{2\left(x_{i}-\mu_{\mathcal{B}}\right)}{m}+\frac{\partial \ell}{\partial \mu_{\mathcal{B}}} \cdot \frac{1}{m}, \\ \frac{\partial \ell}{\partial \gamma} &amp;=\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widetilde{x}_{i}} \cdot \widehat{x}_{i}, \\ \frac{\partial \ell}{\partial \beta} &amp;=\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widetilde{x}_{i}}.
+\end{aligned}\]
+
+<p>For a batch-normalized network, any layer that previously received \(x\) as the input, now receives \(\text{BN}(x)\).</p>
+
+<p>Once the network has been trained, we use the normalization</p>
+
+\[\widehat{x}=\frac{x-\mathrm{E}[x]}{\sqrt{\operatorname{Var}[x]+\epsilon}}\]
+
+<p>using the expectation and variance calculated by entire training set, rather than mini-batch. Say we have \(M\) mini-batches \(\mathcal{B}_{1 \ldots M}\), each of size \(m\), we process these mini-batches, and average over them:</p>
+
+\[\begin{aligned}
+\mathrm{E}[x] &amp; \leftarrow \mathrm{E}_{\mathcal{B}}\left[\mu_{\mathcal{B}}\right] 
+= \frac{1}{M} \sum_{l=1}^{M} \mu_{\mathcal{B_l}}, \\
+\operatorname{Var}[x] &amp; \leftarrow 
+\frac{m}{m-1} \mathrm{E}_{\mathcal{B}} \left[\sigma_{\mathcal{B}}^{2}\right] 
+= \frac{m}{m-1} \frac{1}{M} \sum_{l=1}^{M} \sigma_{\mathcal{B_l}}. 
+\end{aligned}\]
+
+<h2 id="others">Others</h2>
+
+<h3 id="batch-normalization-enables-higher-learning-rates">Batch Normalization Enables Higher Learning Rates</h3>
+
+<p>In traditional deep networks, too-high learning rate may result in the gradients that explode or vanish, as well as getting stuck in poor local minima because there is too much “energy” in the optimization and the parameters are bouncing around chaotically, unable to settle in a nice spot in the optimization landscape.</p>
+
+<p>Batch normalization helps address these issues. By normalizing activations throughout the network, it prevents small changes to the parameters from amplifying into larger and suboptimal changes in activations in gradients; for instance, it prevents the training from getting stuck in the saturated regimes of nonlinearities.</p>
+
+<p>Batch normalization also makes training more resilient to the parameter scale. Normally, large learning rates may increase the scale of layer parameters, which then amplify the gradient during backpropagation and lead to the model explosion. However, with Batch normalization, backpropagation through a layer is unaffected by the scale of its parameters. Indeed, for a scalar \(a\),</p>
+
+\[\mathrm{BN}(W \mathrm{u})=\mathrm{BN}((a W) \mathrm{u}),\]
+
+<p>and we can show that</p>
+
+\[\begin{aligned}
+&amp;\frac{\partial \mathrm{BN}((a W) \mathrm{u})}{\partial \mathrm{u}}=\frac{\partial \mathrm{BN}(W \mathrm{u})}{\partial \mathrm{u}}, \\
+&amp;\frac{\partial \mathrm{BN}((a W) \mathrm{u})}{\partial(a W)}=\frac{1}{a} \cdot \frac{\partial \mathrm{BN}(W \mathrm{u})}{\partial W}.
+\end{aligned}\]
+
+<p>The scale does not affect the layer Jacobian nor, consequently, the gradient propagation.</p>
+
+<h3 id="batch-normalization-regularizes-the-model">Batch Normalization Regularizes the Model</h3>
+
+<p>When training with Batch Normalization, a training example is seen in conjunction with other examples in the mini-batch, and the training network no longer producing deterministic values for a given training example. In our experiments, we found this effect to be advantageous to the generalization of the network. Whereas dropout is typically used to reduce overfitting, in a batch-normalized network we found that it can be either removed or reduced in strength.</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<p>Ioffe, Sergey, and Christian Szegedy. <a href="(https://arxiv.org/abs/1502.03167)">“Batch normalization: Accelerating deep network training by reducing internal covariate shift.”</a> <em>arXiv preprint arXiv:1502.03167</em> (2015).</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

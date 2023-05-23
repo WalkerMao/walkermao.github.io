@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Stacking Methods</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Stacking Methods | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Stacking Methods" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Stacking (or stacked generalization) is one of the three widely used ensemble methods in Machine Learning. The overall idea of stacking is to train several models (base learners, or level-0 models), usually with different algorithm types, on the train data, and then rather than picking the best model, using another model (meta learner, or level-1 model) to learn how to best combine the predictions from the base learners, to make the final prediction. The inputs for the meta-learner is the prediction outputs of the base-learners." />
+<meta property="og:description" content="Stacking (or stacked generalization) is one of the three widely used ensemble methods in Machine Learning. The overall idea of stacking is to train several models (base learners, or level-0 models), usually with different algorithm types, on the train data, and then rather than picking the best model, using another model (meta learner, or level-1 model) to learn how to best combine the predictions from the base learners, to make the final prediction. The inputs for the meta-learner is the prediction outputs of the base-learners." />
+<link rel="canonical" href="http://localhost:4000/stacking.html" />
+<meta property="og:url" content="http://localhost:4000/stacking.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-28T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stacking Methods" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-11-28T00:00:00+08:00","datePublished":"2020-11-28T00:00:00+08:00","description":"Stacking (or stacked generalization) is one of the three widely used ensemble methods in Machine Learning. The overall idea of stacking is to train several models (base learners, or level-0 models), usually with different algorithm types, on the train data, and then rather than picking the best model, using another model (meta learner, or level-1 model) to learn how to best combine the predictions from the base learners, to make the final prediction. The inputs for the meta-learner is the prediction outputs of the base-learners.","headline":"Stacking Methods","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/stacking.html"},"url":"http://localhost:4000/stacking.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/stacking.html">
+    <h2 class="post-title">Stacking Methods</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/ensemble learning"> <li>Ensemble learning</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Nov 28, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>Stacking (or stacked generalization) is one of the three widely used ensemble methods in Machine Learning. The overall idea of stacking is to train several models (<strong>base learners</strong>, or level-0 models), usually with different algorithm types, on the train data, and then rather than picking the best model, using another model (<strong>meta learner</strong>, or level-1 model) to learn how to best combine the predictions from the base learners, to make the final prediction. The inputs for the meta-learner is the prediction outputs of the base-learners.</p>
+
+<div style="text-align: center">
+<figure>
+<img src="https://miro.medium.com/max/1324/1*T-JHq4AK3dyRNi7gpn9-Xw.png" alt="prediction-of-stacking" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Figure. Procedure of predictions by stacking. </figcaption>
+</figure>
+</div>
+
+<p>At first, we train the base learners by the original data, and use the predictions of these base learners as the features and the original labels as the target to train the meta learner.</p>
+
+<p>To reduce overfitting, the most common approach to preparing the training dataset for the meta-model is via \(K\)-fold cross-validation of the base models, where the out-of-fold predictions are used as the training dataset for the meta model.</p>
+
+<p>Say the original dataset has \(N\) samples and we want to train \(M\) types of base learners. After \(K\)-fold cross-validation, we have \(K \cdot M\) models. The out-of-fold predictions made by these models compose a matrix of dimension \(N \times M\), and we use this matrix and the original labels (as shown below) to fit the meta-learner.</p>
+
+<div style="text-align: center">
+<figure>
+<img src="https://miro.medium.com/max/2400/1*SsfD-eJ6svkcCKuBaH5e8w.png" alt="training-data-for-the-meta-learner" style="zoom: 60%;" />
+<figcaption style="font-size: 80%;"> Figure. Training data of meta-learner. </figcaption>
+</figure>
+</div>
+
+<p>Note that we have \(M\) types of base-learners and each has \(K\) models, so we have \(K \cdot M\) models. After the meta learner has been trained. We can keep all these \(K \cdot M\) models at level-0. In this situation, for an input test sample, the \(K\) models in each type of base-learners produce \(K\) predictions, and we make an average of them. Then the output of the level-0 is a vector of dimension \(M\), and this output is the input of level-1 meta-learner.</p>
+
+<p>The following figure is an example of stacking, where we have only one type of base learner, and make \(5\)-fold cross-validation to fit \(5\) models at level-0. We use these \(5\) models to make predictions on test data and take average of them as the input of the meta-learner (model 6 in the figure).</p>
+
+<div style="text-align: center">
+<figure>
+<img src="https://pic4.zhimg.com/80/v2-84dbc338e11fb89320f2ba310ad69ceb_720w.jpg" alt="example-of-stacking" style="zoom:180%;" />
+<figcaption style="font-size: 80%;"> Figure. Training base-learners (model 1~5) and meta-learner (model 6) with 5-fold cross-validation. </figcaption>
+</figure>
+</div>
+
+<p>For computational simplicity, rather than keep all \(K \cdot M\) models at level-0, we usually fit \(M\) models by whole training dataset as the final base learners.</p>
+
+<p>We usually use a simple model as the meta-learner, like Linear Regression or Logistic Regression, to reduce overfitting.</p>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p><a href="https://medium.com/@supun.setunga/stacking-in-machine-learning-357db1cfc3a">Stacking in Machine Learning</a></p>
+
+<p><a href="https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/">Stacking Ensemble Machine Learning</a></p>
+
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

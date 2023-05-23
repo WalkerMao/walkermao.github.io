@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Image Histograms</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Image Histograms | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Image Histograms" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Image Grayscale Histograms" />
+<meta property="og:description" content="Image Grayscale Histograms" />
+<link rel="canonical" href="http://localhost:4000/image-histograms.html" />
+<meta property="og:url" content="http://localhost:4000/image-histograms.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-31T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Image Histograms" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2021-01-31T00:00:00+08:00","datePublished":"2021-01-31T00:00:00+08:00","description":"Image Grayscale Histograms","headline":"Image Histograms","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/image-histograms.html"},"url":"http://localhost:4000/image-histograms.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#image-grayscale-histograms">Image Grayscale Histograms</a><ul><li><a href="#high--low-key-over--under-exposure">High &amp; Low Key; Over &amp; Under Exposure</a></li><li><a href="#contrast">Contrast</a></li><li><a href="#histogram-equalization">Histogram Equalization</a></li></ul></li><li><a href="#ahe-and-clahe">AHE and CLAHE</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/image-histograms.html">
+    <h2 class="post-title">Image Histograms</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cv"> <li>CV</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/traditional cv"> <li>Traditional CV</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jan 31, 2021
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="image-grayscale-histograms">Image Grayscale Histograms</h2>
+
+<p>Histograms measure the frequency of brightness within the image: how many times does a particular pixel value appear in an image. A histogram shows the contrast, brightness, intensity distribution etc. of that image.</p>
+
+<div align="center">
+<img src="https://docs.opencv.org/5.x/histogram_sample.jpg" alt="Histogram Example" style="zoom:100%;" />
+</div>
+
+<p>The pixel intensity is a single value for a grayscale image, or three values for a color image. The histogram above is drawn for grayscale image, not color image.</p>
+
+<h3 id="high--low-key-over--under-exposure">High &amp; Low Key; Over &amp; Under Exposure</h3>
+
+<p>The region where most of the brightness values are present is called the “tonal range”.</p>
+
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_examplehist.png" alt="Example Histogram" style="zoom:100%;" />
+</div>
+
+<p>Images where most of the tones occur in the shadows are called “low key,” whereas with “high key” images most of the tones are in the highlights. Most cameras will produce midtone-centric histograms when in an automatic exposure mode.</p>
+
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowkey.jpg" alt="Low Key Image" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowkey_auto.jpg" alt="img" style="zoom:80%;" />
+</div>
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowkey_hist.png" alt="Low Key Histogram" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowkey_auto_hist.png" alt="Low Key Histogram" style="zoom:80%;" />
+</div>
+<div style="line-height:50%;">
+    <br />
+</div>
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey.jpg" alt="High Key Image" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey_auto.jpg" alt="img" style="zoom:80%;" />
+</div>
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey_hist.png" alt="High Key Histogram" style="zoom:80%;" /><img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highkey_hist_auto.png" alt="High Key Histogram" style="zoom:80%;" />
+</div>
+
+<h3 id="contrast">Contrast</h3>
+
+<p>Contrast is a measure of the difference in brightness between light and dark areas in a scene.</p>
+
+<p>Root mean square (RMS) contrast is defined as the standard deviation of the pixel intensities:</p>
+
+\[\sqrt{\frac{1}{W H} \sum_{i=0}^{W-1} \sum_{j=0}^{H-1}\left(I_{i j}-\bar{I}\right)^{2}}\]
+
+<p>where intensities \(I_{i j}\) are the \(i\)-th \(j\)-th element of the two-dimensional image of size \(W\) by \(H\). \(\bar{I}\) is the average intensity of all pixel values in the image. The image \(I\) is assumed to have its pixel intensities normalized in the range \([0,1]\).</p>
+
+<p>Broad histograms reflect a scene with significant contrast, whereas narrow histograms reflect less contrast. Contrast can have a significant visual impact on an image by emphasizing texture.</p>
+
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowcont.jpg" alt="img" style="zoom:80%;" /> <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highcont.jpg" alt="img" style="zoom:80%;" />
+</div>
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_lowcont_hist.png" alt="img" style="zoom:80%;" /> <img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_highcont_hist.png" alt="img" style="zoom:80%;" /> 
+</div>
+
+<p>Contrast can also vary for different regions within the same image due to both subject matter and lighting.</p>
+
+<div align="center">
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_norm2.jpg" alt="img" style="zoom:80%;" /> <img src="../../../pictures/image-histograms-seperated.png" alt="image-histograms-seperated" style="zoom: 50%;" />
+</div>
+
+<h3 id="histogram-equalization">Histogram Equalization</h3>
+
+<p>Histogram equalization usually increases the contrast of our images, especially when the usable data of the image is represented by close contrast values. Through this adjustment, the intensities can be better distributed on the histogram. Histogram equalization accomplishes this by effectively <strong>spreading out the most frequent intensity values</strong>.</p>
+
+<div align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Histogrammeinebnung.png" alt="Histogram equalization" style="zoom:40%;" />
+</div>
+<p>Let \(f\) be a given image represented as a matrix of integer pixel intensities ranging from \(0\) to \(L-1\). \(L\) is the number of possible intensity values, often \(256\). Let \(p_f(k)\) denote the probability density function (PDF) of the normalized histogram of \(f\) with a bin for each possible intensity \(k\). So</p>
+
+\[p_f(k) = \frac{\text{Number of pixels with intensity }  k}{\text{Total number of pixels}}, \quad k=0,1, \cdots, L-1.\]
+
+<p>The corresponding cumulative distribution function (CDF) is</p>
+
+\[F_f(l) = \sum_{k=0}^{l} p_f(k).\]
+
+<p>The histogram equalized image $ g $ will be defined by</p>
+
+\[g_{i, j} = T_f(f_{i,j}) = \text{floor}\left((L-1) F_f(f_{i,j}) \right) = \text{floor}\left((L-1) \sum_{k=0}^{f_{i, j}} p_f(k)\right)\]
+
+<p>where \(T_f(\cdot)\) is the transformation function of the histogram equalization of \(f\), and \(\text{floor}()\) rounds down to the nearest integer. Note that the transformation function \(T_f(\cdot)\) is proportional to the CDF \(F_f(\cdot)\) of \(f\).</p>
+
+<p>The derivation of the transformation function is <a href="http://www.math.uci.edu/icamp/courses/math77c/demos/hist_eq.pdf">provided here</a>.</p>
+
+<p>The method is useful in images with backgrounds and foregrounds that are both bright or both dark. In particular, the method can lead to better views of bone structure in X-ray images, and to better detail in photographs that are over or under-exposed. Histogram equalization often produces unrealistic effects in photographs; however it is very useful for scientific images like thermal, satellite or X-ray images.</p>
+
+<div align="center">
+<figure>
+<img src="https://docs.opencv.org/master/histeq_numpy1.jpg" alt="histeq_numpy1.jpg" style="zoom:100%;" /> <br />
+<img src="https://docs.opencv.org/master/histeq_numpy2.jpg" alt="histeq_numpy2.jpg" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Figure. Image before and after histogram equalization. </figcaption>
+</figure>
+</div>
+
+<p>A key advantage of the method is that it is a fairly straightforward technique and an invertible operator. So in theory, if the histogram equalization function is known, then the original histogram can be recovered. The calculation is not computationally intensive. A disadvantage of the method is that it is indiscriminate. It may increase the contrast of background noise, while decreasing the usable signal.</p>
+
+<h2 id="ahe-and-clahe">AHE and CLAHE</h2>
+
+<p>Ordinary histogram equalization uses the same transformation derived from the image histogram to transform all pixels. This works well when the distribution of pixel values is similar throughout the image. However, when the image contains regions that are significantly lighter or darker than most of the image, the contrast in those regions will not be sufficiently enhanced, or even weakened.</p>
+
+<p>As shown below, it is true that the background contrast has improved after histogram equalization. But the contrast on the face of statue is weakened and we lost most of the information there due to over-brightness. It is because its histogram is not confined to a particular region.</p>
+
+<div align="center">
+<img src="https://docs.opencv.org/5.x/clahe_1.jpg" alt="Problem of Global HE" style="zoom:90%;" />
+</div>
+
+<p>Adaptive histogram equalization (AHE) improves on this by transforming each pixel with a transformation function derived from a neighborhood region, as in the figure below. The derivation of the transformation functions from the histograms is exactly the same as for ordinary histogram equalization.</p>
+
+<div align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AHE-neighbourhoods.svg/300px-AHE-neighbourhoods.svg.png" alt="AHE-neighbourhoods.svg" style="zoom:80%;" />
+</div>
+
+<p>Ordinary AHE tends to overamplify the contrast in near-constant regions of the image, since the histogram in such regions is highly concentrated. As a result, AHE may cause noise to be amplified in near-constant regions. <strong>Contrast Limited AHE</strong> (<strong>CLAHE</strong>) is a variant of adaptive histogram equalization in which the contrast amplification is limited, so as to reduce this problem of noise amplification.</p>
+
+<p>In CLAHE, the contrast amplification in the vicinity of a given pixel value is given by the slope of the transformation function. In another word, the larger of the slope, the larger of the contrast amplification. The slope of the transformation function is proportional to the slope of the neighborhood CDF and therefore to the value of the histogram at that pixel value. CLAHE limits the amplification by clipping the histogram at a predefined limit before computing the CDF. This limits the slope of the CDF and therefore of the transformation function. The value at which the histogram is clipped, the so-called clip limit, depends on the normalization of the histogram and thereby on the size of the neighborhood region.</p>
+
+<p>It is advantageous not to discard the part of the histogram that exceeds the clip limit but to redistribute it equally among all histogram bins, as shown below.</p>
+
+<div align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Clahe-redist.svg/300px-Clahe-redist.svg.png" alt="Clahe-redist.svg" style="zoom:100%;" />
+</div>
+
+<p>The redistribution will push some bins over the clip limit again (region shaded green in the figure). If this is undesirable, the redistribution procedure can be repeated recursively until the excess is negligible.</p>
+
+<p>The picture below is the result after CLAHE.</p>
+
+<div align="center">
+<img src="https://docs.opencv.org/5.x/clahe_2.jpg" alt="Result of CLAHE" style="zoom:100%;" />
+</div>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p><a href="https://www.cambridgeincolour.com/tutorials/histograms1.htm">Camera Histograms: Tones &amp; Contrast</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Histogram_equalization">Wikipedia: Histogram equalization</a></p>
+
+<p><a href="http://www.math.uci.edu/icamp/courses/math77c/demos/hist_eq.pdf">UCI Math 77C - Image Processing: Histogram Equalization</a></p>
+
+<p><a href="https://docs.opencv.org/master/d5/daf/tutorial_py_histogram_equalization.html">OpenCV Tutorial - Histograms - 2: Histogram Equalization</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Adaptive_histogram_equalization">Wikipedia: Adaptive histogram equalization</a></p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

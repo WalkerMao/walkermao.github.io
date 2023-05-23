@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Shell Command Memo (Part 1)</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Shell Command Memo (Part 1) | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Shell Command Memo (Part 1)" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Navigation" />
+<meta property="og:description" content="Navigation" />
+<link rel="canonical" href="http://localhost:4000/shell-command-memo-part1.html" />
+<meta property="og:url" content="http://localhost:4000/shell-command-memo-part1.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Shell Command Memo (Part 1)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-11-15T00:00:00+08:00","datePublished":"2020-11-15T00:00:00+08:00","description":"Navigation","headline":"Shell Command Memo (Part 1)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/shell-command-memo-part1.html"},"url":"http://localhost:4000/shell-command-memo-part1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#navigation">Navigation</a></li><li><a href="#exploring-the-system">Exploring the System</a></li><li><a href="#manipulating-files-and-directories">Manipulating Files and Directories</a></li><li><a href="#working-with-commands">Working with Commands</a></li><li><a href="#redirection">Redirection</a></li><li><a href="#seeing-the-world-as-the-shell-sees-it">Seeing the World as the Shell Sees It</a></li><li><a href="#advanced-keyboard-tricks">Advanced Keyboard Tricks</a></li><li><a href="#permissions">Permissions</a></li><li><a href="#processes">Processes</a></li><li><a href="#the-environment">The Environment</a></li><li><a href="#storage-media">Storage Media</a></li><li><a href="#networking">Networking</a></li><li><a href="#searching-for-files">Searching for Files</a></li><li><a href="#archiving-and-backup">Archiving and Backup</a></li><li><a href="#text-processing">Text Processing</a></li><li><a href="#formatting-output">Formatting Output</a></li><li><a href="#printing">Printing</a></li><li><a href="#compiling-programs">Compiling Programs</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/shell-command-memo-part1.html">
+    <h2 class="post-title">Shell Command Memo (Part 1)</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/programming"> <li>programming</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Nov 15, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h3 id="navigation">Navigation</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pwd</code>: Print name of current working directory</p>
+
+<p><code class="language-plaintext highlighter-rouge">cd</code>: Change directory</p>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code>: List directory contents</p>
+
+<h3 id="exploring-the-system">Exploring the System</h3>
+
+<p><code class="language-plaintext highlighter-rouge">file</code>: View a brief description of the file contents</p>
+
+<p><code class="language-plaintext highlighter-rouge">less</code>: View file contents</p>
+
+<h3 id="manipulating-files-and-directories">Manipulating Files and Directories</h3>
+
+<p><code class="language-plaintext highlighter-rouge">cp</code>: Copy files and directories</p>
+
+<p><code class="language-plaintext highlighter-rouge">mv</code>: Move/rename files and directories</p>
+
+<p><code class="language-plaintext highlighter-rouge">mkdir</code>: Create directories</p>
+
+<p><code class="language-plaintext highlighter-rouge">rm</code>: Remove files and directories</p>
+
+<p><code class="language-plaintext highlighter-rouge">ln</code>: Create hard and symbolic links</p>
+
+<h3 id="working-with-commands">Working with Commands</h3>
+
+<p><code class="language-plaintext highlighter-rouge">type</code>: Indicate how a command name is interpreted</p>
+
+<p><code class="language-plaintext highlighter-rouge">which</code>: Display which executable program will be executed</p>
+
+<p><code class="language-plaintext highlighter-rouge">help</code>: Get help for shell builtins</p>
+
+<p><code class="language-plaintext highlighter-rouge">man</code>: Display a command’s manual page</p>
+
+<p><code class="language-plaintext highlighter-rouge">apropos</code>: Display a list of appropriate commands</p>
+
+<p><code class="language-plaintext highlighter-rouge">info</code>: Display a command’s info entry</p>
+
+<p><code class="language-plaintext highlighter-rouge">whatis</code>: Display one-line manual page descriptions</p>
+
+<p><code class="language-plaintext highlighter-rouge">alias</code>: Create an alias for a command</p>
+
+<h3 id="redirection">Redirection</h3>
+
+<p><code class="language-plaintext highlighter-rouge">cat</code>: Concatenate files</p>
+
+<p><code class="language-plaintext highlighter-rouge">sort</code>: Sort lines of text</p>
+
+<p><code class="language-plaintext highlighter-rouge">uniq</code>: Report or omit repeated lines</p>
+
+<p><code class="language-plaintext highlighter-rouge">grep</code>: Print lines matching a pattern</p>
+
+<p><code class="language-plaintext highlighter-rouge">wc</code>: Print newline, word, and byte counts for each file</p>
+
+<p><code class="language-plaintext highlighter-rouge">head</code>: Output the first part of a file</p>
+
+<p><code class="language-plaintext highlighter-rouge">tail</code>: Output the last part of a file</p>
+
+<p><code class="language-plaintext highlighter-rouge">tee</code>: Read from standard input and write to standard output and files</p>
+
+<h3 id="seeing-the-world-as-the-shell-sees-it">Seeing the World as the Shell Sees It</h3>
+
+<p><code class="language-plaintext highlighter-rouge">echo</code>: Display a line of text</p>
+
+<h3 id="advanced-keyboard-tricks">Advanced Keyboard Tricks</h3>
+
+<p><code class="language-plaintext highlighter-rouge">clear</code>: Clear the screen</p>
+
+<p><code class="language-plaintext highlighter-rouge">history</code>: Display the contents of the history list</p>
+
+<h3 id="permissions">Permissions</h3>
+
+<p><code class="language-plaintext highlighter-rouge">id</code>: Display user identity</p>
+
+<p><code class="language-plaintext highlighter-rouge">chmod</code>: Change a file’s mode</p>
+
+<p><code class="language-plaintext highlighter-rouge">umask</code>: Set the default file permissions</p>
+
+<p><code class="language-plaintext highlighter-rouge">su</code>: Run a shell as another user</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo</code>: Execute a command as another user</p>
+
+<p><code class="language-plaintext highlighter-rouge">chown</code>: Change a file’s owner</p>
+
+<p><code class="language-plaintext highlighter-rouge">chgrp</code>: Change a file’s group ownership</p>
+
+<p><code class="language-plaintext highlighter-rouge">passwd</code>: Change a user’s password</p>
+
+<h3 id="processes">Processes</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ps</code>: Report a snapshot of current processes</p>
+
+<p><code class="language-plaintext highlighter-rouge">top</code>: Display tasks</p>
+
+<p><code class="language-plaintext highlighter-rouge">jobs</code>: List active jobs</p>
+
+<p><code class="language-plaintext highlighter-rouge">bg</code>: Place a job in the background</p>
+
+<p><code class="language-plaintext highlighter-rouge">fg</code>: Place a job in the foreground</p>
+
+<p><code class="language-plaintext highlighter-rouge">kill</code>: Send a signal to a process</p>
+
+<p><code class="language-plaintext highlighter-rouge">killall</code>: Kill processes by name</p>
+
+<p><code class="language-plaintext highlighter-rouge">shutdown</code>: Shutdown or reboot the system</p>
+
+<h3 id="the-environment">The Environment</h3>
+
+<p><code class="language-plaintext highlighter-rouge">printenv</code>: Print part or all of the environment</p>
+
+<p><code class="language-plaintext highlighter-rouge">set</code>: Set shell options</p>
+
+<p><code class="language-plaintext highlighter-rouge">export</code>: Export environment to subsequently executed programs</p>
+
+<p><code class="language-plaintext highlighter-rouge">alias</code>: Create an alias for a command</p>
+
+<h3 id="storage-media">Storage Media</h3>
+
+<p><code class="language-plaintext highlighter-rouge">mount</code>: Mount a file system</p>
+
+<p><code class="language-plaintext highlighter-rouge">umount</code>: Unmount a file system</p>
+
+<p><code class="language-plaintext highlighter-rouge">fsck</code>: Check and repair a file system</p>
+
+<p><code class="language-plaintext highlighter-rouge">fdisk</code>: Manipulate disk partition table</p>
+
+<p><code class="language-plaintext highlighter-rouge">mkfs</code>: Create a file system</p>
+
+<p><code class="language-plaintext highlighter-rouge">dd</code>: Convert and copy a file</p>
+
+<p><code class="language-plaintext highlighter-rouge">genisoimage (mkisofs)</code>: Create an ISO 9660 image file</p>
+
+<p><code class="language-plaintext highlighter-rouge">wodim (cdrecord)</code>: Write data to optical storage media</p>
+
+<p><code class="language-plaintext highlighter-rouge">md5sum</code>: Calculate an MD5 checksum</p>
+
+<h3 id="networking">Networking</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ping</code>: Send an ICMP ECHO_REQUEST to network hosts</p>
+
+<p><code class="language-plaintext highlighter-rouge">traceroute</code>: Print the route packets trace to a network host</p>
+
+<p><code class="language-plaintext highlighter-rouge">ip</code>: Show / manipulate routing, devices, policy routing and tunnels</p>
+
+<p><code class="language-plaintext highlighter-rouge">netstat</code>: Print network connections, routing tables, interface statistics, masquerade connections, and multicast memberships</p>
+
+<p><code class="language-plaintext highlighter-rouge">ftp</code>: Internet file transfer program</p>
+
+<p><code class="language-plaintext highlighter-rouge">wget</code>: Non-interactive network downloader</p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh</code>: OpenSSH SSH client (remote login program)</p>
+
+<h3 id="searching-for-files">Searching for Files</h3>
+
+<p><code class="language-plaintext highlighter-rouge">locate</code>: Find files by name</p>
+
+<p><code class="language-plaintext highlighter-rouge">find</code>: Search for files in a directory hierarchy</p>
+
+<p><code class="language-plaintext highlighter-rouge">xargs</code>: Build and execute command lines from standard input</p>
+
+<p><code class="language-plaintext highlighter-rouge">touch</code>: Change file times</p>
+
+<p><code class="language-plaintext highlighter-rouge">stat</code>: Display file or file system status</p>
+
+<h3 id="archiving-and-backup">Archiving and Backup</h3>
+
+<p><code class="language-plaintext highlighter-rouge">gzip</code>: Compress or expand files</p>
+
+<p><code class="language-plaintext highlighter-rouge">bzip2</code>: A block sorting file compressor</p>
+
+<p><code class="language-plaintext highlighter-rouge">tar</code>: Tape archiving utility</p>
+
+<p><code class="language-plaintext highlighter-rouge">zip</code>: Package and compress files</p>
+
+<p><code class="language-plaintext highlighter-rouge">rsync</code>: Remote file and directory synchronization</p>
+
+<h3 id="text-processing">Text Processing</h3>
+
+<p><code class="language-plaintext highlighter-rouge">cat</code>: Concatenate files and print on the standard output</p>
+
+<p><code class="language-plaintext highlighter-rouge">sort</code>: Sort lines of text files</p>
+
+<p><code class="language-plaintext highlighter-rouge">uniq</code>: Report or omit repeated lines</p>
+
+<p><code class="language-plaintext highlighter-rouge">cut</code>: Remove sections from each line of files</p>
+
+<p><code class="language-plaintext highlighter-rouge">paste</code>: Merge lines of files</p>
+
+<p><code class="language-plaintext highlighter-rouge">join</code>: Join lines of two files on a common field</p>
+
+<p><code class="language-plaintext highlighter-rouge">comm</code>: Compare two sorted files line by line</p>
+
+<p><code class="language-plaintext highlighter-rouge">diff</code>: Compare files line by line</p>
+
+<p><code class="language-plaintext highlighter-rouge">patch</code>: Apply a diff file to an original</p>
+
+<p><code class="language-plaintext highlighter-rouge">tr</code>: Translate or delete characters</p>
+
+<p><code class="language-plaintext highlighter-rouge">sed</code>: Stream editor for filtering and transforming text</p>
+
+<p><code class="language-plaintext highlighter-rouge">aspell</code>: Interactive spell checker</p>
+
+<h3 id="formatting-output">Formatting Output</h3>
+
+<p><code class="language-plaintext highlighter-rouge">nl</code>: Number lines</p>
+
+<p><code class="language-plaintext highlighter-rouge">fold</code>: Wrap each line to a specified length</p>
+
+<p><code class="language-plaintext highlighter-rouge">fmt</code>: A simple text formatter</p>
+
+<p><code class="language-plaintext highlighter-rouge">pr</code>: Prepare text for printing</p>
+
+<p><code class="language-plaintext highlighter-rouge">printf</code>: Format and print data</p>
+
+<p><code class="language-plaintext highlighter-rouge">groff</code>: A document formatting system</p>
+
+<h3 id="printing">Printing</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pr</code>: Convert text files for printing</p>
+
+<p><code class="language-plaintext highlighter-rouge">lpr</code>: Print files</p>
+
+<p><code class="language-plaintext highlighter-rouge">a2ps</code>: Format files for printing on a PostScript printer</p>
+
+<p><code class="language-plaintext highlighter-rouge">lpstat</code>: Show printer status information</p>
+
+<p><code class="language-plaintext highlighter-rouge">lpq</code>: Show printer queue status</p>
+
+<p><code class="language-plaintext highlighter-rouge">lprm</code>: Cancel print jobs</p>
+
+<h3 id="compiling-programs">Compiling Programs</h3>
+
+<p><code class="language-plaintext highlighter-rouge">make</code>: Utility to maintain programs</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<p>Shotts, William. <em>The Linux command line: a complete introduction</em>. No Starch Press, 2019.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

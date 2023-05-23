@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Notes on "C++ Primer": Chapter 4. Expressions</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Notes on “C++ Primer”: Chapter 4. Expressions | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Notes on “C++ Primer”: Chapter 4. Expressions" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chapter 4. Expressions" />
+<meta property="og:description" content="Chapter 4. Expressions" />
+<link rel="canonical" href="http://localhost:4000/notes-on-c++-primer-chapter-4-expressions.html" />
+<meta property="og:url" content="http://localhost:4000/notes-on-c++-primer-chapter-4-expressions.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-04T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Notes on “C++ Primer”: Chapter 4. Expressions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2022-05-04T00:00:00+08:00","datePublished":"2022-05-04T00:00:00+08:00","description":"Chapter 4. Expressions","headline":"Notes on “C++ Primer”: Chapter 4. Expressions","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/notes-on-c++-primer-chapter-4-expressions.html"},"url":"http://localhost:4000/notes-on-c++-primer-chapter-4-expressions.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#chapter-4-expressions">Chapter 4. Expressions</a><ul><li><a href="#41-fundamentals">4.1 Fundamentals</a><ul><li><a href="#411-basic-concepts">4.1.1 Basic Concepts</a><ul><li><a href="#grouping-operators-and-operands">Grouping Operators and Operands</a></li><li><a href="#operand-conversions">Operand Conversions</a></li><li><a href="#overloaded-operators">Overloaded Operators</a></li><li><a href="#lvalues-and-rvalues">Lvalues and Rvalues</a></li></ul></li><li><a href="#412-precedence-and-associativity">4.1.2 Precedence and Associativity</a><ul><li><a href="#parentheses-override-precedence-and-associativity">Parentheses Override Precedence and Associativity</a></li><li><a href="#when-precedence-and-associativity-matter">When Precedence and Associativity Matter</a></li></ul></li><li><a href="#413-order-of-evaluation">4.1.3 Order of Evaluation</a><ul><li><a href="#order-of-evaluation-precedence-and-associativity">Order of Evaluation, Precedence, and Associativity</a></li></ul></li></ul></li><li><a href="#42-arithmetic-operators">4.2 Arithmetic Operators</a></li><li><a href="#43-logical-and-relational-operators">4.3 Logical and Relational Operators</a><ul><li><a href="#logical-and-and-or-operators">Logical AND and OR Operators</a></li><li><a href="#logical-not-operator">Logical NOT Operator</a></li><li><a href="#equality-tests-and-the-bool-literals">Equality Tests and the <code class="language-plaintext highlighter-rouge">bool</code> Literals</a></li></ul></li></ul></li><li><a href="#44-assignment-operators">4.4 Assignment Operators</a><ul><li><a href="#assignment-is-right-associative">Assignment Is Right Associative</a></li><li><a href="#assignment-has-low-precedence">Assignment Has Low Precedence</a></li><li><a href="#beware-of-confusing-equality-and-assignment-operators">Beware of Confusing Equality and Assignment Operators</a></li><li><a href="#compound-assignment-operators">Compound Assignment Operators</a></li></ul></li></ul></li><li><a href="#45-increment-and-decrement-operators">4.5 Increment and Decrement Operators</a><ul><li><a href="#combining-dereference-and-increment-in-a-single-expression">Combining Dereference and Increment in a Single Expression</a></li><li><a href="#remember-that-operands-can-be-evaluated-in-any-order">Remember That Operands Can Be Evaluated in Any Order</a></li></ul></li></ul></li><li><a href="#46-the-member-access-operators">4.6 The Member Access Operators</a></li><li><a href="#47-the-conditional-operator">4.7 The Conditional Operator</a><ul><li><a href="#nesting-conditional-operations">Nesting Conditional Operations</a></li><li><a href="#using-a-conditional-operator-in-an-output-expression">Using a Conditional Operator in an Output Expression</a></li></ul></li></ul></li><li><a href="#48-the-bitwise-operators">4.8 The Bitwise Operators</a><ul><li><a href="#bitwise-shift-operators">Bitwise Shift Operators</a></li><li><a href="#bitwise-not-operator">Bitwise NOT Operator</a></li><li><a href="#bitwise-and--or--and-xor-operators">Bitwise AND , OR , and XOR Operators</a></li><li><a href="#using-bitwise-operators">Using Bitwise Operators</a></li><li><a href="#shift-operators-aka-io-operators-are-left-associative">Shift Operators (aka IO Operators) Are Left Associative</a></li></ul></li></ul></li><li><a href="#49-the-sizeof-operator">4.9 The <code class="language-plaintext highlighter-rouge">sizeof</code> Operator</a></li><li><a href="#410-comma-operator">4.10 Comma Operator</a></li><li><a href="#411-type-conversions">4.11 Type Conversions</a><ul><li><a href="#when-implicit-conversions-occur">When Implicit Conversions Occur</a></li></ul></li><li><a href="#4111-the-arithmetic-conversions">4.11.1 The Arithmetic Conversions</a><ul><li><a href="#integral-promotions">Integral Promotions</a></li><li><a href="#operands-of-unsigned-type">Operands of Unsigned Type</a></li><li><a href="#understanding-the-arithmetic-conversions">Understanding the Arithmetic Conversions</a></li></ul></li><li><a href="#4112-other-implicit-conversions">4.11.2 Other Implicit Conversions</a></li><li><a href="#4113-explicit-conversions">4.11.3 Explicit Conversions</a><ul><li><a href="#named-casts">Named Casts</a></li><li><a href="#old-style-casts">Old-Style Casts</a></li></ul></li></ul></li><li><a href="#412-operator-precedence-table">4.12 Operator Precedence Table</a></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/notes-on-c++-primer-chapter-4-expressions.html">
+    <h2 class="post-title">Notes on &quot;C++ Primer&quot;: Chapter 4. Expressions</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/c++"> <li>C++</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      May 4, 2022
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><div class="toc">
+        <ul><li><a href="#chapter-4-expressions">Chapter 4. Expressions</a><ul><li><a href="#41-fundamentals">4.1 Fundamentals</a><ul><li><a href="#411-basic-concepts">4.1.1 Basic Concepts</a><ul><li><a href="#grouping-operators-and-operands">Grouping Operators and Operands</a></li><li><a href="#operand-conversions">Operand Conversions</a></li><li><a href="#overloaded-operators">Overloaded Operators</a></li><li><a href="#lvalues-and-rvalues">Lvalues and Rvalues</a></li></ul></li><li><a href="#412-precedence-and-associativity">4.1.2 Precedence and Associativity</a><ul><li><a href="#parentheses-override-precedence-and-associativity">Parentheses Override Precedence and Associativity</a></li><li><a href="#when-precedence-and-associativity-matter">When Precedence and Associativity Matter</a></li></ul></li><li><a href="#413-order-of-evaluation">4.1.3 Order of Evaluation</a><ul><li><a href="#order-of-evaluation-precedence-and-associativity">Order of Evaluation, Precedence, and Associativity</a></li></ul></li></ul></li><li><a href="#42-arithmetic-operators">4.2 Arithmetic Operators</a></li><li><a href="#43-logical-and-relational-operators">4.3 Logical and Relational Operators</a><ul><li><a href="#logical-and-and-or-operators">Logical AND and OR Operators</a></li><li><a href="#logical-not-operator">Logical NOT Operator</a></li><li><a href="#equality-tests-and-the-bool-literals">Equality Tests and the <code class="language-plaintext highlighter-rouge">bool</code> Literals</a></li></ul></li></ul></li><li><a href="#44-assignment-operators">4.4 Assignment Operators</a><ul><li><a href="#assignment-is-right-associative">Assignment Is Right Associative</a></li><li><a href="#assignment-has-low-precedence">Assignment Has Low Precedence</a></li><li><a href="#beware-of-confusing-equality-and-assignment-operators">Beware of Confusing Equality and Assignment Operators</a></li><li><a href="#compound-assignment-operators">Compound Assignment Operators</a></li></ul></li></ul></li><li><a href="#45-increment-and-decrement-operators">4.5 Increment and Decrement Operators</a><ul><li><a href="#combining-dereference-and-increment-in-a-single-expression">Combining Dereference and Increment in a Single Expression</a></li><li><a href="#remember-that-operands-can-be-evaluated-in-any-order">Remember That Operands Can Be Evaluated in Any Order</a></li></ul></li></ul></li><li><a href="#46-the-member-access-operators">4.6 The Member Access Operators</a></li><li><a href="#47-the-conditional-operator">4.7 The Conditional Operator</a><ul><li><a href="#nesting-conditional-operations">Nesting Conditional Operations</a></li><li><a href="#using-a-conditional-operator-in-an-output-expression">Using a Conditional Operator in an Output Expression</a></li></ul></li></ul></li><li><a href="#48-the-bitwise-operators">4.8 The Bitwise Operators</a><ul><li><a href="#bitwise-shift-operators">Bitwise Shift Operators</a></li><li><a href="#bitwise-not-operator">Bitwise NOT Operator</a></li><li><a href="#bitwise-and--or--and-xor-operators">Bitwise AND , OR , and XOR Operators</a></li><li><a href="#using-bitwise-operators">Using Bitwise Operators</a></li><li><a href="#shift-operators-aka-io-operators-are-left-associative">Shift Operators (aka IO Operators) Are Left Associative</a></li></ul></li></ul></li><li><a href="#49-the-sizeof-operator">4.9 The <code class="language-plaintext highlighter-rouge">sizeof</code> Operator</a></li><li><a href="#410-comma-operator">4.10 Comma Operator</a></li><li><a href="#411-type-conversions">4.11 Type Conversions</a><ul><li><a href="#when-implicit-conversions-occur">When Implicit Conversions Occur</a></li></ul></li><li><a href="#4111-the-arithmetic-conversions">4.11.1 The Arithmetic Conversions</a><ul><li><a href="#integral-promotions">Integral Promotions</a></li><li><a href="#operands-of-unsigned-type">Operands of Unsigned Type</a></li><li><a href="#understanding-the-arithmetic-conversions">Understanding the Arithmetic Conversions</a></li></ul></li><li><a href="#4112-other-implicit-conversions">4.11.2 Other Implicit Conversions</a></li><li><a href="#4113-explicit-conversions">4.11.3 Explicit Conversions</a><ul><li><a href="#named-casts">Named Casts</a></li><li><a href="#old-style-casts">Old-Style Casts</a></li></ul></li></ul></li><li><a href="#412-operator-precedence-table">4.12 Operator Precedence Table</a></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+      </div>
+      </br><h2 id="chapter-4-expressions">Chapter 4. Expressions</h2>
+
+<p>An expression is composed of one or more operands and yields a result when it is evaluated. The simplest form of an expression is a single literal or variable. The result of such an expression is the value of the variable or literal. More complicated expressions are formed from an operator and one or more operands.</p>
+
+<h3 id="41-fundamentals">4.1 Fundamentals</h3>
+
+<h4 id="411-basic-concepts">4.1.1 Basic Concepts</h4>
+
+<p>There are both unary operators and binary operators. Unary operators, such as address-of (<code class="language-plaintext highlighter-rouge">&amp;</code>) and dereference (<code class="language-plaintext highlighter-rouge">*</code>), act on one operand. Binary operators, such as equality (<code class="language-plaintext highlighter-rouge">==</code>) and multiplication (<code class="language-plaintext highlighter-rouge">*</code>), act on two operands. There is also one ternary operator that takes three operands, and one operator, function call, that takes an unlimited number of operands.</p>
+
+<h5 id="grouping-operators-and-operands">Grouping Operators and Operands</h5>
+
+<p>Understanding expressions with multiple operators requires understanding the precedence and associativity of the operators and may depend on the order of evaluation of the operands.</p>
+
+<h5 id="operand-conversions">Operand Conversions</h5>
+
+<p>As part of evaluating an expression, operands are often converted from one type to another. For example, the binary operators usually expect operands with the same type. These operators can be used on operands with differing types so long as the operands can be converted (§ 2.1.2, p. 35) to a common type.</p>
+
+<p>Small integral type operands (e.g., <code class="language-plaintext highlighter-rouge">bool</code>, <code class="language-plaintext highlighter-rouge">char</code>, <code class="language-plaintext highlighter-rouge">short</code>, etc.) are generally promoted to a larger integral type, typically <code class="language-plaintext highlighter-rouge">int</code>.</p>
+
+<h5 id="overloaded-operators">Overloaded Operators</h5>
+
+<p>The language defines what the operators mean when applied to built-in and compound types. We can also define what most operators mean when applied to class types. Because such definitions give an alternative meaning to an existing operator symbol, we refer to them as overloaded operators. The IO library <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> operators and the operators we used with <code class="language-plaintext highlighter-rouge">string</code>s, <code class="language-plaintext highlighter-rouge">vector</code>s, and <code class="language-plaintext highlighter-rouge">iterator</code>s are all overloaded operators.</p>
+
+<h5 id="lvalues-and-rvalues">Lvalues and Rvalues</h5>
+
+<p>Every expression in C++ is either an <code class="language-plaintext highlighter-rouge">rvalue</code> or an <code class="language-plaintext highlighter-rouge">lvalue</code>. These names are inherited from C and originally had a simple mnemonic purpose: lvalues could stand on the left-hand side of an assignment whereas rvalues could not.</p>
+
+<p>In C++, the distinction is less simple.  Roughly speaking, when we use an object as an rvalue, we use the object’s value (its contents). When we use an object as an lvalue, we use the object’s identity (its location in memory).</p>
+
+<p>We can use an lvalue when an rvalue is required, but we cannot use an rvalue when an lvalue (i.e., a location) is required. When we use an lvalue in place of an rvalue, the object’s contents (its value) are used. (There is one exception that we’ll cover in § 13.6 (p. 531))</p>
+
+<h4 id="412-precedence-and-associativity">4.1.2 Precedence and Associativity</h4>
+
+<p>An expression with two or more operators is a compound expression. Precedence and associativity determine how the operands are grouped to the operators.</p>
+
+<h5 id="parentheses-override-precedence-and-associativity">Parentheses Override Precedence and Associativity</h5>
+
+<h5 id="when-precedence-and-associativity-matter">When Precedence and Associativity Matter</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ia</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span> <span class="c1">// array with five elements of type int</span>
+<span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">ia</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// initializes last to 8, the value of ia[4]</span>
+<span class="n">last</span> <span class="o">=</span> <span class="o">*</span><span class="n">ia</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// last = 4, equivalent to ia[0] + 4</span>
+</code></pre></div></div>
+
+<h4 id="413-order-of-evaluation">4.1.3 Order of Evaluation</h4>
+
+<p>Precedence specifies how the operands are grouped. It says nothing about the order in which the operands are evaluated. In most cases, the order is largely unspecified. In the following expression</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">f1</span><span class="p">()</span> <span class="o">*</span> <span class="nf">f2</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>we have no way of knowing whether <code class="language-plaintext highlighter-rouge">f1</code> will be called before <code class="language-plaintext highlighter-rouge">f2</code> or vice versa.</p>
+
+<p>For operators that do not specify evaluation order, it is an error for an expression to refer to and change the same object. Expressions that do so have undefined behavior (§ 2.1.2, p. 36). As a simple example, the <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> operator makes no guarantees about when or how its operands are evaluated. As a result, the following output expression is undefined:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="o">++</span><span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// undefined</span>
+</code></pre></div></div>
+
+<p>The compiler might evaluate <code class="language-plaintext highlighter-rouge">++i</code> before evaluating <code class="language-plaintext highlighter-rouge">i</code>, in which case the output will be <code class="language-plaintext highlighter-rouge">1 1</code>. Or the compiler might evaluate <code class="language-plaintext highlighter-rouge">i</code> first, in which case the output will be <code class="language-plaintext highlighter-rouge">0 1</code>. Or the compiler might do something else entirely. Because this expression has undefined behavior, the program is in error, regardless of what code the compiler generates.</p>
+
+<p>There are four operators that do guarantee the order in which operands are evaluated: the logical AND (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>) operator (§ 3.2.3, p. 94), the logical OR (<code class="language-plaintext highlighter-rouge">||</code>) operator (§ 4.3, p. 141), the conditional (<code class="language-plaintext highlighter-rouge">? :</code>) operator (§ 4.7, p. 151), and the comma (<code class="language-plaintext highlighter-rouge">,</code>) operator (§ 4.10, p. 157). For example, the logical AND (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>) operator guarantees that its left-hand operand is evaluated first.</p>
+
+<h5 id="order-of-evaluation-precedence-and-associativity">Order of Evaluation, Precedence, and Associativity</h5>
+
+<p>Order of operand evaluation is independent of precedence and associativity. In an expression such as <code class="language-plaintext highlighter-rouge">f() + g() * h() + j()</code>, there are no guarantees as to the order in which these functions are called. If any of the functions <code class="language-plaintext highlighter-rouge">f</code>, <code class="language-plaintext highlighter-rouge">g</code>, <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">j</code> do affect the same object, then the expression is in error and has undefined behavior.</p>
+
+<p>Order of evaluation for most of the binary operators is left undefined to give the compiler opportunities for optimization.</p>
+
+<h3 id="42-arithmetic-operators">4.2 Arithmetic Operators</h3>
+
+<div align="center">
+<figure>
+<img src="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/graphics/04tab01.jpg" alt="Image" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Table 4.1: Arithmetic Operators (Left Associative) (<a href="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/ch04lev1sec2.html">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>Unless noted otherwise, the arithmetic operators may be applied to any of the arithmetic types (§2.1.1,p. 32)or to any type that can be converted to an arithmetic type. The operands and results of these operators are rvalues. As described in § 4.11 (p. 159), operands of small integral types are promoted to a larger integral type, and all operands may be converted to a common type as part of evaluating these operators.</p>
+
+<p>The unary plus operator and the addition and subtraction operators may also be applied to pointers.</p>
+
+<p>For most operators, operands of type <code class="language-plaintext highlighter-rouge">bool</code> are promoted to <code class="language-plaintext highlighter-rouge">int</code>. In this case, the value of <code class="language-plaintext highlighter-rouge">b</code> is <code class="language-plaintext highlighter-rouge">true</code>, which promotes to the <code class="language-plaintext highlighter-rouge">int</code> value <code class="language-plaintext highlighter-rouge">1</code> (§ 2.1.2, p. 35). That (promoted) value is negated, yielding <code class="language-plaintext highlighter-rouge">-1</code>. The value <code class="language-plaintext highlighter-rouge">-1</code> is converted  back to <code class="language-plaintext highlighter-rouge">bool</code> and used to initialize <code class="language-plaintext highlighter-rouge">b2</code>. This initializer is a nonzero value, which when converted to <code class="language-plaintext highlighter-rouge">bool</code> is <code class="language-plaintext highlighter-rouge">true</code>. Thus, the value of <code class="language-plaintext highlighter-rouge">b2</code> is <code class="language-plaintext highlighter-rouge">true</code>!</p>
+
+<p>CAUTION: OVERFLOW AND OTHER ARITHMETIC EXCEPTIONS</p>
+
+<p>Overflow happens when a value is computed that is outside the range of values that the type can represent. On many systems, there is no compile-time or run-time warning when an overflow occurs. Overflow yields undefined results.</p>
+
+<p>Division (<code class="language-plaintext highlighter-rouge">/</code>) between integers returns an integer. If the quotient contains a fractional part, it is truncated toward zero, no matter positive or negative.</p>
+
+<p>The operands to the remainder (or called the modulus) operator <code class="language-plaintext highlighter-rouge">%</code> must have integral type.</p>
+
+<p>Except for the obscure case where <code class="language-plaintext highlighter-rouge">-m</code> overflows, <code class="language-plaintext highlighter-rouge">(-m) / n</code> and <code class="language-plaintext highlighter-rouge">m / (-n)</code> are always equal to <code class="language-plaintext highlighter-rouge">-(m / n)</code>, <code class="language-plaintext highlighter-rouge">m % (-n)</code> is equal to <code class="language-plaintext highlighter-rouge">m % n</code>, and <code class="language-plaintext highlighter-rouge">(-m) % n</code> is equal to <code class="language-plaintext highlighter-rouge">-(m % n)</code>.</p>
+
+<h3 id="43-logical-and-relational-operators">4.3 Logical and Relational Operators</h3>
+
+<p>The relational operators take operands of arithmetic or pointer type; the logical operators take operands of any type that can be converted to <code class="language-plaintext highlighter-rouge">bool</code>. These operators all return values of type <code class="language-plaintext highlighter-rouge">bool</code>. Arithmetic and pointer operand(s) with a value of zero are <code class="language-plaintext highlighter-rouge">false</code>; all other values are <code class="language-plaintext highlighter-rouge">true</code>. The operands to these operators are rvalues and the result is an rvalue.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/graphics/04tab02.jpg" alt="Image" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Table 4.2. Logical and Relational Operators (<a href="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/ch04lev1sec3.html">Source</a>) </figcaption>
+</figure>
+</div>
+
+<h5 id="logical-and-and-or-operators">Logical AND and OR Operators</h5>
+
+<p>The logical AND and OR operators always evaluate their left operand before the right. Moreover, the right operand is evaluated if and only if the left operand does not determine the result. This strategy is known as <strong>short-circuit evaluation</strong>.</p>
+
+<h5 id="logical-not-operator">Logical NOT Operator</h5>
+
+<p>Because the relational operators return bools, the result of chaining these operators together is likely to be surprising:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// oops! this condition compares k to the bool result of i &lt; j</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="c1">// true if k is greater than 1!</span>
+</code></pre></div></div>
+
+<p>To accomplish the test we intended, we can rewrite the expression as follows:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ok: condition is true if i is smaller than j and j is smaller than k</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="equality-tests-and-the-bool-literals">Equality Tests and the <code class="language-plaintext highlighter-rouge">bool</code> Literals</h5>
+
+<p>Test the truth value of an arithmetic or pointer object:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="c1">// true if val is any nonzero value</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">val</span><span class="p">)</span> <span class="c1">// true if val is zero</span>
+</code></pre></div></div>
+
+<p>In both conditions, the compiler converts <code class="language-plaintext highlighter-rouge">val</code> to <code class="language-plaintext highlighter-rouge">bool</code> type.</p>
+
+<p>We don’t write it as</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span> <span class="c1">// true only if val is equal to 1 </span>
+</code></pre></div></div>
+
+<p>because if <code class="language-plaintext highlighter-rouge">val</code> is not a <code class="language-plaintext highlighter-rouge">bool</code>, then <code class="language-plaintext highlighter-rouge">true</code> is converted to the type of <code class="language-plaintext highlighter-rouge">val</code> before the <code class="language-plaintext highlighter-rouge">==</code> operator is applied, and it is as if we had written</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As we’ve seen, when a bool is converted to another arithmetic type, false converts to 0 and true converts to 1 (§ 2.1.2, p. 35).</p>
+
+<p>WARNING: It is usually a bad idea to use the boolean literals <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> as operands in a comparison. These literals should be used only to compare to an object of type <code class="language-plaintext highlighter-rouge">bool</code>.</p>
+
+<h3 id="44-assignment-operators">4.4 Assignment Operators</h3>
+
+<p>The left-hand operand of an assignment operator must be a modifiable lvalue.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// initialization, not assignment</span>
+<span class="mi">1024</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// error: literals are rvalues</span>
+<span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// error: arithmetic expressions are rvalues</span>
+<span class="n">ci</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// error: ci is a const (nonmodifiable) lvalue</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span> <span class="c1">// assignment, type int, value 3</span>
+</code></pre></div></div>
+
+<p>Under the new standard, we can use a braced initializer list (§ 2.2.1, p. 43) on the right-hand side:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">k</span> <span class="o">=</span> <span class="p">{</span><span class="mf">3.14</span><span class="p">};</span> <span class="c1">// error: narrowing conversion</span>
+</code></pre></div></div>
+
+<h5 id="assignment-is-right-associative">Assignment Is Right Associative</h5>
+
+<p>Unlike the other binary operators, assignment is right associative:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span><span class="p">,</span> <span class="n">jval</span><span class="p">;</span>
+<span class="n">ival</span> <span class="o">=</span> <span class="n">jval</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// ok: each assigned 0</span>
+</code></pre></div></div>
+
+<p>Because assignment is right associative, the right-most assignment, <code class="language-plaintext highlighter-rouge">jval = 0</code>, is the right-hand operand of the left-most assignment operator. Because assignment returns its left-hand operand, the result of the right-most assignment (i.e., <code class="language-plaintext highlighter-rouge">jval</code>) is assigned to <code class="language-plaintext highlighter-rouge">ival</code>.</p>
+
+<p>Each object in a multiple assignment must have the same type as its right-hand neighbor or a type to which that neighbor can be converted (§ 4.11, p. 159):</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span><span class="p">,</span> <span class="o">*</span><span class="n">pval</span><span class="p">;</span> <span class="c1">// ival is an int ; pval is a pointer to int</span>
+<span class="n">ival</span> <span class="o">=</span> <span class="n">pval</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// error: cannot assign the value of a pointer to an int</span>
+</code></pre></div></div>
+
+<p>Because <code class="language-plaintext highlighter-rouge">ival</code> and <code class="language-plaintext highlighter-rouge">pval</code> have different types and there is no conversion from the type of <code class="language-plaintext highlighter-rouge">pval</code> (<code class="language-plaintext highlighter-rouge">int*</code>) to the type of <code class="language-plaintext highlighter-rouge">ival</code> (<code class="language-plaintext highlighter-rouge">int</code>). It is illegal even though zero is a value that can be assigned to either object.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">fval1</span><span class="p">,</span> <span class="n">fval2</span><span class="p">;</span>
+<span class="n">fval1</span> <span class="o">=</span> <span class="n">ival</span> <span class="o">=</span> <span class="n">fval2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span> <span class="c1">// fval1 is 1.0, ival is 1, fval2 is 1.5</span>
+</code></pre></div></div>
+
+<h5 id="assignment-has-low-precedence">Assignment Has Low Precedence</h5>
+
+<p>We want to call a function until it returns a desired value—say, 42:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// a verbose and therefore more error-prone way to write this loop</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">get_value</span><span class="p">();</span> <span class="c1">// get the first value</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">42</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with i ...</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">get_value</span><span class="p">();</span> <span class="c1">// get remaining values</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Rewrite this loop more directly by using assignment in a condition as:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">get_value</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">42</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with i ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note: Because assignment has lower precedence than the relational operators, parentheses are usually needed around assignments in conditions.</p>
+
+<h5 id="beware-of-confusing-equality-and-assignment-operators">Beware of Confusing Equality and Assignment Operators</h5>
+
+<p>The condition in <code class="language-plaintext highlighter-rouge">if (i = j)</code> assigns the value of <code class="language-plaintext highlighter-rouge">j</code> to <code class="language-plaintext highlighter-rouge">i</code> and then tests the result of the assignment. If <code class="language-plaintext highlighter-rouge">j</code> is nonzero, the condition will be <code class="language-plaintext highlighter-rouge">true</code>.</p>
+
+<h5 id="compound-assignment-operators">Compound Assignment Operators</h5>
+
+<p>Compound assignment operators:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+=</span> <span class="o">-=</span> <span class="o">*=</span> <span class="o">/=</span> <span class="o">%=</span> <span class="c1">// arithmetic operators</span>
+<span class="o">&lt;&lt;=</span> <span class="o">&gt;&gt;=</span> <span class="o">&amp;=</span> <span class="o">^=</span> <span class="o">|=</span> <span class="c1">// bitwise operators; see § 4.8 (p. 152)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">x op b</code> is essentially equivalent to <code class="language-plaintext highlighter-rouge">a = a op b</code>.</p>
+
+<h3 id="45-increment-and-decrement-operators">4.5 Increment and Decrement Operators</h3>
+
+<p>The increment (<code class="language-plaintext highlighter-rouge">++</code>) and decrement (<code class="language-plaintext highlighter-rouge">--</code>) operators rise above mere convenience when we use these operators with iterators, because many iterators do not support arithmetic.</p>
+
+<p>There are two forms of these operators: prefix and postfix. The prefix form increments (or decrements) its operand and yields the changed object as its result. The postfix operators increment (or decrement) the operand but yield a copy of the original, unchanged value as its result.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+<span class="n">j</span> <span class="o">=</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span> <span class="c1">// j = 1, i = 1: prefix yields the incremented value</span>
+<span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span> <span class="c1">// j = 1, i = 2: postfix yields the unincremented value</span>
+</code></pre></div></div>
+
+<p>ADVICE: USE POSTFIX OPERATORS ONLY WHEN NECESSARY</p>
+
+<p>The postfix operator must store the original value so that it can return the unincremented value as its result. If we don’t need the unincremented value, there’s no need for the extra work done by the postfix operator.</p>
+
+<h5 id="combining-dereference-and-increment-in-a-single-expression">Combining Dereference and Increment in a Single Expression</h5>
+
+<p>These three expressions are equivalent:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">iter</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">iter</span><span class="o">++</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">iter</span><span class="p">;</span>
+<span class="o">++</span><span class="n">iter</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The first expression is succinct and widely used.</p>
+
+<h5 id="remember-that-operands-can-be-evaluated-in-any-order">Remember That Operands Can Be Evaluated in Any Order</h5>
+
+<p>Most operators give no guarantee as to the order in which operands will be evaluated (§ 4.1.3, p. 137). This lack of guaranteed order often doesn’t matter. The cases where it does matter are when one subexpression changes the value of an operand that is used in another subexpression. Because the increment and decrement operators change their operands, it is easy to misuse these operators in compound expressions.</p>
+
+<p>To illustrate the problem, we’ll rewrite the loop from § 3.4.1 (p. 108) that capitalizes the first word in the input. That example used a <code class="language-plaintext highlighter-rouge">for</code> loop:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isspace</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+    <span class="o">*</span><span class="n">it</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span> <span class="c1">// capitalize the current character</span>
+</code></pre></div></div>
+
+<p>which allowed us to separate the statement that dereferenced <code class="language-plaintext highlighter-rouge">it</code> from the one that incremented it. Replacing the <code class="language-plaintext highlighter-rouge">for</code> with a seemingly equivalent <code class="language-plaintext highlighter-rouge">while</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// the behavior of the following loop is undefined!</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">beg</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isspace</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">))</span>
+    <span class="o">*</span><span class="n">beg</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="o">++</span><span class="p">);</span> <span class="c1">// error: this assignment is undefined</span>
+</code></pre></div></div>
+
+<p>results in undefined behavior. The problem is that both the left- and right-hand operands to <code class="language-plaintext highlighter-rouge">=</code> use <code class="language-plaintext highlighter-rouge">beg</code> and the right-hand operand changes <code class="language-plaintext highlighter-rouge">beg</code>. The assignment is therefore undefined. The compiler might evaluate this expression as either</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">*</span><span class="n">beg</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">);</span> <span class="c1">// execution if left-hand side is evaluated first</span>
+<span class="o">*</span><span class="p">(</span><span class="n">beg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">);</span> <span class="c1">// execution if right-hand side is evaluated first</span>
+</code></pre></div></div>
+
+<p>or it might evaluate it in yet some other way.</p>
+
+<h3 id="46-the-member-access-operators">4.6 The Member Access Operators</h3>
+
+<p>The dot (§ 1.5.2, p. 23) and arrow (§ 3.4.1, p. 110) operators provide for member access. The dot operator fetches a member from an object of class type; arrow is defined so that <code class="language-plaintext highlighter-rouge">ptr-&gt;mem</code> is a synonym for <code class="language-plaintext highlighter-rouge">(*ptr).mem</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">"a string"</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">s1</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// run the size member of the string s1</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">).</span><span class="n">size</span><span class="p">();</span> <span class="c1">// run size on the object to which p points</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="c1">// equivalent to (*p).size()</span>
+</code></pre></div></div>
+
+<h3 id="47-the-conditional-operator">4.7 The Conditional Operator</h3>
+
+<p>The conditional operator (the <code class="language-plaintext highlighter-rouge">? :</code> operator) lets us embed simple if-else logic inside an expression, and it has the following form:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cond</span> <span class="o">?</span> <span class="n">expr1</span> <span class="o">:</span> <span class="n">expr2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>For example,</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">finalgrade</span> <span class="o">=</span> <span class="p">(</span><span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The parentheses can be ignored here but it is not recommended to do that:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">finalgrade</span> <span class="o">=</span> <span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Like the logical AND and logical OR (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code> and <code class="language-plaintext highlighter-rouge">||</code>) operators, the conditional operator guarantees that only one of <code class="language-plaintext highlighter-rouge">expr1</code> or <code class="language-plaintext highlighter-rouge">expr2</code> is evaluated.</p>
+
+<h5 id="nesting-conditional-operations">Nesting Conditional Operations</h5>
+
+<p>We can nest one conditional operator inside another as the <code class="language-plaintext highlighter-rouge">cond</code> or as one or both of the <code class="language-plaintext highlighter-rouge">exprs</code>. As an example,</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">finalgrade</span> <span class="o">=</span> <span class="p">(</span><span class="n">grade</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">)</span> <span class="o">?</span> <span class="s">"high pass"</span>
+                          <span class="o">:</span> <span class="p">(</span><span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h5 id="using-a-conditional-operator-in-an-output-expression">Using a Conditional Operator in an Output Expression</h5>
+
+<p>The conditional operator has fairly low precedence.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">);</span> <span class="c1">// prints pass or fail</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span> <span class="c1">// prints 1 or 0 </span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span> <span class="c1">// error: compares cout to 60</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> operator returns <code class="language-plaintext highlighter-rouge">cout</code>.</p>
+
+<p>The second expression is equivalent to</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">);</span> <span class="c1">// prints 1 or 0</span>
+<span class="n">cout</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span> <span class="c1">// test cout and then yield one of the two literals depending on whether cout is true or false</span>
+</code></pre></div></div>
+
+<p>The last is equivalent to</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">grade</span><span class="p">;</span> <span class="c1">// less-than has lower precedence than shift, so print grade first</span>
+<span class="n">cout</span> <span class="o">&lt;</span> <span class="mi">60</span> <span class="o">?</span> <span class="s">"fail"</span> <span class="o">:</span> <span class="s">"pass"</span><span class="p">;</span> <span class="c1">// then compare cout to 60</span>
+</code></pre></div></div>
+
+<h3 id="48-the-bitwise-operators">4.8 The Bitwise Operators</h3>
+
+<p>The bitwise operators take operands of integral type that they use as a collection of bits. These operators let us test and set individual bits, and they all generate new values.</p>
+
+<p>As usual, if an operand is a “small integer”, its value is first promoted (§ 4.11.1, p. 160) to a larger integral type. The operand(s) can be either signed or unsigned.</p>
+
+<div align="center">
+<figure>
+<img src="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/graphics/04tab03.jpg" alt="Image" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Table 4.3. Bitwise Operators (Left Associative) (<a href="https://www.oreilly.com/library/view/c-primer-fifth/9780133053043/ch04lev1sec8.html">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>WARNING: Because there are no guarantees for how the sign bit is handled, we strongly recommend using unsigned types with the bitwise operators.</p>
+
+<h5 id="bitwise-shift-operators">Bitwise Shift Operators</h5>
+
+<p>We have already used the overloaded versions of the <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> operators that the IO library defines to do input and output. The built-in meaning of these operators is that they perform a bitwise shift on their operands. They yield a value that is a copy of the (possibly promoted) left-hand operand with the bits shifted. The bits are shifted left (<code class="language-plaintext highlighter-rouge">&lt;&lt;</code>) or right (<code class="language-plaintext highlighter-rouge">&gt;&gt;</code>). Bits that are shifted off the end are discarded.</p>
+
+<h5 id="bitwise-not-operator">Bitwise NOT Operator</h5>
+
+<h5 id="bitwise-and--or--and-xor-operators">Bitwise AND , OR , and XOR Operators</h5>
+
+<h5 id="using-bitwise-operators">Using Bitwise Operators</h5>
+
+<h5 id="shift-operators-aka-io-operators-are-left-associative">Shift Operators (aka IO Operators) Are Left Associative</h5>
+
+<h3 id="49-the-sizeof-operator">4.9 The <code class="language-plaintext highlighter-rouge">sizeof</code> Operator</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">sizeof</code> operator returns the size, in bytes, of an expression or a type name. The operator is right associative. The result of <code class="language-plaintext highlighter-rouge">sizeof</code> is a constant expression (§ 2.4.4, p. 65) of type <code class="language-plaintext highlighter-rouge">size_t</code> (§ 3.5.2, p. 116).</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sales_data</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+<span class="k">sizeof</span><span class="p">(</span><span class="n">Sales_data</span><span class="p">);</span> <span class="c1">// size required to hold an object of type Sales_data</span>
+<span class="k">sizeof</span> <span class="n">data</span><span class="p">;</span> <span class="c1">// size of data's type, i.e., sizeof(Sales_data)</span>
+<span class="k">sizeof</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// size of a pointer</span>
+<span class="k">sizeof</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="c1">// size of the type to which p points, i.e., sizeof(Sales_data)</span>
+<span class="k">sizeof</span> <span class="n">data</span><span class="p">.</span><span class="n">revenue</span><span class="p">;</span> <span class="c1">// size of the type of Sales_data's revenue member</span>
+<span class="k">sizeof</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">revenue</span><span class="p">;</span> <span class="c1">// alternative way to get the size of revenue</span>
+</code></pre></div></div>
+
+<p>The operator does not evaluate its operand. <code class="language-plaintext highlighter-rouge">sizeof *p;</code> doesn’t matter that <code class="language-plaintext highlighter-rouge">p</code> is an (i.e., uninitialized) pointer (§ 2.3.2, p. 52). <code class="language-plaintext highlighter-rouge">sizeof</code> doesn’t need dereference the pointer to know what type it will return.</p>
+
+<p><code class="language-plaintext highlighter-rouge">sizeof char</code> is 1.</p>
+
+<p>We can determine the number of elements in an array by dividing the array size by the element size:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">sz</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ia</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="p">);</span> <span class="c1">// the number of elements in ia </span>
+</code></pre></div></div>
+
+<h3 id="410-comma-operator">4.10 Comma Operator</h3>
+
+<p>One common use for the comma operator is in a <code class="language-plaintext highlighter-rouge">for</code> loop:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">size_type</span> <span class="n">cnt</span> <span class="o">=</span> <span class="n">ivec</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="c1">// assign values from size . . . 1 to the elements in ivec</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">size_type</span> <span class="n">ix</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ix</span> <span class="o">!=</span> <span class="n">ivec</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">ix</span><span class="p">,</span> <span class="o">--</span><span class="n">cnt</span><span class="p">)</span>
+    <span class="n">ivec</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This loop increments <code class="language-plaintext highlighter-rouge">ix</code> and decrements <code class="language-plaintext highlighter-rouge">cnt</code> in the expression in the <code class="language-plaintext highlighter-rouge">for</code> header.</p>
+
+<h3 id="411-type-conversions">4.11 Type Conversions</h3>
+
+<p>In C++ some types are related to each other. Two types are related if there is a conversion between them, and we can use an object or value of one type where an operand of the related type is expected.</p>
+
+<p>As an example,</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mf">3.541</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// the compiler might warn about loss of precision</span>
+</code></pre></div></div>
+
+<p>These conversions are carried out automatically and they are referred to as implicit conversions.</p>
+
+<p>The implicit conversions among the arithmetic types are defined to preserve precision, if possible. Most often, if an expression has both integral and floating-point operands, the integer is converted to floating-point. In this case, 3 is converted to <code class="language-plaintext highlighter-rouge">double</code>, floating-point addition is done, and the result is a <code class="language-plaintext highlighter-rouge">double</code>.</p>
+
+<h5 id="when-implicit-conversions-occur">When Implicit Conversions Occur</h5>
+
+<p>The compiler automatically converts operands in the following circumstances:</p>
+
+<ul>
+  <li>
+    <p>In most expressions, values of integral types smaller than <code class="language-plaintext highlighter-rouge">int</code> are first promoted to an appropriate larger integral type.</p>
+  </li>
+  <li>
+    <p>In conditions, non<code class="language-plaintext highlighter-rouge">bool</code> expressions are converted to <code class="language-plaintext highlighter-rouge">bool</code>.</p>
+  </li>
+  <li>
+    <p>In initializations, the initializer is converted to the type of the variable; in assignments, the right-hand operand is converted to the type of the left-hand.</p>
+  </li>
+  <li>
+    <p>In arithmetic and relational expressions with operands of mixed types, the types are converted to a common type.</p>
+  </li>
+  <li>
+    <p>As we’ll see in Chapter 6, conversions also happen during function calls.</p>
+  </li>
+</ul>
+
+<h4 id="4111-the-arithmetic-conversions">4.11.1 The Arithmetic Conversions</h4>
+
+<p>The arithmetic conversions, which we introduced in § 2.1.2 (p. 35), convert one arithmetic type to another. The rules define a hierarchy of type conversions in which operands to an operator are converted to the widest type.</p>
+
+<h5 id="integral-promotions">Integral Promotions</h5>
+
+<p>The integral promotions convert the small integral types to a larger integral type. The types <code class="language-plaintext highlighter-rouge">bool</code>, <code class="language-plaintext highlighter-rouge">char</code>, <code class="language-plaintext highlighter-rouge">signed char</code>, <code class="language-plaintext highlighter-rouge">unsigned char</code>, <code class="language-plaintext highlighter-rouge">short</code>, and <code class="language-plaintext highlighter-rouge">unsigned short</code> are promoted to <code class="language-plaintext highlighter-rouge">int</code> if all possible values of that type fit in an <code class="language-plaintext highlighter-rouge">int</code>. Otherwise, the value is promoted to <code class="language-plaintext highlighter-rouge">unsigned int</code>.</p>
+
+<p>The larger char types (<code class="language-plaintext highlighter-rouge">wchar_t</code>, <code class="language-plaintext highlighter-rouge">char16_t</code>, and <code class="language-plaintext highlighter-rouge">char32_t</code>) are promoted to the smallest type of <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">unsigned int</code>, <code class="language-plaintext highlighter-rouge">long</code>, <code class="language-plaintext highlighter-rouge">unsigned long</code>, <code class="language-plaintext highlighter-rouge">long long</code>, or <code class="language-plaintext highlighter-rouge">unsigned long long</code> in which all possible values of that character type fit.</p>
+
+<h5 id="operands-of-unsigned-type">Operands of Unsigned Type</h5>
+
+<p>If the operands of an operator have differing types, those operands are ordinarily converted to a common type.</p>
+
+<h5 id="understanding-the-arithmetic-conversions">Understanding the Arithmetic Conversions</h5>
+
+<p>One way to understand the arithmetic conversions is to study lots of examples:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span> <span class="kt">char</span> <span class="n">cval</span><span class="p">;</span>
+<span class="kt">short</span> <span class="n">sval</span><span class="p">;</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">usval</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ival</span><span class="p">;</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">uival</span><span class="p">;</span>
+<span class="kt">long</span> <span class="n">lval</span><span class="p">;</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">ulval</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">fval</span><span class="p">;</span> <span class="kt">double</span> <span class="n">dval</span><span class="p">;</span>
+
+<span class="mf">3.14159</span><span class="n">L</span> <span class="o">+</span> <span class="sc">'a'</span><span class="p">;</span> <span class="c1">// 'a' promoted to int, then that int converted to long double; 'a' has type char, which is a numeric value (§ 2.1.1, p. 32)</span>
+<span class="n">dval</span> <span class="o">+</span> <span class="n">ival</span><span class="p">;</span> <span class="c1">// ival converted to double</span>
+<span class="n">dval</span> <span class="o">+</span> <span class="n">fval</span><span class="p">;</span> <span class="c1">// fval converted to double</span>
+<span class="n">ival</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span> <span class="c1">// dval converted (by truncation) to int</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">dval</span><span class="p">;</span> <span class="c1">// if dval is 0, then flag is false, otherwise true</span>
+<span class="n">cval</span> <span class="o">+</span> <span class="n">fval</span><span class="p">;</span> <span class="c1">// cval promoted to int, then that int converted to float</span>
+<span class="n">sval</span> <span class="o">+</span> <span class="n">cval</span><span class="p">;</span> <span class="c1">// sval and cval promoted to int</span>
+<span class="n">cval</span> <span class="o">+</span> <span class="n">lval</span><span class="p">;</span> <span class="c1">// cval converted to long</span>
+<span class="n">ival</span> <span class="o">+</span> <span class="n">ulval</span><span class="p">;</span> <span class="c1">// ival converted to unsigned long</span>
+<span class="n">usval</span> <span class="o">+</span> <span class="n">ival</span><span class="p">;</span> <span class="c1">// promotion depends on the size of unsigned short and int</span>
+<span class="n">uival</span> <span class="o">+</span> <span class="n">lval</span><span class="p">;</span> <span class="c1">// conversion depends on the size of unsigned int and long</span>
+</code></pre></div></div>
+
+<h4 id="4112-other-implicit-conversions">4.11.2 Other Implicit Conversions</h4>
+
+<p>Array to Pointer Conversions: In most expressions, when we use an array, the array is automatically converted to a pointer to the first element in that array:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ia</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span> <span class="c1">// array of ten int s</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">ia</span><span class="p">;</span> <span class="c1">// convert ia to a pointer to the first element</span>
+</code></pre></div></div>
+
+<p>Pointer Conversions: There are several other pointer conversions: …</p>
+
+<p>Conversions to <code class="language-plaintext highlighter-rouge">bool</code>: If the pointer or arithmetic value is zero, the conversion yields <code class="language-plaintext highlighter-rouge">false</code>; any other value yields <code class="language-plaintext highlighter-rouge">true</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">cp</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">cp</span><span class="p">)</span> <span class="cm">/* ... */</span>  <span class="c1">// true if the pointer cp is not zero</span>
+<span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">cp</span><span class="p">)</span> <span class="cm">/* ... */</span>  <span class="c1">//true if * cp is not the null character</span>
+</code></pre></div></div>
+
+<p>Conversion to <code class="language-plaintext highlighter-rouge">const</code>: We can convert a pointer to a non<code class="language-plaintext highlighter-rouge">const</code> type to a pointer to the corresponding <code class="language-plaintext highlighter-rouge">const</code> type, and similarly for references.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// convert a nonconst to a reference to const int</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// convert address of a nonconst to the address of a const</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">j</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// error: conversion from const to nonconst not allowed</span>
+</code></pre></div></div>
+
+<p>Conversions Defined by Class Types: Class types can define conversions that the compiler will apply automatically. The compiler will apply only one class-type conversion at a time.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="s">"a value"</span><span class="p">;</span> <span class="c1">// character string literal converted to type string</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">)</span> <span class="c1">// while condition converts cin to bool</span>
+</code></pre></div></div>
+
+<p>The IO library defines a conversion from <code class="language-plaintext highlighter-rouge">istream</code> to <code class="language-plaintext highlighter-rouge">bool</code>. The resulting <code class="language-plaintext highlighter-rouge">bool</code> value depends on the state of the stream. If the last read succeeded, then the conversion yields <code class="language-plaintext highlighter-rouge">true</code>, else <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<h4 id="4113-explicit-conversions">4.11.3 Explicit Conversions</h4>
+
+<p>Sometimes we want to explicitly force an object to be converted to a different type. For example, we might want to use floating-point division in the following code:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">i</span><span class="o">/</span><span class="n">j</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>To do so, we’d need a way to explicitly convert <code class="language-plaintext highlighter-rouge">i</code> and/or <code class="language-plaintext highlighter-rouge">j</code> to double. We use a cast to request an explicit conversion.</p>
+
+<p>WARNING: Although necessary at times, casts are inherently dangerous constructs.</p>
+
+<h5 id="named-casts">Named Casts</h5>
+
+<p>A named cast has the following form:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cast</span><span class="o">-</span><span class="n">name</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">expression</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">type</code> is the target type of the conversion, and <code class="language-plaintext highlighter-rouge">expression</code> is the value to be cast. The <code class="language-plaintext highlighter-rouge">cast-name</code> may be one of <code class="language-plaintext highlighter-rouge">static_cast</code>, <code class="language-plaintext highlighter-rouge">dynamic_cast</code>, <code class="language-plaintext highlighter-rouge">const_cast</code>, and <code class="language-plaintext highlighter-rouge">reinterpret_cast</code>. The <code class="language-plaintext highlighter-rouge">cast-name</code> determines what kind of conversion is performed.</p>
+
+<p><strong>static_cast</strong></p>
+
+<p>Any well-defined type conversion, other than those involving low-level <code class="language-plaintext highlighter-rouge">const</code>, can be requested using a <code class="language-plaintext highlighter-rouge">static_cast</code>. For example, we can force our expression to use floating-point division by casting one of the operands to <code class="language-plaintext highlighter-rouge">double</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">slope</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">/</span> <span class="n">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>A <code class="language-plaintext highlighter-rouge">static_cast</code> is often useful when a larger arithmetic type is assigned to a smaller type. It is also useful to perform a conversion that the compiler will not generate automatically.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">const_cast</code></strong></p>
+
+<p>A <code class="language-plaintext highlighter-rouge">const_cast</code> changes only a low-level (§ 2.4.3, p. 63) <code class="language-plaintext highlighter-rouge">const</code> in its operand:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pc</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">pc</span><span class="p">);</span> <span class="c1">// ok: but writing through p is undefined</span>
+</code></pre></div></div>
+
+<p>Conventionally we say that a cast that converts a <code class="language-plaintext highlighter-rouge">const</code> object to a non<code class="language-plaintext highlighter-rouge">const</code> type “casts away the <code class="language-plaintext highlighter-rouge">const</code>”. However, using a <code class="language-plaintext highlighter-rouge">const_cast</code> in order to write to a <code class="language-plaintext highlighter-rouge">const</code> object is undefined.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cp</span><span class="p">;</span>
+<span class="c1">// error: static_cast can't cast away const</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+<span class="k">static_cast</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span> <span class="c1">// ok: converts string literal to string</span>
+<span class="k">const_cast</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span> <span class="c1">// error: const_cast only changes constness</span>
+</code></pre></div></div>
+
+<p>A <code class="language-plaintext highlighter-rouge">const_cast</code> is most useful in the context of overloaded functions, which we’ll describe in § 6.4 (p. 232). Other uses of <code class="language-plaintext highlighter-rouge">const_cast</code> often indicate a design flaw.</p>
+
+<p><strong>reinterpret_cast</strong></p>
+
+<p>A <code class="language-plaintext highlighter-rouge">reinterpret_cast</code> generally performs a low-level reinterpretation of the bit pattern of its operands.</p>
+
+<p>WARNING: A reinterpret_cast is inherently machine dependent. Safely using reinterpret_cast requires completely understanding the types involved as well as the details of how the compiler implements the cast.</p>
+
+<p>ADVICE: AVOID CASTS</p>
+
+<p>Casts interfere with normal type checking (§ 2.2.2, p. 46). As a result, we strongly recommend that programmers avoid casts. This advice is particularly applicable to <code class="language-plaintext highlighter-rouge">reinterpret_cast</code>s. Such casts are always hazardous.</p>
+
+<h5 id="old-style-casts">Old-Style Casts</h5>
+
+<p>In early versions of C++, an explicit cast took one of the following two forms:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">type</span> <span class="p">(</span><span class="n">expr</span><span class="p">);</span> <span class="c1">// function-style cast notation</span>
+<span class="p">(</span><span class="n">type</span><span class="p">)</span> <span class="n">expr</span><span class="p">;</span> <span class="c1">// C-language-style cast notation</span>
+</code></pre></div></div>
+
+<p>When we use an old-style cast where a static_cast or a const_cast would be legal, the old-style  cast does the same conversion as the respective named cast. If neither cast is legal, then an old-style cast performs a reinterpret_cast. For example:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">pc</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span> <span class="n">ip</span><span class="p">;</span> <span class="c1">// ip is a pointer to int</span>
+</code></pre></div></div>
+
+<p>has the same effect as using a <code class="language-plaintext highlighter-rouge">reinterpret_cast</code>.</p>
+
+<p>WARNING: Old-style casts are less visible than are named casts, and it is more difficult to track down a rogue cast.</p>
+
+<h3 id="412-operator-precedence-table">4.12 Operator Precedence Table</h3>
+
+<h3 id="chapter-summary">Chapter Summary</h3>
+
+<p>Most operators do not specify the order in which operands are evaluated: The compiler is free to evaluate either the left- or right-hand operand first.</p>
+
+<p>Operands are often converted automatically from their initial type to another related type. For example, small integral types are promoted to a larger integral type in every expression. Conversions exist for both built-in and class types. Conversions can also be done explicitly through a cast.</p>
+
+<h3 id="defined-terms">Defined Terms</h3>
+
+<p><strong>cast</strong> An explicit conversion.</p>
+
+<p><strong>const_cast</strong> A cast that converts a low-level <code class="language-plaintext highlighter-rouge">const</code> object to the corresponding non<code class="language-plaintext highlighter-rouge">const</code> type or vice versa.</p>
+
+<p><strong>conversion</strong> Process whereby a value of one type is transformed into a value of another type. The language defines conversions among the built-in types. Conversions to and from class types are also possible.</p>
+
+<p><strong>implicit conversion</strong> A conversion that is automatically generated by the compiler.</p>
+
+<p><strong>integral promotions</strong> conversions that take a smaller integral type to its most closely related larger integral type. Operands of small integral types (e.g., <code class="language-plaintext highlighter-rouge">short</code>, <code class="language-plaintext highlighter-rouge">char</code>, etc.) are always promoted, even in contexts where such conversions might not seem to be required.</p>
+
+<p><strong>lvalue</strong> An expression that yields an object or function. A non<code class="language-plaintext highlighter-rouge">const</code> lvalue that denotes an object may be the left-hand operand of assignment.</p>
+
+<p><strong>order of evaluation</strong> Order, if any, in which the operands to an operator are evaluated. In most cases, the compiler is free to evaluate operands in any order. However, the operands are always evaluated before the operator itself is evaluated. Only the <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>, <code class="language-plaintext highlighter-rouge">||</code>, <code class="language-plaintext highlighter-rouge">?:</code>, and comma operators specify the order in which their operands are evaluated.</p>
+
+<p><strong>rvalue</strong> Expression that yields a value but not the associated location, if any, of that value.</p>
+
+<p><strong>sizeof</strong> Operator that returns the size, in bytes.</p>
+
+<p><strong>static_cast</strong> An explicit request for a well-defined type conversion. Often used to override an implicit conversion that the compiler would otherwise perform.</p>
+
+<p><br /></p>
+
+<h2 id="references">References</h2>
+
+<p>Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. <em>C++ Primer</em>. Addison-Wesley Professional, 2012.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

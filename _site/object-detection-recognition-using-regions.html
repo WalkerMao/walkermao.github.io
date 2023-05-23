@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Object Detection: Recognition using Regions</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Object Detection: Recognition using Regions | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Object Detection: Recognition using Regions" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The contents in this post are excerpted from the paper “Recognition using regions” 1. Gu, Chunhui, Joseph J. Lim, Pablo Arbeláez, and Jitendra Malik. “Recognition using regions.” In 2009 IEEE Conference on computer vision and pattern recognition, pp. 1030-1037. IEEE, 2009. &#8617;" />
+<meta property="og:description" content="The contents in this post are excerpted from the paper “Recognition using regions” 1. Gu, Chunhui, Joseph J. Lim, Pablo Arbeláez, and Jitendra Malik. “Recognition using regions.” In 2009 IEEE Conference on computer vision and pattern recognition, pp. 1030-1037. IEEE, 2009. &#8617;" />
+<link rel="canonical" href="http://localhost:4000/object-detection-recognition-using-regions.html" />
+<meta property="og:url" content="http://localhost:4000/object-detection-recognition-using-regions.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Object Detection: Recognition using Regions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2021-11-20T00:00:00+08:00","datePublished":"2021-11-20T00:00:00+08:00","description":"The contents in this post are excerpted from the paper “Recognition using regions” 1. Gu, Chunhui, Joseph J. Lim, Pablo Arbeláez, and Jitendra Malik. “Recognition using regions.” In 2009 IEEE Conference on computer vision and pattern recognition, pp. 1030-1037. IEEE, 2009. &#8617;","headline":"Object Detection: Recognition using Regions","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/object-detection-recognition-using-regions.html"},"url":"http://localhost:4000/object-detection-recognition-using-regions.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#region-extraction">Region Extraction</a></li><li><a href="#region-description">Region Description</a></li><li><a href="#discriminative-weight-learning">Discriminative Weight Learning</a></li><li><a href="#voting">Voting</a></li><li><a href="#verification">Verification</a></li><li><a href="#segmentation">Segmentation</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/object-detection-recognition-using-regions.html">
+    <h2 class="post-title">Object Detection: Recognition using Regions</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cv"> <li>CV</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/object detection"> <li>Object detection</li> </a><a class="post-link" href="/tags/traditional cv"> <li>Traditional CV</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Nov 20, 2021
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The contents in this post are excerpted from the paper “Recognition using regions” <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<p>This paper presents a unified framework for object detection, segmentation, and classification using regions. Region features are appealing in this context because: (1) they encode shape and scale information of objects naturally; (2) they specify the domains on which to compute various features, without being affected by clutter from out-side the region.</p>
+
+<p>The pipeline of this region-based recognition framework is as follows:</p>
+
+<ol>
+  <li>Each image is represented by a bag of regions derived from a region tree as shown in Figure 2;</li>
+  <li>Regions are described by a rich set of cues (shape, color and texture) inside them;</li>
+  <li>Region weights are learned using a discriminative max-margin framework;</li>
+  <li>A generalized Hough voting scheme is applied to cast initial hypotheses of object locations, scales, and support based on region matching;</li>
+  <li>These hypotheses are then refined through a verification classifier and a constrained segmenter, respectively, to obtain final detection and segmentation results.</li>
+</ol>
+
+<h3 id="region-extraction">Region Extraction</h3>
+
+<p>The authors start by constructing a region tree using the hierarchical segmentation engine by <a href="https://ieeexplore.ieee.org/abstract/document/5206707/">Arbelaez et al. (2009)</a>. The regions the authors consider are the nodes of that tree, including the root which is the entire image. The authors use them as the basic entities for this approach.</p>
+
+<div align="center">
+<img src="../../../pictures/recognition-using-regions-fig1-fig2-fig3.png" alt="recognition-using-regions-fig1-fig2-fig3.png" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> (source: Gu et al., 2009) </figcaption>
+</div>
+
+<h3 id="region-description">Region Description</h3>
+
+<p>The authors describe a region by subdividing evenly its bounding box into an \(n \times n\) (\(4 \times 4\) in the paper) grid, as illustrated in Figure 3. Each cell encodes information only inside the region. The different region cues the authors capture from the cells are: contour shape, edge shape, color, and texture.</p>
+
+<h3 id="discriminative-weight-learning">Discriminative Weight Learning</h3>
+
+<p>Not all regions are equally significant for discriminating an object from another. For example, wheel regions are more important than uniform patches to distinguish a bicycle from a mug. Here, the authors adapt the framework by <a href="https://proceedings.neurips.cc/paper/2006/hash/9f8684e630c4c30cad7b1f0935cd62ab-Abstract.html">Frome et al. (2006)</a> for learning region weights.</p>
+
+<div align="center">
+<img src="../../../pictures/recognition-using-regions-fig4-weight-learning-on-regions.png" alt="recognition-using-regions-fig4-weight-learning-on-regions.png" style="zoom: 66%;" />
+<figcaption style="font-size: 80%;"> (source: Gu et al., 2009) </figcaption>
+</div>
+
+<h3 id="voting">Voting</h3>
+
+<p>The goal here, given a query image and an object category, is to generate hypotheses of bounding boxes and (partial) support of objects of that category in the image. (I don’t understand yet)</p>
+
+<h3 id="verification">Verification</h3>
+
+<p>A verification classifier is applied to each bounding box hypothesis from voting. (I don’t understand yet)</p>
+
+<h3 id="segmentation">Segmentation</h3>
+
+<p>The segmentation task we consider is that of precisely extracting the support of the object. (I don’t understand yet)</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Gu, Chunhui, Joseph J. Lim, Pablo Arbeláez, and Jitendra Malik. “Recognition using regions.” In <em>2009 IEEE Conference on computer vision and pattern recognition</em>, pp. 1030-1037. IEEE, 2009. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

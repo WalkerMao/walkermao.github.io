@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Canny Edge Detection</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Canny Edge Detection | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Canny Edge Detection" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Image Edge Basis" />
+<meta property="og:description" content="Image Edge Basis" />
+<link rel="canonical" href="http://localhost:4000/canny-edge-detection.html" />
+<meta property="og:url" content="http://localhost:4000/canny-edge-detection.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-17T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Canny Edge Detection" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2021-02-17T00:00:00+08:00","datePublished":"2021-02-17T00:00:00+08:00","description":"Image Edge Basis","headline":"Canny Edge Detection","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/canny-edge-detection.html"},"url":"http://localhost:4000/canny-edge-detection.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#image-edge-basis">Image Edge Basis</a><ul><li><a href="#goal-and-motivation-for-edge-detection">Goal and Motivation for Edge Detection</a></li><li><a href="#origin-of-edges">Origin of Edges</a></li></ul></li><li><a href="#image-gradients">Image Gradients</a><ul><li><a href="#discrete-derivatives">Discrete Derivatives</a></li></ul></li><li><a href="#noise-reduction">Noise Reduction</a><ul><li><a href="#derivative-of-gaussian-filter">Derivative of Gaussian Filter</a></li><li><a href="#sobel-filter">Sobel Filter</a></li></ul></li><li><a href="#canny-edge-detector">Canny Edge Detector</a><ul><li><a href="#suppress-noise-and-compute-gradients">Suppress Noise and Compute Gradients</a></li><li><a href="#compute-gradient-magnitude-and-direction">Compute Gradient Magnitude and Direction</a></li><li><a href="#non-maximum-suppression">Non-Maximum Suppression</a></li><li><a href="#hysteresis-thresholding">Hysteresis Thresholding</a></li><li><a href="#connectivity-analysis">Connectivity Analysis</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/canny-edge-detection.html">
+    <h2 class="post-title">Canny Edge Detection</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cv"> <li>CV</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/traditional cv"> <li>Traditional CV</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Feb 17, 2021
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="image-edge-basis">Image Edge Basis</h2>
+
+<h3 id="goal-and-motivation-for-edge-detection">Goal and Motivation for Edge Detection</h3>
+
+<p>The goal of edge detection is to identify sudden changes (discontinuities) in an image. Intuitively, most semantic and shape information from the image can be encoded in the edges, and the edges are more compact than original pixels. The edges help us extract information, recognize objects, and recover the geometry and viewpoint of an image.</p>
+
+<h3 id="origin-of-edges">Origin of Edges</h3>
+
+<p>There are four possible sources of edges in an image: surface normal discontinuity (surface changes direction sharply), depth discontinuity (one surface behind another), surface color discontinuity (single surface changes color), illumination discontinuity (shadows/lighting). These discontinuities are demonstrated in the plot below.</p>
+
+<div align="center">
+<figure>
+<img src="https://miro.medium.com/max/637/1*ujB8H3EkxMFVtmLUBSdDfQ.png" alt="Four-possible-sources-of-edges" style="zoom:100%;" />
+<figcaption style="font-size: 80%;"> Figure. Four possible sources of edges in an image. (<a href="https://cs.stanford.edu/people/eroberts/courses/soco/projects/1997-98/computer-vision/edges.html">Source</a>)</figcaption>
+</figure>
+</div>
+
+<h2 id="image-gradients">Image Gradients</h2>
+
+<p>An edge in an image is an image contour across which the image’s brightness or hue changes abruptly. We define an edge as a rapid place of change in the image intensity function, i.e. edges occur in an image when the magnitude of the gradient (first derivative) is high, as shown below.</p>
+
+<div align="center">
+<figure>
+<img src="https://ai.stanford.edu/~syyeung/cvweb/Pictures1/edgedetection.png" alt="Edge Detection" style="zoom:30%;" />
+<figcaption style="font-size: 80%;"> Figure. An image with intensity function and first derivative. (<a href="https://ai.stanford.edu/~syyeung/cvweb/tutorial1.html">Source</a>)</figcaption>
+</figure>
+</div>
+
+<h3 id="discrete-derivatives">Discrete Derivatives</h3>
+
+<p>There are three main types of derivatives that can be applied on pixels. Their formulas and corresponding filters (convoluting the filter with the image gives the derivatives) are:</p>
+
+\[\begin{aligned}
+&amp;\text {Backward: } &amp; f^{\prime}(x) &amp;= f(x)-f(x-1) &amp;\rightarrow &amp; \ [0,1,-1], \\
+&amp;\text {Forward: } &amp; f^{\prime}(x) &amp;= f(x)-f(x+1) &amp;\rightarrow &amp; \ [-1,1,0], \\
+&amp;\text {Central: } &amp; f^{\prime}(x) &amp;= f(x+1)-f(x-1) &amp;\rightarrow &amp; \ \frac{1}{2}[1,0,-1].
+\end{aligned}\]
+
+<p>The 2D gradient $ (\nabla f) $ can be calculated as follows:</p>
+
+\[\begin{aligned}
+\nabla f(x, y) &amp;=\left[\begin{array}{l}
+\frac{\partial f(x, y)}{\partial x} \\
+\frac{\partial f(x, y)}{\partial y}
+\end{array}\right] 
+= \left[\begin{array}{l}
+f_{x} \\
+f_{y}
+\end{array}\right].
+\end{aligned}\]
+
+<p>We can also calculate the magnitude and the angle of the gradient:</p>
+
+\[\begin{aligned}
+&amp; \mid\nabla f(x, y)\mid = \sqrt{f_{x}^{2}+f_{y}^{2}}, \\
+&amp; \theta =\tan ^{-1}\left(f_{y} / f_{x}\right).
+\end{aligned}\]
+
+<p>The gradient vectors point toward the direction of the most rapid increase in intensity.</p>
+
+<div align="center">
+<figure>
+<img src="https://miro.medium.com/max/1650/1*p9U2BnfbT9cwFQnNWfyLxg.png" alt="Image for post" style="zoom:60%;" />
+<figcaption style="font-size: 80%;"> Figure. The gradient vector directions. (<a href="https://jeheonpark93.medium.com/vc-edge-detection-4dec1b0be8e5">Source</a>)</figcaption>
+</figure>
+</div>
+
+<h2 id="noise-reduction">Noise Reduction</h2>
+
+<p>If there is excessive noise in an image, the partial derivatives will not be effective for identifying the edges, as shown below. In order to properly extract edge locations, the noise removal should be preceded before the computing image gradients.</p>
+
+<div align="center">
+<figure>
+<img src="https://ai.stanford.edu/~syyeung/cvweb/Pictures1/noise.png" alt="The derivative of an edge in a noisy image." style="zoom: 23%;" />
+<figcaption style="font-size: 80%;"> Figure. Computed derivatives of a noisy image. (<a href="https://medium.com/jun-devpblog/cv-3-gradient-and-laplacian-filter-difference-of-gaussians-dog-7c22e4a9d6cc">Source</a>)</figcaption>
+</figure>
+</div>
+
+<h3 id="derivative-of-gaussian-filter">Derivative of Gaussian Filter</h3>
+
+<p>We can apply the Gaussian smoothing before computing image gradients.</p>
+
+<div align="center">
+<figure>
+<img src="https://miro.medium.com/max/3175/1*2roG-Ul5AfTD3riXE-aCKA.png" alt="Image for post" style="zoom:40%;" />
+<figcaption style="font-size: 80%;"> Figure. Proper approach to locate edges in a noisy image with Gaussian and Derivative Filters. (<a href="https://medium.com/jun-devpblog/cv-3-gradient-and-laplacian-filter-difference-of-gaussians-dog-7c22e4a9d6cc">Source</a>)</figcaption>
+</figure>
+</div>
+
+<p>Let $ f $ and $ h $ be an image and a filter, respectively. Note that one characteristic of convolution is that the derivative of convolved image $ (h * f) $ is equivalent to convolving image $ f $ with the differentiated filter $ \nabla h $.</p>
+
+\[\frac{\partial}{\partial x}(h * f)=\left(\frac{\partial}{\partial x} h\right) * f\]
+
+<p>Using this, we can simplify one operation in previous figure. This time, we first compute the differentiated filter $ \nabla h $ and convolve it with the image $f$, and this yields the same result as that is previous figure.</p>
+
+<div align="center">
+<figure>
+<img src="https://miro.medium.com/max/1155/1*ySk0VvShNkgECSha4LKuAg.png" alt="Image for post" style="zoom:53%;" />
+<figcaption style="font-size: 80%;"> Figure. Simplified approach to locate edges in a noisy image with the derivative of Gaussian filter. (<a href="https://medium.com/jun-devpblog/cv-3-gradient-and-laplacian-filter-difference-of-gaussians-dog-7c22e4a9d6cc">Source</a>)</figcaption>
+</figure>
+</div>
+
+<p>Smoothing removes noise but blurs edges. Smoothing with different kernel sizes can detect edges at different scales.</p>
+
+<h3 id="sobel-filter">Sobel Filter</h3>
+
+<p>This algorithm utilizes two $3 \times 3 $ kernels which, once convolved with the image, approximate the $ x $ and $ y $ derivatives of the original image.</p>
+
+\[h_{x}=\left[\begin{array}{ccc}
+1 &amp; 0 &amp; -1 \\
+2 &amp; 0 &amp; -2 \\
+1 &amp; 0 &amp; -1
+\end{array}\right], \quad h_{y}=\left[\begin{array}{ccc}
+1 &amp; 2 &amp; 1 \\
+0 &amp; 0 &amp; 0 \\
+-1 &amp; -2 &amp; -1
+\end{array}\right].\]
+
+<p>These matrices represent the result of smoothing and differentiation</p>
+
+\[h_{x}=\left[\begin{array}{lll}
+1 &amp; 0 &amp; -1 \\
+2 &amp; 0 &amp; -2 \\
+1 &amp; 0 &amp; -1
+\end{array}\right]=\left[\begin{array}{l}
+1 \\
+2 \\
+1
+\end{array}\right]\left[\begin{array}{lll}
+1 &amp; 0 &amp; -1
+\end{array}\right].\]
+
+<p>The Sobel filter can also be thought of as $3 \times 3$ approximations to first derivative of Gaussian kernels. This approximation enables the Sobel operator to be computed quite quickly, while Gaussian derivatives might be more accurate.</p>
+
+<p>The Sobel Filter has many problems, including poor localization. The Sobel Filter also favors horizontal and vertical edges over oblique edges</p>
+
+<h2 id="canny-edge-detector">Canny Edge Detector</h2>
+
+<p>The Canny edge Detector has five algorithmic steps:</p>
+
+<ol>
+  <li>Suppress noise and compute gradients: Filter image with derivative of Gaussian or Sobel filter;</li>
+  <li>Compute gradient magnitude and direction;</li>
+  <li>Non-maximum suppression: Thin wide “edges” down to single pixel width;</li>
+  <li>Hysteresis thresholding: Use two thresholds to find weak and strong edges;</li>
+  <li>Connectivity analysis to detect edges: Keep strong edges and connect weak edges with them.</li>
+</ol>
+
+<h3 id="suppress-noise-and-compute-gradients">Suppress Noise and Compute Gradients</h3>
+
+<p>We can both suppress noise and compute the graidents in the x and y directions using methods
+like derivative of Gaussian filter or Sobel filter.</p>
+
+<h3 id="compute-gradient-magnitude-and-direction">Compute Gradient Magnitude and Direction</h3>
+
+\[\begin{aligned}
+&amp; \mid\nabla f(x, y)\mid = \sqrt{f_{x}^{2}+f_{y}^{2}}, \\
+&amp; \theta =\tan ^{-1}\left(f_{y} / f_{x}\right).
+\end{aligned}\]
+
+<h3 id="non-maximum-suppression">Non-Maximum Suppression</h3>
+
+<div align="center">
+<figure>
+<img src="https://image1.slideserve.com/2231035/the-canny-edge-detector3-n.jpg" alt="img" style="zoom:70%;" />
+<figcaption style="font-size: 80%;"> Figure. Undesirable thick edges. </figcaption>
+</figure>
+</div>
+
+<p>The solution is to check if a pixel is local maximum along gradient direction. Basically, if the pixel is not the largest of the three pixels in the direction and opposite the direction of its gradient, then the gradient of this pixel is set to $0$.</p>
+
+<h3 id="hysteresis-thresholding">Hysteresis Thresholding</h3>
+
+<p>All remaining pixels are subjected to hysteresis thresholding. This part uses two values, for the high and low thresholds. Every pixel with a intensity gradient magnitude above the high threshold is marked as a strong edge. Every pixel below the low threshold is set to non-edge. Every pixel between the two thresholds is marked as a weak edge.</p>
+
+<h3 id="connectivity-analysis">Connectivity Analysis</h3>
+
+<p>The final step is connecting the edges. All strong edge pixels are edges. For weak edge pixels, only the weak edge pixels that are linked to strong edge pixels are edges. The part uses BFS (breadth-first search) or DFS (depth-first search) to find all the edges.</p>
+
+<div align="center">
+<figure>
+<img src="https://docs.opencv.org/master/hysteresis.jpg" alt="hysteresis.jpg" style="zoom:75%;" />
+<figcaption style="font-size: 80%;"> Figure. Pixel A is a strong edge, while B and C are weak edges. C is a edge after connectivity analysis but B is not. (<a href="https://docs.opencv.org/master/da/d22/tutorial_py_canny.html">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p><a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture05/lecture05.pdf">CS131 - Computer Vision: Lecture 5</a></p>
+
+<p><a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture06/lecture06.pdf">CS131 - Computer Vision: Lecture 6</a></p>
+
+<p><a href="https://slazebni.cs.illinois.edu/spring19/lec07_edge.pdf">CS 543/ECE 549 - Computer Vision: Edge detection</a></p>
+
+<p><a href="https://docs.opencv.org/master/da/d22/tutorial_py_canny.html">OpenCV-Python Tutorials: Canny Edge Detection</a></p>
+
+<p><a href="https://medium.com/jun-devpblog/cv-3-gradient-and-laplacian-filter-difference-of-gaussians-dog-7c22e4a9d6cc">Gradient and Laplacian Filter, Difference of Gaussians (DOG)</a></p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

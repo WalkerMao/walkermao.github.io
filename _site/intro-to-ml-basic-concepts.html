@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Intro to Machine Learning: Basic Concepts</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Intro to Machine Learning: Basic Concepts | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Intro to Machine Learning: Basic Concepts" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Basic Assumption" />
+<meta property="og:description" content="1. Basic Assumption" />
+<link rel="canonical" href="http://localhost:4000/intro-to-ml-basic-concepts.html" />
+<meta property="og:url" content="http://localhost:4000/intro-to-ml-basic-concepts.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-26T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Intro to Machine Learning: Basic Concepts" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-02-26T00:00:00+08:00","datePublished":"2020-02-26T00:00:00+08:00","description":"1. Basic Assumption","headline":"Intro to Machine Learning: Basic Concepts","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/intro-to-ml-basic-concepts.html"},"url":"http://localhost:4000/intro-to-ml-basic-concepts.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#1-basic-assumption">1. Basic Assumption</a></li><li><a href="#2-why-estimate-f-">2. Why Estimate $f$ ?</a><ul><li><a href="#21-prediction">2.1 Prediction</a></li><li><a href="#22-inference">2.2 Inference</a></li></ul></li><li><a href="#3-how-do-we-estimate-f-">3. How Do We Estimate $f$ ?</a><ul><li><a href="#31-parametric-methods">3.1 Parametric Methods</a></li><li><a href="#32-non-parametric-methods">3.2 Non-parametric Methods</a></li></ul></li><li><a href="#4-types-of-machine-learning-algorithms">4. Types of Machine Learning Algorithms</a><ul><li><a href="#41-regression-and-classification">4.1 Regression and Classification</a></li><li><a href="#42-supervised-unsupervised-semi-supervised-and-reinforcement">4.2 Supervised, Unsupervised, Semi-supervised, and Reinforcement</a></li><li><a href="#43-generative-and-discriminative">4.3 Generative and Discriminative</a><ul><li><a href="#431-generative-model">4.3.1 Generative Model</a></li><li><a href="#432-discriminative-model">4.3.2 Discriminative Model</a></li></ul></li></ul></li><li><a href="#5-trade-off">5. Trade-off</a><ul><li><a href="#51-flexibility-interpretability-trade-off">5.1 Flexibility-Interpretability Trade-off</a></li><li><a href="#52-bias-variance-trade-off">5.2 Bias-Variance Trade-off</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/intro-to-ml-basic-concepts.html">
+    <h2 class="post-title">Intro to Machine Learning: Basic Concepts</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/ml"> <li>ML</li> </a><a class="post-link" href="/categories/stat"> <li>Stat</li> </a></ul>
+      <ul class="post-tags"></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Feb 26, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="1-basic-assumption">1. Basic Assumption</h2>
+
+<p>We assume that there is some relationship between $Y$ and $X$ which can be written as $Y = f(X) + \epsilon$. Here $f$ is some fixed but unknown function and $\epsilon$ is a random error term, which is independent of $X$ and has mean zero.</p>
+
+<h2 id="2-why-estimate-f-">2. Why Estimate $f$ ?</h2>
+
+<p>There are two main reasons: prediction and inference.</p>
+
+<h3 id="21-prediction">2.1 Prediction</h3>
+
+<p>The prediction $\hat{Y} = \hat{f}(X).$ The goal of prediction is to learn a function $f$ such that $f(X)$ is closed to $Y$.</p>
+
+<p>The accuracy of $\hat{Y}$ as a prediction for $Y$ depends on two quantities, which we will call the reducible error (introduced by \(X\)) and the irreducible error (introduced by $\epsilon$). $Y$ is a function of $X$ and $\epsilon$. Consider the expectation of the squared loss:</p>
+
+\[E(Y-\hat{Y})^2 = E[f(X)+\epsilon-\hat{f}(X)]^2 = E[f(X)-\hat{f}(X)]^2 + \text{Var} (\epsilon).\]
+
+<p>The first item (expectation) is reducible and the second (variance) is irreducible.</p>
+
+<h3 id="22-inference">2.2 Inference</h3>
+
+<p>For inference, we want to understand the relationship between $X$ and $Y$, or more specifically, to understand how $Y$ changes as a function of $X_1 , . . . , X_p$. Now $\hat{f}$ cannot be treated as a black box, because we need to know its exact form.</p>
+
+<h2 id="3-how-do-we-estimate-f-">3. How Do We Estimate $f$ ?</h2>
+
+<h3 id="31-parametric-methods">3.1 Parametric Methods</h3>
+
+<p>Parametric methods involve a two-step model-based approach.</p>
+
+<ol>
+  <li>
+    <p>Select model. We make an assumption about the functional form, or shape of $f$. For example, linear model.</p>
+  </li>
+  <li>
+    <p>Fit or train the model.</p>
+  </li>
+</ol>
+
+<p>Advantages compared to non-parametric methods: need less observations, harder to over-fit, more interpretable, easier to do inference.</p>
+
+<h3 id="32-non-parametric-methods">3.2 Non-parametric Methods</h3>
+
+<p>Non-parametric methods do not make explicit assumptions about the functional form of $f$. Instead they seek an estimate of $f$ that gets as close to the data points as possible without being too rough or wiggly.</p>
+
+<p>Advantage compared to parametric methods: flexible. By avoiding the assumption of a particular functional form for $f$, they have the potential to accurately fit a wider range of possible shapes for $f$ compared to parametric method.</p>
+
+<h2 id="4-types-of-machine-learning-algorithms">4. Types of Machine Learning Algorithms</h2>
+
+<h3 id="41-regression-and-classification">4.1 Regression and Classification</h3>
+
+<ul>
+  <li>
+    <p>Regression problem: Target variable \(Y\) is continuous.</p>
+  </li>
+  <li>
+    <p>Classification problem: Target variable \(Y\) is discrete.</p>
+  </li>
+</ul>
+
+<h3 id="42-supervised-unsupervised-semi-supervised-and-reinforcement">4.2 Supervised, Unsupervised, Semi-supervised, and Reinforcement</h3>
+
+<ul>
+  <li>
+    <p>Supervised learning: Target variable is available. E.g. regression and classification.</p>
+  </li>
+  <li>
+    <p>Unsupervised learning: Target variable is not available. E.g. clustering, dimensionality reduction, and association.</p>
+  </li>
+</ul>
+
+<h3 id="43-generative-and-discriminative">4.3 Generative and Discriminative</h3>
+
+<p>Both these two types of models are for classification problems.</p>
+
+<h4 id="431-generative-model">4.3.1 Generative Model</h4>
+
+<p>Generative model learns the joint probability distribution \(P(X,Y)\).</p>
+
+<p>Steps:</p>
+
+<ol>
+  <li>Assume some functional form for \(P(Y)\), \(P(X\mid Y)\);</li>
+  <li>Estimate parameters of \(P(Y)\), \(P(X\mid Y)\) directly from training data;</li>
+  <li>Use Bayes rule to calculate \(P(X,Y)\) and also \(P(Y \mid X)\).</li>
+</ol>
+
+<p>Examples: Naive Bayes classifier, supervised learning Gaussian mixture model (SLGMM), hidden Markov model (HMM), etc..</p>
+
+<h4 id="432-discriminative-model">4.3.2 Discriminative Model</h4>
+
+<p>Discriminative model learns the conditional probability distribution \(P(Y \mid X)\) or the discriminant function \(\delta(X)\).</p>
+
+<p>Steps:</p>
+
+<ol>
+  <li>Assume some functional form for \(P(Y \mid X)\);</li>
+  <li>Estimate parameters of \(P(Y \mid X)\) directly from training data.</li>
+</ol>
+
+<p>Examples: Logistic regression, SVM, decision tree, etc..</p>
+
+<h2 id="5-trade-off">5. Trade-off</h2>
+
+<h3 id="51-flexibility-interpretability-trade-off">5.1 Flexibility-Interpretability Trade-off</h3>
+
+<p>The flexible models are usually more accurate and less interpretable. For example, linear regression is interpretable but not flexible, and neural network is the opposite.</p>
+
+<p>[high Interpretability, low Flexibility] Subset Selection (e.g. LASSO), Least Squares, Generalized Additive Models (GAM) (e.g. Trees), Bagging or Boosting, SVM. [low Interpretability, high Flexibility]</p>
+
+<p>Note: SVM with non-linear kernels is non-linear methods.</p>
+
+<h3 id="52-bias-variance-trade-off">5.2 Bias-Variance Trade-off</h3>
+
+<p>For regression, assume $Y = f+\epsilon,E(\epsilon) = 0$, and $\epsilon$ is independent with $f$ and $\hat{f}$, then we have</p>
+
+\[\begin{align*}
+E[(Y-\hat{f})^2] &amp;= E[(f-\hat{f}+\epsilon)^2] \\
+&amp;= E[(f-\hat{f})^2] + E(\epsilon^2) + 2E(f-\hat{f})E(\epsilon) \\ 
+&amp;= E(\hat{f}^2) + f^2 - 2fE(\hat{f}) + \text{Var}(\epsilon) + 0\\ 
+&amp;= \big[ E(\hat{f}^2) - E^2(\hat{f}) \big] + \big[ E^2(\hat{f}) + f^2 - 2fE(\hat{f}) \big] + \text{Var}(\epsilon) \\
+&amp;= \text{Var}(\hat{f}) + [E(\hat{f})-f]^2 + \text{Var}(\epsilon) \\
+&amp;= \text{Var}(\hat{f}) + \text{Bias}^2(\hat{f}) + \text{Var}(\epsilon).
+\end{align*}\]
+
+<p><strong>More flexible methods leads to higher variance and lower bias.</strong></p>
+
+<p>Variance $\text{Var}(\hat{f})$ refers to the amount by which $ \hat{f} $ would change if it is by a different training data set. If the model \(\hat{f}\) uses too much information from the the training data, it may do not generalize well. Typically, the model will change a lot if you change the training set, hence the “high variance” name. In general, more flexible statistical methods have higher variance.</p>
+
+<p>Bias $\text{Bias}(\hat{f})$ refers to the error that is introduced by approximating a real-life problem. For example, linear regression assumes that there is a linear relationship between $Y$ and $X$. It is unlikely that any real-life problem truly has such a simple linear relationship, and so performing linear regression will undoubtedly result in some bias in the estimate of $f$. Generally, more flexible methods result in less bias.</p>
+
+<p>Note: It is possible to have a model that has lower variance and lower bias simultaneously. For example, boosting method can reduce both variance and bias.</p>
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>James, Gareth, et al. “Statistical Learning.” <em>An introduction to statistical learning</em>. Vol. 112. New York: springer, 2013.</p>
+
+<p>Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. <em>The elements of statistical learning</em>. Vol. 1. No. 10. New York: Springer series in statistics, 2001.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Principal Component Analysis (PCA)</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Principal Component Analysis (PCA) | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Principal Component Analysis (PCA)" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="http://localhost:4000/pca.html" />
+<meta property="og:url" content="http://localhost:4000/pca.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-10T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Principal Component Analysis (PCA)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2020-03-10T00:00:00+08:00","datePublished":"2020-03-10T00:00:00+08:00","description":"Introduction","headline":"Principal Component Analysis (PCA)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/pca.html"},"url":"http://localhost:4000/pca.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#introduction">Introduction</a><ul><li><a href="#goal-of-pca">Goal of PCA</a></li><li><a href="#centralization">Centralization</a></li><li><a href="#covariance-matrix">Covariance Matrix</a></li></ul></li><li><a href="#derive-pca-through-orthogonal-transformation">Derive PCA through Orthogonal Transformation</a><ul><li><a href="#orthogonal-transformation">Orthogonal Transformation</a></li><li><a href="#maximizing-variance">Maximizing Variance</a><ul><li><a href="#optimization-by-lagrange-multipliers">Optimization by Lagrange Multipliers</a></li></ul></li></ul></li><li><a href="#derive-pca-through-svd">Derive PCA through SVD</a><ul><li><a href="#singular-value-decomposition">Singular Value Decomposition</a></li><li><a href="#diagonalizing-covariance-matrix">Diagonalizing Covariance Matrix</a></li><li><a href="#low-rank-approximation">Low-Rank Approximation</a></li></ul></li><li><a href="#example-tips-and-summary">Example, Tips and Summary</a><ul><li><a href="#example">Example</a></li><li><a href="#tips">Tips</a></li><li><a href="#summary">Summary</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/pca.html">
+    <h2 class="post-title">Principal Component Analysis (PCA)</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/stat"> <li>Stat</li> </a><a class="post-link" href="/categories/fe"> <li>FE</li> </a><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/unsupervised learning"> <li>Unsupervised learning</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Mar 10, 2020
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><h2 id="introduction">Introduction</h2>
+
+<h3 id="goal-of-pca">Goal of PCA</h3>
+
+<p>The goal of PCA (principal component analysis) is to reduce the dimension of the original data without losing too much information. In machine learning, we usually want to reduce the number of features of the original matrix \(\underset{n \times p}{X}\), that is, to find a matrix \(\underset{n \times d}{Z_d}\) that contains enough information of \(X\) but with \(d&lt;p\), where \(n\) is the number of observations, \(p\) is the number of features and \(d\) is the number of features after PCA, which is also the number of components.</p>
+
+<h3 id="centralization">Centralization</h3>
+
+<p>The original data \(X=(x^{(1)}, \cdots ,x^{(p)})\) is of dimension \(n \times p\) with column vectors \(x^{(1)}, \cdots ,x^{(p)}\). Each column vector refers to a feature. At first, we centralize the original data by reducing the column mean:</p>
+
+<p>Set \(x_i^{(j)} = x_i^{(j)} - \frac{1}{n} \sum_{i=1}^n x_i^{(j)}\) for all \(i=1,\cdots,n\) and all \(j=1,\cdots,p\).</p>
+
+<p>After centralization,  \(\sum_{i=1}^n x_i^{(j)} = 0\) or \(\bar{x}^{(j)}=0\).</p>
+
+<h3 id="covariance-matrix">Covariance Matrix</h3>
+
+<p>The \(i\)-th sample can be written as $x_i = (x_i^{(1)}, \cdots ,x_i^{(p)})^T$. We consider it as a random vector with dimension \(p\times 1\). The covariance matrix of \(x_i\) is</p>
+
+\[\begin{align}
+\text{Var}(x_i) 
+&amp;= \begin{pmatrix}
+  \text{Var}(x_i^{(1)}) &amp; \text{Cov}(x_i^{(1)}, x_i^{(2)}) &amp; \cdots &amp; \text{Cov}(x_i^{(1)}, x_i^{(p)}) \\
+  \text{Cov}(x_i^{(2)}, x_i^{(1)}) &amp; \text{Var}(x_i^{(2)}) &amp; \cdots &amp; \text{Cov}(x_i^{(2)}, x_i^{(p)}) \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+\text{Cov}(x_i^{(p)}, x_i^{(1)}) &amp; \text{Cov}(x_i^{(p)}, x_i^{(2)}) &amp; \cdots &amp; \text{Var}(x_i^{(p)})
+ \end{pmatrix} \\
+&amp;= \begin{pmatrix}
+  E(x_i^{(1)} - Ex_i^{(1)})^2 &amp; E[(x_i^{(1)} - Ex_i^{(1)}) (x_i^{(2)} - Ex_i^{(2)})] &amp; \cdots &amp; E[(x_i^{(1)} - Ex_i^{(1)}) (x_i^{(p)} - Ex_i^{(p)})] \\
+  E[(x_i^{(2)} - Ex_i^{(2)}) (x_i^{(1)} - Ex_i^{(1)})] &amp; E(x_i^{(2)} - Ex_i^{(2)})^2 &amp; \cdots &amp; E[(x_i^{(2)} - Ex_i^{(2)}) (x_i^{(p)} - Ex_i^{(p)})] \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+E[(x_i^{(p)} - Ex_i^{(p)})(x_i^{(1)} - Ex_i^{(1)})] &amp; E[(x_i^{(p)} - Ex_i^{(p)})(x_i^{(2)} - Ex_i^{(2)})] &amp;  \cdots &amp; E(x_i^{(p)} - Ex_i^{(p)})^2
+ \end{pmatrix}.
+\end{align}\]
+
+<p>For arbitrary integer \(j, j'\) subject to \(1 \leq j, j' \leq p\) , we use  \(\bar{x}^{(j)}\) to estimate \(E(x_i^{(j)})\), and \(\frac{1}{n-1} \sum_{i=1}^{n} (x_i^{(j)} - \bar{x}^{(j)}) (x_i^{(j')} - \bar{x}^{(j')})\) to estimate \(E[(x_i^{(j)} - Ex_i^{(j)})(x_i^{(j')} - Ex_i^{(j')})]\).</p>
+
+<p>Since \(\bar{x}^{(j)}=0\) after centralization, we have the estimator of variance of arbitrary sample</p>
+
+\[\begin{align}
+S^2_x = \hat{\text{Var}}(x_i) 
+&amp;= \frac{1}{n-1} 
+\begin{pmatrix}
+  \sum_{i}{x_i^{(1)}}^2 &amp; \sum_{i} x_i^{(1)} x_i^{(2)} &amp; \cdots &amp; \sum_{i} x_i^{(1)} x_i^{(p)} \\
+  \sum_{i}x_i^{(2)} x_i^{(1)} &amp; \sum_{i} {x_i^{(2)}}^2 &amp; \cdots &amp; \sum_{i} x_i^{(2)} x_i^{(p)} \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+\sum_{i} x_i^{(p)} x_i^{(1)} &amp; \sum_{i} x_i^{(p)} x_i^{(2)} &amp; \cdots &amp; \sum_{i} {x_i^{(p)}}^2
+ \end{pmatrix} \\
+&amp;= \frac{1}{n-1} 
+\begin{pmatrix}
+  {x^{(1)}}^T x^{(1)} &amp; {x^{(1)}}^T x^{(2)} &amp; \cdots &amp; {x^{(1)}}^T x^{(p)} \\
+  {x^{(2)}}^T x^{(1)} &amp; {x^{(2)}}^T x^{(2)} &amp; \cdots &amp; {x^{(2)}}^T x^{(p)} \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  {x^{(p)}}^T x^{(1)} &amp; {x^{(p)}}^T x^{(2)} &amp; \cdots &amp; {x^{(p)}}^T x^{(p)} \\
+ \end{pmatrix} \\
+ &amp;= \frac{1}{n-1} X^T X,
+\end{align}\]
+
+<p>which is the <strong>sample covariance matrix</strong>. Note that if \(X\) is not centered, then \(\frac{X^T X}{n-1}\) is not the sample covariance matrix.</p>
+
+<h2 id="derive-pca-through-orthogonal-transformation">Derive PCA through Orthogonal Transformation</h2>
+
+<h3 id="orthogonal-transformation">Orthogonal Transformation</h3>
+
+<p>Suppose there is a orthogonal matrix \(\underset{p\times p}{W}\) with dimension \(p \times p\), then we transform \(X\) by \(W\) to get \(\underset{n\times p}{Z} = XW\). Denote \(\underset{n \times d}{Z_d}\) as the output of PCA, which is a sub-matrix of \(Z\). The rows of \(W\) are \(w_1^T, \cdots, w_p^T\), and the columns are \(w^{(1)}, \cdots, w^{(p)}\).</p>
+
+<p>Orthogonal transformation to the centralized data \(X\) or \(x_i\):</p>
+
+\[\underset{n \times p}{X} \ \underset{p \times p}{W} = \underset{n \times p}{Z} \ \text{ or } \ \underset{n \times p}{X}\ \underset{p \times 1}{w^{(j)}} = \underset{n \times 1}{z^{(j)}}  \ \text{ or } \ \underset{p \times p}{W} \ \underset{p \times 1}{x_i} = \underset{p \times 1}{z_i},\]
+
+<p>where \(z_i\) is the \(i\)-th observation after transformation with dimension \(p \times 1\) and \(z^{(j)}\) is the \(j\)-th principal component with dimension \(n \times 1\).</p>
+
+<p>Similar to \(X\), the sample covariance matrix of \(z_i\) is \(\frac{1}{n-1} Z^T Z\).</p>
+
+<h3 id="maximizing-variance">Maximizing Variance</h3>
+
+<p>As we known, high variance means large amount of information.</p>
+
+<p>The sample covariance matrix of \(z_i\) is 
+\(S_z^2 = \hat{\text{Var}} (z_i) = \frac{1}{n-1} Z^T Z = \frac{1}{n-1} W^T X^T X W = W^T S_x^2 W.\)</p>
+
+<p>The objective is to find \(W\) that maximize \(W^T S_x^2 W\):</p>
+
+\[W = \underset{W \in \mathbb{R}^{p \times p}}{\text{argmax }} W^T S_x^2 W, \\
+\text{subject to } W^TW = I_p.\]
+
+<p>The sample variance of the \(j\)-th principal component \(z^{(j)}=Xw^{(j)}\) is</p>
+
+\[\hat{\text{Var}} (z_i^{(j)}) = \frac{1}{n-1} {z^{(j)}}^T z^{(j)} = \frac{1}{n-1} {w^{(j)}}^T X^T X w^{(j)} = {w^{(j)}}^T S^2_x w^{(j)}.\]
+
+<p>We find \(w^{(1)}, \cdots, w^{(p)}\) <strong>sequentially</strong>, then \(z^{(1)},z^{(2)},\cdots,z^{(p)}\) are 1st, 2nd, \(\cdots\), and \(p\)-th principal component. We can do this by gradient ascent, or more commonly by Lagrange multipliers, as shown below.</p>
+
+<h4 id="optimization-by-lagrange-multipliers">Optimization by Lagrange Multipliers</h4>
+
+<p>We find \(w^{(1)}, \cdots, w^{(p)}\) sequentially by using the method of Lagrange multipliers.</p>
+
+<p>At first, we find \(w^{(1)}\) that maximize the sample variance of the first principal component</p>
+
+\[w^{(1)} = \underset{w^{(1)} \in \mathbb{R}^p}{\text{argmax }} \hat{\text{Var}} (z_i^{(1)}) = \underset{w^{(1)} \in \mathbb{R}^p}{\text{argmax }} {w^{(1)}}^T S^2_x w^{(1)}, \\
+\text{ subject to } {w^{(1)}}^T w^{(1)} = 1.\]
+
+<p>Using the method of Lagrange multipliers, the Lagrangian function:</p>
+
+\[{\mathcal {L}} (w^{(1)}, \lambda_1) = {w^{(1)}}^T S^2_x w^{(1)} + \lambda ({w^{(1)}}^T w^{(1)} - 1).\]
+
+<p>Take derivatives of \({\mathcal {L}} (w^{(1)}, \lambda_1)\) with respect to \(w^{(1)}\) and  \(\lambda_1\) then set to \(0\):</p>
+
+\[{\begin{cases}
+\frac{\partial {\mathcal {L}} (w^{(1)}, \lambda_1)} {\partial w^{(1)}} = S^2_x w^{(1)} - \lambda_1 w^{(1)} = 0, \\
+\frac{\partial {\mathcal {L}} (w^{(1)}, \lambda_1)} {\partial \lambda_1} = {w^{(1)}}^T w^{(1)} - 1 = 0.
+\end{cases}}\]
+
+<p>Now we have \(S^2_x w^{(1)} = \lambda_1 w^{(1)}\), which means \(\lambda_1\) is a eigenvalue of \(S^2_x\) and \(w^{(1)}\) is the corresponding eigenvector.</p>
+
+<p>In addition, \(\hat{\text{Var}} (z_i^{(1)}) = {w^{(1)}}^T S^2_x w^{(1)} = \lambda_1\), so we select the largest eigenvalue of \(S_x^2\) as \(\lambda_1\) since we want to maximize  \(\hat{\text{Var}} (z_i^{(1)})\).</p>
+
+<p>Then we find \(w^{(2)}\) that maximize the sample variance of the second principal component</p>
+
+\[w^{(2)} = \underset{w^{(2)} \in \mathbb{R}^p}{\text{argmax }} \hat{\text{Var}} (z_i^{(2)}) = \underset{w^{(2)} \in \mathbb{R}^p}{\text{argmax }} {w^{(2)}}^T S^2_x w^{(2)}, \\
+\text{ subject to } {w^{(2)}}^T w^{(2)} = 1 \text{ and } {w^{(2)}}^T w^{(1)} = 0.\]
+
+<p>Lagrangian function:</p>
+
+\[{\mathcal {L}} (w^{(2)}, \lambda_2, \mu_2) = {w^{(2)}}^T S^2_x w^{(2)} + \lambda_2 ({w^{(2)}}^T w^{(2)} - 1) + \mu_2 ({w^{(2)}}^T w^{(1)} - 0).\]
+
+<p>Take derivatives of \({\mathcal {L}} (w^{(2)}, \lambda_2, \mu_2)\) with respect to \(w^{(2)}\), \(\lambda_2\) and \(\mu_2\), then set to \(0\). We have \(S^2_x w^{(2)} = \lambda_2 w^{(2)}\). \(\lambda_2\) is the second eigenvalue of \(S^2_x\) and \(w^{(2)}\) is the corresponding eigenvector.</p>
+
+<p>Thus,</p>
+
+\[S_z^2 = W^T S_x^2 W = 
+\begin{pmatrix}
+  \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\
+  0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  0 &amp; 0 &amp; \cdots &amp; \lambda_p
+ \end{pmatrix},\]
+
+<p>where <strong>the columns of \(W\) are the eigenvectors of \(S_x^2\) and \(\lambda_1, \cdots \lambda_p\) are the corresponding eigenvalues.</strong></p>
+
+<p>\(\lambda_j\) <strong>is the sample variance of the \(j\)-th principal component.</strong></p>
+
+\[{\lambda}_j = \hat{\text{Var}} (z^{(j)}) = \frac{ {z^{(j)}}^T z^{(j)}} {n-1} = {w^{(j)}}^T \frac{X^T X}{n-1} w^{(j)} = {w^{(j)}}^T S^2_x w^{(j)}.\]
+
+<h2 id="derive-pca-through-svd">Derive PCA through SVD</h2>
+
+<h3 id="singular-value-decomposition">Singular Value Decomposition</h3>
+
+<p>Normal SVD: \(X = \underset{n\times n}{U}\ \underset{n\times p}{\Sigma}\ \underset{p\times p}{V^T}\).</p>
+
+<p>Compact SVD: \(X = \underset{n\times r}{U}\ \underset{r \times r}{\Sigma}\ \underset{r \times p}{V^T}\), where \(r\) is the rank of \(X\); \(U\) and \(V\) are orthogonal matrices; \(\Sigma\) is a diagonal matrix with singular values \(\sigma_1, \cdots, \sigma_r\) on the diagonal. We prefer the compact SVD since it is more computationally effective.</p>
+
+<h3 id="diagonalizing-covariance-matrix">Diagonalizing Covariance Matrix</h3>
+
+<p>We can also derive the result from the diagonalization of the covariance matrix.</p>
+
+<p>Note that the diagonal entries of \(\frac{X^TX}{n-1}\) are the sample variance of each feature of \(X\), and the diagonal entries of \(\frac{Z^TZ}{n-1}\) are the sample variance of each principal components. Thus, we want to make \(\text{tr}(Z_d)\) as close as possible to \(\text{tr}(X)\). The larger \(\text{tr}(Z_d)\), the higher variance, and the larger information we can have in \(Z_d\).</p>
+
+<p>An intuitive idea is to find a way to transform \(X^TX\) to a diagonal matrix \(Z^TZ\), then \(Z_d^T Z_d\) will be the sub-matrix of \(Z^TZ\) and contains the most highest \(d\) diagonal values of  \(Z^TZ\). In this way, the information contained in \(Z_d\) will be largest.</p>
+
+<p>SVD is a nice method to do this.</p>
+
+<p>Suppose \(p=r\). Since \(U\) and \(V\) are both orthogonal, we have \(U^T=U^{-1}, V^T=V^{-1}\), then the compact SVD of \(X^TX\) is</p>
+
+\[X^TX = V \Sigma^T U^T \cdot U \Sigma V^T = V \Sigma^2 V^T.\]
+
+<p>It is also the eigenvalue decomposition of \(X^TX\). The columns of \(V\) are the eigenvectors of \(X^TX\) and the diagonal entries of \(\Sigma^2\) are the corresponding eigenvalues.</p>
+
+<p>Now we have a diagonal matrix \(\Sigma^2\), then we set</p>
+
+\[Z^TZ = V^T X^T X V = \Sigma^2 = 
+\begin{pmatrix}
+  \sigma_1^2 &amp; 0 &amp; \cdots &amp; 0 \\
+  0 &amp; \sigma_2^2 &amp; \cdots &amp; 0 \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  0 &amp; 0 &amp; \cdots &amp; \sigma_p^2
+ \end{pmatrix} .\]
+
+<p>Thus,</p>
+
+\[Z = XV.\]
+
+<p>The column vectors in \(V\) are the orthogonal basis vectors, which is the same as \(W\) and <strong>decide the directions of the principal components</strong>.</p>
+
+<p>To get \(Z_d\), we select the \(d\) column vectors in \(V\) that corresponding to \(d\) largest eigenvalues \(\sigma_1^2, \cdots, \sigma_d^2\).</p>
+
+<h3 id="low-rank-approximation">Low-Rank Approximation</h3>
+
+<p>Compact SVD of \(X\) can be decomposed as \(X = \underset{n\times r}{U}\ \underset{r \times r}{\Sigma}\ \underset{r \times p}{V^T} = \sum_{j=1}^r \sigma_j u_j v_j^T\), where \(u_1,\cdots,u_r\) and \(v_1,\cdots,v_r\) are column vectors of \(U\) and \(V\).</p>
+
+<p>According to Eckart-Young-Mirsky theorem, we can approximate \(X\) by \(\sum_{j=1}^d \sigma_j u_j v_j^T\).</p>
+
+<p>We have</p>
+
+\[XX^T = U \Sigma V^T \cdot V \Sigma^T U^T = U \Sigma^2 U^T, \\
+Z_d Z_d^T = \underset{n \times d}{U_d} \ \underset{d \times d}{\Sigma_d^2} \ \underset{d \times n}{U_d^T}.\]
+
+<p>Therefore,</p>
+
+\[Z_d = U_d \Sigma_d.\]
+
+<h2 id="example-tips-and-summary">Example, Tips and Summary</h2>
+
+<h3 id="example">Example</h3>
+
+<div style="text-align: center">
+<img src="../../../pictures/PCA-visulization.png?raw=true" style="zoom: 50%;" alt="PCA-visulization.png" />
+</div>
+
+\[X = 
+
+\begin{pmatrix}
+  0 &amp; 0 \\
+  2 &amp; 2 \\
+  4 &amp; 4 \\
+  6 &amp; 6 \\
+  8 &amp; 8
+ \end{pmatrix}
+
+ -
+
+\begin{pmatrix}
+  4 &amp; 4 \\
+  4 &amp; 4 \\
+  4 &amp; 4 \\
+  4 &amp; 4 \\
+  4 &amp; 4
+ \end{pmatrix}
+
+ =
+
+ \begin{pmatrix}
+  -4 &amp; -4 \\
+  -2 &amp; -2 \\
+  0 &amp; 0 \\
+  2 &amp; 2 \\
+  4 &amp; 4
+ \end{pmatrix}.\]
+
+\[W = 
+ \begin{pmatrix}
+  \frac{\sqrt{2}}{2} &amp; \frac{-\sqrt{2}}{2} \\
+  \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2}
+ \end{pmatrix} ,
+
+\ \ \ \ \ \ 
+
+Z = XW =
+ \begin{pmatrix}
+  -4\sqrt{2} &amp; 0 \\
+  -2\sqrt{2} &amp; 0 \\
+  0 &amp; 0 \\
+  2\sqrt{2} &amp; 0 \\
+  4\sqrt{2} &amp; 0
+ \end{pmatrix}.\]
+
+<h3 id="tips">Tips</h3>
+
+<ul>
+  <li>
+    <p>The trace of a matrix equals to the sum of the eigenvalues. \(X^TX\) and \(XX^T\) have the same eigenvalues. \(\text{tr}(Z_d^T Z_d) =  \text{tr}(Z_d Z_d^T) = \sum_{j=1}^{d} \sigma_j^2\), which equals to \(n-1\) times the sum of the sample variances of \(z^{(1)}, \cdots, z^{(d)}\). We also have \(\text{tr}(X^TX) = \text{tr}(Z^TZ) = \text{tr}(XX^T) = \text{tr}(ZZ^T) =\text{tr}(\Sigma^2) = \sum_{j=1}^p \sigma_j^2\), which also equals to  \(n-1\) times the sum of the sample variances of \(x^{(1)}, \cdots, x^{(p)}\) or equivalently that of \(z^{(1)}, \cdots, z^{(p)}\).</p>
+
+    <p>Thus, the proportion of the information (variance) retained in the output \(Z_d\) is \(\text{tr}(\Sigma_d^2) / \text{tr}(\Sigma^2) = \sum_{j=1}^d \sigma_j^2 / \sum_{j=1}^p \sigma_j^2\).</p>
+  </li>
+  <li>
+    <p>How to decide the number of components \(d\) ? We can plot the information (variance) proportion v.s. the number of components.</p>
+  </li>
+</ul>
+
+<div style="text-align: center">
+<img src="../../../pictures/PCA-chose-number-of-components.png" style="width:50%;height:50%;" alt="PCA-chose-number-of-components.png" />
+</div>
+
+<h3 id="summary">Summary</h3>
+
+\[\begin{align*} 
+\underset{n \times p}{X} = \underset{n\times p}{U}\ \underset{p \times p}{\Sigma}\ \underset{p \times p}{V^T} &amp; \implies Z^TZ = V^T X^T X V = \Sigma^2 \implies \underset{n \times p}{Z} = XV \implies \underset{n \times d}{Z_d} = \underset{n \times p}{X}\ \underset{p \times d}{V_d}. \text{ (Cov matrix and ortho trans)} \\
+\text{or} &amp;\implies XX^T = U \Sigma^2 U^T \implies
+Z_d Z_d^T = \underset{n \times d}{U_d} \ \underset{d \times d}{\Sigma_d^2} \ \underset{d \times n}{U_d^T} \implies \underset{n \times d}{Z_d} = U_d \Sigma_d. \text{ (SVD low-rank approx)}
+\end{align*}\]
+
+<p>Sample covariance matrix of an arbitrary sample (denote as sample \(i\)) after PCA:</p>
+
+\[\begin{align*}
+\hat{\text{Var}}(z_i) &amp;= 
+S_z^2 = W^T S_x^2 W = 
+\begin{pmatrix}
+  \lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\
+  0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  0 &amp; 0 &amp; \cdots &amp; \lambda_p
+ \end{pmatrix} \\
+ &amp;= \frac{1}{n-1} Z^TZ = \frac{1}{n-1} V^T X^T X V = \frac{1}{n-1} \Sigma^2 = \frac{1}{n-1} 
+\begin{pmatrix}
+  \sigma_1^2 &amp; 0 &amp; \cdots &amp; 0 \\
+  0 &amp; \sigma_2^2 &amp; \cdots &amp; 0 \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  0 &amp; 0 &amp; \cdots &amp; \sigma_p^2
+ \end{pmatrix} .
+\end{align*}\]
+
+<p><br /></p>
+
+<p><strong>References:</strong></p>
+
+<p>Lecture notes from professor <a href="https://stat.rutgers.edu/people-pages/faculty/people/130-faculty/378-min-xu">Min Xu</a>.</p>
+
+<p>张 洋. “<a href="https://blog.codinglabs.org/articles/pca-tutorial.html.">PCA的数学原理.</a>” <em>CodingLabs</em>, 22 June 2013.</p>
+
+<p>Jonathan Hui, “<a href="https://medium.com/@jonathan_hui/machine-learning-singular-value-decomposition-svd-principal-component-analysis-pca-1d45e885e491.">Machine Learning - SVD and PCA.</a>” <em>Medium</em>, 6 Mar 2019.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

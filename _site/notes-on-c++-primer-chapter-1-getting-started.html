@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Notes on "C++ Primer": Chapter 1. Getting Started</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Notes on “C++ Primer”: Chapter 1. Getting Started | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Notes on “C++ Primer”: Chapter 1. Getting Started" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chapter 1. Getting Started" />
+<meta property="og:description" content="Chapter 1. Getting Started" />
+<link rel="canonical" href="http://localhost:4000/notes-on-c++-primer-chapter-1-getting-started.html" />
+<meta property="og:url" content="http://localhost:4000/notes-on-c++-primer-chapter-1-getting-started.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Notes on “C++ Primer”: Chapter 1. Getting Started" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2022-05-01T00:00:00+08:00","datePublished":"2022-05-01T00:00:00+08:00","description":"Chapter 1. Getting Started","headline":"Notes on “C++ Primer”: Chapter 1. Getting Started","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/notes-on-c++-primer-chapter-1-getting-started.html"},"url":"http://localhost:4000/notes-on-c++-primer-chapter-1-getting-started.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#chapter-1-getting-started">Chapter 1. Getting Started</a><ul><li><a href="#11-writing-a-simple-c-program">1.1 Writing a Simple C++ Program</a><ul><li><a href="#111-compiling-and-executing-our-program">1.1.1 Compiling and Executing Our Program</a><ul><li><a href="#program-source-file-naming-convention">Program Source File Naming Convention</a></li><li><a href="#running-the-compiler-from-the-command-line">Running the Compiler from the Command Line</a></li></ul></li></ul></li><li><a href="#12-a-first-look-at-inputoutput">1.2 A First Look at Input/Output</a><ul><li><a href="#standard-input-and-output-objects">Standard Input and Output Objects</a></li><li><a href="#a-program-that-uses-the-io-library">A Program That Uses the IO Library</a></li><li><a href="#writing-to-a-stream">Writing to a Stream</a></li><li><a href="#using-names-from-the-standard-library">Using Names from the Standard Library</a></li><li><a href="#reading-from-a-stream">Reading from a Stream</a></li></ul></li></ul></li><li><a href="#13-a-word-about-comments">1.3 A Word about Comments</a></li><li><a href="#14-flow-of-control">1.4 Flow of Control</a><ul><li><a href="#141-the-while-statement">1.4.1 The <code class="language-plaintext highlighter-rouge">while</code> Statement</a></li><li><a href="#142-the-for-statement">1.4.2 The <code class="language-plaintext highlighter-rouge">for</code> Statement</a></li><li><a href="#143-reading-an-unknown-number-of-inputs">1.4.3 Reading an Unknown Number of Inputs</a></li><li><a href="#144-the-if-statement">1.4.4 The <code class="language-plaintext highlighter-rouge">if</code> Statement</a></li></ul></li><li><a href="#15-introducing-classes">1.5 Introducing Classes</a><ul><li><a href="#151-the-sales_item-class">1.5.1 The <code class="language-plaintext highlighter-rouge">Sales_item</code> Class</a></li><li><a href="#152-a-first-look-at-member-functions">1.5.2 A First Look at Member Functions</a></li></ul></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/notes-on-c++-primer-chapter-1-getting-started.html">
+    <h2 class="post-title">Notes on &quot;C++ Primer&quot;: Chapter 1. Getting Started</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/cs"> <li>CS</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/c++"> <li>C++</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      May 1, 2022
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><div class="toc">
+        <ul><li><a href="#chapter-1-getting-started">Chapter 1. Getting Started</a><ul><li><a href="#11-writing-a-simple-c-program">1.1 Writing a Simple C++ Program</a><ul><li><a href="#111-compiling-and-executing-our-program">1.1.1 Compiling and Executing Our Program</a><ul><li><a href="#program-source-file-naming-convention">Program Source File Naming Convention</a></li><li><a href="#running-the-compiler-from-the-command-line">Running the Compiler from the Command Line</a></li></ul></li></ul></li><li><a href="#12-a-first-look-at-inputoutput">1.2 A First Look at Input/Output</a><ul><li><a href="#standard-input-and-output-objects">Standard Input and Output Objects</a></li><li><a href="#a-program-that-uses-the-io-library">A Program That Uses the IO Library</a></li><li><a href="#writing-to-a-stream">Writing to a Stream</a></li><li><a href="#using-names-from-the-standard-library">Using Names from the Standard Library</a></li><li><a href="#reading-from-a-stream">Reading from a Stream</a></li></ul></li></ul></li><li><a href="#13-a-word-about-comments">1.3 A Word about Comments</a></li><li><a href="#14-flow-of-control">1.4 Flow of Control</a><ul><li><a href="#141-the-while-statement">1.4.1 The <code class="language-plaintext highlighter-rouge">while</code> Statement</a></li><li><a href="#142-the-for-statement">1.4.2 The <code class="language-plaintext highlighter-rouge">for</code> Statement</a></li><li><a href="#143-reading-an-unknown-number-of-inputs">1.4.3 Reading an Unknown Number of Inputs</a></li><li><a href="#144-the-if-statement">1.4.4 The <code class="language-plaintext highlighter-rouge">if</code> Statement</a></li></ul></li><li><a href="#15-introducing-classes">1.5 Introducing Classes</a><ul><li><a href="#151-the-sales_item-class">1.5.1 The <code class="language-plaintext highlighter-rouge">Sales_item</code> Class</a></li><li><a href="#152-a-first-look-at-member-functions">1.5.2 A First Look at Member Functions</a></li></ul></li><li><a href="#chapter-summary">Chapter Summary</a></li><li><a href="#defined-terms">Defined Terms</a></li></ul></li><li><a href="#references">References</a></li></ul>
+
+      </div>
+      </br><h2 id="chapter-1-getting-started">Chapter 1. Getting Started</h2>
+
+<h3 id="11-writing-a-simple-c-program">1.1 Writing a Simple C++ Program</h3>
+
+<p><strong>Every C++ program contains one or more functions, one of which must be named <code class="language-plaintext highlighter-rouge">main</code>. The operating system runs a C++ program by calling <code class="language-plaintext highlighter-rouge">main</code>.</strong> Here is a simple version of <code class="language-plaintext highlighter-rouge">main</code> that returns a value to the operating system:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>On most systems, the value returned from <code class="language-plaintext highlighter-rouge">main</code> is a status indicator. A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A nonzero return has a meaning that is defined by the system. Ordinarily a nonzero return indicates what kind of error occurred.</strong></p>
+
+<h4 id="111-compiling-and-executing-our-program">1.1.1 Compiling and Executing Our Program</h4>
+<p>Having written the program, we need to compile it.</p>
+
+<p><strong>Integrated development environment (IDE) bundles the compiler with build and analysis tools.</strong> Most compilers, including those that come with an IDE, provide a command line interface. It is usually easier to get started with a command line interface, rather than an IDE.</p>
+
+<h5 id="program-source-file-naming-convention">Program Source File Naming Convention</h5>
+
+<p>Program files are normally referred to as a <strong>source files</strong>. The suffix of the file tells the system that the file is a C++ program.  Different compilers use different suffix conventions; the most common include <code class="language-plaintext highlighter-rouge">.cc</code>, <code class="language-plaintext highlighter-rouge">.cxx</code>, <code class="language-plaintext highlighter-rouge">.cpp</code>, <code class="language-plaintext highlighter-rouge">.cp</code>, and <code class="language-plaintext highlighter-rouge">.C</code>.</p>
+
+<h5 id="running-the-compiler-from-the-command-line">Running the Compiler from the Command Line</h5>
+
+<p>If we are using a command-line interface, we will typically compile a program in a console window (such as a shell window on a UNIX system or a Command Prompt window on Windows). <strong>The compiler generates an executable file.</strong></p>
+
+<p>The command used to run the C++ compiler varies across compilers and operating systems. The most common compilers are the GNU compiler and the Microsoft Visual Studio compilers.</p>
+
+<p>The command to run the GNU compiler is <code class="language-plaintext highlighter-rouge">g++</code>. Assuming that our <code class="language-plaintext highlighter-rouge">main</code> program is in a file named <code class="language-plaintext highlighter-rouge">prog1.cc</code>, we might compile it by using a command such as</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>g++ <span class="nt">-o</span> prog1 prog1.cc
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">$</code> is the system prompt. The <code class="language-plaintext highlighter-rouge">-o prog1</code> is an argument to the compiler and names the file in which to put the executable file as <code class="language-plaintext highlighter-rouge">prog1</code>. This command generates an executable file named <code class="language-plaintext highlighter-rouge">prog1</code> on UNIX systems and <code class="language-plaintext highlighter-rouge">prog1.exe</code> on Windows. If the <code class="language-plaintext highlighter-rouge">-o prog1</code> is omitted, the compiler generates an executable named <code class="language-plaintext highlighter-rouge">a.out</code> on UNIX systems and <code class="language-plaintext highlighter-rouge">a.exe</code> on Windows.</p>
+
+<p>To run the executable <code class="language-plaintext highlighter-rouge">prog1</code> on UNIX:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./prog1
+</code></pre></div></div>
+
+<p>The value returned from <code class="language-plaintext highlighter-rouge">main</code> is accessed in a system-dependent manner. After executing the program, we issue an appropriate <code class="language-plaintext highlighter-rouge">echo</code> command to obtain the status:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</code></pre></div></div>
+
+<h3 id="12-a-first-look-at-inputoutput">1.2 A First Look at Input/Output</h3>
+
+<p>The C++ language does not define any statements to do input or output (IO). Instead, C++ includes an extensive <strong>standard library</strong> that provides IO (and many other facilities).</p>
+
+<p>Most of the examples in this book use the <code class="language-plaintext highlighter-rouge">iostream</code> library. Fundamental to the <code class="language-plaintext highlighter-rouge">iostream</code> library are two types named <code class="language-plaintext highlighter-rouge">istream</code> and <code class="language-plaintext highlighter-rouge">ostream</code>, which represent input and output streams, respectively. A stream is a sequence of characters read from or written to an IO device. The term stream is intended to suggest that the characters are generated, or consumed, sequentially over time.</p>
+
+<h5 id="standard-input-and-output-objects">Standard Input and Output Objects</h5>
+
+<p><strong>The <code class="language-plaintext highlighter-rouge">iostream</code> library defines four IO objects.</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Object name</th>
+      <th>Type</th>
+      <th>Used for</th>
+      <th>Also known as</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cin</code></td>
+      <td><code class="language-plaintext highlighter-rouge">istream</code></td>
+      <td>Input</td>
+      <td>Standard input</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ostream</code></td>
+      <td>Output</td>
+      <td>Standard output</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cerr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ostream</code></td>
+      <td>Warning and error messages</td>
+      <td>Standard error</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">clog</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ostream</code></td>
+      <td>General information about the execution of the program</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Ordinarily, the system associates each of these objects with the window in which the program is executed. So, when we read from <code class="language-plaintext highlighter-rouge">cin</code>, data are read from the window in which the program is executing, and when we write to <code class="language-plaintext highlighter-rouge">cout</code>, <code class="language-plaintext highlighter-rouge">cerr</code>, or <code class="language-plaintext highlighter-rouge">clog</code>, the output is written to the same window.</p>
+
+<h5 id="a-program-that-uses-the-io-library">A Program That Uses the IO Library</h5>
+
+<p>Using the IO library, we can extend our main program to prompt the user to give us two numbers and then print their sum:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter two numbers:"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"The sum of "</span> <span class="o">&lt;&lt;</span> <span class="n">v1</span> <span class="o">&lt;&lt;</span> <span class="s">" and "</span> <span class="o">&lt;&lt;</span> <span class="n">v2</span>
+              <span class="o">&lt;&lt;</span> <span class="s">" is "</span> <span class="o">&lt;&lt;</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The first line of our program <code class="language-plaintext highlighter-rouge">#include &lt;iostream&gt;</code> tells the compiler that we want to use the <code class="language-plaintext highlighter-rouge">iostream</code> library. The name inside angle brackets (<code class="language-plaintext highlighter-rouge">iostream</code> in this case) refers to a header. Every program that uses a library facility must include its associated header.</p>
+
+<h5 id="writing-to-a-stream">Writing to a Stream</h5>
+
+<p>In C++ an <strong>expression</strong> yields a result and is composed of one or more <strong>operands</strong> and (usually) an <strong>operator</strong>.</p>
+
+<p>The output operator <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> writes the given value (right-hand operand) on the given <code class="language-plaintext highlighter-rouge">ostream</code> object (left-hand operand). The output operator returns its left-hand operand as its result. The following three expressions are equivalent:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter two numbers:"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter two numbers:"</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter two numbers:"</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The second operator prints <code class="language-plaintext highlighter-rouge">endl</code>, which is a special value called a manipulator. Writing <code class="language-plaintext highlighter-rouge">endl</code> has the effect of ending the current line and flushing the buffer associated with that device. Flushing the buffer ensures that all the output the program has generated so far is actually written to the output stream, rather than sitting in memory waiting to be written.</p>
+
+<h5 id="using-names-from-the-standard-library">Using Names from the Standard Library</h5>
+
+<p>The prefix <code class="language-plaintext highlighter-rouge">std::</code> of <code class="language-plaintext highlighter-rouge">std::cout</code> and <code class="language-plaintext highlighter-rouge">std::endl</code> indicates that the names <code class="language-plaintext highlighter-rouge">cout</code> and <code class="language-plaintext highlighter-rouge">endl</code> are defined inside the <strong>namespace</strong> named <code class="language-plaintext highlighter-rouge">std</code>. <strong>All the names defined by the standard library are in the <code class="language-plaintext highlighter-rouge">std</code> namespace.</strong></p>
+
+<p>Rather than using the prefix <code class="language-plaintext highlighter-rouge">std::</code>, we can also write the line <code class="language-plaintext highlighter-rouge">using namespace std;</code> to make all the names in the <code class="language-plaintext highlighter-rouge">std</code> namespace available, then you can use names defined in the <code class="language-plaintext highlighter-rouge">std</code> namespace without using the <code class="language-plaintext highlighter-rouge">std::</code> prefix; [^2]</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>	
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter two numbers:"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This way simplifies the code but modern practice regards this as a bit lazy and potentially a problem in large projects. The preferred approaches are to use the <code class="language-plaintext highlighter-rouge">std::</code> qualifier or to use something called a <code class="language-plaintext highlighter-rouge">using</code> declaration to make just particular names available: [^2]</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span> <span class="c1">// make cout available</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// make endl available</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">;</span> <span class="c1">// make cin available</span>
+</code></pre></div></div>
+
+<h5 id="reading-from-a-stream">Reading from a Stream</h5>
+
+<p>The input operator <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> reads data from the given <code class="language-plaintext highlighter-rouge">istream</code> object (left-hand operand) and stores what was read in the given object (right-hand operand). Like the output operator, the input operator returns its left-hand operand as its result.</p>
+
+<p>The following three expressions are equivalent:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v1</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">v2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="13-a-word-about-comments">1.3 A Word about Comments</h3>
+
+<p>Single-line comments start with <code class="language-plaintext highlighter-rouge">//</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// a comment</span>
+</code></pre></div></div>
+
+<p>Multi-line comments start with <code class="language-plaintext highlighter-rouge">/*</code> and ends with <code class="language-plaintext highlighter-rouge">*/</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 
+ This is 
+ a comment 
+*/</span>
+</code></pre></div></div>
+
+<h3 id="14-flow-of-control">1.4 Flow of Control</h3>
+
+<h4 id="141-the-while-statement">1.4.1 The <code class="language-plaintext highlighter-rouge">while</code> Statement</h4>
+
+<p>For example,</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>
+	<span class="o">++</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="142-the-for-statement">1.4.2 The <code class="language-plaintext highlighter-rouge">for</code> Statement</h4>
+
+<p>For example,</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="143-reading-an-unknown-number-of-inputs">1.4.3 Reading an Unknown Number of Inputs</h4>
+
+<p>For example,</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="n">value</span><span class="p">;</span> 
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Sum is: "</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If we give this program the input <code class="language-plaintext highlighter-rouge">3 4 5 6</code> then our output will be <code class="language-plaintext highlighter-rouge">Sum is: 18</code>.</p>
+
+<p>The input operator returns its left operand, which in this case is <code class="language-plaintext highlighter-rouge">std::cin</code>. This condition, therefore, tests <code class="language-plaintext highlighter-rouge">std::cin</code>. An <code class="language-plaintext highlighter-rouge">istream</code> becomes invalid when we hit <code class="language-plaintext highlighter-rouge">end-of-file</code> or encounter an invalid input, such as reading a value that is not an integer. An <code class="language-plaintext highlighter-rouge">istream</code> that is in an invalid state will cause the condition to yield false.</p>
+
+<h4 id="144-the-if-statement">1.4.4 The <code class="language-plaintext highlighter-rouge">if</code> Statement</h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">){</span>
+    <span class="n">expressions</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">{</span>
+    <span class="n">expressions</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">expressions</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="15-introducing-classes">1.5 Introducing Classes</h3>
+
+<p><strong>In C++ we define our own data structures by defining a class.</strong> <strong>A class defines a type along with a collection of operations that are related to that type.</strong> The class mechanism is one of the most important features in C++. In fact, a primary focus of the design of C++ is to make it possible to define class types that behave as naturally as the built-in types.</p>
+
+<p>As we’ve seen, to use a library facility, we must include the associated header. Similarly, we use headers to access classes defined for our own applications. Conventionally, header file names are derived from the name of a class defined in that header. Header files that we write usually have a suffix of <code class="language-plaintext highlighter-rouge">.h</code>, but some programmers use <code class="language-plaintext highlighter-rouge">.H</code>, <code class="language-plaintext highlighter-rouge">.hpp</code>, or <code class="language-plaintext highlighter-rouge">.hxx</code>. The standard library headers typically have no suffix at all. Compilers usually don’t care about the form of header file names, but IDEs sometimes do.</p>
+
+<h4 id="151-the-sales_item-class">1.5.1 The <code class="language-plaintext highlighter-rouge">Sales_item</code> Class</h4>
+
+<p><strong>Every class defines a type. The type name is the same as the name of the class.</strong> Hence, our <code class="language-plaintext highlighter-rouge">Sales_item</code> class defines a type named <code class="language-plaintext highlighter-rouge">Sales_item</code>. As with the built-in types, we can define a variable of a class type. When we write <code class="language-plaintext highlighter-rouge">Sales_item item;</code>, we are saying that item is an object of type <code class="language-plaintext highlighter-rouge">Sales_item</code>. We often contract the phrase “an object of type <code class="language-plaintext highlighter-rouge">Sales_item</code>” to “a <code class="language-plaintext highlighter-rouge">Sales_item</code> object” or even more simply to “a <code class="language-plaintext highlighter-rouge">Sales_item</code>”.</p>
+
+<p>The following program reads data from the standard input into a <code class="language-plaintext highlighter-rouge">Sales_item</code> object and writes that <code class="language-plaintext highlighter-rouge">Sales_item</code> back onto the standard output:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">"Sales_item.h"</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">Sales_item</span> <span class="n">book</span><span class="p">;</span>
+	<span class="c1">// read ISBN, number of copies sold, and sales price</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">book</span><span class="p">;</span>
+	<span class="c1">// write ISBN, number of copies sold, total revenue, and average price</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">book</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Headers from the standard library are enclosed in angle brackets (<code class="language-plaintext highlighter-rouge">&lt; &gt;</code>). Those that are not part of the library are enclosed in double quotes (<code class="language-plaintext highlighter-rouge">" "</code>).</p>
+
+<p>TIP: USING FILE REDIRECTION</p>
+
+<p>It can be tedious to repeatedly type these transactions as input to the programs you are testing. Most operating systems support file redirection, which lets us associate a named file with the standard input and the standard output:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>addItems &lt;infile <span class="o">&gt;</span>outfile
+</code></pre></div></div>
+
+<p>Assuming <code class="language-plaintext highlighter-rouge">$</code> is the system prompt and our addition program has been compiled into an executable file named <code class="language-plaintext highlighter-rouge">addItems.exe</code> on Windows (or <code class="language-plaintext highlighter-rouge">addItems</code> on UNIX systems), this command will read transactions from a file named <code class="language-plaintext highlighter-rouge">infile</code> and write its output to a file named <code class="language-plaintext highlighter-rouge">outfile</code> in the current directory.</p>
+
+<h4 id="152-a-first-look-at-member-functions">1.5.2 A First Look at Member Functions</h4>
+
+<p><strong>A member function (or a method) is a function that is defined as part of a class.</strong></p>
+
+<h3 id="chapter-summary">Chapter Summary</h3>
+
+<h3 id="defined-terms">Defined Terms</h3>
+
+<p><strong>header</strong> Mechanism whereby the definitions of a class or other names are made available to multiple programs. A program uses a header through a <code class="language-plaintext highlighter-rouge">#include</code> directive.</p>
+
+<p><strong>main</strong> Function called by the operating system to execute a C++ program. Each program must have one and only one function named main.</p>
+
+<p><strong>namespace</strong> Mechanism for putting names defined by a library into a single place. Namespaces help avoid inadvertent name clashes. The names defined by the C++ library are in the namespace <code class="language-plaintext highlighter-rouge">std</code>.</p>
+
+<p><strong>standard library</strong> Collection of types and functions that every C++ compiler must support. The library provides the types that support IO. C++ programmers tend to talk about “the library”, meaning the entire standard library. They also tend to refer to particular parts of the library by referring to a library type, such as the “<code class="language-plaintext highlighter-rouge">iostream</code> library”, meaning the part of the standard library that defines the IO classes.</p>
+
+<p><strong>std</strong> Name of the namespace used by the standard library. <code class="language-plaintext highlighter-rouge">std::cout</code> indicates that we’re using the name <code class="language-plaintext highlighter-rouge">cout</code> defined in the std namespace.</p>
+
+<p><strong>variable</strong> A named object.</p>
+
+<p><strong>. operator</strong> Dot operator. Left-hand operand must be an object of class type and the right-hand operand must be the name of a member of that object. The operator yields the named member of the given object.</p>
+
+<p><strong>:: operator</strong> Scope operator. Among other uses, the scope operator is used to access names in a namespace.</p>
+
+<p><br /></p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Lippman, Stanley B., Josée Lajoie, and Barbara E. Moo. <em>C++ Primer</em>. Addison-Wesley Professional, 2012.</p>
+
+<p>[2] Prata, Stephen. <em>C++ primer plus</em>. Addison-Wesley Professional, 2011.</p>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>

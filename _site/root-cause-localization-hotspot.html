@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://kit.fontawesome.com/123ecac47c.js" crossorigin="anonymous"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="shortcut icon" type="image/png" href="/assets/portfolio.png">
+<title>Root Cause Localization: HotSpot</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Root Cause Localization: HotSpot | Weikai’s blog.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Root Cause Localization: HotSpot" />
+<meta name="author" content="Weikai Mao" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The contents in this post are excerpted from the paper “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes” 1. Sun, Yongqian, et al. “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes.” IEEE Access 6 (2018): 10909-10923. &#8617;" />
+<meta property="og:description" content="The contents in this post are excerpted from the paper “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes” 1. Sun, Yongqian, et al. “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes.” IEEE Access 6 (2018): 10909-10923. &#8617;" />
+<link rel="canonical" href="http://localhost:4000/root-cause-localization-hotspot.html" />
+<meta property="og:url" content="http://localhost:4000/root-cause-localization-hotspot.html" />
+<meta property="og:site_name" content="Weikai’s blog." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-06T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Root Cause Localization: HotSpot" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Weikai Mao"},"dateModified":"2021-06-06T00:00:00+08:00","datePublished":"2021-06-06T00:00:00+08:00","description":"The contents in this post are excerpted from the paper “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes” 1. Sun, Yongqian, et al. “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes.” IEEE Access 6 (2018): 10909-10923. &#8617;","headline":"Root Cause Localization: HotSpot","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/root-cause-localization-hotspot.html"},"url":"http://localhost:4000/root-cause-localization-hotspot.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<meta name="google-site-verification" content="wXp8C1QlYKCpKxfXyFfQXEv9l5fJvcOi53ofYmOcaSA" />
+<meta name="msvalidate.01" content="97F0BB32D312B808156DE357EA8474D3" />
+<meta name="yandex-verification" content="690106a82d8966ab" />
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno"
+      }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>    
+
+
+  
+
+
+
+
+
+
+
+</head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/" class="iconlink"> 
+          <h3> 
+            <i class="fas fa-home"></i> HOME 
+          </h3> 
+        </a>
+        <a href="/"> <img src="/assets/portfolio.png" alt="Weikai Mao"></a>
+        <h2 id="title"> Weikai Mao </h2>
+        <p style="font-size:90%" class="tagline">maoweikai123@outlook.com</p>
+        
+        <ul class="social"><a href="https://github.com/WalkerMao">
+              <li>
+                <i class="fab fa-github"></i>
+              </li>
+            </a><a href="https://www.linkedin.com/in/weikai-mao-000249124">
+              <li>
+                <i class="fab fa-linkedin"></i>
+              </li>
+            </a><a href="/wechat-qr-code.html">
+              <li>
+                <i class="fab fa-weixin"></i>
+              </li>
+            </a></ul><h3 style="color:gray; font-weight:normal"> Categories: </h3>
+            <ul class="post-categories" style="max-width:225px;">
+              
+                  <a class="post-link" href="/"> <li style="padding: 4px 8px;"> All </li> </a>
+              
+                  <a class="post-link" href="/categories/cs"> <li style="padding: 4px 8px;"> CS </li> </a>
+              
+                  <a class="post-link" href="/categories/cv"> <li style="padding: 4px 8px;"> CV </li> </a>
+              
+                  <a class="post-link" href="/categories/dl"> <li style="padding: 4px 8px;"> DL </li> </a>
+              
+                  <a class="post-link" href="/categories/fe"> <li style="padding: 4px 8px;"> FE </li> </a>
+              
+                  <a class="post-link" href="/categories/math"> <li style="padding: 4px 8px;"> Math </li> </a>
+              
+                  <a class="post-link" href="/categories/ml"> <li style="padding: 4px 8px;"> ML </li> </a>
+              
+                  <a class="post-link" href="/categories/nlp"> <li style="padding: 4px 8px;"> NLP </li> </a>
+              
+                  <a class="post-link" href="/categories/stat"> <li style="padding: 4px 8px;"> Stat </li> </a>
+              
+                  <a class="post-link" href="/categories/杂"> <li style="padding: 4px 8px;"> 杂 </li> </a>
+              
+            </ul><p>&copy; 2023 </p>
+
+      </section>
+      <section class="content">
+        <div class="sidebar">
+  <ul><li><a href="#introduction">Introduction</a></li><li><a href="#problem-definition">Problem Definition</a><ul><li><a href="#important-terms">Important Terms</a></li><li><a href="#problem-statement">Problem Statement</a></li><li><a href="#challenges">Challenges</a></li></ul></li><li><a href="#core-idea-and-overview">Core Idea and Overview</a></li><li><a href="#design-of-hotspot">Design of HotSpot</a><ul><li><a href="#potential-score">Potential Score</a><ul><li><a href="#ripple-effect">Ripple Effect</a></li><li><a href="#potential-score-1">Potential Score</a></li></ul></li><li><a href="#mcts-algorithm">MCTS Algorithm</a><ul><li><a href="#selection">Selection</a></li><li><a href="#expansion">Expansion</a></li><li><a href="#evaluation">Evaluation</a></li><li><a href="#backup">Backup</a></li></ul></li><li><a href="#hierarchical-pruning">Hierarchical Pruning</a></li><li><a href="#the-overall-algorithm">The Overall Algorithm</a></li></ul></li></ul>
+
+</div><div class="post-container" id="viewpoint">
+  <a class="post-link" href="/root-cause-localization-hotspot.html">
+    <h2 class="post-title">Root Cause Localization: HotSpot</h2>
+  </a>
+  <div class="post-meta">
+    <div>
+      <ul class="post-categories"><a class="post-link" href="/categories/ml"> <li>ML</li> </a></ul>
+      <ul class="post-tags"><a class="post-link" href="/tags/root cause localization"> <li>Root cause localization</li> </a></ul>
+    </div>
+    <div class="post-date">
+      <i class="icon-calendar"></i>
+      Jun 6, 2021
+    </div>
+  </div>
+  <div style="line-height:77%;">
+    <br>
+  </div>
+  <div class="post"><p>The contents in this post are excerpted from the paper “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes” <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This paper proposes an approach, called HotSpot, to automatically localize the root cause, one (or more) combination of attribute values in multiple dimensions. In this paper, our measure (or called KPI) is page view (PV).</p>
+
+<h3 id="problem-definition">Problem Definition</h3>
+
+<h4 id="important-terms">Important Terms</h4>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun.t1-2804764-large.gif" alt="Table 1: Terms" style="zoom:180%;" />
+<figcaption style="font-size:80%;"> Table 1. Terms (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>A vector of the distinct attribute value combination is called an element in this paper, denoted as \(e=(p, i, d, c)\), where \((p \in \mathrm{P} \text{ or } p=*)\), \((i \in \mathrm{I} \text{ or } i=*)\), \((d \in \mathrm{D} \text{ or } d=*)\), and \((c \in \mathrm{C} \text{ or } c=*)\), \(*\) is the wildcard. Here, the “distinct” means that an element can be \((\text{Beijing}, \text{Mobile})\) or \((*, \text{Mobile})\), but cannot be \((\text{Beijing } \lor \text{ Shanghai}, \text{Mobile})\). Denote the real value according an element \(e\) as \(v(e)\). Denote the collection of all the most fine-grained elements as \(\text{LEAF} = \{e \mid e=(p,i,d,c), p\neq*, i\neq*, d\neq*, c\neq*\}\).</p>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun1-2804764-large.gif" alt="img" style="zoom:70%;" />
+<figcaption style="font-size:80%;"> Figure 1. A 4-d data cube, represented as aseries of 3-d data cubes (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>As shown in Figure 1, the elements of \(\text{LEAF}\) constitute a 4-d data cube. The cuboid is denoted as \(B_{i}\) (\(i\) can be an arbitrary combination of \(P, I, D\) and \(C\)), e.g., \(B_{P}\) is a 1-d cuboid and \(B_{P, I, D}\) is a 3-d cuboid. The element set of a cuboid \(B_{i}\) is denoted as \(E(B_i)\), e.g., \(E\left(B_{P}\right)=\{e \mid e=(p, *, *, *), p \neq *\}\), \(E\left(B_{P, I, D}\right)=\{e \mid e=(p, i, d, *), p \neq *, i \neq *, d \neq *\}\), \(\text{LEAF} = E\left(B_{P, I, D, C}\right)\).</p>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun2-2804764-large.gif" alt="img" style="zoom:60%;" />
+<figcaption style="font-size:80%;"> Figure 2.
+Cuboids in a 4-d data. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+<p>Moreover, we structure the cuboids and label layer IDs for them, as shown in Figure 2. In addition, we say \(B_{P}\) or \(B_{I}\) is a father cuboid of \(B_{P, I}\), and \(B_{P, I}\) is a child cuboid of \(B_{P}\) or \(B_{I}\). Accordingly, the elements of the cuboids, such as \((p, *, *, *)\left(\in E\left(B_{P}\right)\right)\) and \((p, i, *, *)\left(\in E\left(B_{P, I}\right)\right)\), also have the father-and-child relationships.</p>
+
+<p>We denote \(e^{\prime}=\left(p^{\prime}, i^{\prime}, d^{\prime}, c^{\prime}\right)\) as a descendant of \(e=(p, i, d, c)\) iff \(\left(e \neq e^{\prime}\right)\) and \(\left(p^{\prime}=p\right.\) or \(\left.p=*\right)\) and \(\left(i^{\prime}=i\right.\) or \(i=*\) ) and \(\left(d^{\prime}=d\right.\) or \(d=*\) ) and \(\left(c^{\prime}=c\right.\) or \(\left.c=*\right) . \operatorname{Desc}(e)=\left\{e^{\prime} \mid e^{\prime}\right.\) is a descendant of \(\left.e\right\}\). \(\operatorname{Desc}^{\prime}(e)=\left\{e^{\prime} \mid e^{\prime}=\left(p^{\prime}, i^{\prime}, d^{\prime}, c^{\prime}\right) \in L E A F, e^{\prime} \in \operatorname{Desc}(e)\right\}\). If \(e \in L E A F\), then PV value \(v(e)\) is directly measured. Otherwise,</p>
+
+\[v(e)=\sum _{e'\in Desc'(e)}{v(e')}\]
+
+<p>e.g.,</p>
+
+\[v(\text{Beijing},*,*,*) = \sum _{j,k,h}{v(\text{Beijing}, i_{j}, d_{k}, c_{h})}, \\
+\text{Total}~PV=v(*,*,*,*)\!=\!\sum _{i,j,k,h}{v(p_{i}, i_{j}, d_{k}, c_{h})}.\]
+
+<h4 id="problem-statement">Problem Statement</h4>
+
+<p>The additive KPI (with multi-dimensional attributes) anomaly localization problem is to <strong>identify the cuboid and its elements</strong> that most potentially have caused the anomalous change of the total KPI value.</p>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun.t4-2804764-large.gif" alt="img" style="zoom:58%;" />
+<figcaption style="font-size:70%;"> Table 4. A simple PV structure. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+<p>As an example shown in Table 4, each cuboid contains a set of elements, i.e., \(E(BP)=\{(\text{Beijing},∗),(\text{Shanghai},∗),(\text{Guangdong},∗)\}\), \(E(BI)=\{(∗, \text{Mobile}),(∗,\text{Unicom})\}\), \(\text{LEAF} = E(BP,I)=(\text{Beijing}, \text{Mobile}) , (\text{Shanghai}, \text{Mobile}) , (\text{Guangdong}, \text{Mobile}) ,\) \((\text{Beijing}, \text{Unicom}) , (\text{Shanghai}, \text{Unicom}) , (\text{Guangdong}, \text{Unicom})\). \(v(p,i)\) are shown in the cells of the table, e.g., \(v(\text{Beijing}, \text{Mobile})=20\), \(v(\text{Beijing},∗)=30\).</p>
+
+<p>The problem of anomaly localization for additive KPIs can be restated as follows:</p>
+
+<p>Effectively and efficiently identify the most potential root cause, i.e., a subset of elements of one specific cuboid \(B_i\), for a total KPI value anomaly. The root cause set \(\text{RSet} \subseteq  E(B_i)\).</p>
+
+<p>Note that this definition allows the multiple elements within the same cuboid as the root cause set. For instance, a root cause can be \(\text{RSet}=\{(\text{Beijing},∗),(\text{Shanghai},∗)\}\). However, this definition excludes the cases where there are simultaneous root causes in multiple cuboids, which is extremely rare in reality. Also note that we only deal with the case where total KPI value is anomalous.</p>
+
+<h4 id="challenges">Challenges</h4>
+
+<p>There are mainly two challenges for our anomaly localization problem.</p>
+
+<ol>
+  <li>
+    <p>How to measure the potential of an attribute combination set to be the root cause?</p>
+  </li>
+  <li>
+    <p>How to design the searching and pruning strategy to localize the root cause from a huge search space?</p>
+  </li>
+</ol>
+
+<h3 id="core-idea-and-overview">Core Idea and Overview</h3>
+
+<p>For challenge 1, we propose <strong>Potential Score</strong> as the metrical function.</p>
+
+<p>For challenge 2, we apply <strong>Monte Carlo Tree Search (MCTS)</strong> algorithm and hierarchical pruning strategy.</p>
+
+<p>Recall that the root cause set \(\text{RSet}\) is one of the \(2^n-1\) subsets of a cuboid with \(n\) elements inside.</p>
+
+<h3 id="design-of-hotspot">Design of HotSpot</h3>
+
+<p>HotSpot searches the sets of cuboids layer by layer, i.e., from layer \(1\) to layer \(L\) (\(L\) is the number of layers). For each cuboid of a given layer, HotSpot applies <strong>MCTS</strong> to find its subset with the largest <strong>potential score</strong> (ps), which is called <strong>best set</strong> (abbreviated \(\text{BSet}\)) of this cuboid. When going from a layer to the next layer, <strong>hierarchical pruning</strong> is used. We repeat this process until layer \(L\) is searched, or the root cause set \(\text{RSet}\) (\(ps(\text{RSet}) &gt; PT\)) is obtained, where \(PT\) (\(ps\) Threshold) is a threshold that we think it is large enough to be regarded as the root cause set when a set with a \(ps &gt; PT\). The final output \(\text{RSet}\) is the \(\text{BSet}\) with the largest \(ps\) among all \(\text{BSet}\)s generated by the algorithm.</p>
+
+<h4 id="potential-score">Potential Score</h4>
+
+<p>Our idea for this Potential Score is based on the following intuition: when the KPI value at a root cause element changes, all its descendant LEAF elements’ KPI values also change accordingly.</p>
+
+<h5 id="ripple-effect">Ripple Effect</h5>
+
+<p>Generally, when the value of a root cause element increases or decreases, it obeys the <strong>ripple effect</strong> property as follows:</p>
+
+<p>Let \(x\) denote an element that is not in \(\text{LEAF}\), i.e., \(x \notin \text{LEAF}\). Let \(x_{i}^{\prime}\) denote the descendant elements of \(x\) in \(\text{LEAF}\), i.e., \(x_{i}^{\prime} \in \operatorname{Desc}^{\prime}(x)\). When the PV value of \(x\) changes by \(h(x)\), i.e., \(h(x)=f(x)-v(x), x_{i}^{\prime}\) will get its share of \(h(x)\) according to the proportions of their forecast values, i.e.,</p>
+
+\[v(x'_{i}) = f(x'_{i}) - h(x) \times \dfrac {f(x'_{i})}{f(x)}, ~(f(x)\neq 0).\]
+
+<h5 id="potential-score-1">Potential Score</h5>
+
+<p>The ripple effect reveals how a root cause set affects many other elements’ values. Therefore, to <strong>measure the potential of a set to be the root cause</strong>, we propose to 1) assume that the set \(S\) is the root cause, 2) deduce new PV values of the descendant elements in \(\text{LEAF}\) based on the ripple effect, and 3) compare all the actual PV values with the newly deduced PV values of \(\text{LEAF}\) elements. The closer the two kinds of values are, the more potential the set has to be the root cause set.</p>
+
+<p>If \(y_{i} \in \text{LEAF}\), we denote the newly deduced PV values of an assumed root cause set \(S\) with \(a(y_{i})\). if \(y_{i} \notin \operatorname{Desc}^{\prime}(S)\), \(a(y_{i})=f(y_{i})\). Let \(\vec{a}\) be the vector of \(a(y_{i})\), i.e., \(\vec{a}=[a(y_{1}), a(y_{2}), a(y_{3}), \ldots, a(y_{n})]\), where \(n\) is the element count of \(\text{LEAF}\). Similarly, let \(\vec{v}=[v(y_{1}), v(y_{2}), v(y_{3}), \ldots, v(y_{n})], \vec{f}=[f(y_{1}), f(y_{2}), f(y_{3}), \ldots, f(y_{n})]\). Then we define the Potential Score \((p s)\) of a set \(S\):</p>
+
+\[\text { Potential Score }=\max \left(1-\frac{d(\vec{v}, \vec{a})}{d(\vec{v}, \vec{f})}, 0\right),\]
+
+<p>where \(d(\vec{u}, \vec{w})\) represents the distance of the vectors \(\vec{u}\) and \(\vec{w}\). Here we adopt the Euclidean distance:</p>
+
+\[d(\vec{u}, \vec{w})=\sqrt{\sum_{i}\left(u_{i}-w_{i}\right)^{2}}\]
+
+<p>The potential score of a set ranges from 0 to 1, i.e., \([0,1]\). If a set has a higher score, it will be considered to have higher potential to be the root cause.</p>
+
+<p>When two element sets have the same potential score, we follow a “succinctness” principle. i.e., the one with less number of element wins, either following the Occam’s razor principle or because the elements of one set are collectively the ancestors (preferred as root cause) of those in the other. E.g. \(\{(\text{Beijing},*)\}\) is more succinct than  \(\{(\text{Beijing},\text{Mobile})\}\), and is also more succinct than \(\{(\text{Beijing},*), (\text{Shanghai},*)\}\).</p>
+
+<h4 id="mcts-algorithm">MCTS Algorithm</h4>
+
+<p><strong>For a given cuboid \(B\), we apply MCTS to obtain the best set</strong> (the subset with the largest potential score of this cuboid). Suppose there are n elements in \(E(B)\). The search space within \(B\) for the root cause set is \(2^n-1\), which apparently can be very large for a large \(n\).</p>
+
+<p>MCTS is a heuristic method for searching optimal decisions in a given domain by taking random samples in the decision space and building a search tree according to the results from existing random examples. At the very high-level, MCTS tries to balance the exploitation along those promising branches and the <em>exploration</em> along those unexplored branches.</p>
+
+<p>In MCTS, each node represents a <strong>state</strong> \(s\) (the root can be regarded as \(\varnothing\)). An <strong>action space</strong> \(A(s)\) contains all the legal actions that can be taken at \(s\). The algorithm can move from one state \(s\) to another by taking a legal action, named \(a \in A(s)\), via the <strong>edge</strong> \((s, a)\). There can be variables associated with an edge, used by the algorithm to indicate the “value” of taking action \(a\) at state \(s\).</p>
+
+<p>We adopt MCTS to our anomaly localization problem in a cuboid as follows. We first calculate \(p s(e)\) for each \(e\) in this cuboid, and rank all \(e\) according to \(p s(e)\). Each state \(s\) corresponds to the candidate <strong>root cause set</strong> \(S(s)\) that is currently being explored. \(N(s)\) is the number of times \(s\) has been visited. We setup three variables for each edge \((s, a) . N(s, a)\) is <strong>visit count</strong>, i.e., the number of times that edge \((s, a)\) has been visited. \(p s(S(s))\) is the potential score of set \(S(s)\). Suppose \(s\) transitions to \(s^{\prime}\) following \((s, a)\). Then edge \((s, a)\) ‘s <strong>action value</strong> \(Q(s, a)=\max _{u \in\left\{s^{\prime}\right\} \cup \operatorname{descendent}\left(s^{\prime}\right)} p s(S(u))\), which equals the <strong>maximum potential score</strong> of \(s^{\prime}\) and its descendant nodes in the tree. \(Q(s, a)\) is initialized to be \(p s(S(s))\) for each \(s\). (It is initialized as \(0\) in this <a href="https://github.com/junkfei/Multidimensional_root_cause_analysis">reproduction</a>)</p>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun4abcd-2804764-large.gif" alt="img" style="zoom:80%;" />
+<figcaption style="font-size:80%;"> Figure 4.
+MCTS in HotSpot. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+
+<h5 id="selection">Selection</h5>
+
+<p>The goal of this step is to select a node from the current state tree to be expanded. Each time when this step is executed, the tree traversal always starts with the root state.</p>
+
+<p>Assume that we have advanced to the current state \(s\) in this selection step. If all the actions in \(A(s)\) have been visited in previous iterations, then an action \(a\) is selected from the set of available actions \(A(s)\) by using the Upper Confidence Bound (UCB) algorithm, shown as below:</p>
+
+\[a = \mathop {\arg\max}_{a \in A(s)} \left\{Q(s, a) + C \sqrt{\frac{\ln N(s)}{N(s, a)}}\right\}. \tag{8}\]
+
+<p>\(Q(s, a)\) is the value of taking the move \(a\). The higher the value of \(Q(s, a)\), the larger the chance of move \(a\) is selected in this selection step, which is the exploitation mechanism in MCTS. The second part of the equation is just the standard UCB mechanism for exploration. The balance between exploitation and exploration can be changed by modifying \(C\). A commonly used value of \(C\) is \(\sqrt{2}\), which we choose in this paper, or it can be chosen empirically in practice.</p>
+
+<p>In case there is an action \(a \in A(s)\) that has not been explored at all, equation 8 cannot be applied since \(N(s, a)=0\). Instead, we assign a probability of taking unvisited actions to be \(R=\left(1-Q\left(s, a_{\max }\right)\right)\), where \(a_{\max }=\arg \max _{a \in A(s) \cap N(s, a) \neq 0} Q(s, a)\).</p>
+
+<p>The selection step starts at the root of the tree, and stops when a leaf state is chosen according to equation 8 or an unvisited action is selected. E.g., in Figure 4(a) along with the bold edges, the selection step stops when the leaf state \(\left\{e_{1}, e_{3}\right\}\) is selected.</p>
+
+<h5 id="expansion">Expansion</h5>
+
+<p>After a state \(s\) is selected in the selection step, we then expand the Monte Carlo Tree by adding a new node \(s^{\prime}\), where \(S\left(s^{\prime}\right)=S(s) \cup\left\{e^{*}\right\}\) and \(e^{*}=\arg \max _{e \in\left\{e_{1}, e_{2}, \ldots, e_{n}\right\}-S(s)} p s(e)\). We choose \(e^{*}\) to have the largest \(p s(S)\) value of the remaining elements rather than choosing \(e^{*}\) randomly.</p>
+
+<p>For example, in Figure 4(b), \(s\) (where \(S(s)=\left\{e_{1}, e_{3}\right\}\) ) is selected, and then \(e^{*}=e_{4}\) is added to get \(s^{\prime}\) where \(S\left(s^{\prime}\right)=\left\{e_{1}, e_{3}, e_{4}\right\}\).</p>
+
+<h5 id="evaluation">Evaluation</h5>
+
+<p>To initialize the new node after expansion (e.g., \(\left\{e_{1}, e_{3}, e_{4}\right\}\) in Figure 4(c)), we calculate its \(p s, Q\) and \(N\).</p>
+
+<h5 id="backup">Backup</h5>
+
+<p>Action values \(Q\) and visit count \(N\) on all nodes along path from \(s^{\prime}\) to the root are updated, as illustrated by the bold arrows in Figure 4(b). Recall the definition of \(Q\), along the path, we update the \(Q\) of a father only when the child’s \(Q\) is greater than the father’s.</p>
+
+<p><strong>Localizing the root cause set in a cuboid</strong>. We apply MTCS in each cuboid, for which we iteratively perform the above four steps until at least one of the following three conditions occur:</p>
+
+<ol>
+  <li>A best set is found, i.e., \(\text{BSet} = S\) if \(ps(S) \geq PT\);</li>
+  <li>All the available nodes of the set are expanded;</li>
+  <li>The iteration time is greater than a maximum number \(M\), which is configured empirically.</li>
+</ol>
+
+<p>Under both the second and third terminating conditions, if we have not obtained a set whose \(ps\) is greater than \(PT\), we will return the \(\text{BSet}\) with the greatest \(ps\) as the \(\text{RSet}\).</p>
+
+<h4 id="hierarchical-pruning">Hierarchical Pruning</h4>
+
+<p>In order to further reduce the search space for the cuboids in higher layers, HotSpot applies a hierarchical pruning strategy. The basic idea is that, HotSpot searches the cuboids layer by layer, i.e., from layer \(1\) to layer \(L\). After searching a lower layer, it prunes some elements in the higher layers that is unlikely to be root cause elements.</p>
+
+<p>For each cuboid \(B\) of layer \(l\) \((1 \leq l &lt; L)\), we can obtain the best sets (the subset with the largest potential score of this cuboid) \(\text{BSet}_{l,B}\) using the MCTS algorithm. Our intuition is as follows. If an element \((p_1,i_1,∗,∗)\) in layer \(l+1\) has a high potential score, its father elements \((p_1,∗,∗,∗)\) and \((∗,i_1,∗,∗)\) in layer \(l\) will also have a relatively high potential score. Therefore, if a father element has a very low potential score, each of the children elements is unlikely to be a root cause element. As a result, if an element in layer \(l\) is not in \(\text{BSet}_{l,B}\), HotSpot chooses to prune all its children elements.</p>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun.t7-2804764-small.gif" alt="Table 7. Example for hierarchical pruning." style="zoom:80%;" />
+<figcaption style="font-size:80%;"> Table 7. Example for hierarchical pruning. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+
+<div align="center">
+<figure>
+<img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/6287639/8274985/8288614/sun5-2804764-small.gif" alt="Figure 5. Hierarchical pruning for example in Table 7" style="zoom:80%;" />
+<figcaption style="font-size:80%;"> Figure 5. Hierarchical pruning for example in Table 7. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>We take an example in Table 7 and illustrate our hierarchical pruning approach in Figure 5. Suppose we are in layer 1, and the best sets obtained using MCTS are \(\text{BSet}_{1, B_{P}}=\{(\text{Fujian}, *),(\text{Jiangsu}, *)\}\) with \(p s\left(\text{BSet}_{1, B_{P}}\right)=0.50\), and \(\text{BSet}_{1, B_{I}}=\{(*, \text{Mobile}),(*, \text{Unicom})\}\) with \(ps\left(\text{BSet}_{1, B_{I}}\right)=0.32\). When searching cuboids in layer 2, we prune the elements \((\text{Zhejiang}, \text{Unicom})\) and \((\text{Zhejiang}, \text{Unicom})\) because their father element \((\text{Zhejiang}, *)\) is not in the \(\text{BSets}\) of layer 1. Therefore, we only need to search the remaining four elements for \(B_{P, I}\). This way, the number of potential sets will be reduced from \(63\) to \(15\) (\(2^{6}-1\) to \(2^{4}-1\)). Then using MCTS again in layer 2, we obtain the \(\text{RSet} = \text{BSet}_{2, B_{P, I}} = \{(\text{Fujian}, \text{Mobile}), (\text{Jiangsu}, \text{Unicom}) \}\), where \(ps(\text{BSet}_{2,B_{P, I}})=1\).</p>
+
+<h4 id="the-overall-algorithm">The Overall Algorithm</h4>
+
+<div align="center">
+<figure>
+<img src="../../../pictures/hotspot-algorithm.jpg" alt="image-20210614032009846" style="zoom:50%;" />
+<figcaption style="font-size:80%;"> Algorithm 1. HotSpot. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
+</figure>
+</div>
+
+<p>HotSpot takes the PV values of elements, a potential threshold \(PT\) and a maximum iteration number \(M\) as inputs. It starts with layer 1. For each cuboid of a given layer, HotSpot applies MCTS to find its best set. When going from a layer to the next layer, hierarchical pruning is used. We repeat this process until layer \(L\) is searched, or the root cause set \(\text{RSet}\) (\(ps(\text{RSet})&gt;PT\)) is obtained. The final output \(\text{RSet}\) is the the \(\text{BSet}\) with the greatest \(ps\) among all \(\text{BSet}\) generated by the algorithm.</p>
+
+<p><br /></p>
+
+<p><strong>Reference:</strong></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Sun, Yongqian, et al. “Hotspot: Anomaly localization for additive kpis with multi-dimensional attributes.” <em>IEEE Access</em> 6 (2018): 10909-10923. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <br> </br>
+  <p><font color="grey" size="4"> Comments </font></p>
+  <HR color=#D1D0CE SIZE=10>
+
+<div id="disqus_thread"></div>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://walkermao.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+                            
+
+  
+</div>
+
+      </section>
+    </main><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178951885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178951885-1');
+</script>
+
+    
+    <div id="back-top">
+      <a href="javascript:void(0);" onclick="topFunction()" title="Back to top"> </a>
+    </div>
+
+  </body>
+</html>
+
+<script src = "/assets/js/scroll_into_view.js"></script>
+<script src = "/assets/js/back_to_top.js"></script>
