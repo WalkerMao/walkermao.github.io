@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Notes on CS231A Course Notes 1: Camera Models"
-date: 2023-10-18
+date: 2023-10-17
 categories: CV
 tags: [Traditional CV]
 comments: true
