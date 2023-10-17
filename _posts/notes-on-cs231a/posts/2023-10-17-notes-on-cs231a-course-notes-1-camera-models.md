@@ -37,10 +37,9 @@ As discussed earlier, a point $$ P $$ in 3D space can be mapped (or projected) i
 
 
 <div align='center'>
-<img src="../../../pictures/camera-model-sketch.png" alt="camera-model-sketch" style="zoom: 75%;" />
+<img src="../../../pictures/camera-model-sketch.png" alt="camera-model-sketch" style="zoom: 67%;" />
 <figcaption style="font-size: 80%;"> Figure: Camera model sketch </figcaption>
 </div>
-
 
 ### 4.1 The Camera Matrix Model and Homogeneous Coordinates
 
