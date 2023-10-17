@@ -680,3 +680,44 @@ class A(collections.abc.Iterable):
 
 ### 8.15. Delegating Attribute Access
 
+Simply stated, delegation is a programming pattern where the responsibility for implementing a particular operation is handed off (i.e., delegated) to a different object. 
+
+The `__getattr__()` method is kind of like a catch-all for attribute lookup. It’s a method that gets called if code tries to access an attribute that doesn't exist. 
+
+Delegation is sometimes used as an alternative to inheritance. This use of delegation is often useful in situations where direct inheritance might not make much sense or where you want to have more control of the relationship between objects (e.g., only exposing certain methods, implementing interfaces, etc.).
+
+```python
+class Proxy:
+    """Forbiden accessing private attributes"""
+    def __init__(self, obj):
+        self._obj = obj
+    
+    # Delegate attribute lookup to internal obj
+    def __getattr__(self, name):
+        if name.startswith('_'):
+            raise AttributeError('Cannot access a private attribute')
+        return getattr(self._obj, name)
+
+            
+class Spam:
+    def __init__(self):
+        self.a = 'a'
+        self._a = '_a'
+    
+    def bar(self):
+        print('bar')
+        
+    def _bar(self):
+        print('_bar')
+        
+
+s = Spam()  # Create an instance
+p = Proxy(s)  # Create a proxy around it
+
+print(p.a)  # Output: a
+p.bar()  # Output: bar
+print(p._a)  # AttributeError: Cannot access a private attribute
+p._bar()  # AttributeError: Cannot access a private attribute
+```
+
+### 8.16. Defining More Than One Constructor in a Class

@@ -9,6 +9,16 @@
             <lastmod>2019-06-07T00:00:00+00:00</lastmod>
             <priority>1.00</priority>
         </url><url>
+                <loc>http://localhost:4000/notes-on-cs231a-course-notes-1-camera-models.html</loc>
+                <lastmod>2023-08-06T00:00:00+08:00</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>0.80</priority>
+            </url><url>
+                <loc>http://localhost:4000/notes-on-cs231a.html</loc>
+                <lastmod>2023-08-06T00:00:00+08:00</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>0.80</priority>
+            </url><url>
                 <loc>http://localhost:4000/the-curse-of-dimensionality-in-machine-learning.html</loc>
                 <lastmod>2022-07-17T00:00:00+08:00</lastmod>
                 <changefreq>weekly</changefreq>
@@ -146,6 +156,11 @@
             </url><url>
                 <loc>http://localhost:4000/root-cause-localization-adtributor.html</loc>
                 <lastmod>2021-05-16T00:00:00+08:00</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>0.80</priority>
+            </url><url>
+                <loc>http://localhost:4000/notes-on-cs231a.html</loc>
+                <lastmod>2021-03-14T00:00:00+08:00</lastmod>
                 <changefreq>weekly</changefreq>
                 <priority>0.80</priority>
             </url><url>

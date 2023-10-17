@@ -19,3 +19,4 @@ hidden: false
 
 [Random Sample Consensus (RANSAC)](ransac)
 
+[Notes on CS231A](notes-on-cs231a)
