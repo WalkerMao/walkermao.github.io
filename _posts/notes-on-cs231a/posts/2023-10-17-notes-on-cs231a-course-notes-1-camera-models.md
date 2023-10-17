@@ -46,6 +46,7 @@ As discussed earlier, a point $$ P $$ in 3D space can be mapped (or projected) i
 #### 4.1.1 Introduction to the Camera Matrix Mode
 
 The camera matrix model describes a set of important parameters that affect how a world point $$ P $$ is mapped to image coordinates $$ P' $$.
+
 $$
 P^{\prime}=\left[\begin{array}{l}
 x^{\prime} \\
@@ -58,6 +59,7 @@ l z' \frac{y}{z}+c_y
 \beta \frac{y}{z}+c_y
 \end{array}\right],
 $$
+
 where,
 
 * $$x', y'$$ are coordinates of a image point $$ P' $$ in digital image coordinates; they have units like "pixel".
