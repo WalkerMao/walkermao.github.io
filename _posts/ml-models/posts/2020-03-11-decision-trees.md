@@ -11,10 +11,8 @@ hidden: true
 Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one. They are conceptually simple yet powerful. 
 
 <div style="text-align: center">
-<img src="../../pictures/Partitions-of-tree.jpg" alt="Partitions-of-tree" style="zoom:29%;" />    <img src="../../pictures/Decision-tree.jpg" alt="Decision-tree" style="zoom:30%;" /> 
+<img src="../../../pictures/ml-models/posts/2020-03-11-decision-trees/Partitions-of-tree.jpg" alt="Partitions-of-tree" style="zoom:29%;" />    <img src="../../../pictures/ml-models/posts/2020-03-11-decision-trees/Decision-tree.jpg" alt="Decision-tree" style="zoom:30%;" /> 
 </div>
-
-
 
 ## 1. Regression Trees
 
@@ -112,7 +110,7 @@ $$
 \text{Misclassification error: } \frac{1}{2} -  \mid \hat{p}_{m1}-\frac{1}{2} \mid. \\\text{Gini index: } 2 \hat{p}_{m1} (1-\hat{p}_{m1}). \\\text{Entropy or deviance: } - \hat{p}_{m1} \log(\hat{p}_{m1}) - (1-\hat{p}_{m1}) \log(1-\hat{p}_{m1}).
 $$
 
-<div style="text-align: center"> <img src="/pictures/Three-measures.png" alt="Three-measures" style="zoom: 70%;" /> </div>
+<div style="text-align: center"> <img src="../../../pictures/ml-models/posts/2020-03-11-decision-trees/Three-measures.png" alt="Three-measures" style="zoom: 70%;" /> </div>
 
 All three are similar, but entropy and the Gini index are differentiable, and hence more amenable to numerical optimization. 
 
@@ -171,7 +169,7 @@ Partial dependence functions $$f_\mathcal{S}(X_\mathcal{S})$$ can be used to int
 The partial dependence of $f(X)$ on $X_\mathcal{S}$ is a marginal average of $f$, and can represent the **effect** of $X_\mathcal{S}$ on $f(X)$ after accounting for the (average) effects of the other variables $X_\mathcal{C}$ on $f(X)$. It is not the effect of $$X_\mathcal{S}$$ on $f(X)$ ignoring the effects of $X_\mathcal{C}$. The latter is given by the conditional expectation $$ \tilde{f}_\mathcal{S}(X_\mathcal{S}) = E[f(X_\mathcal{S}, X_\mathcal{C}) \mid f(X_\mathcal{S})]$$. 
 
 <div style="text-align: center">
-<img src="../../../pictures/Partial-dependence-plot-1.jpg" alt="Partial-dependence-plot-1" style="zoom: 33%;" /><img src="../../../pictures/Partial-dependence-plot-2.jpg" alt="Partial-dependence-plot-2" style="zoom: 33%;" /><img src="../../../pictures/Partial-dependence-plot-3.jpg" alt="Partial-dependence-plot-3" style="zoom: 28.5%;" />
+<img src="../../../pictures/Partial-dependence-plot-1.jpg" alt="Partial-dependence-plot-1" style="zoom: 33%;" /><img src="../../../pictures/ml-models/posts/2020-03-11-decision-trees/Partial-dependence-plot-2.jpg" alt="Partial-dependence-plot-2" style="zoom: 33%;" /><img src="../../../pictures/ml-models/posts/2020-03-11-decision-trees/Partial-dependence-plot-3.jpg" alt="Partial-dependence-plot-3" style="zoom: 28.5%;" />
 </div>
 
 

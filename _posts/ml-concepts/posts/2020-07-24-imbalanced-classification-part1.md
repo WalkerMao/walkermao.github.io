@@ -14,7 +14,7 @@ Imbalanced data typically refers to a problem with classification problems where
 
 Let's first review the confusion matrix, as shown below.
 
-<div style="text-align: center"> <img src="../../../pictures/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/> </div>
+<div style="text-align: center"> <img src="../../../pictures/ml-concepts/posts/2020-07-24-imbalanced-classification-part1/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/> </div>
 
 Say if we have a imbalanced data set, in which $$99\%$$ are of negative class and $$1\%$$ are of positive class, then a classification model that always predict "negative" can achieve $$0.99$$ accuracy on average. The specificity (true negative rate) of this model is $$\text{TNR} = \frac{TN}{TN+FP} = \frac{99\%}{99\% + 0\%}=1$$. However, the sensitivity (true positive rate, or recall) is $$\text{TPR} = \frac{TP}{TP+FN} = \frac{0\%}{0\%+1\%}=0$$, which is the fraction of the total amount of positive instances that were actually retrieved. 
 
@@ -34,7 +34,7 @@ plt.ylabel('True Positive Rate')
 plt.show()
 ```
 
-<div style="text-align: center"> <img src="../../../pictures/Special-ROC.png" alt="Special-ROC" style="zoom:100%;" /> </div>
+<div style="text-align: center"> <img src="../../../pictures/ml-concepts/posts/2020-07-24-imbalanced-classification-part1/Special-ROC.png" alt="Special-ROC" style="zoom:100%;" /> </div>
 
 In the following sections, we discuss the approaches to deal with the class imbalance problems. 
 
@@ -90,7 +90,7 @@ To increase the prediction accuracy of the minority class samples, we can **dete
 
 The plot below is an ROC curve labeled with different probability cutoffs (or thresholds), and the numbers in the parentheses are the specificity and sensitivity. 
 
-<div style="text-align: center"> <img src="../../../pictures/ROC-with-different-cutoffs.png" alt="ROC-with-different-cutoffs" style="zoom:40%;" />  </div>
+<div style="text-align: center"> <img src="../../../pictures/ml-concepts/posts/2020-07-24-imbalanced-classification-part1/ROC-with-different-cutoffs.png" alt="ROC-with-different-cutoffs" style="zoom:40%;" />  </div>
 
 Several techniques exist for determining a new cutoff. First, if there is a particular target that must be met for the sensitivity or specificity, this point can be found on the ROC curve and the corresponding cutoff can be determined. Another approach for determining a cutoff is to find the point on the ROC curve that is closest (i.e. the shortest distance) to the upper left corner of the plot. Another approach is to find the cutoff associated with the largest value of the **Youden's $J$ index**. The index is defined as
 

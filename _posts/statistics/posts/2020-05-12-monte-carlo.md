@@ -45,15 +45,15 @@ Suppose we want to compute definite integral of function $f(x)$ from $a$ to $b$,
 
 1. The possible inputs are uniformly distributed in the upper bound volume;
 
-   <img src="/pictures/MC_Int_1.png" alt="MC_Int_1" style="zoom:15%;" />
+   <img src="../../../pictures/statistics/posts/2020-05-12-monte-carlo/MC_Int_1.png" alt="MC_Int_1" style="zoom:15%;" />
 
 2. Generate $N$ uniform random samples in upper bound volume;
 
-   <img src="/pictures/MC_Int_2.png" alt="MC_Int_2" style="zoom:15%;" />
+   <img src="../../../pictures/statistics/posts/2020-05-12-monte-carlo/MC_Int_2.png" alt="MC_Int_2" style="zoom:15%;" />
 
 3. Count the $K$ samples that fall below the $f(x)$ curve;
 
-   <img src="/pictures/MC_Int_3.png" alt="MC_Int_3" style="zoom:15%;" />
+   <img src="../../../pictures/statistics/posts/2020-05-12-monte-carlo/MC_Int_3.png" alt="MC_Int_3" style="zoom:15%;" />
 
 4. The estimate of the integral is $$\frac{K}{N} \times \text{Area of upper bound volume} = \frac{K}{N} (b-a)(c-0)$$.
 

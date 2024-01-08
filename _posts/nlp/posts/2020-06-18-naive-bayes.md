@@ -70,7 +70,7 @@ The final algorithm can be expressed as
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/Naive-Bayes.png" alt="Naive-Bayes" style="zoom:70%;" />
+<img src="../../../pictures/nlp/posts/2020-06-18-naive-bayes/Naive-Bayes.png" alt="Naive-Bayes" style="zoom:70%;" />
 </figure>
 </div>
 <br>

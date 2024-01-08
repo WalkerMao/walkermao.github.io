@@ -23,7 +23,7 @@ This equation represents a line in $$a,b$$ space, and each $$a,b$$ point on the 
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/hough-transform-a-b-space.png" alt="hough transform: from (x,y) space to (a,b) space" style="zoom:50%;" />
+<img src="../../../pictures/traditional-cv/posts/2021-03-13-hough-transform/hough-transform-a-b-space.png" alt="hough transform: from (x,y) space to (a,b) space" style="zoom:50%;" />
 <figcaption style="font-size: 80%;"> Figure. The transformation from the
 original (x,y) space to (a,b) space. (<a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture06/lecture06.pdf">Source</a>) </figcaption>
 </figure>
@@ -45,7 +45,7 @@ In $$\rho, \theta$$ space, points are not represented as lines but instead as si
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/hough-transform-rho-theta-space.png" alt="image" style="zoom: 70%;" />
+<img src="../../../pictures/traditional-cv/posts/2021-03-13-hough-transform/hough-transform-rho-theta-space.png" alt="image" style="zoom: 70%;" />
 <figcaption style="font-size: 80%;"> Figure. The transformation from the
 original (x,y) space to (\rho,\theta) space. (<a href="https://github.com/StanfordVL/cs131_notes/blob/master/lecture06/lecture06.pdf">Source</a>) </figcaption>
 </figure>

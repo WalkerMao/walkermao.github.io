@@ -130,8 +130,8 @@ A nice subproduct of attention mechanism is the weight matrix.
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/attention_weight_matrix_exmaple_1.png" alt="attention_weight_matrix_exmaple_1.png" style="zoom:66%;" />
-<img src="../../../pictures/attention_weight_matrix_exmaple_2.png" alt="attention_weight_matrix_exmaple_2.png" style="zoom:74%;" />
+<img src="../../../pictures/nlp/posts/2021-10-07-rnn-encoder-decoder-models/attention_weight_matrix_exmaple_1.png" alt="attention_weight_matrix_exmaple_1.png" style="zoom:66%;" />
+<img src="../../../pictures/nlp/posts/2021-10-07-rnn-encoder-decoder-models/attention_weight_matrix_exmaple_2.png" alt="attention_weight_matrix_exmaple_2.png" style="zoom:74%;" />
 <figcaption style="font-size:80%;"> Fig: Attention weight matrix examples for translation from Chinese to English. (Source: <a href="https://arxiv.org/abs/1601.04811">Tu et al., 2016</a>) </figcaption>
 </figure>
 </div>

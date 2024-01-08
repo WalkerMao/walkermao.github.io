@@ -35,7 +35,7 @@ Because the paraxial refraction model approximates using the thin lens assumptio
 As discussed earlier, a point $$ P $$ in 3D space can be mapped (or projected) into a 2D point $$ P' $$ in the image plane $$ \Pi' $$. This $$ \mathbb{R}^3 \to \mathbb{R}^2 $$ mapping is referred to as a **projective transformation**.
 
 <div align='center'>
-<img src="../../../pictures/notes-on-cs231a/camera-model-sketch.png" alt="camera-model-sketch" style="zoom: 60%;" />
+<img src="../../../pictures/notes-on-cs231a/posts/2023-10-17-notes-on-cs231a-course-notes-1-camera-models/camera-model-sketch.png" alt="camera-model-sketch" style="zoom: 60%;" />
 <figcaption style="font-size: 80%;"> Figure: Camera model sketch </figcaption>
 </div>
 

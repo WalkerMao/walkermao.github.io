@@ -20,7 +20,7 @@ Impulse noise: contains random occurrences of white pixels.
 Gaussian noise: variations in intensity drawn from a Gaussian normal distribution.
 
 <div align='center'>
-<img src="../../../pictures/image-noises.png" alt="image-20210208220329486" style="zoom:50%;" />
+<img src="../../../pictures/traditional-cv/posts/2021-02-06-image-smoothing/image-noises.png" alt="image-20210208220329486" style="zoom:50%;" />
 </div>
 
 
@@ -85,7 +85,7 @@ Medium filter takes the median of all the pixels under the kernel area and repla
 Medium filter is robustness to outliers and hence it is highly effective against salt-and-pepper noise and impulse noise in an image, as shown in plots below below. Note that medium filter is a non-linear filter.
 
 <div align='center'>
-<img src="../../../pictures/median-filter-is-robust-to-outliers.png" alt="image-20210208234629956" style="zoom:45%;" /> <img src="../../../pictures/median-filter-for-salt-and-pepper-noise.png" alt="image-20210208234710400" style="zoom:50%;" /> 
+<img src="../../../pictures/traditional-cv/posts/2021-02-06-image-smoothing/median-filter-is-robust-to-outliers.png" alt="image-20210208234629956" style="zoom:45%;" /> <img src="../../../pictures/traditional-cv/posts/2021-02-06-image-smoothing/median-filter-for-salt-and-pepper-noise.png" alt="image-20210208234710400" style="zoom:50%;" /> 
 </div>
 
 
@@ -96,7 +96,7 @@ The previous filters may blur edges a bit in this after smoothing, but bilateral
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/comparison-of-median-filter-and-bilateral-filter.png" alt="comparison-of-median-filter-and-bilateral-filter" style="zoom:50%;" />
+<img src="../../../pictures/traditional-cv/posts/2021-02-06-image-smoothing/comparison-of-median-filter-and-bilateral-filter.png" alt="comparison-of-median-filter-and-bilateral-filter" style="zoom:50%;" />
 <figcaption style="font-size: 80%;"> Figure. Comparision of median filter and bilateral filter. (<a href="http://people.csail.mit.edu/sparis/bf_course/slides08/04_applications_simple_bf.pdf">Source</a>)</figcaption>
 </figure>
 </div>
@@ -138,7 +138,7 @@ Parameters $$ \sigma_{s} $$ and $$ \sigma_{r} $$ will measure the amount of filt
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/bilateral-filter-on-a-height-field.jpg" alt="image-20210209004651041" style="zoom:40%;" />
+<img src="../../../pictures/traditional-cv/posts/2021-02-06-image-smoothing/bilateral-filter-on-a-height-field.jpg" alt="image-20210209004651041" style="zoom:40%;" />
 <figcaption style="font-size: 80%;"> Figure. Bilateral Filter on a Height Field. (<a href="http://people.csail.mit.edu/sparis/bf_course/slides08/03_definition_bf.pdf">Source</a>)</figcaption>
 </figure>
 </div>
@@ -153,7 +153,7 @@ The figure below illustrates their effects. As soon as one of the weight is clos
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/effects-of-two-params-in-bilateral-filter.png" alt="image-20210209003647488" style="zoom: 50%;" />
+<img src="../../../pictures/traditional-cv/posts/2021-02-06-image-smoothing/effects-of-two-params-in-bilateral-filter.png" alt="image-20210209003647488" style="zoom: 50%;" />
 <figcaption style="font-size: 80%;"> Figure. Effects of the range and spatial parameters, and comparison with Gaussian blur. (<a href="http://people.csail.mit.edu/sparis/bf_course/course_notes.pdf">Source</a>)</figcaption>
 </figure>
 </div>

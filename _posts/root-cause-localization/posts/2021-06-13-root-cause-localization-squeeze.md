@@ -126,7 +126,7 @@ We use a simple density based clustering algorithm, as shown in Algorithm 1. Fir
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/squeeze-algorithm.png" alt="Squeeze algorithm" style="zoom:100%;" />
+<img src="../../../pictures/root-cause-localization/posts/2021-06-13-root-cause-localization-squeeze/squeeze-algorithm.png" alt="Squeeze algorithm" style="zoom:100%;" />
 <figcaption style="font-size:80%;"> Squeeze algorithm. (<a href="https://ieeexplore.ieee.org/document/8987454">Source</a>) </figcaption>
 </figure>
 </div>

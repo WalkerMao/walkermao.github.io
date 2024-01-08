@@ -138,7 +138,7 @@ Finally, we rank the remaining attribute combinations and output them as the eff
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/idice-algorithm.png" alt="image-20210528014952533" style="zoom:80%;" />
+<img src="../../../pictures/root-cause-localization/posts/2021-05-23-root-cause-localization-idice/idice-algorithm.png" alt="image-20210528014952533" style="zoom:80%;" />
 <figcaption style="font-size:80%;"> iDice Algorithm </figcaption>
 </figure>
 </div>

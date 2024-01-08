@@ -69,7 +69,7 @@ Broad histograms reflect a scene with significant contrast, whereas narrow histo
 Contrast can also vary for different regions within the same image due to both subject matter and lighting.
 
 <div align='center'>
-<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_norm2.jpg" alt="img" style="zoom:80%;" /> <img src="../../../pictures/image-histograms-seperated.png" alt="image-histograms-seperated" style="zoom: 50%;" />
+<img src="https://cdn.cambridgeincolour.com/images/tutorials/hist_norm2.jpg" alt="img" style="zoom:80%;" /> <img src="../../../pictures/traditional-cv/posts/2021-01-31-image-histograms/image-histograms-seperated.png" alt="image-histograms-seperated" style="zoom: 50%;" />
 </div>
 
 

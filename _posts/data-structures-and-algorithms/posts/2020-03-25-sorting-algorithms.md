@@ -70,7 +70,7 @@ def bubbleSort(arr):
 
 <div align="center">
 <figure>
-<img src="../../../pictures/bubble_sort.png" alt="BubbleSort" style="zoom: 100%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/bubble_sort.png" alt="BubbleSort" style="zoom: 100%;" />
 <figcaption style="font-size: 80%;"> Bubble sort example. (<a href="https://eleni.blog/2019/06/09/sorting-in-go-using-bubble-sort/">Figure source</a>) </figcaption>
 </figure>
 </div>
@@ -99,7 +99,7 @@ def insertionSort(arr):
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/insertion-sort.png" alt="InsertionSort" style="zoom: 70%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/insertion-sort.png" alt="InsertionSort" style="zoom: 70%;" />
 <figcaption style="font-size: 80%;"> Insertion sort example. (<a href="https://www.geeksforgeeks.org/insertion-sort/">Figure source</a>) </figcaption>
 </figure>
 </div>
@@ -111,7 +111,7 @@ The unique way that these sublists are chosen is the key to the shell sort. Inst
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/shellsort.jpg" alt="shellsort.jpg" style="zoom:70%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/shellsort.jpg" alt="shellsort.jpg" style="zoom:70%;" />
 <figcaption style="font-size: 80%;"> Shell sort example. (<a href="https://www.geeksforgeeks.org/shellsort/">Figure source</a>) </figcaption>
 </figure>
 </div>
@@ -153,7 +153,7 @@ def heapSort(arr):
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/heap-sort.png" alt="Heap sort" style="zoom:100%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/heap-sort.png" alt="Heap sort" style="zoom:100%;" />
 <figcaption style="font-size: 80%;"> Heap sort example. </figcaption>
 </figure>
 </div>
@@ -179,7 +179,7 @@ Divide the array into two sublists recursively and merge them.
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/merge-sort.png" alt="Merge sort" style="zoom: 80%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/merge-sort.png" alt="Merge sort" style="zoom: 80%;" />
 <figcaption style="font-size: 80%;"> Merge sort example. (<a href="https://www.geeksforgeeks.org/merge-sort/">Figure source</a>) </figcaption>
 </figure>
 </div>
@@ -274,7 +274,7 @@ Recursively pick an element as pivot and partition the other elements by compari
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/quick-sort.png" alt="Quick sort" style="zoom:100%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/quick-sort.png" alt="Quick sort" style="zoom:100%;" />
 <figcaption style="font-size: 80%;"> Quick sort example. (<a href="https://www.geeksforgeeks.org/quick-sort/">Figure source</a>) </figcaption>
 </figure>
 </div>
@@ -398,7 +398,7 @@ Counting sort is usually used for sorting integers or characters. It is based on
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/count_sort_example.gif" alt="counting_sort" style="zoom:100%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/count_sort_example.gif" alt="counting_sort" style="zoom:100%;" />
 <figcaption style="font-size: 80%;"> Counting sort example. </figcaption>
 </figure>
 </div>
@@ -430,7 +430,7 @@ In this case, radix sort can sort such an array in linear time. The idea of Radi
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/radix-sort.png" alt="radix-sort" style="zoom:60%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/radix-sort.png" alt="radix-sort" style="zoom:60%;" />
 <figcaption style="font-size: 80%;"> Radix sort example. </figcaption>
 </figure>
 </div>
@@ -467,7 +467,7 @@ Bucket sort works as follows:
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/bucket-sort.png" alt="bucket-sort" style="zoom:60%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-03-25-sorting-algorithms/bucket-sort.png" alt="bucket-sort" style="zoom:60%;" />
 <figcaption style="font-size: 80%;"> Bucket sort example. </figcaption>
 </figure>
 </div>

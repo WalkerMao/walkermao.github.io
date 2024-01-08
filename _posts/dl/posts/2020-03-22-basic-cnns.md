@@ -53,7 +53,7 @@ The matrix of weights is called **convolutional filter** or **convolutional kern
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/working-of-a-convolutional-layer.png" alt="working-of-a-convolutional-layer" style="zoom: 60%;" />
+<img src="../../../pictures/dl/posts/2020-03-22-basic-cnns/working-of-a-convolutional-layer.png" alt="working-of-a-convolutional-layer" style="zoom: 60%;" />
 <figcaption style="font-size: 80%;">Figure. Working of a convolutional layer. (<a href="https://arxiv.org/abs/1902.05655">Figure source</a>)</figcaption>
 </figure>
 </div>

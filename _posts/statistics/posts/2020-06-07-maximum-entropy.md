@@ -32,7 +32,7 @@ Equality iff $$P_X \equiv U_{\mathcal{X}}$$. $$□$$
 
 Note that entropy is different from variance. Variance is the expectation of the squared deviation of a random variable from its mean. Also note that the properties of the entropy of continuous distribution is different from that of discrete distribution.
 
-<div align="center"> <img src="../../../pictures/variance-and-entropy.png" alt="variance-and-entropy" style="zoom:60%;" /> </div>
+<div align="center"> <img src="../../../pictures/statistics/posts/2020-06-07-maximum-entropy/variance-and-entropy.png" alt="variance-and-entropy" style="zoom:60%;" /> </div>
 
 ## Principle of Maximum Entropy
 

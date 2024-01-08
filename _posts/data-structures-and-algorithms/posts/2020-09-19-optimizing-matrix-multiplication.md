@@ -49,7 +49,7 @@ The time complexity of the above naive recursive approach is exponential. It sho
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/matrix-chain-multiplication-brute-force.png" alt="Brute-force approach for matrix chain multiplication" style="zoom: 60%;" />
+<img src="../../../pictures/data-structures-and-algorithms/posts/2020-09-19-optimizing-matrix-multiplication/matrix-chain-multiplication-brute-force.png" alt="Brute-force approach for matrix chain multiplication" style="zoom: 60%;" />
 <figcaption style="font-size: 80%;"> <a href="https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/">Figure source</a> </figcaption>
 </figure>
 </div>

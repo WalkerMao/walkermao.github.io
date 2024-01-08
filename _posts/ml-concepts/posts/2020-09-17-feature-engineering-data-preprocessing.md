@@ -23,7 +23,7 @@ Thirdly, feature scaling helps gradient descent converges faster. Suppose the sc
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/feature-scaling-and-gradient-descent.png" alt="feature-scaling-and-gradient-descent.png" style="zoom: 50%;" />
+<img src="../../../pictures/ml-concepts/posts/2020-09-17-feature-engineering-data-preprocessing/feature-scaling-and-gradient-descent.png" alt="feature-scaling-and-gradient-descent.png" style="zoom: 50%;" />
 <figcaption style="font-size: 80%;"> <a href="https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35">Figure source</a> </figcaption>
 </figure>
 </div>
@@ -42,7 +42,7 @@ If all $$x^{[j]}>0$$ or $$<0$$ for $$j=1,2,\cdots$$, the gradients $$\frac{\part
 
 Now let's show why the same sign of gradients may leads to zig-zagging. Say there are two parameters $$w_1,w_2$$, and the gradients of them are always of the same sign. That means $$w_1$$ and $$w_2$$ increase or decrease simultaneously in the gradient updates, and it also means that we can only move roughly in the direction of northeast or southwest in the parameter space. If our goal happens to be in the northwest or southeast side of our current position, then it will cost a lot to move to our target position, as shown below. 
 
-<div style="text-align: center"> <img src="../../../pictures/zig-zagging-parameter-updates.png" alt="zig-zagging-parameter-updates" style="zoom: 30%;" />  </div>
+<div style="text-align: center"> <img src="../../../pictures/ml-concepts/posts/2020-09-17-feature-engineering-data-preprocessing/zig-zagging-parameter-updates.png" alt="zig-zagging-parameter-updates" style="zoom: 30%;" />  </div>
 
 ### Common Methods
 
