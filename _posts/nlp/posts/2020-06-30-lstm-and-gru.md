@@ -88,7 +88,7 @@ $$
 Here is the architecture of an LSTM. 
 
 <div align='center'>
-<img src="../../../pictures/The detailed internals of a LSTM.png" alt="The detailed internals of a LSTM" style="zoom:80%;" />
+<img src="../../../images/The detailed internals of a LSTM.png" alt="The detailed internals of a LSTM" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^2] </figcaption>
 </div>
 
@@ -139,7 +139,7 @@ When $$z_t=1$$, we have $$h_t = h_{t-1} $$, which is similar to identity mapping
 ### Summary for GRU
 
 <div align='center'>
-<img src="../../../pictures/The detailed internals of a GRU.png" alt="The detailed internals of a GRU" style="zoom:80%;" />
+<img src="../../../images/The detailed internals of a GRU.png" alt="The detailed internals of a GRU" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^2] </figcaption>
 </div>
 
@@ -148,7 +148,7 @@ When $$z_t=1$$, we have $$h_t = h_{t-1} $$, which is similar to identity mapping
 Although LSTM unit and GRU are much more complex than basic recurrent unit, we can still maintain modularity of LSTM unit and GRU and to easily experiment with different architectures. To see this, the following figure illustrates the inputs and outputs associated with each kind of unit.
 
 <div align='center'>
-<img src="../../../pictures/nlp/posts/2020-06-30-lstm-and-gru/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:80%;" />
+<img src="../../../images/nlp/posts/2020-06-30-lstm-and-gru/SLP-Fig-9.14.png" alt="SLP-Fig-9.14" style="zoom:80%;" />
 <figcaption style="font-size: 80%;"> Figure source: [^1] </figcaption>
 </div>
 <br>

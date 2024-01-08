@@ -44,7 +44,7 @@ If we have the estimated probabilities $$\hat{p}_1, \cdots ,\hat{p}_n$$, then $$
 
 The plot is known as ROC (receiver operating characteristic) curve. The AUC (area under curve) is the area under the ROC curve. The larger of the AUC, the better of the classification model. 
 
-<div style="text-align: center"> <img src="../../../pictures/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/>  <img src="../../../pictures/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ROC.png" alt="ROC" style="zoom: 70%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ConfusionMatrx.jpg" alt="Confusion Matrix" style="zoom:95%;"/>  <img src="../../../images/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ROC.png" alt="ROC" style="zoom: 70%;" /> </div>
 
 Note that the metrics are not the loss functions. 
 
@@ -75,7 +75,7 @@ plt.show()
 ```
 
 <div style="text-align: center">
-<img src="../../../pictures/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ROC1.png" alt="ROC curve for all p_hat = 0" style="zoom:100%;" /> <img src="../../../pictures/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ROC2.png" alt="img" style="zoom:100%;" />
+<img src="../../../images/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ROC1.png" alt="ROC curve for all p_hat = 0" style="zoom:100%;" /> <img src="../../../images/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/ROC2.png" alt="img" style="zoom:100%;" />
 </div>
 There are more metrics like F1 score and Cohen’s kappa coefficient, etc.. 
 
@@ -86,7 +86,7 @@ There are more metrics like F1 score and Cohen’s kappa coefficient, etc..
 If a model learned too much noise in the training data, it tends to be overfitting, and the training error is much lower than the test error. Overfitting often happens for flexible models. An overfitted model has low bias but high variance. Regularization discourages learning a more complex or flexible model, so as to reduce overfitting. 
 
 <div style="text-align: center">
-<img src="../../../pictures/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/overfitting.png" style="width:90%;height:90%;" alt="Overfitting">
+<img src="../../../images/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/overfitting.png" style="width:90%;height:90%;" alt="Overfitting">
 </div>
 
 ### 7.2 L1 and L2 Regularization
@@ -100,7 +100,7 @@ The hyperparameter $\lambda$ depends the regularization strength. Note: a hyperp
 Linear regression with L1-norm is LASSO and L2-norm is ridge regression.
 
 <div style="text-align: center">
-<img src="../../../pictures/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/LASSO-and-Ridge.png" alt="LASSO and Ridge" style="zoom:100%;" />
+<img src="../../../images/ml-concepts/posts/2020-02-27-intro-to-ml-training-models/LASSO-and-Ridge.png" alt="LASSO and Ridge" style="zoom:100%;" />
 </div>
 
 L1-norm shrinks some coefficients (or weights) to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more robust and also more computationally efficient when doing prediction. 

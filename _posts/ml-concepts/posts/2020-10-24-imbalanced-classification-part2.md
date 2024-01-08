@@ -50,7 +50,7 @@ The **synthetic minority over-sampling technique** (**SMOTE**), described by Cha
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/ml-concepts/posts/2020-10-24-imbalanced-classification-part2/SMOTE-KNN-interpolation.png" alt="SMOTE-KNN-interpolation.png" style="zoom: 80%;" />
+<img src="../../../images/ml-concepts/posts/2020-10-24-imbalanced-classification-part2/SMOTE-KNN-interpolation.png" alt="SMOTE-KNN-interpolation.png" style="zoom: 80%;" />
 <figcaption style="font-size: 80%;"> Figure. Example for SMOTE: a. The original majority data (blue) and minority data (green); b. Randomly selected minority data point (balck) and its 3 nearest minority neighbors (yellow); c. New data point (red) synthesized by linear interpolation between the selected data point and its randomly selected neighbor (both black). <a href="https://www.researchgate.net/figure/Graphical-representation-of-the-SMOTE-algorithm-a-SMOTE-starts-from-a-set-of-positive_fig2_317489171"> Figure source</a>. </figcaption>
 </figure>
 </div>
@@ -63,7 +63,7 @@ There are some extensions to SMOTE that are more selective regarding the example
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/ml-concepts/posts/2020-10-24-imbalanced-classification-part2/Borderline-SMOTE.png" alt="Borderline-SMOTE.png" style="zoom: 120%;" />
+<img src="../../../images/ml-concepts/posts/2020-10-24-imbalanced-classification-part2/Borderline-SMOTE.png" alt="Borderline-SMOTE.png" style="zoom: 120%;" />
 <figcaption style="font-size: 80%;"> Figure. Example for Borderline-SMOTE: (a) The original data; (b) The borderline minority examples (solid squares); (c) The borderline synthetic minority examples (hollow squares). Figure from the <a href="https://sci2s.ugr.es/keel/keel-dataset/pdfs/2005-Han-LNCS.pdf"> original paper</a>. </figcaption>
 </figure>
 </div>
@@ -107,7 +107,7 @@ EasyEnsemble and BalanceCascade are introduced by XuYing Liu, et al. to deal wit
 
 <div style="text-align: center">
 <figure>
-<img src="../../../pictures/ml-concepts/posts/2020-10-24-imbalanced-classification-part2/EasyEnsemble.png" alt="EasyEnsemble.png" style="zoom:40%;" />
+<img src="../../../images/ml-concepts/posts/2020-10-24-imbalanced-classification-part2/EasyEnsemble.png" alt="EasyEnsemble.png" style="zoom:40%;" />
 <figcaption style="font-size: 80%;"> Figure. EasyEnsemble example. </figcaption>
 </figure>
 </div>

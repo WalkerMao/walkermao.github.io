@@ -213,7 +213,7 @@ We take an example in Table 7 and illustrate our hierarchical pruning approach i
 
 <div align='center'>
 <figure>
-<img src="../../../pictures/root-cause-localization/posts/2021-06-06-root-cause-localization-hotspot/hotspot-algorithm.jpg" alt="image-20210614032009846" style="zoom:50%;" />
+<img src="../../../images/root-cause-localization/posts/2021-06-06-root-cause-localization-hotspot/hotspot-algorithm.jpg" alt="image-20210614032009846" style="zoom:50%;" />
 <figcaption style="font-size:80%;"> Algorithm 1. HotSpot. (<a href="https://ieeexplore.ieee.org/document/8288614">Source</a>) </figcaption>
 </figure>
 </div>

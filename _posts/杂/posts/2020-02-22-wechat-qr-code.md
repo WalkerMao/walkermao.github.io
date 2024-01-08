@@ -8,4 +8,4 @@ comments: true
 hidden: true
 ---
 
-<div style="text-align: center"> <img src="../../../pictures/杂/posts/2020-02-22-wechat-qr-code/wechat-qr-code.png" alt="wechat-qr-code" style="zoom:50%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/杂/posts/2020-02-22-wechat-qr-code/wechat-qr-code.png" alt="wechat-qr-code" style="zoom:50%;" /> </div>

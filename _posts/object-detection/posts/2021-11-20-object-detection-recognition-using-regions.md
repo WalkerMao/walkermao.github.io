@@ -26,7 +26,7 @@ The pipeline of this region-based recognition framework is as follows:
 The authors start by constructing a region tree using the hierarchical segmentation engine by [Arbelaez et al. (2009)](https://ieeexplore.ieee.org/abstract/document/5206707/). The regions the authors consider are the nodes of that tree, including the root which is the entire image. The authors use them as the basic entities for this approach.
 
 <div align='center'>
-<img src="../../../pictures/object-detection/posts/2021-11-20-object-detection-recognition-using-regions/recognition-using-regions-fig1-fig2-fig3.png" alt="recognition-using-regions-fig1-fig2-fig3.png" style="zoom:100%;" />
+<img src="../../../images/object-detection/posts/2021-11-20-object-detection-recognition-using-regions/recognition-using-regions-fig1-fig2-fig3.png" alt="recognition-using-regions-fig1-fig2-fig3.png" style="zoom:100%;" />
 <figcaption style="font-size: 80%;"> (source: Gu et al., 2009) </figcaption>
 </div>
 
@@ -39,7 +39,7 @@ The authors describe a region by subdividing evenly its bounding box into an $$ 
 Not all regions are equally significant for discriminating an object from another. For example, wheel regions are more important than uniform patches to distinguish a bicycle from a mug. Here, the authors adapt the framework by [Frome et al. (2006)](https://proceedings.neurips.cc/paper/2006/hash/9f8684e630c4c30cad7b1f0935cd62ab-Abstract.html) for learning region weights.
 
 <div align='center'>
-<img src="../../../pictures/object-detection/posts/2021-11-20-object-detection-recognition-using-regions/recognition-using-regions-fig4-weight-learning-on-regions.png" alt="recognition-using-regions-fig4-weight-learning-on-regions.png" style="zoom: 66%;" />
+<img src="../../../images/object-detection/posts/2021-11-20-object-detection-recognition-using-regions/recognition-using-regions-fig4-weight-learning-on-regions.png" alt="recognition-using-regions-fig4-weight-learning-on-regions.png" style="zoom: 66%;" />
 <figcaption style="font-size: 80%;"> (source: Gu et al., 2009) </figcaption>
 </div>
 

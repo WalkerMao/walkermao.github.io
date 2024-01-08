@@ -88,7 +88,7 @@ $$
 $$
 
 <div style="text-align: center">
-<img src="../../../pictures/ml-models/posts/2020-03-01-linear-regression/LASSO-and-Ridge.png" alt="LASSO-and-Ridge" style="zoom:100%;" />
+<img src="../../../images/ml-models/posts/2020-03-01-linear-regression/LASSO-and-Ridge.png" alt="LASSO-and-Ridge" style="zoom:100%;" />
 </div>
 
 L1-norm shrinks some coefficients to $0$ and produces sparse coefficients, so it can be used to do feature selection. The sparsity makes the model more computationally efficient when doing prediction. L2-norm is differentiable so it has an analytical solution and can be calculated efficiently when training model. 

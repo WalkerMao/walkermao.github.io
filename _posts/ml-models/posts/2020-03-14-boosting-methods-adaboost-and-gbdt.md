@@ -25,7 +25,7 @@ Here $\eta_1,\eta_2,\cdots ,\eta_M$ are computed by the boosting algorithm, and 
 AdaBoost, short for Adaptive Boosting, is a basic boosting methods. It can be implemented for both regression and classification problems. 
 
 <div style="text-align: center">
-<img src="../../../pictures/ml-models/posts/2020-03-14-boosting-methods-adaboost-and-gbdt/adaboost.png" alt="adaboost.png" style="zoom:70%;" />
+<img src="../../../images/ml-models/posts/2020-03-14-boosting-methods-adaboost-and-gbdt/adaboost.png" alt="adaboost.png" style="zoom:70%;" />
 </div>
 
 

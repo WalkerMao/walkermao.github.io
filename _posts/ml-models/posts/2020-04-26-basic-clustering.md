@@ -32,7 +32,7 @@ where $$K$$ is the number of clusters, $$c_i$$ is the cluster index of $$x_i$$, 
 
 Here is a visualization of K-means algorithm: 
 
-<div style="text-align: center"> <img src="../../../pictures/ml-models/posts/2020-04-26-basic-clustering/kmeansViz.png" alt="K-means visualization" style="zoom:100%;" />  </div>
+<div style="text-align: center"> <img src="../../../images/ml-models/posts/2020-04-26-basic-clustering/kmeansViz.png" alt="K-means visualization" style="zoom:100%;" />  </div>
 
 We can select the hyperparameter $$K$$ by the knee point (or elbow point) of the $$D \text{ v.s. } K$$ plot, as shown below.
 
@@ -66,7 +66,7 @@ Note that $f$ is (strictly) concave when $-f$ is (strictly) convex, thus we have
 
 The figure below is an interpretation of the theorem.
 
-<div style="text-align: center"> <img src="../../../pictures/ml-models/posts/2020-04-26-basic-clustering/Jensen-inequality.png" alt="Representation of Jensen's Inequality" style="zoom: 80%;" />  </div>
+<div style="text-align: center"> <img src="../../../images/ml-models/posts/2020-04-26-basic-clustering/Jensen-inequality.png" alt="Representation of Jensen's Inequality" style="zoom: 80%;" />  </div>
 
 Here, $f$ is a convex function shown by the solid line. Also, $X$ is a random variable that has a $0.5$ chance of taking the value $a$, and a $0.5$ chance of taking the value $b$ (indicated on the $x$-axis). Thus, the value $E(X)$ is given by the midpoint between $a$ and $b$.  The value $E[f(X)]$ is now the midpoint on the $y$-axis between $f(a)$ and $f(b)$. We see that because $f$ is convex, it must be the case that $E[f(X)] ≥ f(EX)$.
 
@@ -210,7 +210,7 @@ contrast, a "**hard**" guess is one that represents a single best guess (such as
 
 Similar to K-means, it is also susceptible to local optima, so reinitializing at several different initial parameters may be a good idea.
 
-<div style="text-align: center"> <img src="../../../pictures/ml-models/posts/2020-04-26-basic-clustering/GMM-example.png" alt="GMM example" style="zoom: 70%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/ml-models/posts/2020-04-26-basic-clustering/GMM-example.png" alt="GMM example" style="zoom: 70%;" /> </div>
 
 <br>
 

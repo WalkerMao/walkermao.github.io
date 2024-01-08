@@ -43,7 +43,7 @@ However, for word vector representation, rather than the term-document matrix, i
 
 Figure 6.5 shows a simplified subset of the word-word co-occurrence matrix for these four words computed from the Wikipedia corpus.
 
-<img src="../../../pictures/nlp/posts/2020-06-22-word-vectors-part1/word_word_co_occurrence_matrix.png" alt="image-20200622023815889" style="zoom:57%;" />
+<img src="../../../images/nlp/posts/2020-06-22-word-vectors-part1/word_word_co_occurrence_matrix.png" alt="image-20200622023815889" style="zoom:57%;" />
 
 Note that $$\mid\mathcal{V}\mid$$, the length of the word vector, is generally the size of the vocabulary, usually between $$10,000$$ and $$50,000$$ words (using the most frequent words in the training corpus; keeping words after about the most frequent $$50,000$$ or so is generlly not helpful). These vectors are usually very **sparse** since most of these numbers are zero, and there are efficient algorithms for storing and computing with sparse matrices. 
 

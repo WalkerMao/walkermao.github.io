@@ -49,11 +49,11 @@ Dropout is an extremely effective, simple and recently introduced regularization
 
 While training, at each iteration, dropout is implemented by only keeping a neuron active with some probability $$p$$ (a hyperparameter), or setting it to zero temporarily otherwise, as shown below:
 
-<div style="text-align: center"> <img src="../../../pictures/dl/posts/2021-01-02-training-nns-regularization-and-others/dropout-training.jpeg" alt="dropout-training" style="zoom:70%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/dl/posts/2021-01-02-training-nns-regularization-and-others/dropout-training.jpeg" alt="dropout-training" style="zoom:70%;" /> </div>
 
 At test time, the weights of this network are scaled-down versions (multiplied by $$p$$) of the trained weights, as shown below:
 
-<div style="text-align: center"> <img src="../../../pictures/dl/posts/2021-01-02-training-nns-regularization-and-others/dropout-testing.png" alt="dropout-testing" style="zoom:55%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/dl/posts/2021-01-02-training-nns-regularization-and-others/dropout-testing.png" alt="dropout-testing" style="zoom:55%;" /> </div>
 
 A wider network may be required when using dropout.
 
@@ -103,7 +103,7 @@ Search for learning rate and regularization strength on log scale. For example, 
 
 We prefer random search to grid search. As argued by Bergstra and Bengio in [Random Search for Hyper-Parameter Optimization](http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf), "randomly chosen trials are more efficient for hyper-parameter optimization than trials on a grid". As it turns out, this is also usually easier to implement. 
 
-<div style="text-align: center"> <img src="../../../pictures/dl/posts/2021-01-02-training-nns-regularization-and-others/gridsearchbad.jpeg" alt="Grid Search and Random Search" style="zoom:50%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/dl/posts/2021-01-02-training-nns-regularization-and-others/gridsearchbad.jpeg" alt="Grid Search and Random Search" style="zoom:50%;" /> </div>
 
 <br>
 

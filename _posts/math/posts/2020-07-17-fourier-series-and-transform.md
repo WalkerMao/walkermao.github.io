@@ -14,7 +14,7 @@ We know that the sum of sinusoidal functions (cosine and sine) will still be a p
 
 Here is an example from [*Math is fun*](https://www.mathsisfun.com/calculus/fourier-series.html) shows the plot of $$\sin(x)+\sin(2x)$$.
 
-<div style="text-align: center"> <img src="../../../pictures/math/posts/2020-07-17-fourier-series-and-transform/waves.svg" alt="waves" style="zoom: 80%;" />  </div>
+<div style="text-align: center"> <img src="../../../images/math/posts/2020-07-17-fourier-series-and-transform/waves.svg" alt="waves" style="zoom: 80%;" />  </div>
 
 ### Definition
 
@@ -149,7 +149,7 @@ $$
 
 The original signal $$f(t)$$ is defined on the **time domain** (or the spatial domain) and the $$\hat{f}(s)$$ is defined on the **frequency domain**. The Fourier transform analyzes a signal into its frequency components. The set of all frequencies is the spectrum of $f(t)$. The value of $$f(t)$$ or $$\hat{f}(s)$$ is called the **amplitude**.
 
-<div style="text-align: center"> <img src="../../../pictures/math/posts/2020-07-17-fourier-series-and-transform/fourier_transform.jpg" alt="fourier_transform" style="zoom:100%;" /> </div>
+<div style="text-align: center"> <img src="../../../images/math/posts/2020-07-17-fourier-series-and-transform/fourier_transform.jpg" alt="fourier_transform" style="zoom:100%;" /> </div>
 
 Note that for a (non-periodic) signal defined on the whole real line we generally do not have a discrete set of frequencies, as in the periodic case, but rather a continuum of frequencies. 
 
