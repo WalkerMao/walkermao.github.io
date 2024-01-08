@@ -2,7 +2,7 @@
 layout: post
 title: "The Transformer Model"
 date: 2022-06-13
-categories: NLP DL
+categories: DL NLP
 tags: [Encoder-decoder]
 toc: false
 published: true
@@ -295,7 +295,9 @@ The third is the path length between long-range dependencies in the network. Lea
 
 <div align='center'>
 <figure>
-<img src="https://lenngro.github.io/assets/images/2020-11-07-Attention-Is-All-You-Need/comparison.png" alt="comparison" style="zoom:82%;" />
+<img src="https://i.imgur.com/vTDh4uv.png" alt="comparison" style="zoom:100%;" />
+<img src="https://i.imgur.com/Yc4rKT4.png" alt="comparison" style="zoom:100%;" />
+<figcaption style="font-size:80%;"> Figure: Comparision between CNN, RNN and Self-Attention. (<a href="https://hackmd.io/@YungHuiHsu/Sk94txrBq">Source</a>) </figcaption>
 </figure>
 </div>
 
