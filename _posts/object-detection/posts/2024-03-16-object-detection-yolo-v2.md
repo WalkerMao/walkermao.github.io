@@ -33,7 +33,7 @@ We focus mainly on improving recall and localization (shortcomings of YOLO) whil
 * Dimension Clusters. Instead of choosing priors (anchor box dimensions) by hand, we run k-means clustering on the training set bounding boxes to automatically ﬁnd good priors. We use IOU as the k-means distance metric. This gives much better IOU result.
 * Direct Location Prediction.
 * Fine-Grained Features. Adding a passthrough layer that brings features from an earlier layer. The passthrough layer concatenates the higher resolution features with the low resolution features by stacking adjacent features into different channels instead of spatial locations.
-* Multi-Scale Training. Since the model only uses convolutional and pooling layers it can be resized on the ﬂy. We want YOLOv2 to be robust to running on images of different sizes so we train this into the model. Every 10 batches our network randomly chooses a new image dimension size and continue training. Note that the YOLOv2 288 × 288 ~ YOLOv2 544 × 544 are the same network with different input image size. The network runs faster at smaller sizes so YOLOv2 offers an easy trade off between speed and accuracy.
+* Multi-Scale Training [^2]. Since the model only uses convolutional and pooling layers it can be resized on the ﬂy. We want YOLOv2 to be robust to running on images of different sizes so we train this into the model. Every 10 batches our network randomly chooses a new image dimension size and continue training. Note that the YOLOv2 288 × 288 ~ YOLOv2 544 × 544 are the same network with different input image size. The network runs faster at smaller sizes so YOLOv2 offers an easy trade off between speed and accuracy.
 
 ## 3. Faster
 
@@ -85,3 +85,4 @@ Many of our techniques generalize outside of object detection. Our WordTree repr
 **Reference:**
 
 [^1]: Redmon, Joseph, and Ali Farhadi. "YOLO9000: better, faster, stronger." *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2017.
+[^2]: "[Perform multi-scale training (yolov2)](https://stackoverflow.com/questions/50005852)." *Stack Overflow*. 2018.
