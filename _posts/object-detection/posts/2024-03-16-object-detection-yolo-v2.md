@@ -27,7 +27,7 @@ First we improve upon the base YOLO detection system to produce YOLOv2, a state-
 
 We focus mainly on improving recall and localization (shortcomings of YOLO) while maintaining classiﬁcation accuracy.
 
-* Batch Normalization. Batch normalization leads to sig-niﬁcant improvements in convergence while eliminating the need for other forms of regularization. This more than 2% improvement in mAP.
+* Batch Normalization. Batch normalization leads to signiﬁcant improvements in convergence while eliminating the need for other forms of regularization. This more than 2% improvement in mAP.
 * High Resolution Classiﬁer. Make a transition from pretraining to fine tuning if the datasets are different in some aspects. The original YOLO trains the classiﬁer network at 224 × 224 and increases the resolution to 448 for detection. This means the network has to simultaneously switch to learning object detection and adjust to the new input resolution. For YOLOv2 we ﬁrst ﬁne tune the classiﬁcation network at the full 448 × 448 resolution for 10 epochs on ImageNet. This gives the network time to adjust its ﬁlters to work better on higher resolution input. We then ﬁne tune the resulting network on detection. This gives an increase of almost 4% mAP.
 * Convolutional with Anchor Boxes. Recall increases but mAP decreases.
 * Dimension Clusters. Instead of choosing priors (anchor box dimensions) by hand, we run k-means clustering on the training set bounding boxes to automatically ﬁnd good priors. We use IOU as the k-means distance metric. This gives much better IOU result.
@@ -57,11 +57,15 @@ Multi-label: We could instead use a multi-label model to combine the datasets wh
 
 Instead of using multi-class or multi-label, we use hierarchical classiﬁcation. We use WordTree, a hierarchical model of visual concepts. To perform classiﬁcation with WordTree we predict conditional probabilities at every node for the probability of each hyponym of that synset given that synset. For example, at the "terrier" node we predict:
 
-Pr(Norfolk terrier | terrier); Pr(Yorkshire terrier | terrier); Pr(Bedlington terrier | terrier); ...
+$$
+\text{Pr}(\text{Norfolk terrier} \mid \text{terrier});\ \text{Pr}(\text{Yorkshire terrier} \mid \text{terrier});\ \text{Pr}(\text{Bedlington terrier} \mid \text{terrier});\ \dots
+$$
 
 If we want to compute the absolute probability for a particular node we simply follow the path through the tree to the root node and multiply to conditional probabilities. So if we want to know if a picture is of a Norfolk terrier we compute:
 
-Pr(Norfolk terrier) = Pr(Norfolk terrier | terrier) * Pr(terrier hunting | dog) * ... * Pr(mammal | animal) * Pr(animal | physical object)
+$$
+\text{Pr}(\text{Norfolk terrier}) = \text{Pr}(\text{Norfolk terrier} \mid \text{terrier}) \times \text{Pr}(\text{terrier hunting} \mid \text{dog}) \times \dots \\ \times \text{Pr}(\text{mammal} \mid \text{animal}) \times \text{Pr}(\text{animal} \mid \text{physical object})
+$$
 
 <div align='center'>
 <figure>
