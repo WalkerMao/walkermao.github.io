@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Object Detection"
-date: 2022-02-20
+date: 2024-03-17
 categories: CV
 tags: [Object detection]
 comments: true
@@ -23,3 +23,6 @@ hidden: false
 
 [YOLO v1](object-detection-yolo-v1)
 
+[YOLO v2](object-detection-yolo-v2)
+
+[YOLO v3](object-detection-yolo-v3)
