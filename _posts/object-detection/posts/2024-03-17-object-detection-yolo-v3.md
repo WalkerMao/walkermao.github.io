@@ -31,7 +31,7 @@ Use anchors.
 
 ### 2.2. Class Prediction
 
-We use independent logistic classiﬁers to predict classes instead of a softmax. In another word, we use multilabel classification instead of multiclass classification. During training we use binary cross-entropy loss.
+We use independent logistic classifiers to predict classes instead of a softmax. In another word, we use multilabel classification instead of multiclass classification. During training we use binary cross-entropy loss.
 
 In this dataset there are many overlapping labels (i.e. Woman and Person). Using a softmax imposes the assumption that each box has exactly one class which is often not the case. A multilabel approach better models the data.
 
@@ -43,7 +43,7 @@ YOLOv3 predicts boxes at 3 different scales. Our system extracts features from t
 
 Use Darknet-53.
 
-Darknet-53 has similar performance to ResNet-152 and is 2 times faster. ResNets have too many layers and are not very efﬁcient.
+Darknet-53 has similar performance to ResNet-152 and is 2 times faster. ResNets have too many layers and are not very efficient.
 
 ## 3. How We Do
 

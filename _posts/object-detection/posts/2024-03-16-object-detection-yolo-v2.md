@@ -13,11 +13,11 @@ The contents in this post are excerpted from the paper "YOLO9000: Better, Faster
 
 ## Abstract
 
-YOLO9000 is a state-of-the-art, real-time object detection system that can detect over 9000 object categories. We propose **a method to jointly train on object detection and classiﬁcation**. Using this method we train YOLO9000 simultaneously on the COCO detection dataset and the ImageNet classiﬁcation dataset. Our joint training allows YOLO9000 to predict detections for object classes that don't have labelled detection data.
+YOLO9000 is a state-of-the-art, real-time object detection system that can detect over 9000 object categories. We propose **a method to jointly train on object detection and classification**. Using this method we train YOLO9000 simultaneously on the COCO detection dataset and the ImageNet classiﬁcation dataset. Our joint training allows YOLO9000 to predict detections for object classes that don't have labelled detection data.
 
 ## 1. Introduction
 
-We propose **a new method to harness the large a mount of classiﬁcation data and use it to expand the scope of current detection systems**. Our method uses a hierarchical view of object classiﬁcation that allows us to combine distinct datasets together.
+We propose **a new method to harness the large a mount of classfication data and use it to expand the scope of current detection systems**. Our method uses a hierarchical view of object classiﬁcation that allows us to combine distinct datasets together.
 
 We also propose **a joint training algorithm that allows us to train object detectors on both detection and classiﬁcation data**. Our method leverages labeled detection images to learn to precisely localize objects while it uses classiﬁcation images to increase its vocabulary and robustness.
 
@@ -33,7 +33,7 @@ We focus mainly on improving recall and localization (shortcomings of YOLO) whil
 * Dimension Clusters. Instead of choosing priors (anchor box dimensions) by hand, we run k-means clustering on the training set bounding boxes to automatically ﬁnd good priors. We use IOU as the k-means distance metric. This gives much better IOU result.
 * Direct Location Prediction.
 * Fine-Grained Features. Adding a passthrough layer that brings features from an earlier layer. The passthrough layer concatenates the higher resolution features with the low resolution features by stacking adjacent features into different channels instead of spatial locations.
-* Multi-Scale Training [^2]. Since the model only uses convolutional and pooling layers it can be resized on the ﬂy. We want YOLOv2 to be robust to running on images of different sizes so we train this into the model. Every 10 batches our network randomly chooses a new image dimension size and continue training. Note that the YOLOv2 288 × 288 ~ YOLOv2 544 × 544 are the same network with different input image size. The network runs faster at smaller sizes so YOLOv2 offers an easy trade off between speed and accuracy.
+* Multi-Scale Training [^2]. Since the model only uses convolutional and pooling layers it can be resized on the fly. We want YOLOv2 to be robust to running on images of different sizes so we train this into the model. Every 10 batches our network randomly chooses a new image dimension size and continue training. Note that the YOLOv2 288 × 288 ~ YOLOv2 544 × 544 are the same network with different input image size. The network runs faster at smaller sizes so YOLOv2 offers an easy trade off between speed and accuracy.
 
 ## 3. Faster
 
@@ -45,7 +45,7 @@ During training we use standard data augmentation tricks including random crops,
 
 ### Jointly Training
 
-We propose a mechanism for jointly training on classiﬁcation and detection data. Our method uses images la-belled for detection to learn detection-speciﬁc information like bounding box coordinate prediction and objectness as well as how to classify common objects. It uses images with only class labels to expand the number of categories it can detect.
+We propose a mechanism for jointly training on classiﬁcation and detection data. Our method uses images labelled for detection to learn detection-speciﬁc information like bounding box coordinate prediction and objectness as well as how to classify common objects. It uses images with only class labels to expand the number of categories it can detect.
 
 During training we mix images from both detection and classiﬁcation datasets. When our network sees an image labelled for detection we can backpropagate based on the full YOLOv2 loss function. When it sees a classiﬁcation image we only backpropagate loss from the classiﬁcation-speciﬁc parts of the architecture.
 
