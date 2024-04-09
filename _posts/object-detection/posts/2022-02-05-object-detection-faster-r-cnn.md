@@ -47,8 +47,7 @@ To generate region proposals, we slide a small network over the convolutional fe
 
 #### 3.1.1 Anchors
 
-At each sliding-window location, we simultaneously predict multiple region proposals, where the number
-of maximum possible proposals for each location is denoted as $$ k $$. So the reg layer has $$ 4k $$ outputs encoding the coordinates of $$ k $$ boxes, and the cls layer (two-class softmax layer) outputs $$ 2k $$ scores that estimate probability of object or not object for each proposal (one may use logistic regression as the cls layer to produce $$ k $$ scores alternatively). 
+At each sliding-window location, we simultaneously predict multiple region proposals, where the number of maximum possible proposals for each location is denoted as $$ k $$. So the reg layer has $$ 4k $$ outputs encoding the coordinates of $$ k $$ boxes, and the cls layer (two-class softmax layer) outputs $$ 2k $$ scores that estimate probability of object or not object for each proposal (one may use logistic regression as the cls layer to produce $$ k $$ scores alternatively). 
 
 <div align='center'>
 <figure>
