@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Object Detection: YOLO v1"
+title: "Object Detection: YOLOv1"
 date: 2022-02-20
 categories: CV DL
 tags: [Object detection, CNN]

@@ -21,10 +21,10 @@ hidden: false
 
 [Faster R-CNN](object-detection-faster-r-cnn)
 
-[YOLO v1](object-detection-yolo-v1)
+[YOLOv1](object-detection-yolov1)
 
-[YOLO v2](object-detection-yolo-v2)
+[YOLOv2](object-detection-yolov2)
 
-[YOLO v3](object-detection-yolo-v3)
+[YOLOv3](object-detection-yolov3)
 
 [YOLOX](object-detection-yolox)
