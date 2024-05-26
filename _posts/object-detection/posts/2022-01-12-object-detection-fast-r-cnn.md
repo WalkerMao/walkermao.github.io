@@ -36,7 +36,7 @@ Advantages of the proposed Fast R-CNN method over R-CNN and SPP-net:
 
 ## 2. Fast R-CNN Architecture and Training
 
-Figure 1 illustrates the Fast R-CNN architecture. A Fast R-CNN network takes as input an entire image and a set of object region proposals. 
+Figure 1 illustrates the Fast R-CNN architecture. A Fast R-CNN network takes as input an entire image and a set of object region proposals (proposed by methods like [selective search](https://link.springer.com/article/10.1007/s11263-013-0620-5)).
 
 <div align='center'>
 <figure>

@@ -17,7 +17,7 @@ hidden: false
 
 [Spatial Pyramid Pooling (SPP)](spatial-pyramid-pooling-spp)
 
-[Object Detection: Fast R-CNN](object-detection-fast-r-cnn)
+[Fast R-CNN](object-detection-fast-r-cnn)
 
 [Faster R-CNN](object-detection-faster-r-cnn)
 

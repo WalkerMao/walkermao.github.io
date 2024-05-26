@@ -19,7 +19,7 @@ In this work, we introduce a Region Proposal Network (RPN) that shares full-imag
 
 ## 1. Introduction
 
-Region proposal methods typically rely on inexpensive features and economical inference schemes. Selective Search, one of the most popular methods, greedily merges superpixels based on engineered low-level features.
+Selective Search, one of the most popular region proposal methods, is very slow.
 
 <div align='center'>
 <figure>
@@ -31,7 +31,6 @@ Region proposal methods typically rely on inexpensive features and economical in
 <img src="https://blog.kakaocdn.net/dn/CrYbK/btq8EnUObH0/ftLSPBtaQETv7LxfNPvXr0/img.png" alt="img" style="zoom:80%;" />
 </figure>
 </div>
-
 
 RPNs are designed to efficiently predict region proposals with a wide range of scales and aspect ratios. In contrast to prevalent methods like OverFeat, SPPnet and Fast R-CNN that use pyramids of images (Figure 1, a) or pyramids of filters (Figure 1, b), we introduce novel "anchor" boxes that serve as references at multiple scales and aspect ratios. Our scheme can be thought of as a pyramid of regression references (Figure 1, c), which avoids enumerating images or filters of multiple scales or aspect ratios. This model performs well when trained and tested using single-scale images and thus benefits running speed.
 
