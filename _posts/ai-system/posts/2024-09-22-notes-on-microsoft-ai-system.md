@@ -82,9 +82,10 @@ GPU 显存和主存（Host memory）之间通过 PCIe 总线传输数据。
 ### 3.1.1 深度学习框架发展概述
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/blob/main/Textbook/%E7%AC%AC3%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/img/frameworks-evolution.png" alt="图1. 深度学习框架发展历程" style="zoom:70%;" />
+<img src="https://raw.githubusercontent.com/microsoft/AI-System/main/Textbook/%E7%AC%AC3%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/img/frameworks-evolution.png" alt="图1. 深度学习框架发展历程" style="zoom:100%;" />
 <figcaption style="font-size: 80%;">图1. 深度学习框架发展历程</figcaption>
 </div>
+
 
 到目前阶段，神经网络模型结构越发多变，涌现出了大量如：TensorFlow Eager，TensorFlow Auto-graph，PyTorch JIT，JAX这类呈现出设计选择融合的深度学习框架设计。这些项目纷纷采用设计特定领域语言(Domain-Specific Language，DSL）的思路，在提高描述神经网络算法表达能力和编程灵活性的同时，通过编译期优化技术来改善运行时性能。
 
@@ -112,9 +113,10 @@ GPU 显存和主存（Host memory）之间通过 PCIe 总线传输数据。
 数据流图（Dataflow Graph）是一种描述计算的经典方式，广泛用于科学计算系统。为了避免在调度执行数据流图时陷入循环依赖，数据流图通常是一个有向无环图。在深度学习框架中，图中的结点是深度学习框架后端所支持的操作原语（Primitive Operation），不带状态，没有副作用，结点的行为完全由输入输出决定；结点之间的边显式地表示了操作原语之间的数据依赖关系。图3中的圆形是数据流图中边上流动的数据，方形（节点）是数据流图中的基本操作。
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/blob/main/Textbook/%E7%AC%AC3%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/img/forward-computation-graph.png" alt="图3. x*y+sin⁡(x)的数据流图实例和定义该数据流图的TensorFlow代码" style="zoom:70%;" />
+<img src="https://raw.githubusercontent.com/microsoft/AI-System/main/Textbook/%E7%AC%AC3%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/img/forward-computation-graph.png" alt="图3. x*y+sin⁡(x)的数据流图实例和定义该数据流图的TensorFlow代码" style="zoom:12%;" />
 <figcaption style="font-size: 80%;">图3. x*y+sin⁡(x)的数据流图实例和定义该数据流图的TensorFlow代码</figcaption>
 </div>
+
 
 张量计算非常适合在单指令多数据（SIMD，Single Instruction, Multiple Data）加速器上进行加速实现。
 
@@ -154,9 +156,10 @@ RNN和Attention机制的计算过程依赖于循环控制，为了支持有控�
 TensorFlow中控制流方案的概况，整体分为：暴露给前端用户用于构建计算图的前端API，这些API会被转换成更低等级的控制流原语：Enter，Switch，Exit，Merge，NextIteration，使用这些原语对计算图进行扩展，再由计算图优化器进一步进行改写。
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/blob/main/Textbook/%E7%AC%AC3%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/img/control-flow-tensorflow.png" alt="图 4. TensorFlow控制流解决方案概况" style="zoom:40%;" />
+<img src="https://raw.githubusercontent.com/microsoft/AI-System/main/Textbook/%E7%AC%AC3%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/img/control-flow-tensorflow.png" alt="图 4. TensorFlow控制流解决方案概况" style="zoom:10%;" />
 <figcaption style="font-size: 80%;">图 4. TensorFlow控制流解决方案概况</figcaption>
 </div>
+
 
 ### 3.2.3 动态图：复用宿主语言控制流语句
 
@@ -532,9 +535,10 @@ TPU 的推理芯片去掉了以下功能：缓存（Caches）， 分支预测（
 即使是移除绝对值接近于0的权重也会带来推理精度的损失。为了恢复网络精度，通常在剪枝之后需要进行再次的训练，这个过程称为微调（fine-tuning）。微调之后的权重分布将部分地恢复高斯分布的特性，同时网络精度也会达到或接近剪枝前的水平。大多数的权重剪枝算法都遵循这一“正则化-剪枝-微调”反复迭代的流程。
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/raw/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/2/three%20step.png" alt="图11.2.3 剪枝算法常用的迭代计算流程" style="zoom:100%;" />
+<img src="https://github.com/microsoft/AI-System/raw/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/2/three%20step.png" alt="图11.2.3 剪枝算法常用的迭代计算流程" style="zoom:50%;" />
 <figcaption style="font-size: 80%;">图11.2.3 剪枝算法常用的迭代计算流程</figcaption>
 </div>
+
 
 #### 激活稀疏
 
@@ -579,9 +583,10 @@ ReLU激活函数输出结果中存在高度的稀疏性。
 许多研究开始探索通过给神经网络剪枝添加一个“规则”的约束，使得剪枝后的稀疏模式更加适合硬件计算。 例如使非零值的位置分布不再是随机的，而是集中在规则的子结构中。 相比较于细粒度剪枝方法针对每个权值进行剪枝，粗粒度剪枝方法以组为单位对权值矩阵进行剪枝，使用组内的最大值或平均值为代表一组权值的重要性。 这种引入了“规则”的结构化约束的稀疏模式通常被称为结构化稀疏（Structured Sparsity）、粗粒度稀疏（Coarse-grained Sparsity）或块稀疏（Block Sparsity）。 但这种方法通常会牺牲模型的准确率和压缩比，结构化稀疏对非零权值的位置进行了限制，在剪枝过程中会将一些数值较大的权值剪枝，从而影响模型准确率。
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/blob/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/3/%E7%A8%80%E7%96%8F%E5%B9%B3%E8%A1%A1.jpg" alt="图11.3.2 稀疏模型有效性和计算高效性权衡" style="zoom:100%;" />
+<img src="https://raw.githubusercontent.com/microsoft/AI-System/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/3/%E7%A8%80%E7%96%8F%E5%B9%B3%E8%A1%A1.jpg" alt="图11.3.2 稀疏模型有效性和计算高效性权衡" style="zoom:100%;" />
 <figcaption style="font-size: 80%;">图11.3.2 稀疏模型有效性和计算高效性权衡</figcaption>
 </div>
+
 
 #### 半结构化稀疏
 
@@ -590,18 +595,20 @@ ReLU激活函数输出结果中存在高度的稀疏性。
 在下图的例子中，三个具有不同的稀疏结构的稀疏矩阵都是从图a中稠密权值矩阵剪枝得到的，稀疏度都是50%。细粒度剪枝会剪枝掉绝对值最小的50%的权值，从而得到了图 b 中的非结构化稀疏矩阵。粗粒度剪枝针对 2x2 的权值块进行剪枝，每块权值的重要性由块平均值代表，从而得到了图 c 中的结构化稀疏（块稀疏）矩阵。组平衡剪枝将每一个矩阵行分成了两个组（bank），每个组内进行独立的细粒度剪枝，去除在每个组内绝对值最小的 50% 的权值，从而得到了d图中的组平衡稀疏矩阵。
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/blob/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/3/%E7%A8%80%E7%96%8F%E6%AF%94%E8%BE%83.jpg" alt="图11.3.3 不同稀疏模式的比较" style="zoom:100%;" />
+<img src="https://raw.githubusercontent.com/microsoft/AI-System/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/3/%E7%A8%80%E7%96%8F%E6%AF%94%E8%BE%83.jpg" alt="图11.3.3 不同稀疏模式的比较" style="zoom:80%;" />
 <figcaption style="font-size: 80%;">图11.3.3 不同稀疏模式的比较</figcaption>
 </div>
+
 
 由于在每个bank内使用细粒度剪枝，因此能够很大程度地保留那些数值较大的权值，保持权值位置的随机分布，从而保持较高的模型准确率。同时这种方法得到的稀疏矩阵模式将矩阵进行了平衡的分割，这有利于硬件解决不规则的内存访问，并对矩阵运算实现高并行度。 
 
 英伟达在2020年发布了A100 GPU，其稀疏张量核使用了一种称为细粒度结构化稀疏（Fine-grained Structured Sparsity）的权值稀疏模式。 英伟达提出的细粒度结构化稀疏与组平衡稀疏解决的是相同的模型有效性和计算高效性的权衡问题，采用了相似的设计思想，因此稀疏结构也非常相似。细粒度结构化稀疏也称之为 2:4 结构化稀疏（2:4 Structured Sparsity）。在其剪枝过程中，权值矩阵首先被切分成大小固定为 4 的向量，并且稀疏度固定为50%（2:4）。2:4 结构化稀疏可以视为组平衡稀疏的一种特殊情况，即将组大小设置为4，将稀疏度设置为 50%。
 
 <div align='center'>
-<img src="https://github.com/microsoft/AI-System/blob/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/3/A100_sparse.jpg" alt="图11.3.4 A100 GPU的稀疏方法" style="zoom:100%;" />
+<img src="https://raw.githubusercontent.com/microsoft/AI-System/main/Textbook/%E7%AC%AC11%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%8A%A0%E9%80%9F/img/3/A100_sparse.jpg" alt="图11.3.4 A100 GPU的稀疏方法" style="zoom:120%;" />
 <figcaption style="font-size: 80%;">图11.3.4 A100 GPU的稀疏方法</figcaption>
 </div>
+
 
 无论是组平衡稀疏，还是A100中提出的细粒度结构化稀疏，我们都可以将其称之为半结构化稀疏（Semi-structured Sparsity）。
 
