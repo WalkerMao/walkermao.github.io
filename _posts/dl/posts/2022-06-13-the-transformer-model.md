@@ -128,6 +128,14 @@ The attention weight determines how much each positions were attended by the cur
 
 <div align='center'>
 <figure>
+<img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*Cfsh9uK8Y6FhamziJZIKRA.jpeg" alt="img" style="zoom:90%;" />
+<figcaption style="font-size:80%;"> Figure: Self-Attention Layer accomplish attention with self by 3 parts (<a href="https://medium.com/lsc-psd/introduction-of-self-attention-layer-in-transformer-fc7bff63f3bc">Source</a>) </figcaption>
+</figure>
+</div>
+
+
+<div align='center'>
+<figure>
 <img src="https://miro.medium.com/max/1400/1*4Ky7WD2Bwt7ONuewCEimbg.gif" alt="img" style="zoom:55%;" />
 <figcaption style="font-size:80%;"> Figure: Step flow of calculating attentions (<a href="https://medium.com/lsc-psd/introduction-of-self-attention-layer-in-transformer-fc7bff63f3bc">Source</a>) </figcaption>
 </figure>
@@ -138,6 +146,7 @@ The attention weight determines how much each positions were attended by the cur
 <figcaption style="font-size:80%;"> Figure: Step flow of calculating calculating outputs of self-attention layer (<a href="https://medium.com/lsc-psd/introduction-of-self-attention-layer-in-transformer-fc7bff63f3bc">Source</a>) </figcaption>
 </figure>
 </div>
+
 
 Why dot-product attention: The two most commonly used attention functions are additive attention, and dot-product (multiplicative) attention, and they are similar in theoretical complexity. Here we use the dot-product attention, which is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
 
