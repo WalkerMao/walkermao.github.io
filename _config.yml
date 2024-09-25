@@ -21,6 +21,8 @@ plainwhite:
   post-categories:
     - categ: "All"
       url: ""
+    - categ: "AIS"
+      url: "categories/ais"
     - categ: "CS"
       url: "categories/cs"
     - categ: "CV"

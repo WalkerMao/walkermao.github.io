@@ -6,7 +6,7 @@ categories: CS
 tags: [C++]
 comments: true
 published: true
-hidden: false
+hidden: true
 ---
 
 [Chapter 1. Getting Started](notes-on-c++-primer-chapter-1-getting-started)
