@@ -197,7 +197,8 @@ The Transformer uses multi-head attention in different ways:
 
 * The encoder/decoder contains self-attention layers, which allow each position in the encoder/decoder to attend to all positions in the encoder/decoder up to and including that position. 
 
-* In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax. That is
+* In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax, and these $$-\infty$$ are then converted to $$0$$ by softmax. That is
+  
   $$
   && \operatorname{MaskedAttention}(Q, K, V) = \operatorname{softmax}\left(\frac{Q K^{T} + \text{Mask}}{\sqrt{d_{k}}}\right) V, \\
   && \text{Mask} = \begin{pmatrix}
@@ -207,9 +208,10 @@ The Transformer uses multi-head attention in different ways:
     0 & 0 & \cdots & 0
    \end{pmatrix} \in \mathbb{R}^{L \times L}.
   $$
+  
   The $$i$$-th row in $$Q$$ refers to the $$i$$-th query token and also leads to the $$i$$-th output. The $$-\infty$$ in $$i$$-th row of $$ \text{Mask} $$ masks the $$i$$-th row of $$Q$$ to compute with the ($$i+1$$)-th and afterwards rows of $$K$$ and $$V$$. That is, as for generating the $$i$$-th output, the $$i$$-th row of $$ \text{Mask} $$ prevents the decoder to use the ($$i+1$$)-th and afterwards tokens' information that were encoded in $$K$$ and $$V$$. [^9]
 
-  Note that the mask is also needed during inference with GPT-like models. ([Here](https://ai.stackexchange.com/a/42602) is an explanation)
+  For GPT-like models, not only training, the mask is also needed during inference for GPT-like models. However, it is not needed when using KV cache because we calculate attention using only the last generated token as query to predict the next token.
 
 In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^6]
 
