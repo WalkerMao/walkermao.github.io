@@ -194,8 +194,22 @@ In the paper the authors employ $$ h=8 $$ parallel attention layers, or heads. F
 The Transformer uses multi-head attention in different ways:
 
 * In "encoder-decoder attention" layer (the third/middle sub-layer in decoder), the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms.
+
 * The encoder/decoder contains self-attention layers, which allow each position in the encoder/decoder to attend to all positions in the encoder/decoder up to and including that position. 
-* In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax.
+
+* In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax. That is
+  $$
+  && \operatorname{MaskedAttention}(Q, K, V) = \operatorname{softmax}\left(\frac{Q K^{T} + \text{Mask}}{\sqrt{d_{k}}}\right) V, \\
+  && \text{Mask} = \begin{pmatrix}
+    0 & -\infin & \cdots & -\infin \\
+    0 & 0 & \cdots & -\infin \\
+    \vdots  & \vdots  & \ddots & \vdots \\
+    0 & 0 & \cdots & 0
+   \end{pmatrix} \in \mathbb{R}^{L \times L}.
+  $$
+  The $$i$$-th row in $$Q$$ refers to the $$i$$-th query token and also leads to the $$i$$-th output. The $$-\infty$$ in $$i$$-th row of $$ \text{Mask} $$ masks the $$i$$-th row of $$Q$$ to compute with the ($$i+1$$)-th and afterwards rows of $$K$$ and $$V$$. That is, as for generating the $$i$$-th output, the $$i$$-th row of $$ \text{Mask} $$ prevents the decoder to use the ($$i+1$$)-th and afterwards tokens' information that were encoded in $$K$$ and $$V$$. [^9]
+
+  Note that the mask is also needed during inference with GPT-like models. ([Here](https://ai.stackexchange.com/a/42602) is an explanation)
 
 In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^6]
 
@@ -357,3 +371,4 @@ Vaswani, et al. (2017) employed Residual [Dropout](https://www.jmlr.org/papers/v
 [^7]: Kazemnejad, Amirhossein. "[Transformer Architecture: The Positional Encoding.](https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)" *kazemnejad.com*. 2019.
 
 [^8]: Denk, Timo. "[Linear Relationships in the Transformer's Positional Encoding.](https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/)" *Timo Denk's Blog*. 2019.
+[^9]: Kierszbaum, Samuel. "[Masking in Transformers' self-attention mechanism](https://medium.com/analytics-vidhya/masking-in-transformers-self-attention-mechanism-bad3c9ec235c)" *medium.com*. 2020.
