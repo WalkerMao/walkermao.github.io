@@ -133,7 +133,6 @@ The attention weight determines how much each positions were attended by the cur
 </figure>
 </div>
 
-
 <div align='center'>
 <figure>
 <img src="https://miro.medium.com/max/1400/1*4Ky7WD2Bwt7ONuewCEimbg.gif" alt="img" style="zoom:55%;" />
@@ -146,7 +145,6 @@ The attention weight determines how much each positions were attended by the cur
 <figcaption style="font-size:80%;"> Figure: Step flow of calculating calculating outputs of self-attention layer (<a href="https://medium.com/lsc-psd/introduction-of-self-attention-layer-in-transformer-fc7bff63f3bc">Source</a>) </figcaption>
 </figure>
 </div>
-
 
 Why dot-product attention: The two most commonly used attention functions are additive attention, and dot-product (multiplicative) attention, and they are similar in theoretical complexity. Here we use the dot-product attention, which is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
 
@@ -191,29 +189,44 @@ In the paper the authors employ $$ h=8 $$ parallel attention layers, or heads. F
 
 #### 3.2.3 Applications of Attention in our Model
 
-The Transformer uses multi-head attention in different ways:
+The Transformer uses multi-head attention in different ways: self-attention, masked self-attention and encoder-decoder attention.
 
-* In "encoder-decoder attention" layer (the third/middle sub-layer in decoder), the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms.
+In the encoder, source tokens communicate with each other and update their representations (self-attention); In the decoder, a target token first looks at previously generated target tokens (masked self-attention), then at the source tokens (encoder-decoder attention), and finally updates its representation. [^6]
 
-* The encoder/decoder contains self-attention layers, which allow each position in the encoder/decoder to attend to all positions in the encoder/decoder up to and including that position. 
+<div align='center'>
+<figure>
+<img src="https://jalammar.github.io/images/gpt2/self-attention-and-masked-self-attention.png" alt="img" style="zoom:45%;" />
+<figcaption style="font-size:80%;"> Figure: Self-attention and Masked self-attention. (<a href="https://jalammar.github.io/illustrated-gpt2/">Source</a>) </figcaption>
+</figure>
+</div>
 
-* In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax, and these $$-\infty$$ are then converted to $$0$$ by softmax. That is
 
-  $$
-  \operatorname{MaskedAttention}(Q, K, V) =   \operatorname{softmax}\left(\frac{Q K^{T} + \text{Mask}}{\sqrt{d_{k}}}\right) V, \\
+##### Self-attention layers
+
+The encoder contains self-attention layers, which allow each position in the input sequence to attend to all other positions.
+
+##### Masked self-attention layers
+
+
+In the decoder, the self-attention layer is only allowed to attend to earlier positions in the output sequence. We implement this inside of scaled dot-product attention by masking out all values (setting to $$-\infty$$) for future positions in the input of the softmax, and these $$-\infty$$ are then converted to $$0$$ by softmax. That is
+
+$$
+\operatorname{MaskedAttention}(Q, K, V) =   \operatorname{softmax}\left(\frac{Q K^{T} + \text{Mask}}{\sqrt{d_{k}}}\right) V, \\
 \text{Mask} = \begin{pmatrix}
-  0 & -\infty & \cdots & -\infty \\
-  0 & 0 & \cdots & -\infty \\
-  \vdots  & \vdots  & \ddots & \vdots \\
-  0 & 0 & \cdots & 0
-  \end{pmatrix} \in \mathbb{R}^{L \times L}.
-  $$
+0 & -\infty & \cdots & -\infty \\
+0 & 0 & \cdots & -\infty \\
+\vdots  & \vdots  & \ddots & \vdots \\
+0 & 0 & \cdots & 0
+\end{pmatrix} \in \mathbb{R}^{L \times L}.
+$$
 
-  The $$i$$-th row in $$Q$$ refers to the $$i$$-th query token and also leads to the $$i$$-th output. The $$-\infty$$ in $$i$$-th row of $$ \text{Mask} $$ masks the $$i$$-th row of $$Q$$ to compute with the ($$i+1$$)-th and afterwards rows of $$K$$ and $$V$$. That is, as for generating the $$i$$-th output, the $$i$$-th row of $$ \text{Mask} $$ prevents the decoder to use the ($$i+1$$)-th and afterwards tokens' information that were encoded in $$K$$ and $$V$$. [^9]
+The $$i$$-th row in $$Q$$ refers to the $$i$$-th query token and also leads to the $$i$$-th output. The $$-\infty$$ in $$i$$-th row of $$ \text{Mask} $$ masks the $$i$$-th row of $$Q$$ to compute with the ($$i+1$$)-th and afterwards rows of $$K$$ and $$V$$. That is, as for generating the $$i$$-th output, the $$i$$-th row of $$ \text{Mask} $$ prevents the decoder to use the ($$i+1$$)-th and afterwards tokens' information that were encoded in $$K$$ and $$V$$. [^9]
 
-  For GPT-like models, not only training, the mask is also needed during inference. However, it is not needed when using KV-cache because we calculate attention using only the last generated token as query to predict the next token.
+For GPT-like models, not only training, the mask is also needed during inference. However, it is not needed when using KV-cache because we calculate attention using only the last generated token as query to predict the next token.
 
-In the encoder, source tokens communicate with each other and update their representations; In the decoder, a target token first looks at previously generated target tokens, then at the source tokens, and finally updates its representation. [^6]
+##### Encoder-decoder attention layers
+
+In "encoder-decoder attention" layer (the third/middle sub-layer in decoder), the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms.
 
 ### 3.3 Position-wise Feed-Forward Networks
 
@@ -231,7 +244,7 @@ We use embedding layers to convert the input tokens (words) and output tokens (w
 
 <div align='center'>
 <figure>
-<img src="https://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="img" style="zoom:70%;" />
+<img src="https://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="img" style="zoom:80%;" />
 <figcaption style="font-size:80%;"> Figure: An illustration for the procedures from the output of the decoder stack to an output word. (<a href="https://jalammar.github.io/illustrated-transformer/#the-final-linear-and-softmax-layer">Source</a>) </figcaption>
 </figure>
 </div>
